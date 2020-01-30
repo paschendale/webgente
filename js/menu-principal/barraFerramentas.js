@@ -1,0 +1,3 @@
+function barraFerramentas(){
+	myMapa.barraFerramentas();
+}

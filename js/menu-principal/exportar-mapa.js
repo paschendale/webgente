@@ -1,0 +1,3 @@
+function exportar(){
+	myMapa.exportar();
+}
