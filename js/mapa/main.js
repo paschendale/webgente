@@ -4,7 +4,7 @@ function main(){
     //Variável global para controle da exibição ou não da "Barra de Edição" confome o clique do usuário;
     barraEdicaoHabilitado = false;
 
-	myMapa = new mapa(-19.737342, -45.251930, 17);
+	myMapa = new mapa(init.latitude,init.longitude,init.zoomInicial);
 	myMapa.scale();
 
     var optionsControl = {
