@@ -31,5 +31,16 @@ var vetorOverlay = [
         format: 'image/png',
         transparent: true,
         tiled: true
+	},
+
+	parametros_pontos_levantamento_360 = {
+		nome: 'Imagens 360°',
+		grupo: 'Cadastro Urbano',
+		host: 'https://geoserver.genteufv.com.br/geoserver/ows?',
+		maxZoom: 25,
+        layers: 'bomdespacho:pontos_levantamento_360',
+        format: 'image/png',
+        transparent: true,
+        tiled: true
 	}
 ];
