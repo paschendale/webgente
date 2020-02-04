@@ -7,7 +7,7 @@ function main(){
 	myMapa = new mapa(init.latitude,init.longitude,init.zoomInicial);
 	myMapa.scale();
 
-    var optionsControl = {
+    /*var optionsControl = {
         collapsed: true
     };
     
@@ -34,5 +34,24 @@ function main(){
 
     vetorBasemap.forEach(adicionaBasemap);
     vetorOverlay.forEach(adicionaOverlay);
+    */
+
+    parametros_cbge_quadras = {
+        nome: 'Quadras CTM',
+        grupo: 'Cadastro Urbano',
+        host: 'https://geoserver.genteufv.com.br/geoserver/ows?',
+        maxZoom: 25,
+        layers: 'bomdespacho:CBGE_Quadras',
+        format: 'image/png',
+        transparent: true,
+        tiled: true
+    }
+
+    L.tileLayer.wms('https://geoserver.genteufv.com.br/geoserver/ows?', parametros_cbge_quadras).addTo(myMapa.getMapa());
+
+    var source = L.WMS.source("https://geoserver.genteufv.com.br/geoserver/ows?", {
+          opacity: 0.1,
+    });
+    source.getLayer("bomdespacho:CBGE_Quadras").addTo(myMapa.getMapa());
 
 }
