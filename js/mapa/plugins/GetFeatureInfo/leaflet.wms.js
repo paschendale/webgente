@@ -216,6 +216,8 @@ wms.Source = L.Layer.extend({
             return;
         }
         this._map.openPopup(info, latlng);
+        obj = JSON.parse(info);
+        console.log(obj.features[0].properties.Caminho);
     },
 
     'showWaiting': function() {

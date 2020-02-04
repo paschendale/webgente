@@ -25,17 +25,18 @@ function main(){
 
     vetorBasemap.forEach(adicionaBasemap);
 
-    var source = L.WMS.source("https://geoserver.genteufv.com.br/geoserver/ows?", {
+    var source = L.WMS.source(overlayHost, {
           opacity: 1,
           tiled: true,
           maxZoom: 25,
-          "info_format": "text/html",
+          "info_format": "application/json",
           transparent: true,
           format: 'image/png'
     });
     
     var camadaOverlay = [0]; // Inicializa vetor externo à função para armazenamento das camadas de Overlay 
 	k = 0; // Inicializa contador
+
     function adicionaSourceOverlay (objeto){
     	k++;
     	camadaOverlay[k] = source.getLayer(objeto.layers);
