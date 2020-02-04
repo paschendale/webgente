@@ -216,7 +216,7 @@ wms.Source = L.Layer.extend({
             return;
         }
         obj = JSON.parse(info);
-        this._map.openPopup(JSON.stringify(obj.features[0].properties), latlng);
+        this._map.openPopup(JSON.stringify(obj.features[0].properties.Caminho), latlng);
     },
 
     'showPhotoSphereViewer': function(latlng, info) {
