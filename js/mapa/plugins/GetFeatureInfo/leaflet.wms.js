@@ -216,6 +216,16 @@ wms.Source = L.Layer.extend({
             return;
         }
         obj = JSON.parse(info);
+        var div = document.getElementsByClassName('leaflet-popup-content');
+        var psv = new PhotoSphereViewer({
+            panorama: "https://www.genteufv.com.br/360_bd/20191221_02/08_Proj_Processing/Panoramica/20191221_02_00002_PAN.jpeg",
+            container: div,
+            time_anim: 3000,
+            navbar: true,
+            navbar_style: {
+                backgroundColor: 'rgba(58, 67, 77, 0.7)'
+            }
+        });
         this._map.openPopup(JSON.stringify(obj.features[0].properties.Caminho), latlng);
     },
 
