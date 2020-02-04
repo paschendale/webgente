@@ -215,9 +215,17 @@ wms.Source = L.Layer.extend({
         if (!this._map) {
             return;
         }
-        this._map.openPopup(info, latlng);
         obj = JSON.parse(info);
-        console.log(obj.features[0].properties.Caminho);
+        this._map.openPopup(JSON.stringify(obj.features[0].properties), latlng);
+    },
+
+    'showPhotoSphereViewer': function(latlng, info) {
+        // Hook to handle displaying parsed AJAX response to the user
+        if (!this._map) {
+            return;
+        }
+        obj = JSON.parse(info);
+        this._map.openPopup(obj.features[0].properties.Caminho, latlng);
     },
 
     'showWaiting': function() {
