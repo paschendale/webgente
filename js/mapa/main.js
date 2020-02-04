@@ -47,11 +47,16 @@ function main(){
         tiled: true
     }
 
-    L.tileLayer.wms('https://geoserver.genteufv.com.br/geoserver/ows?', parametros_cbge_quadras).addTo(myMapa.getMapa());
+    /*L.tileLayer.wms('https://geoserver.genteufv.com.br/geoserver/ows?', parametros_cbge_quadras).addTo(myMapa.getMapa());*/
+
 
     var source = L.WMS.source("https://geoserver.genteufv.com.br/geoserver/ows?", {
-          opacity: 0.1,
+          opacity: 1,
+          tiled: true,
+          maxZoom: 25,
+          "info_format": "text/html"
     });
-    source.getLayer("bomdespacho:CBGE_Quadras").addTo(myMapa.getMapa());
+    
+    source.getLayer("bomdespacho:pontos_levantamento_360").addTo(myMapa.getMapa());
 
 }
