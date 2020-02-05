@@ -216,10 +216,19 @@ wms.Source = L.Layer.extend({
             return;
         }
         obj = JSON.parse(info);
+        this._map.openPopup(JSON.stringify(obj.features[0].properties), latlng);
+    },
+
+    'showPhotoSphereViewer': function(latlng, info) {
+        // Hook to handle displaying parsed AJAX response to the user
+        if (!this._map) {
+            return;
+        }
+         obj = JSON.parse(info);
         var div = L.DomUtil.create('div', 'psv-container')
         var psv = new PhotoSphereViewer({
             panorama: "img/teste.jpeg",
-            container: document.getElementById('psv-container'),
+            container: document.getElementsByClassName('psv-container'),
             time_anim: 3000,
             navbar: true,
             navbar_style: {
@@ -228,15 +237,6 @@ wms.Source = L.Layer.extend({
         });
         /*this._map.openPopup(JSON.stringify(obj.features[0].properties.Caminho), latlng);*/
         this._map.openPopup(div, latlng);
-    },
-
-    'showPhotoSphereViewer': function(latlng, info) {
-        // Hook to handle displaying parsed AJAX response to the user
-        if (!this._map) {
-            return;
-        }
-        obj = JSON.parse(info);
-        this._map.openPopup(obj.features[0].properties.Caminho, latlng);
     },
 
     'showWaiting': function() {

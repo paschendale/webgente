@@ -1,3 +1,5 @@
+var overlayHost = 'https://geoserver.genteufv.com.br/geoserver/ows?';
+
 // Definindo camadas overlay
 var vetorOverlay = [
 	lotes = {
