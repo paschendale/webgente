@@ -222,26 +222,21 @@ wms.Source = L.Layer.extend({
             maxWidth: 500
         }
 
-        sitebase = 'https://www.genteufv.com.br/psv/index.html?';
-        html = '<a href="'+sitebase+obj.features[0].properties.Caminho+'" target="_blank">Abrir visualizador 360° em tela cheia</a>';
-        html2 = '<div> <iframe src="'+sitebase+obj.features[0].properties.Caminho+'" style="overflow:auto;width:500px;height:300px;border:none"></iframe><p align="center">'+html+'</p></div>';
-        this._map.openPopup(html2, latlng, optionsPopup);
-
         // Entrar com o opt_gfi como argumento na função
-        /*
-        if (opt_gfi == 1){
+        
+        if (opt_gfi == 2){
 
             this._map.openPopup(JSON.stringify(obj.features[0].properties), latlng);
 
         } else {
 
-            sitebase = 'https://www.genteufv.com.br/psv/index.html?';
-            html = '<a href="'+sitebase+obj.features[0].properties.Caminho+'" target="_blank">Abrir visualizador 360°</a>';
-            html2 = '<div> <object type="text/html" data="'+sitebase+obj.features[0].properties.Caminho+'" width="300px" height="300px" style="resize:both;overflow:auto"></object></div>';
-            this._map.openPopup(html2, latlng);
+        sitebase = 'https://www.genteufv.com.br/psv/index.html?';
+        html = '<a href="'+sitebase+obj.features[0].properties.Caminho+'" target="_blank">Abrir visualizador 360° em tela cheia</a>';
+        html2 = '<div> <iframe src="'+sitebase+obj.features[0].properties.Caminho+'" style="overflow:auto;width:500px;height:300px;border:none"></iframe><p align="center">'+html+'</p></div>';
+        this._map.openPopup(html2, latlng, optionsPopup);
 
         };
-        */
+        
         
         //obj.features[0].properties.Caminho
     },

@@ -1,4 +1,6 @@
  //Função principal int main()
+var opt_gfi = 1;
+
 function main(){
 
     //Variável global para controle da exibição ou não da "Barra de Edição" confome o clique do usuário;
@@ -13,26 +15,24 @@ function main(){
 
     // Adicionando alguns botoes
 
-    var opt_gfi = 2;
+
 
     var estado = L.easyButton({
         states: [{
-                stateName: 'gfi',        // name the state
-                icon:      '<img src="img/info.png">',               // and define its properties
-                title:     'Mostra informações do mapa',      // like its title
-                onClick: function(btn, map) {       // and its callback
-                    console.log(opt_gfi);
-                    opt_gfi = 1;
-                    estado.state('360');    // change state on click!
-                }
-            }, {
                 stateName: '360',
                 icon:      '<img src="img/360-degree.png">',
+                                title:     'Mostra informações do mapa',      // like its title
+                onClick: function(btn, map) {       // and its callback
+                    opt_gfi = 2;
+                    estado.state('gfi');    // change state on click!
+                }
+            }, {
+                stateName: 'gfi',        // name the state
+                icon:      '<img src="img/info.png">',               // and define its properties
                 title:     'Abre visualizador de imagens 360°',
                 onClick: function(btn, map) {
-                    console.log(opt_gfi);
-                    opt_gfi = 2;
-                    estado.state('gfi');
+                    opt_gfi = 1;
+                    estado.state('360');
                 }
         }]
     });
