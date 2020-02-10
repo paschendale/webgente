@@ -12,24 +12,12 @@ var vetorBasemap = [
         attribution: 'Limites Municipais obtidos através do IBGE (2010) e Prefeitura Municipal de Bom Despacho (2019)'
     },
 
-    parametros_satelite = {
-        nome: 'Imagem de Satélite',
-        host: 'https://geoserver.genteufv.com.br/geoserver/ows?',
-        padrao: false,
-        maxZoom: 22,
-        layers: 'bomdespacho:bomdespacho_satelite',
-        format: 'image/png',
-        transparent: false,
-        tiled: true,
-        attribution: 'Imageamento orbital do satélite Kompsat adquirido pela PMBD em Outubro de 2019'
-    },
-
-    parametros_ortofoto = {
-        nome: 'Ortofoto',
+    parametros_imageamento = {
+        nome: 'Imageamento Aéreo e Orbital',
         host: 'https://geoserver.genteufv.com.br/geoserver/ows?',
         padrao: true,
         maxZoom: 22,
-        layers: 'bomdespacho:ortofoto',
+        layers: 'bomdespacho:ortofoto_base',
         format: 'image/png',
         transparent: false,
         tiled: true,
@@ -41,7 +29,7 @@ var vetorBasemap = [
         host: 'https://geoserver.genteufv.com.br/geoserver/ows?',
         padrao: false,
         maxZoom: 22,
-        layers: 'bomdespacho:cadastro',
+        layers: 'bomdespacho:base_cadastral',
         format: 'image/png',
         transparent: false,
         tiled: true,
