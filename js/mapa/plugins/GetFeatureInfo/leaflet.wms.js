@@ -24,7 +24,6 @@
 
 // Module object
 var wms = {};
-var opt_gfi = 2;
 
 // Quick shim for Object.keys()
 if (!('keys' in Object)) {
@@ -216,11 +215,31 @@ wms.Source = L.Layer.extend({
         if (!this._map) {
             return;
         }
-        // Entrar com o opt_gfi como argumento na função
-
-        // Fim do if
+        
         obj = JSON.parse(info);
-        this._map.openPopup('www.genteufv.com.br/psv/index.html?'+obj.features[0].properties.Caminho, latlng);
+
+        sitebase = 'https://www.genteufv.com.br/psv/index.html?';
+        html = '<a href="'+sitebase+obj.features[0].properties.Caminho+'" target="_blank">Abrir visualizador 360°</a>';
+        html2 = '<div> <object type="text/html" data="'+sitebase+obj.features[0].properties.Caminho+'" width="300px" height="300px" style="resize:both;overflow:auto"></object></div>';
+        this._map.openPopup(html2, latlng);
+
+        // Entrar com o opt_gfi como argumento na função
+        /*
+        if (opt_gfi == 1){
+
+            this._map.openPopup(JSON.stringify(obj.features[0].properties), latlng);
+
+        } else {
+
+            sitebase = 'https://www.genteufv.com.br/psv/index.html?';
+            html = '<a href="'+sitebase+obj.features[0].properties.Caminho+'" target="_blank">Abrir visualizador 360°</a>';
+            html2 = '<div> <object type="text/html" data="'+sitebase+obj.features[0].properties.Caminho+'" width="300px" height="300px" style="resize:both;overflow:auto"></object></div>';
+            this._map.openPopup(html2, latlng);
+
+        };
+        */
+        
+        //obj.features[0].properties.Caminho
     },
 
     'showWaiting': function() {
