@@ -9,36 +9,9 @@ function main(){
 	myMapa = new mapa(init.latitude,init.longitude,init.zoomInicial);
 	myMapa.scale();
 
-    // Criando função para abrir 360
-
-    // Fim da função do 360
-
     // Adicionando alguns botoes
 
-
-
-    var estado = L.easyButton({
-        states: [{
-                stateName: '360',
-                icon:      '<img src="img/360-degree.png">',
-                                title:     'Mostra informações do mapa',      // like its title
-                onClick: function(btn, map) {       // and its callback
-                    opt_gfi = 2;
-                    estado.state('gfi');    // change state on click!
-                }
-            }, {
-                stateName: 'gfi',        // name the state
-                icon:      '<img src="img/info.png">',               // and define its properties
-                title:     'Abre visualizador de imagens 360°',
-                onClick: function(btn, map) {
-                    opt_gfi = 1;
-                    estado.state('360');
-                }
-        }]
-    });
-    estado.addTo(myMapa.getMapa());
-
-    L.easyButton('<img src="img/home.png">', function(btn, map){
+    var homeBut = L.easyButton('<img src="img/home.png">', function(btn, map){
         var initial = [init.latitude,init.longitude];
         map.setView(initial,init.zoomInicial);
     }).addTo(myMapa.getMapa());
@@ -77,9 +50,43 @@ function main(){
 
     function adicionaSourceOverlay (objeto){
     	k++;
-    	camadaOverlay[k] = source.getLayer(objeto.layers);
-    	Lc.addOverlay(camadaOverlay[k],objeto.nome,objeto.grupo);
+        if (objeto.tipo == 'camada'){
+            camadaOverlay[k] = source.getLayer(objeto.layers);
+            Lc.addOverlay(camadaOverlay[k],objeto.nome,objeto.grupo);
+        }
     };
 
-    vetorOverlay.forEach(adicionaSourceOverlay)
+    function adiciona360 (objeto){
+        k++;
+        if (objeto.tipo == '360'){
+            camadaOverlay[k] = source.getLayer(objeto.layers).addTo(myMapa.getMapa());
+        }
+    };
+
+    vetorOverlay.forEach(adicionaSourceOverlay);
+
+    var camada360 = source.getLayer(parametros_pontos_levantamento_360.layers);
+
+    var estado = L.easyButton({
+        states: [{
+                stateName: '360_disabled',
+                icon:      '<img src="img/360-degree.png">',
+                title:     'Liga o visualizador de imagens 360°',   
+                onClick: function(btn, map) {       
+                    opt_gfi = 1;
+                    camada360.addTo(myMapa.getMapa());
+                    estado.state('360_enabled');    
+                }
+            }, {
+                stateName: '360_enabled',   
+                icon:      '<img src="img/360-degree-clicked.png">',               
+                title:     'Desativa o visualizador de imagens 360°',
+                onClick: function(btn, map) {
+                    opt_gfi = 2;
+                    myMapa.getMapa().removeLayer(camada360);
+                    estado.state('360_disabled');
+                }
+        }]
+    });
+    estado.addTo(myMapa.getMapa());
 }

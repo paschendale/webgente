@@ -214,27 +214,20 @@ wms.Source = L.Layer.extend({
         // Hook to handle displaying parsed AJAX response to the user
         if (!this._map) {
             return;
-        }
-        
+        }     
         obj = JSON.parse(info);
-
         optionsPopup = {
-            maxWidth: 500
+            maxWidth: 300
         }
-
-        // Entrar com o opt_gfi como argumento na função
-        
         if (opt_gfi == 2){
-
             this._map.openPopup(JSON.stringify(obj.features[0].properties), latlng);
-
+        } else if (typeof obj.features[0].properties.Caminho != 'undefined'){
+            sitebase = 'https://www.genteufv.com.br/psv/index.html?';
+            html = '<a href="'+sitebase+obj.features[0].properties.Caminho+'" target="_blank">Abrir visualizador 360° em tela cheia</a>';
+            html2 = '<div> <iframe src="'+sitebase+obj.features[0].properties.Caminho+'" style="overflow:auto;width:300px;height:200px;border:none"></iframe><p align="center">'+html+'</p></div>';
+            this._map.openPopup(html2, latlng, optionsPopup);
         } else {
-
-        sitebase = 'https://www.genteufv.com.br/psv/index.html?';
-        html = '<a href="'+sitebase+obj.features[0].properties.Caminho+'" target="_blank">Abrir visualizador 360° em tela cheia</a>';
-        html2 = '<div> <iframe src="'+sitebase+obj.features[0].properties.Caminho+'" style="overflow:auto;width:500px;height:300px;border:none"></iframe><p align="center">'+html+'</p></div>';
-        this._map.openPopup(html2, latlng, optionsPopup);
-
+            this._map.openPopup('Clique em um ponto da camada de imagens 360 ou desative as camadas que o sobrepoem', latlng)
         };
         
         
