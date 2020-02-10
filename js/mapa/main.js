@@ -23,6 +23,7 @@ function main(){
 
     var optionsControl = {
         collapsed: true,
+        groupsCollapsable: true,
         groupCheckboxes: true
     };
     
