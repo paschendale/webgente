@@ -24,6 +24,7 @@
 
 // Module object
 var wms = {};
+var opt_gfi = 2;
 
 // Quick shim for Object.keys()
 if (!('keys' in Object)) {
@@ -215,28 +216,11 @@ wms.Source = L.Layer.extend({
         if (!this._map) {
             return;
         }
-        obj = JSON.parse(info);
-        this._map.openPopup(JSON.stringify(obj.features[0].properties), latlng);
-    },
+        // Entrar com o opt_gfi como argumento na função
 
-    'showPhotoSphereViewer': function(latlng, info) {
-        // Hook to handle displaying parsed AJAX response to the user
-        if (!this._map) {
-            return;
-        }
-         obj = JSON.parse(info);
-        var div = L.DomUtil.create('div', 'psv-container')
-        var psv = new PhotoSphereViewer({
-            panorama: "img/teste.jpeg",
-            container: document.getElementsByClassName('psv-container'),
-            time_anim: 3000,
-            navbar: true,
-            navbar_style: {
-                backgroundColor: 'rgba(58, 67, 77, 0.7)'
-            }
-        });
-        /*this._map.openPopup(JSON.stringify(obj.features[0].properties.Caminho), latlng);*/
-        this._map.openPopup(div, latlng);
+        // Fim do if
+        obj = JSON.parse(info);
+        this._map.openPopup('www.genteufv.com.br/psv/index.html?'+obj.features[0].properties.Caminho, latlng);
     },
 
     'showWaiting': function() {

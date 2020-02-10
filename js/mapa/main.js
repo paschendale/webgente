@@ -7,6 +7,44 @@ function main(){
 	myMapa = new mapa(init.latitude,init.longitude,init.zoomInicial);
 	myMapa.scale();
 
+    // Criando função para abrir 360
+
+    // Fim da função do 360
+
+    // Adicionando alguns botoes
+
+    var opt_gfi = 2;
+
+    var estado = L.easyButton({
+        states: [{
+                stateName: 'gfi',        // name the state
+                icon:      '<img src="img/info.png">',               // and define its properties
+                title:     'Mostra informações do mapa',      // like its title
+                onClick: function(btn, map) {       // and its callback
+                    console.log(opt_gfi);
+                    opt_gfi = 1;
+                    estado.state('360');    // change state on click!
+                }
+            }, {
+                stateName: '360',
+                icon:      '<img src="img/360-degree.png">',
+                title:     'Abre visualizador de imagens 360°',
+                onClick: function(btn, map) {
+                    console.log(opt_gfi);
+                    opt_gfi = 2;
+                    estado.state('gfi');
+                }
+        }]
+    });
+    estado.addTo(myMapa.getMapa());
+
+    L.easyButton('<img src="img/home.png">', function(btn, map){
+        var initial = [init.latitude,init.longitude];
+        map.setView(initial,init.zoomInicial);
+    }).addTo(myMapa.getMapa());
+
+    // Fim da adição de botoes
+
     var optionsControl = {
         collapsed: true
     };
