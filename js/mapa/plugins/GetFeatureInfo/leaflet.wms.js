@@ -218,10 +218,14 @@ wms.Source = L.Layer.extend({
         
         obj = JSON.parse(info);
 
+        optionsPopup = {
+            maxWidth: 500
+        }
+
         sitebase = 'https://www.genteufv.com.br/psv/index.html?';
-        html = '<a href="'+sitebase+obj.features[0].properties.Caminho+'" target="_blank">Abrir visualizador 360°</a>';
-        html2 = '<div> <object type="text/html" data="'+sitebase+obj.features[0].properties.Caminho+'" width="300px" height="300px" style="resize:both;overflow:auto"></object></div>';
-        this._map.openPopup(html2, latlng);
+        html = '<a href="'+sitebase+obj.features[0].properties.Caminho+'" target="_blank">Abrir visualizador 360° em tela cheia</a>';
+        html2 = '<div> <iframe src="'+sitebase+obj.features[0].properties.Caminho+'" style="overflow:auto;width:500px;height:300px;border:none"></iframe><p align="center">'+html+'</p></div>';
+        this._map.openPopup(html2, latlng, optionsPopup);
 
         // Entrar com o opt_gfi como argumento na função
         /*
