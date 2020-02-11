@@ -1,6 +1,27 @@
 // Cria uma variável global para setar o tipo de informação a ser puxada no GetFeatureInfo, 1: Abre visualizador 360, 2: Abre tabela de atributos
 var opt_gfi = 2;
 
+function json2table (objeto){
+
+	tb_init = '<table><tr><th>"Atributo"</th><th>"Valor"</th></tr>';
+
+	tb_data_acum = '';
+
+	for (var property in objeto) {
+    if (!objeto.hasOwnProperty(property)) continue;
+		
+		tb_data = '<tr><td>'+property+'</td><td>'+objeto[property]+'</td></tr>';
+		
+		tb_data_acum = tb_data_acum+tb_data;
+	};
+
+	tb_final = '</table>';
+
+	tb = tb_init+tb_data_acum+tb_final;
+
+	return tb;
+};
+
 //Função principal int main()
 function main(){
 
