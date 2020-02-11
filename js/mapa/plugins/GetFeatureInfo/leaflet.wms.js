@@ -38,6 +38,28 @@ if (!('keys' in Object)) {
     };
 }
 
+function json2table (objeto){
+
+    tb_init = '<table><tr><th>Atributo</th><th>Valor</th></tr>';
+
+    tb_data_acum = '';
+
+    for (var property in objeto) {
+    if (!objeto.hasOwnProperty(property)) continue;
+        
+        tb_data = '<tr><td>'+property+'</td><td>'+objeto[property]+'</td></tr>';
+        
+        tb_data_acum = tb_data_acum+tb_data;
+    };
+
+    tb_final = '</table>';
+
+    tb = tb_init+tb_data_acum+tb_final;
+
+    return tb;
+};
+
+
 /*
  * wms.Source
  * The Source object manages a single WMS connection.  Multiple "layers" can be
@@ -220,18 +242,25 @@ wms.Source = L.Layer.extend({
             maxWidth: 300
         }
         if (opt_gfi == 2){
-            this._map.openPopup(JSON.stringify(obj.features[0].properties), latlng);
+
+            css_table = '<style>table {width:300px;text-align:left;vertical-align:center;padding: 15px;border-bottom: 1px solid #ddd;font-family: Tahoma, Geneva, sans-serif;}td,th {border-bottom: 1px solid #ddd;padding: 7px;}tr:hover {background-color: #f5f5f5;}th {background-color: #f5f5f5;}</style>'
+            this._map.openPopup(css_table+json2table(obj.features[0].properties), latlng);
+
         } else if (typeof obj.features[0].properties.Caminho != 'undefined'){
+
             sitebase = 'https://www.genteufv.com.br/psv/index.html?';
-            html = '<a href="'+sitebase+obj.features[0].properties.Caminho+'" target="_blank">Abrir visualizador 360° em tela cheia</a>';
-            html2 = '<div> <iframe src="'+sitebase+obj.features[0].properties.Caminho+'" style="overflow:auto;width:300px;height:200px;border:none"></iframe><p align="center">'+html+'</p></div>';
-            this._map.openPopup(html2, latlng, optionsPopup);
+
+            fullscreen = '<a href="'+sitebase+obj.features[0].properties.Caminho+'" target="_blank">Abrir visualizador 360° em tela cheia</a>';
+
+            html = '<div> <iframe src="'+sitebase+obj.features[0].properties.Caminho+'" style="overflow:auto;width:300px;height:200px;border:none"></iframe><p align="center">'+fullscreen+'</p></div>';
+
+            this._map.openPopup(html, latlng, optionsPopup);
+
         } else {
+
             this._map.openPopup('Clique em um ponto da camada de imagens 360 ou desative as camadas que o sobrepoem', latlng)
+
         };
-        
-        
-        //obj.features[0].properties.Caminho
     },
 
     'showWaiting': function() {
