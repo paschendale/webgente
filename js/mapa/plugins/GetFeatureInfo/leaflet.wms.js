@@ -249,9 +249,12 @@ wms.Source = L.Layer.extend({
         } else if (typeof obj.features[0].properties.Caminho != 'undefined'){
 
             sitebase = 'https://www.genteufv.com.br/psv/index.html?';
-            html = '<a href="'+sitebase+obj.features[0].properties.Caminho+'" target="_blank">Abrir visualizador 360° em tela cheia</a>';
-            html2 = '<div> <iframe src="'+sitebase+obj.features[0].properties.Caminho+'" style="overflow:auto;width:300px;height:200px;border:none"></iframe><p align="center">'+html+'</p></div>';
-            this._map.openPopup(html2, latlng, optionsPopup);
+
+            fullscreen = '<a href="'+sitebase+obj.features[0].properties.Caminho+'" target="_blank">Abrir visualizador 360° em tela cheia</a>';
+
+            html = '<div> <iframe src="'+sitebase+obj.features[0].properties.Caminho+'" style="overflow:auto;width:300px;height:200px;border:none"></iframe><p align="center">'+fullscreen+'</p></div>';
+
+            this._map.openPopup(html, latlng, optionsPopup);
 
         } else {
 
