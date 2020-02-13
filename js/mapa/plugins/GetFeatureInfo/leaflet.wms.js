@@ -247,8 +247,7 @@ wms.Source = L.Layer.extend({
         }
         if (opt_gfi == 2){
 
-            css_table = '<style>table {width:280px;text-align:left;vertical-align:center;padding: 15px;border-bottom: 1px solid #ddd;font-family: Tahoma, Geneva, sans-serif;}td,th {border-bottom: 1px solid #ddd;padding: 7px;}tr:hover {background-color: #f5f5f5;}th {background-color: #f5f5f5;}</style>'
-            this._map.openPopup(css_table+json2table(obj.features[0].properties), latlng, optionsPopup);
+            this._map.openPopup(json2table(obj.features[0].properties), latlng, optionsPopup);
 
         } else if (typeof obj.features[0].properties.Caminho != 'undefined'){
 
