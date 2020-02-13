@@ -38,26 +38,6 @@ if (!('keys' in Object)) {
     };
 }
 
-function json2table (objeto){
-
-    tb_init = '<table><tr><th>Atributo</th><th>Valor</th></tr>';
-
-    tb_data_acum = '';
-
-    for (var property in objeto) {
-    if (!objeto.hasOwnProperty(property)) continue;
-        
-        tb_data = '<tr><td>'+property+'</td><td>'+objeto[property]+'</td></tr>';
-        
-        tb_data_acum = tb_data_acum+tb_data;
-    };
-
-    tb_final = '</table>';
-
-    tb = tb_init+tb_data_acum+tb_final;
-
-    return tb;
-};
 
 
 /*
@@ -242,12 +222,12 @@ wms.Source = L.Layer.extend({
         obj = JSON.parse(info);
 
         optionsPopup = {
-            maxWidth: 300,
+            width: 300,
             maxHeight: 500
         }
         if (opt_gfi == 2){
 
-            this._map.openPopup(json2table(obj.features[0].properties), latlng, optionsPopup);
+            this._map.openPopup(objects2div(obj.features), latlng, optionsPopup);
 
         } else if (typeof obj.features[0].properties.Caminho != 'undefined'){
 

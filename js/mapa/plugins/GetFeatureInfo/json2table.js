@@ -6,39 +6,53 @@ function objects2div (objeto){
 
 	div_data = '';
 
-	for (var i = 0; i = objeto.length; i++){
+	i = 0;
 
-		div_content[i] = div_init+properties2table(objeto.features[i].properties)+div_final;
+	css = '<style>a {text-align:left;vertical-align:center;font-family: Tahoma, Geneva, sans-serif;font-weight: bold;}</style>';
 
-		div_data = div_data + div_content[i];
+    for (var property in objeto) {
+    if (!objeto.hasOwnProperty(property)) continue;
+
+    	div_id = 'tabela'+i;
+
+		title = (objeto[property].id).split('.')
+
+		div_content = '<div class="container" ><div class="panel-group" width="290px"><div class="panel panel-default"><div class="panel-heading"><p class="panel-title"><a data-toggle="collapse" href="#'+div_id+'">'+title[0]+'</a></p></div><div id="'+div_id+'" class="panel-collapse collapse"><div class="panel-body">'+properties2table(objeto[property].properties)+'</div></div></div></div></div>'
+
+		div_data = div_data + div_content + '<p></p>';
+
+		i++;
 
 	}
 
-	return div_data
+	div_data = div_data;
+
+	return div_data;
 
 };
 
 function properties2table (objeto){
 
-	tb_init = '<table><tr><th>"Atributo"</th><th>"Valor"</th></tr>';
+    tb_init = '<table><tr><th>Atributo</th><th>Valor</th></tr>';
 
-	tb_data_acum = '';
+    tb_data_acum = '';
 
-	for (var i = 0; i = objeto.length; i++) {
+    for (var property in objeto) {
+    if (!objeto.hasOwnProperty(property)) continue;
+        
+        tb_data = '<tr><td>'+property+'</td><td>'+objeto[property]+'</td></tr>';
+        
+        tb_data_acum = tb_data_acum+tb_data;
+    };
 
-		tb_data[i] = '<tr><td>'+objeto[i].constructor.name+'</td><td>'+objeto[i]+'</td></tr>';
+    css_table = '<style>table {width:280px;text-align:left;vertical-align:center;padding: 15px;border-bottom: 1px solid #ddd;font-family: Tahoma, Geneva, sans-serif;}td,th {border-bottom: 1px solid #ddd;padding: 7px;}tr:hover {background-color: #f5f5f5;}th {background-color: #f5f5f5;}</style>'
 
-		tb_data_acum = tb_data_acum+tb_data[i];
-	
-	}
+    tb_final = '</table>';
 
-	tb_final = '</table>';
+    tb = css_table+tb_init+tb_data_acum+tb_final;
 
-	css_table = '<style>table {width:300px;text-align:left;vertical-align:center;padding: 15px;border-bottom: 1px solid #ddd;font-family: Tahoma, Geneva, sans-serif;}td,th {border-bottom: 1px solid #ddd;padding: 7px;}tr:hover {background-color: #f5f5f5;}th {background-color: #f5f5f5;}</style>'
+    return tb;
 
-
-	tb = css_table+tb_init+tb_data_acum+tb_final;
-
-	return tb;
 };
+
 
