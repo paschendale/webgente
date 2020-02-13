@@ -217,8 +217,10 @@ wms.Source = L.Layer.extend({
             'request': 'GetFeatureInfo',
             'query_layers': layers.join(','),
             'X': Math.round(point.x),
-            'Y': Math.round(point.y)
+            'Y': Math.round(point.y),
+            'feature_count': (wmsParams.layers.match(/,/g) || []).length+1
         };
+
         return L.extend({}, wmsParams, infoParams);
     },
 
@@ -238,6 +240,7 @@ wms.Source = L.Layer.extend({
             return;
         }     
         obj = JSON.parse(info);
+
         optionsPopup = {
             maxWidth: 300
         }
