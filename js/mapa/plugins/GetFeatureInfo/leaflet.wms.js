@@ -223,15 +223,13 @@ wms.Source = L.Layer.extend({
 
         optionsPopup = {
             width: 300,
-            maxHeight: 500
+            maxHeight: 300
         }
         if (opt_gfi == 2){
 
             this._map.openPopup(objects2div(obj.features), latlng, optionsPopup);
 
         } else if (typeof obj.features[0].properties.Caminho != 'undefined'){
-
-            sitebase = 'https://www.genteufv.com.br/psv/index.html?';
 
             fullscreen = '<a href="'+sitebase+obj.features[0].properties.Caminho+'" target="_blank">Abrir visualizador 360° em tela cheia</a>';
 

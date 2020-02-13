@@ -8,7 +8,7 @@ function objects2div (objeto){
 
 	i = 0;
 
-	css = '<style>a {text-align:left;vertical-align:center;font-family: Tahoma, Geneva, sans-serif;font-weight: bold;}</style>';
+	css = '<style>a {font-weight: bold; color: inherit;}</style>';
 
     for (var property in objeto) {
     if (!objeto.hasOwnProperty(property)) continue;
@@ -17,7 +17,7 @@ function objects2div (objeto){
 
 		title = (objeto[property].id).split('.')
 
-		div_content = '<div class="container" ><div class="panel-group" width="290px"><div class="panel panel-default"><div class="panel-heading"><p class="panel-title"><a data-toggle="collapse" href="#'+div_id+'">'+title[0]+'</a></p></div><div id="'+div_id+'" class="panel-collapse collapse"><div class="panel-body">'+properties2table(objeto[property].properties)+'</div></div></div></div></div>'
+		div_content = '<div style="width:280px;"><div><div><div><p><a style="font-weight: bold; color: inherit;" data-toggle="collapse" href="#'+div_id+'">'+title[0]+'</a></p></div><div id="'+div_id+'" class="panel-collapse collapse"><div class="panel-body">'+properties2table(objeto[property].properties)+'</div></div></div></div></div>'
 
 		div_data = div_data + div_content + '<p></p>';
 
@@ -25,7 +25,7 @@ function objects2div (objeto){
 
 	}
 
-	div_data = div_data;
+	div_data = div_data + css;
 
 	return div_data;
 
@@ -39,10 +39,24 @@ function properties2table (objeto){
 
     for (var property in objeto) {
     if (!objeto.hasOwnProperty(property)) continue;
+
+    	switch (property) {
+    		case 'path_360': // Implementar no SIG!
+
+    			tb_data = '<a href="'+sitebase+obj.features[0].properties.Caminho+'" target="_blank">Abrir visualização 360° do imóvel</a>';
+
+    		case 'path_files': // Implementar!
+
+    			tb_data = '<a href="http://138.94.148.143:8225/share/page/user/geoufv/dashboard" target="_blank">Abrir arquivos do imóvel</a>';
+
+    		default:
+
+	    		tb_data = '<tr><td>'+property+'</td><td>'+objeto[property]+'</td></tr>';
+
+    	}   
+
+    	tb_data_acum = tb_data_acum+tb_data;     
         
-        tb_data = '<tr><td>'+property+'</td><td>'+objeto[property]+'</td></tr>';
-        
-        tb_data_acum = tb_data_acum+tb_data;
     };
 
     css_table = '<style>table {width:280px;text-align:left;vertical-align:center;padding: 15px;border-bottom: 1px solid #ddd;font-family: Tahoma, Geneva, sans-serif;}td,th {border-bottom: 1px solid #ddd;padding: 7px;}tr:hover {background-color: #f5f5f5;}th {background-color: #f5f5f5;}</style>'
