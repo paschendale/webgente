@@ -1,6 +1,8 @@
 // Cria uma variável global para setar o tipo de informação a ser puxada no GetFeatureInfo, 1: Abre visualizador 360, 2: Abre tabela de atributos
 var opt_gfi = 2;
-
+var drawnItems;
+var drawControl;
+//As variaveis devem ser globais para que a barra de Edição seja retirada
 //Função principal int main()
 function main(){
 

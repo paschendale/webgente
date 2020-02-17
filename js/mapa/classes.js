@@ -18,7 +18,7 @@ class mapa{
 		return this.mapa;
 	}
 
-	//Plugin da barra de escala
+	//Plugin da Barra de escala
 	scale(){
 	    var optionsScale = {
 	    	metric: true, //Define a unidade em m/km
@@ -56,9 +56,11 @@ class mapa{
 
 	//Plugin para desenhar as geometrias
 	barraEdicao(valor){
+	
 		if(valor == true){
+			drawnItems= new L.FeatureGroup();
 			//Definindo as funcionalidades da barra de controle lateral
-			var drawnItems = new L.FeatureGroup();
+			
 			this.mapa.addLayer(drawnItems);
 			// Definindo o titulo do botão
 			L.drawLocal.draw.toolbar.buttons.polyline = 'Polyline';
@@ -67,7 +69,7 @@ class mapa{
 			L.drawLocal.draw.toolbar.buttons.marker = 'Marker';
 			L.drawLocal.draw.toolbar.buttons.polygon = 'Polygon';
 			
-			var drawControl = new L.Control.Draw({
+			drawControl = new L.Control.Draw({
 			        position: 'topleft',
 			        draw:{
 			            polyline: {
@@ -132,13 +134,17 @@ class mapa{
 		                layer.bindPopup("Área aproximada: " + area.toFixed(5) + " km2");
 					}
 					drawnItems.addLayer(layer); //Define o desenho como uma camada
+				
 				});
+			
+			}else if(valor == false){
+				this.mapa.removeControl(drawControl);
+				this.mapa.removeLayer(drawnItems);
+			//Remove a Barra de Edição já existente  	
+
 			}
 
-			if(valor == false){
-				alert("não implementado");
-			}
-		}
+				}
 
 	//Plugin para exportar o mapa
 	exportar(){
