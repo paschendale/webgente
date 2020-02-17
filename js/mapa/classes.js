@@ -58,7 +58,7 @@ class mapa{
 	barraEdicao(valor){
 	
 		if(valor == true){
-			drawnItems= new L.FeatureGroup();
+			drawnItems = new L.FeatureGroup();
 			//Definindo as funcionalidades da barra de controle lateral
 			
 			this.mapa.addLayer(drawnItems);
