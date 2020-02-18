@@ -1,13 +1,20 @@
 // Definindo camadas overlay
 
+/*
+maxZoom: 25,
+format: 'image/png',
+transparent: true,
+tiled: true
+*/
+
 var overlayHost = 'https://geoserver.genteufv.com.br/geoserver/ows?';
 
 var vetorOverlay = [
 	parametros_tra_vias_deslocamento = {
 		nome: 'Rodovias Municipais',
+		layers: 'bomdespacho:TRA_Via_Deslocamento',
 		grupo: 'Malha Viária',
 		maxZoom: 25,
-        layers: 'bomdespacho:TRA_Via_Deslocamento',
         format: 'image/png',
         transparent: true,
         tiled: true

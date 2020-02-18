@@ -190,45 +190,6 @@ class wmsCamada{
 	}
 }
 
-//Conexao WFS com o geoserver
-class wfsCamada{
-	//public
-	constructor(objeto){
-		this.WFScamada
-	}
-	//Passar todas as funções do arquivo overlay-control.js como funções internas dessa classe
-	/*callLayerWFS(nome, layerGeoserver, conexao){
-		var defaultParameters = {
-	        service : 'WFS',
-	        version : '1.0.0',
-	        request : 'GetFeature',
-	        typeName : layerGeoserver, 
-	        outputFormat : 'text/javascript',
-	        format_options : 'callback:getJson',
-	        SrsName : 'EPSG:4326'
-    	};
-
-    	var owsrootUrl = conexao; 
-	    var parameters = L.Util.extend(defaultParameters);
-	    var URL = owsrootUrl + L.Util.getParamString(parameters);
-
-	    var xhr = $.ajax({
-        url: URL,
-        dataType: 'jsonp', 
-        cache: false, 
-        jsonpCallback: 'getJson',
-	        success: function(response){
-	            console.log("CALL SUCCESS");
-	            wfs_layer = L.geoJson(response, {
-	                    //style: style,
-	                    //onEachFeature: onEachFeature
-	                }).addTo(mapa); 
-	            camadas.push(wfs_layer);
-	        }
-    	});
-	}*/
-}
-
 class baseLayer{
 	//public
 	constructor(link, atributo){
@@ -242,3 +203,30 @@ class baseLayer{
 	}
 }
 
+class overlay{
+	//public
+	constructor(nome, layer, grupo){
+		//Parâmetros dinâmicos da classe
+		this.nome = nome;
+		this.layer = layer;
+		this.grupo = grupo;
+		//Parâmetros default da classe
+		this.maxZoom = 25;
+		this.format = "image/jpeg";
+		this.transparent = true;
+		this.tiled = true;
+	}
+
+	getOverlay(){
+		var overlay = {
+			nome : this.nome,
+			layer : this.layer,
+			grupo : this.grupo,
+			maxZoom : this.maxZoom,
+			format : this.format,
+			transparent : this.transparent,
+			tiled : this.tiled
+		}
+		return overlay;
+	}
+}
