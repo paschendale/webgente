@@ -205,16 +205,18 @@ class baseLayer{
 
 class overlay{
 	//public
-	constructor(nome, layer, grupo){
+	constructor(nome, layer, grupo, maxZoom, format, transparent,tiled){
 		//Parâmetros dinâmicos da classe
 		this.nome = nome;
 		this.layer = layer;
 		this.grupo = grupo;
-		//Parâmetros default da classe
-		this.maxZoom = 25;
-		this.format = "image/jpeg";
-		this.transparent = true;
-		this.tiled = true;
+		//Parâmetros default modificáveis da classe 
+		// O atributo recebe = (Se o parâmetro == undefined)? recebe o default: caso contrário recebe o parâmetro preenchido;   
+		this.maxZoom= (maxZoom==undefined)? 25: maxZoom;
+		this.format= (format==undefined)? "image/jpeg": format;
+		this.transparent= (transparent==undefined)? true: transparent;
+		this.tiled= (tiled==undefined)? true: tiled;
+		
 	}
 
 	getOverlay(){

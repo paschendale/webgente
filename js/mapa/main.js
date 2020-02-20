@@ -101,9 +101,8 @@ function main(){
 	};
 
     //Exemplo de chamada da classe overlay criada 
-    /*
-    m = new overlay('Rodovias Privadas', 'bomdespacho:TRA_Via_Deslocamento', 'Malha Viária');
-    console.log(typeof(m.getOverlay()));
-    */
+   
+  
+    
    
 }
