@@ -40,8 +40,8 @@ class mapa{
 			<div class="row">
 			<div class="col-2-lg col-2-xs col-2-xs col-2-xs">
 			</div>
-			<div class="col-2-lg col-2-xs col-2-xs col-2-xs">
-			  	<div class="modal-dialog" role="dialog" id="barra" style="opacity: 1.0; position: absolute; margin-left: 17%; margin-top: 18%; width: 100%;">
+			<div class="col-5-lg col-5-xs col-5-xs col-5-xs">
+			  	<div class="modal-dialog" role="dialog" id="barra" style="opacity: 1.0; position: relative; margin-left: 17%; margin-top: 18%; width: 100%;">
 			    	<div class="modal-content">
 			      		<div class="modal-body">
 					     	<nav>

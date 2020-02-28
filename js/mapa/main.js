@@ -2,6 +2,7 @@
 var opt_gfi = 2;
 var drawnItems;
 var drawControl;
+var menu = " ";
 //As variaveis devem ser globais para que a barra de Edição seja retirada
 //Função principal int main()
 function main(){
