@@ -33,7 +33,11 @@ class mapa{
 
 		//Formulário dinâmico mostrado quando o usuário seleciona a opção de "Barra de ferramentas"
 		menu.innerHTML = `
-			  	<div class="modal-dialog" role="dialog" id="barra" style="opacity: 0.7; position: relative; margin-left: 1%; margin-top: 5%; width: 24%;">
+			<div class="row">
+			<div class="col-2-lg col-2-xs col-2-xs col-2-xs">
+			</div>
+			<div class="col-2-lg col-2-xs col-2-xs col-2-xs">
+			  	<div class="modal-dialog" role="dialog" id="barra" style="opacity: 1.0; position: absolute; margin-left: 17%; margin-top: 18%; width: 100%;">
 			    	<div class="modal-content">
 			      		<div class="modal-body">
 					     	<nav>
@@ -51,6 +55,8 @@ class mapa{
 					    </div>
 			    	</div>
 			   	</div>
+			</div>
+			</div>
 		`;
 	}
 
