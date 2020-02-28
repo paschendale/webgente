@@ -29,10 +29,13 @@ class mapa{
 	}
 
 	barraFerramentas(){
-		var menu = document.getElementById("barraFerramentas");
+		
 
+		if(menu==" "){
+		menu = document.getElementById("barraFerramentas");
+		
 		//Formulário dinâmico mostrado quando o usuário seleciona a opção de "Barra de ferramentas"
-		menu.innerHTML = `
+				menu.innerHTML = `
 			  	<div class="modal-dialog" role="dialog" id="barra" style="opacity: 0.7; position: relative; margin-left: 1%; margin-top: 5%; width: 24%;">
 			    	<div class="modal-content">
 			      		<div class="modal-body">
@@ -43,6 +46,7 @@ class mapa{
 							    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false" onclick="opcoesCEP()">CEP</a>
 							    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false" onclick="opcoesIPTU()">IPTU</a>
 							    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false" onclick="opcoesLOTE()">Lote CP</a>
+							    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false" onclick="opcoesTeste()">Quadra </a>
 							    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Filtro</a>
 							  </div>
 							</nav>
@@ -52,6 +56,15 @@ class mapa{
 			    	</div>
 			   	</div>
 		`;
+		
+	}else{
+			
+			menu.innerHTML=" ";
+			menu=" ";
+			
+			
+		}
+
 	}
 
 	//Plugin para desenhar as geometrias
@@ -147,6 +160,7 @@ class mapa{
 				}
 
 	//Plugin para exportar o mapa
+	//imprime o mapa diretamento no navegador 
 	exportar(){
 		var customActionToPrint = function(context, mode) {
 			return function() {

@@ -4,7 +4,7 @@ function opcoesCEP(){
 		<!--Colocar AJAX aqui-->
 		<form action="" method="POST">
 	    	<input type="text" id="cep" name="cep" placeholder="CEP">
-	    	<input type="submit" value="Ok">
+	    	<input type="button" value="Ok" onclick="filtros()" >
 	    </form>
 	`
 }
@@ -82,6 +82,18 @@ function opcoesFiltro(){
 	    	</select>
 	    	<input type="text" id="valor" name="valor" placeholder="Valor">
 	    	<input type="submit" value="Ok">
+	    </form>
+	`
+}
+
+function opcoesTeste(){
+	var opcao = document.getElementById("conteudo");
+	opcao.innerHTML = `
+		<!--Colocar AJAX aqui-->
+		<form action="" method="POST">
+	    	<input type="text" id="quadra" name="quadra" placeholder="Quadra">
+	    	<input type="text" id="setor" name="setor" placeholder="Setor">
+	    	<input type="button" value="Ok" onclick="filtros()" >
 	    </form>
 	`
 }
