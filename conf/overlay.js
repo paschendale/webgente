@@ -40,6 +40,16 @@ var vetorOverlay = [
         tiled: true
 	},
 
+	parametros_cbge_lotes = {
+		nome: 'Lotes',
+		grupo: 'Cadastro Urbano',
+		maxZoom: 25,
+        layers: 'bomdespacho:CBGE_Lotes',
+        format: 'image/png',
+        transparent: true,
+        tiled: true
+	},
+
 	parametros_tra_trecho_arruamento = {
 		nome: 'Eixos de Vias',
 		grupo: 'Cadastro Urbano',
