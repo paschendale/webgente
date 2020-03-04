@@ -68,7 +68,7 @@ function main(){
     	k++;
         camadaOverlay[k] = source.getLayer(objeto.layers);
         
-        Lc.addOverlay(camadaOverlay[k],objeto.nome,objeto.grupo);
+        Lc.addOverlay(camadaOverlay[k], objeto.nome, objeto.grupo);
     };
 
     vetorOverlay.forEach(adicionaSourceOverlay);
@@ -100,11 +100,5 @@ function main(){
 	        }]
 	    });
 	    estado.addTo(myMapa.getMapa());
-	};
-
-    //Exemplo de chamada da classe overlay criada 
-   
-  
-    
-   
+	}; 
 }
