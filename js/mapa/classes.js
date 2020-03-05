@@ -64,14 +64,11 @@ class mapa{
 			</div>
 		`;
 		
-	}else{
-			
-			menu.innerHTML=" ";
-			menu=" ";
-			
-			
+	}
+	else{
+		menu.innerHTML=" ";
+		menu=" ";
 		}
-
 	}
 
 	//Plugin para desenhar as geometrias
@@ -233,10 +230,10 @@ class overlay{
 		this.grupo = grupo;
 		//Parâmetros default modificáveis da classe 
 		// O atributo recebe = (Se o parâmetro == undefined)? recebe o default: caso contrário recebe o parâmetro preenchido;   
-		this.maxZoom= (maxZoom==undefined)? 25: maxZoom;
-		this.format= (format==undefined)? "image/jpeg": format;
-		this.transparent= (transparent==undefined)? true: transparent;
-		this.tiled= (tiled==undefined)? true: tiled;
+		this.maxZoom = (maxZoom==undefined)? 25: maxZoom;
+		this.format = (format==undefined)? "image/jpeg": format;
+		this.transparent = (transparent==undefined)? true: transparent;
+		this.tiled = (tiled==undefined)? true: tiled;
 		
 	}
 
