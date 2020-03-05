@@ -67,7 +67,8 @@ function main(){
     function adicionaSourceOverlay (objeto){
     	k++;
         camadaOverlay[k] = source.getLayer(objeto.layers);
-        Lc.addOverlay(camadaOverlay[k],objeto.nome,objeto.grupo);
+        
+        Lc.addOverlay(camadaOverlay[k], objeto.nome, objeto.grupo);
     };
 
     vetorOverlay.forEach(adicionaSourceOverlay);

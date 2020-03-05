@@ -91,7 +91,6 @@ function opcoesTeste(){
 	opcao.innerHTML = `
 		<!--Colocar AJAX aqui-->
 		<form action="" method="POST">
-	    	<input type="text" id="quadra" name="quadra" placeholder="Quadra">
 	    	<input type="text" id="setor" name="setor" placeholder="Setor">
 	    	<input type="button" value="Ok" onclick="filtros()" >
 	    </form>
