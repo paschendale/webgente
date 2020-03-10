@@ -8,8 +8,6 @@ function filtros(){
 	quadra.host = overlayHost;
 	quadra.cql_filter = cql_setor.getAttribute("name") +"="+ cql_setor.value;// +" and "+cql_quadra.getAttribute("name") +"= "+ cql_quadra.value ;
 
-	console.log(quadra);
-
 	//Chamada da camada wms do geoserver como imagem
 
 	if(controle == true){
@@ -31,7 +29,8 @@ function filtros(){
         typeName : quadra.layers,
         outputFormat : 'text/javascript',
         format_options : 'callback:getJson',
-        SrsName : 'EPSG:4326'
+        SrsName : 'EPSG:4326',
+        cql_filter: quadra.cql_filter //Cql filter adicionado também na requisição wfs
     };
 
     var parameters = L.Util.extend(defaultParameters);
@@ -51,6 +50,6 @@ function filtros(){
     	});
 }
 
-function tabela () {
+function tabela(){
 
 }
