@@ -1,26 +1,37 @@
 var controle = false;
 
+
 function filtros(){
-	var cql_quadra = document.getElementById("quadra");
 	var cql_setor = document.getElementById("setor");
-	var quadra = vetorOverlay[2];
+	var cql_filtro= cql_setor.getAttribute("name") +"="+ cql_setor.value;
+    var quadra= vetorOverlay[2];
+    quadra.host= overlayHost;
+    quadra.cql_filter= cql_filtro;
+   
 
-	quadra.host = overlayHost;
-	quadra.cql_filter = cql_setor.getAttribute("name") +"="+ cql_setor.value;// +" and "+cql_quadra.getAttribute("name") +"= "+ cql_quadra.value ;
+    if(controle == true){
+       
+        //Remover a GetFeatureInfo requisitada
+       
+        controle = false
+    }
 
-	//Chamada da camada wms do geoserver como imagem
+    if(controle == false){
+        //Chama a camada como wms normal usando a classe wmsCamada criada no arquivo classes.js
+        source = L.WMS.source(quadra.host, {
+            opacity: 1,
+            tiled: true,
+            maxZoom: 25,
+            "info_format": "application/json",
+            transparent: true,
+            format: 'image/png',
+            cql_filter: quadra.cql_filter
+        });
 
-	if(controle == true){
-		myMapa.getMapa().removeLayer(quadra_filtro.getLayer());
-		controle = false;
-	}
-	if(controle == false){
-		quadra_filtro = new wmsCamada(quadra);
-		quadra_filtro.getLayer().addTo(myMapa.getMapa());
-		controle = true;
-	}
+        source.getLayer(quadra.layers).addTo(myMapa.getMapa());
 
-	//Chamada de todos os atributos da camada wms requisitada
+        controle = true;
+    }
 
 	var defaultParameters = {
         service : 'WFS',
@@ -30,12 +41,14 @@ function filtros(){
         outputFormat : 'text/javascript',
         format_options : 'callback:getJson',
         SrsName : 'EPSG:4326',
-        cql_filter: quadra.cql_filter //Cql filter adicionado também na requisição wfs
+         cql_filter: quadra.cql_filter
+        //Cql filter adicionado também na requisição wfs
     };
 
     var parameters = L.Util.extend(defaultParameters);
     var URL = "https://geoserver.genteufv.com.br/geoserver/ows" + L.Util.getParamString(parameters);
 
+    
     var xhr = $.ajax({
         url: URL,
         dataType: 'jsonp', 
@@ -43,12 +56,17 @@ function filtros(){
         jsonpCallback: 'getJson',
         	success: function(response){
         		//Editar o json de resposta das quadras dos setores aqui em um popup
-            	for(var i=0; i<response.features.length; i++){
-            		console.log(response.features[i].properties);
+
+                for(var i=0; i<response.features.length; i++){
+            		
+                console.log(response.features[i].properties);
+
             	}
             }
-    	});
+  	});
+
 }
+
 
 function tabela(){
 
