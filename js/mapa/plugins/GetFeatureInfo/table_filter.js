@@ -1,19 +1,22 @@
 var controle = false;
 
+function filtros(identificador){
+    //Pega todo o input que possui o id="identificador"
+	var cql_parametro = document.getElementById(identificador);
+    //A partir do input pego, pega o value digitado pelo usuário e monta o cql_filtro
+	var cql_filtro = identificador +"="+ cql_parametro.value;
 
-function filtros(){
-	var cql_setor = document.getElementById("setor");
-	var cql_filtro= cql_setor.getAttribute("name") +"="+ cql_setor.value;
-    var quadra= vetorOverlay[2];
-    quadra.host= overlayHost;
-    quadra.cql_filter= cql_filtro;
-   
+    var quadra = vetorOverlay[2];
+
+    console.log(quadra);
+
+    quadra.host = overlayHost;
+    quadra.cql_filter = cql_filtro;
 
     if(controle == true){
-       
         //Remover a GetFeatureInfo requisitada
-       
         controle = false
+        console.log(source);
     }
 
     if(controle == false){
@@ -56,11 +59,8 @@ function filtros(){
         jsonpCallback: 'getJson',
         	success: function(response){
         		//Editar o json de resposta das quadras dos setores aqui em um popup
-
                 for(var i=0; i<response.features.length; i++){
-            		
-                console.log(response.features[i].properties);
-
+                    console.log(response.features[i].properties);
             	}
             }
   	});

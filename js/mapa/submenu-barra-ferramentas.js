@@ -92,7 +92,7 @@ function opcoesTeste(){
 		<!--Colocar AJAX aqui-->
 		<form action="" method="POST">
 	    	<input type="text" id="setor" name="setor" placeholder="Setor">
-	    	<input type="button" value="Ok" onclick="filtros()" >
+	    	<input type="button" value="Ok" onclick="filtros('setor')" >
 	    </form>
 	`
 }

@@ -39,9 +39,9 @@ function main(){
 	 
     function adicionaBasemap(objeto){
         i++;
-        camadaBase[i] = new wmsCamada(objeto)
+        camadaBase[i] = new wmsCamada(objeto);
         Lc.addBaseLayer(camadaBase[i].getLayer(),objeto.nome);
-        if (objeto.padrao) {camadaBase[i].getLayer().addTo(myMapa.getMapa());};
+        //if (objeto.padrao) {camadaBase[i].getLayer().addTo(myMapa.getMapa());};
     }
 
 
@@ -73,7 +73,6 @@ function main(){
     };
 
     vetorOverlay.forEach(adicionaSourceOverlay);
-
     
     // Testa se existe a camada do levantamento 360, definida dentro do arquivo conf/360.js, caso exista, carrega o botão de habilitar a camada e o visualizador 360.
 
