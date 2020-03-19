@@ -1,50 +1,46 @@
 var controle = false;
 
-function filtros(identificador){
-    //Pega todo o input que possui o id="identificador"
-	var cql_parametro = document.getElementById(identificador);
-    //A partir do input pego, pega o value digitado pelo usuário e monta o cql_filtro
-	var cql_filtro = identificador +"="+ cql_parametro.value;
+function filtros(camadaFiltrada){
+    //Recebe a camada de pesquisa e concatena uma string com o conteúdo do cql_filter 
+    var cql_filtro="";
+    for(campo of camadaFiltrada.prop_query){
+        var resp=document.getElementById(campo).value;
+        cql_filtro+=(resp!="" & cql_filtro!="")? " and ": "";
+        cql_filtro+=(resp!="")?campo+"="+ resp:"";
+}
 
-    var quadra = vetorOverlay[2];
-
-    console.log(quadra);
-
-    quadra.host = overlayHost;
-    quadra.cql_filter = cql_filtro;
-
+   var layerF = camadaFiltrada;
     if(controle == true){
         //Remover a GetFeatureInfo requisitada
-        controle = false
-        console.log(source);
+        controle = false;
     }
 
     if(controle == false){
         //Chama a camada como wms normal usando a classe wmsCamada criada no arquivo classes.js
-        source = L.WMS.source(quadra.host, {
+        source = L.WMS.source(overlayHost, {
             opacity: 1,
             tiled: true,
             maxZoom: 25,
             "info_format": "application/json",
             transparent: true,
             format: 'image/png',
-            cql_filter: quadra.cql_filter
+            cql_filter: cql_filtro
         });
-
-        source.getLayer(quadra.layers).addTo(myMapa.getMapa());
+       
+        source.getLayer(layerF.layers).addTo(myMapa.getMapa());
 
         controle = true;
     }
 
-	var defaultParameters = {
+    var defaultParameters = {
         service : 'WFS',
         version : '1.0.0',
         request : 'GetFeature',
-        typeName : quadra.layers,
+        typeName : layerF.layers,
         outputFormat : 'text/javascript',
         format_options : 'callback:getJson',
         SrsName : 'EPSG:4326',
-         cql_filter: quadra.cql_filter
+        cql_filter: cql_filtro
         //Cql filter adicionado também na requisição wfs
     };
 
@@ -57,13 +53,13 @@ function filtros(identificador){
         dataType: 'jsonp', 
         cache: false, 
         jsonpCallback: 'getJson',
-        	success: function(response){
-        		//Editar o json de resposta das quadras dos setores aqui em um popup
+            success: function(response){
+                //Editar o json de resposta das quadras dos setores aqui em um popup
                 for(var i=0; i<response.features.length; i++){
                     console.log(response.features[i].properties);
-            	}
+                }
             }
-  	});
+    });
 
 }
 

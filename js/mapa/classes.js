@@ -51,7 +51,7 @@ class mapa{
 							    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false" onclick="opcoesCEP()">CEP</a>
 							    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false" onclick="opcoesIPTU()">IPTU</a>
 							    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false" onclick="opcoesLOTE()">Lote CP</a>
-							    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false" onclick="opcoesTeste()">Quadra </a>
+							    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false" onclick="opcoesTeste()">Lote </a>
 							    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Filtro</a>
 							  </div>
 							</nav>
@@ -223,11 +223,12 @@ class baseLayer{
 
 class overlay{
 	//public
-	constructor(nome, layer, grupo, maxZoom, format, transparent,tiled){
+	constructor(nome, layers, grupo,prop_query, maxZoom, format, transparent,tiled){
 		//Parâmetros dinâmicos da classe
 		this.nome = nome;
-		this.layer = layer;
+		this.layers = layers;
 		this.grupo = grupo;
+		this.prop_query=prop_query; 
 		//Parâmetros default modificáveis da classe 
 		// O atributo recebe = (Se o parâmetro == undefined)? recebe o default: caso contrário recebe o parâmetro preenchido;   
 		this.maxZoom = (maxZoom==undefined)? 25: maxZoom;
@@ -240,8 +241,9 @@ class overlay{
 	getOverlay(){
 		var overlay = {
 			nome : this.nome,
-			layer : this.layer,
+			layers : this.layers,
 			grupo : this.grupo,
+			prop_query:this.prop_query,
 			maxZoom : this.maxZoom,
 			format : this.format,
 			transparent : this.transparent,

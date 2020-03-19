@@ -39,8 +39,19 @@ var vetorOverlay = [
         transparent: true,
         tiled: true
 	},
+	//exemplo de funcionamento da classe overlay
 
-	parametros_cbge_lotes = {
+	parametros_cbge_lotes = new overlay(
+		'Lotes',
+		'bomdespacho:CBGE_Lotes',
+		'Cadastro Urbano',
+		['n_setor','n_quadra'],
+		undefined , 
+		undefined,
+		undefined,
+		undefined)
+
+	/*parametros_cbge_lotes = {
 		nome: 'Lotes',
 		grupo: 'Cadastro Urbano',
 		maxZoom: 25,
@@ -48,7 +59,7 @@ var vetorOverlay = [
         format: 'image/png',
         transparent: true,
         tiled: true
-	},
+	}*/,
 
 	parametros_tra_trecho_arruamento = {
 		nome: 'Eixos de Vias',
