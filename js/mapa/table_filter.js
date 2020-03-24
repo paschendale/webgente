@@ -11,7 +11,7 @@ function filtros(camadaFiltrada){
 
    var layerF = camadaFiltrada;
     if(controle == true){
-        //Remover a GetFeatureInfo requisitada
+        
         controle = false;
     }
 

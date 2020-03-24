@@ -5,99 +5,77 @@ maxZoom: 25,
 format: 'image/png',
 transparent: true,
 tiled: true
+
+*/
+
+/*
+	Ordem de preenchimento da classe overlay:
+   new overlay (
+     	nome, 
+		layers, 
+		grupo,
+		prop_query, 
+		maxZoom, 
+		format, 
+		transparent,
+		tiled )
 */
 
 var overlayHost = 'https://geoserver.genteufv.com.br/geoserver/ows?';
 
-var vetorOverlay = [
-	parametros_tra_vias_deslocamento = {
-		nome: 'Rodovias Municipais',
-		layers: 'bomdespacho:TRA_Via_Deslocamento',
-		grupo: 'Malha Viária',
-		maxZoom: 25,
-        format: 'image/png',
-        transparent: true,
-        tiled: true
-	},
 
-	parametros_tra_caminho_carrocavel = {
-		nome: 'Rodovias Privadas',
-		grupo: 'Malha Viária',
-		maxZoom: 25,
-        layers: 'bomdespacho:TRA_Caminho_Carrocavel',
-        format: 'image/png',
-        transparent: true,
-        tiled: true
-	},
-
-	parametros_cbge_quadras = {
-		nome: 'Quadras',
-		grupo: 'Cadastro Urbano',
-		maxZoom: 25,
-        layers: 'bomdespacho:CBGE_Quadras',
-        format: 'image/png',
-        transparent: true,
-        tiled: true
-	},
-	//exemplo de funcionamento da classe overlay
+var vetorOverlay =  [
+	parametros_tra_vias_deslocamento = new overlay(
+		'Rodovias Municipais',
+		'bomdespacho:TRA_Via_Deslocamento',
+		'Malha Viária'
+		)
+	,
+	parametros_tra_caminho_carrocavel = new overlay(
+		'Rodovias Privadas',
+		'bomdespacho:TRA_Caminho_Carrocavel',
+		'Malha Viária'
+		)
+		,
+	parametros_cbge_quadras = new overlay(
+		'Quadras',
+		'bomdespacho:CBGE_Quadras',
+		'Cadastro Urbano',
+		['setor','cod_quadra'])
+	,
+	
 
 	parametros_cbge_lotes = new overlay(
 		'Lotes',
 		'bomdespacho:CBGE_Lotes',
 		'Cadastro Urbano',
-		['n_setor','n_quadra'],
-		undefined , 
-		undefined,
-		undefined,
-		undefined)
+		['n_setor','n_quadra']
+		)
 
-	/*parametros_cbge_lotes = {
-		nome: 'Lotes',
-		grupo: 'Cadastro Urbano',
-		maxZoom: 25,
-        layers: 'bomdespacho:CBGE_Lotes',
-        format: 'image/png',
-        transparent: true,
-        tiled: true
-	}*/,
+	,
+	parametros_tra_trecho_arruamento = new overlay(
+		 'Eixos de Vias',
+		'bomdespacho:CBGE_Trecho_Arruamento',
+		 'Cadastro Urbano'
+		)
+	,
+	parametros_tra_trecho_rodoviario =new overlay(
+	    'Trecho Rodoviario',
+	    'bomdespacho:TRA_Trecho_Rodoviario',
+	    'Malha Viária'
+ 
+		)
+	 ,
 
-	parametros_tra_trecho_arruamento = {
-		nome: 'Eixos de Vias',
-		grupo: 'Cadastro Urbano',
-		maxZoom: 25,
-        layers: 'bomdespacho:CBGE_Trecho_Arruamento',
-        format: 'image/png',
-        transparent: true,
-        tiled: true
-	},
+	parametros_hid_massa_dagua = new overlay(
+		'Corpos D`Água',
+		'bomdespacho:HID_Massa_Dagua',
+		'Meio Ambiente'
+	),
 
-	parametros_tra_trecho_rodoviario = {
-		nome: 'Trecho Rodoviario',
-		grupo: 'Malha Viária',
-		maxZoom: 25,
-        layers: 'bomdespacho:TRA_Trecho_Rodoviario',
-        format: 'image/png',
-        transparent: true,
-        tiled: true
-	},
-
-	parametros_hid_massa_dagua = {
-		nome: 'Corpos D`Água',
-		grupo: 'Meio Ambiente',
-		maxZoom: 25,
-        layers: 'bomdespacho:HID_Massa_Dagua',
-        format: 'image/png',
-        transparent: true,
-        tiled: true
-	},
-
-	parametros_hid_trecho_drenagem = {
-		nome: 'Hidrografia',
-		grupo: 'Meio Ambiente',
-		maxZoom: 25,
-        layers: 'bomdespacho:HID_Trecho_Drenagem',
-        format: 'image/png',
-        transparent: true,
-        tiled: true
-	}
+	parametros_hid_trecho_drenagem =new overlay(
+		'Hidrografia',
+		'bomdespacho:HID_Trecho_Drenagem',
+		'Meio Ambiente'
+		)
 ];

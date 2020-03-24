@@ -1,4 +1,5 @@
 //Cada plugin fica definido como uma função interna dessa classe, sendo chamado a medida que o usuário acha necessário
+
 class mapa{
 	//public
 	constructor(latitude, longitude, zoom){
@@ -28,14 +29,25 @@ class mapa{
 	    L.control.scale(optionsScale).addTo(this.mapa);
 	}
 
-	barraFerramentas(){
-		
+
+	barraPesquisas(){
+	
 
 		if(menu==" "){
-		menu = document.getElementById("barraFerramentas");
+		menu = document.getElementById("barraPesquisas");
+		//Formulário dinâmico mostrado quando o usuário seleciona a opção de "Barra de Pesquisa"
+		var camadasPesquisaveis="";
+		var obj_camada;
+		//As abas de pesquisas são definidas de acordo com as camadas que possuem campos pesquisáveis definidos em prop_query 
+		for (var n=0;n<vetorOverlay.length; n++ ){
+			obj_camada=vetorOverlay[n];
+			if (obj_camada.prop_query!=undefined){
+				camadasPesquisaveis+=`<a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false" onclick="opcoes(`+n+`)">`+ obj_camada.nome+`</a>`;
+
+			camadasPesquisaveis+=`\n`;
+			}
+		} 
 		
-		//Formulário dinâmico mostrado quando o usuário seleciona a opção de "Barra de ferramentas"
-				
 		menu.innerHTML = `
 			<div class="row">
 			<div class="col-2-lg col-2-xs col-2-xs col-2-xs">
@@ -46,14 +58,8 @@ class mapa{
 			      		<div class="modal-body">
 					     	<nav>
 							  <div class="nav nav-tabs" id="nav-tab" role="tablist">
-							    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Endereço</a>
-							    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Bairro</a>
-							    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false" onclick="opcoesCEP()">CEP</a>
-							    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false" onclick="opcoesIPTU()">IPTU</a>
-							    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false" onclick="opcoesLOTE()">Lote CP</a>
-							    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false" onclick="opcoesTeste()">Lote </a>
-							    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Filtro</a>
-							  </div>
+							 `+camadasPesquisaveis+`
+							 </div>
 							</nav>
 							<br>
 							<div id="conteudo"></div>
@@ -196,6 +202,9 @@ class mapa{
 		}).addTo(this.mapa);
 	}
 }
+ 
+
+
 
 class wmsCamada{
 	//public

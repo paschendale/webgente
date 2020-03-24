@@ -1,0 +1,3 @@
+function barraPesquisas(){
+	myMapa.barraPesquisas();
+}
