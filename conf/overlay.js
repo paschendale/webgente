@@ -31,27 +31,35 @@ var vetorOverlay =  [
 		'Malha Viária'
 		)
 	,
+
 	parametros_tra_caminho_carrocavel = new overlay(
 		'Rodovias Privadas',
 		'bomdespacho:TRA_Caminho_Carrocavel',
 		'Malha Viária'
 		)
-		,
-	parametros_cbge_quadras = new overlay(
-		'Quadras',
-		'bomdespacho:CBGE_Quadras',
+
+	,
+	parametros_cbge_edificacoes = new overlay(
+		'Edificacoes',
+		'bomdespacho:CBGE_Edificacoes',
 		'Cadastro Urbano',
-		['setor','cod_quadra'])
+		['distrito','setor','quadra','lote','unidade']
+		)
 	,
 	
-
 	parametros_cbge_lotes = new overlay(
 		'Lotes',
 		'bomdespacho:CBGE_Lotes',
 		'Cadastro Urbano',
-		['n_setor','n_quadra']
+		['distrito','setor','quadra','lote']
 		)
-
+	,
+	parametros_cbge_quadras = new overlay(
+		'Quadras',
+		'bomdespacho:CBGE_Quadras',
+		'Cadastro Urbano',
+		['distrito','setor','quadra']
+		)
 	,
 	parametros_tra_trecho_arruamento = new overlay(
 		 'Eixos de Vias',
