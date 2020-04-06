@@ -56,7 +56,8 @@ var vetorOverlay =  [
 	parametros_tra_trecho_arruamento = new overlay(
 		 'Eixos de Vias',
 		'bomdespacho:CBGE_Trecho_Arruamento',
-		 'Cadastro Urbano'
+		 'Cadastro Urbano',
+		 ['tipo', 'nome_logradouro']
 		)
 	,
 	parametros_tra_trecho_rodoviario =new overlay(

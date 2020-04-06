@@ -221,6 +221,8 @@ wms.Source = L.Layer.extend({
         }     
         obj = JSON.parse(info);
 
+        console.log(obj);
+
         optionsPopup = {
             width: 300,
             maxHeight: 300

@@ -52,7 +52,7 @@ class mapa{
 			<div class="col-2-lg col-2-xs col-2-xs col-2-xs">
 			</div>
 			<div class="col-5-lg col-5-xs col-5-xs col-5-xs">
-			  	<div class="modal-dialog" role="dialog" id="barra" style="opacity: 1.0; position: absolute; margin-left: 5%; margin-top: 1%; width: 100%; z-index: 2000;">
+			  	<div class="modal-dialog" role="dialog" id="barra" style="opacity: 1.0; position: absolute; margin-left: 5%; margin-top: 1%; width: 500px; z-index: 2000;">
 			    	<div class="modal-content">
 			      		<div class="modal-body">
 					     	<nav>
