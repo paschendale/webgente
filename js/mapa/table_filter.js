@@ -18,6 +18,7 @@ function filtros(camadaFiltrada){
     }
 
     if(controle == false){
+
         //Chama a camada como wms normal usando a classe wmsCamada criada no arquivo classes.js
         source = L.WMS.source(overlayHost, {
             opacity: 1,
@@ -49,6 +50,8 @@ function filtros(camadaFiltrada){
     var parameters = L.Util.extend(defaultParameters);
     var URL = "https://geoserver.genteufv.com.br/geoserver/ows" + L.Util.getParamString(parameters);
 
+    //Implementa requisição WFS somente para a camada de ruas 
+    
     if(camadaFiltrada.nome == "Eixos de Vias"){
     	var xhr = $.ajax({
         url: URL,
@@ -59,41 +62,35 @@ function filtros(camadaFiltrada){
                 //Editar o json de resposta das quadras dos setores aqui em um popup
                 
                 var eixo = document.getElementById("eixoVias");
+
                 var eixo_html_01 = `
 					<div class="row">
-						<div class="col-2-lg col-2-xs col-2-xs col-2-xs">
-							</div>
-								<div class="col-5-lg col-5-xs col-5-xs col-5-xs">
-					  				<div class="modal-dialog" role="dialog" id="barra" style="table, th, td {
-  border: 1px solid black;
-  border-collapse: collapse;
-}
-th, td {
-  padding: 5px;
-}
-th {
-  text-align: left;
-} z-index: 2000;">
-					    				<div class="modal-content">
-					      					<div class="modal-body">
-					      						<table>
-					      							<tr>
-					      								<th>Tipo</th>
-					      								<th>Logradouro</th>
-					      							</tr>
-					      							<tr>
-					      					`;
+					  	<div class="modal-dialog" role="dialog" id="barra">
+					    	<div class="modal-content">
+					      		<div class="modal-body" style="height: 400px; overflow-y: scroll; opacity: 1.0;">
+					      			<table style="border: solid; border-width: 1px; position: relative; text-align: center; z-index: 20000; width: 330px; padding-right: 1px;">
+					      				<tr>
+					      					<th>Tipo</th>
+					      					<th>Logradouro</th>
+					      				</tr>
+					`;
 
 				var eixo_td = "";	      					
                 for(var i=0; i<response.features.length; i++){
-                    eixo_td = eixo_td + "<td>" + response.features[i].properties.tipo + "</td>";
-                    eixo_td = eixo_td + "<td>" + response.features[i].properties.nome_logradouro + "</td>";
+                    if(response.features[i].properties.tipo == "AVN")
+                        eixo_td = eixo_td + "<tr><td>" + "Avendida" + "</td>";
+                    else if(response.features[i].properties.tipo == "PCA")
+                        eixo_td = eixo_td + "<tr><td>" + "Praça" + "</td>";
+                    else if(response.features[i].properties.tipo == "RUA")
+                        eixo_td = eixo_td + "<tr><td>" + "Rua" + "</td>";
+                    eixo_td = eixo_td + "<td>" + response.features[i].properties.nome_logradouro + "</td></tr>";
                 }
                 
-                var eixo_html_02  =`</div>
+                var eixo_html_02  =`</table>
+                                    </div>
 					    		</div>
 					   		</div>
-						</div>
+						
 					</div>
 				`; 
 
@@ -101,21 +98,6 @@ th {
     		}
     	});
     }
-    /*
-    var xhr = $.ajax({
-        url: URL,
-        dataType: 'jsonp', 
-        cache: false, 
-        jsonpCallback: 'getJson',
-            success: function(response){
-                //Editar o json de resposta das quadras dos setores aqui em um popup
-                for(var i=0; i<response.features.length; i++){
-                    console.log(response.features[i].properties.nome_logradouro);
-                }
-            }
-    });
-    */
-
 }
 
 
