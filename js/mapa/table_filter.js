@@ -65,25 +65,31 @@ function filtros(camadaFiltrada){
 
                 var eixo_html_01 = `
 					<div class="row">
-					  	<div class="modal-dialog" role="dialog" id="barra">
-					    	<div class="modal-content">
-					      		<div class="modal-body" style="height: 400px; overflow-y: scroll; opacity: 1.0;">
-					      			<table style="border: solid; border-width: 1px; position: relative; text-align: center; z-index: 20000; width: 330px; padding-right: 1px;">
+					  	<div class="modal-dialog" role="dialog" id="barra" style="margin-top: 9%; margin-left: 5%;">
+					    	<div class="modal-content" style="opacity: 1.0;">
+					      		<div class="modal-body" style="height: 400px; overflow-y: scroll; background-color: white">
+					      			<table style="border: solid; border-width: 1px; position: relative; text-align: center; z-index: 20000; width: 340px;">
 					      				<tr>
 					      					<th>Tipo</th>
 					      					<th>Logradouro</th>
+                                            <th>Ver</th>
 					      				</tr>
 					`;
 
 				var eixo_td = "";	      					
                 for(var i=0; i<response.features.length; i++){
-                    if(response.features[i].properties.tipo == "AVN")
+                    if(response.features[i].properties.tipo == "AVN"){
                         eixo_td = eixo_td + "<tr><td>" + "Avendida" + "</td>";
-                    else if(response.features[i].properties.tipo == "PCA")
+                    }
+                    else if(response.features[i].properties.tipo == "PCA"){
                         eixo_td = eixo_td + "<tr><td>" + "Praça" + "</td>";
-                    else if(response.features[i].properties.tipo == "RUA")
+                    }
+                    else if(response.features[i].properties.tipo == "RUA"){
                         eixo_td = eixo_td + "<tr><td>" + "Rua" + "</td>";
-                    eixo_td = eixo_td + "<td>" + response.features[i].properties.nome_logradouro + "</td></tr>";
+                    }
+
+                    eixo_td = eixo_td + "<td>" + response.features[i].properties.nome_logradouro + "</td>";
+                    eixo_td = eixo_td + '<td><img src="img/lupa.png"></td></tr>';
                 }
                 
                 var eixo_html_02  =`</table>
@@ -95,6 +101,11 @@ function filtros(camadaFiltrada){
 				`; 
 
 				eixo.innerHTML = eixo_html_01 + eixo_td + eixo_html_02;  
+
+                 if(response.features.length == 0){
+                    eixo_td = eixo_td + "<td></td><td> ERRO: NENHUM RESULTADO</td><td></td>";
+                    eixo.innerHTML = eixo_html_01 + eixo_td + eixo_html_02; 
+                }
     		}
     	});
     }
