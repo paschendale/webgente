@@ -1,5 +1,9 @@
 var controle = false;
 
+function buscaVia(){
+    alert("TESTE");
+}
+
 function filtros(camadaFiltrada){
     //Recebe a camada de pesquisa e concatena uma string com o conteúdo do cql_filter 
 
@@ -65,10 +69,10 @@ function filtros(camadaFiltrada){
 
                 var eixo_html_01 = `
 					<div class="row">
-					  	<div class="modal-dialog" role="dialog" id="barra" style="margin-top: 9%; margin-left: 5%;">
-					    	<div class="modal-content" style="opacity: 1.0;">
-					      		<div class="modal-body" style="height: 400px; overflow-y: scroll; background-color: white">
-					      			<table style="border: solid; border-width: 1px; position: relative; text-align: center; z-index: 20000; width: 340px;">
+					  	<div class="modal-dialog" role="dialog" id="barra-rua">
+					    	<div class="modal-content">
+					      		<div class="modal-body" id="corpo-rua">
+					      			<table id="tabela-rua">
 					      				<tr>
 					      					<th>Tipo</th>
 					      					<th>Logradouro</th>
@@ -89,14 +93,13 @@ function filtros(camadaFiltrada){
                     }
 
                     eixo_td = eixo_td + "<td>" + response.features[i].properties.nome_logradouro + "</td>";
-                    eixo_td = eixo_td + '<td><img src="img/lupa.png"></td></tr>';
+                    eixo_td = eixo_td + '<td><img src="img/lupa.png" onclick="buscaVia()"></td></tr>';
                 }
                 
                 var eixo_html_02  =`</table>
-                                    </div>
-					    		</div>
-					   		</div>
-						
+                                </div>
+					    	</div>
+					   	</div>
 					</div>
 				`; 
 
@@ -109,9 +112,4 @@ function filtros(camadaFiltrada){
     		}
     	});
     }
-}
-
-
-function tabela(){
-
 }
