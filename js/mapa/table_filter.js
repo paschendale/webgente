@@ -10,9 +10,12 @@ function filtros(camadaFiltrada){
     var cql_filtro="";
     for(campo of camadaFiltrada.prop_query){
         var resp = document.getElementById(campo).value;
-
-        cql_filtro+=(resp!="" & cql_filtro!="")? " and ": "";
-        cql_filtro+=(resp!="")?(campo+"="+ "'"+resp+"'"):"";
+       cql_filtro+=(resp!="" & cql_filtro!="")? " and ": "";
+        if(Number.isNaN(parseInt(resp))){
+            cql_filtro+=(resp!="")?(campo+" LIKE "+ " '%"+(resp.toLowerCase())+"%' or "+campo+" LIKE "+ " '%"+(resp.toUpperCase())+"%' " ):"";
+        }else{
+            cql_filtro+=(resp!="")?(campo+" = "+ ""+resp+" "):"";
+        }
 	}
 
    var layerF = camadaFiltrada;
