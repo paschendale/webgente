@@ -1,8 +1,33 @@
 var controle = false;
+var tabela= "";
+var layerF;
 
-function buscaVia(){
-    alert("TESTE");
+
+function buscaVia(posicao){
+   //usa a posição para identificar qual via deve ser exibida
+   var long=tabela.features[posicao].geometry.coordinates[0][0][0];
+   var lat=tabela.features[posicao].geometry.coordinates[0][0][1];
+    myMapa.getMapa().setView([lat,long],20);
+  
+    
+
+  var filtro= "( tipo LIKE '%"+tabela.features[posicao].properties.tipo+"%') and (nome_logradouro LIKE '%"+tabela.features[posicao].properties.nome_logradouro+"%')";
+  source = L.WMS.source(overlayHost, {
+            opacity: 1,
+            tiled: true,
+            maxZoom: 25,
+            "info_format": "application/json",
+            transparent: true,
+            format: 'image/png',
+            cql_filter:filtro,
+            styles:'quadras_sabrina'
+        });
+  source.getLayer(layerF.layers).addTo(myMapa.getMapa());
+      
 }
+
+
+
 
 function filtros(camadaFiltrada){
     //Recebe a camada de pesquisa e concatena uma string com o conteúdo do cql_filter 
@@ -12,31 +37,30 @@ function filtros(camadaFiltrada){
         var resp = document.getElementById(campo).value;
        cql_filtro+=(resp!="" & cql_filtro!="")? " and ": "";
         if(Number.isNaN(parseInt(resp))){
-            cql_filtro+=(resp!="")?(campo+" LIKE "+ " '%"+(resp.toLowerCase())+"%' or "+campo+" LIKE "+ " '%"+(resp.toUpperCase())+"%' " ):"";
+            cql_filtro+=(resp!="")?("("+campo+" LIKE "+ " '%"+(resp.toLowerCase())+"%' or "+campo+" LIKE "+ " '%"+(resp.toUpperCase())+"%') " ):"";
         }else{
             cql_filtro+=(resp!="")?(campo+" = "+ ""+resp+" "):"";
         }
 	}
 
-   var layerF = camadaFiltrada;
+  
     if(controle == true){
         
         controle = false;
     }
-
+    layerF = camadaFiltrada;
     if(controle == false){
 
         //Chama a camada como wms normal usando a classe wmsCamada criada no arquivo classes.js
-        source = L.WMS.source(overlayHost, {
+    source = L.WMS.source(overlayHost, {
             opacity: 1,
             tiled: true,
             maxZoom: 25,
             "info_format": "application/json",
             transparent: true,
-            format: 'image/png',
-            cql_filter: cql_filtro
+            format: 'image/png'
         });
-    
+
         source.getLayer(layerF.layers).addTo(myMapa.getMapa());
 
         controle = true;
@@ -67,6 +91,7 @@ function filtros(camadaFiltrada){
         jsonpCallback: 'getJson',
             success: function(response){
                 //Editar o json de resposta das quadras dos setores aqui em um popup
+                tabela=response;
                 
                 var eixo = document.getElementById("eixoVias");
 
@@ -94,9 +119,11 @@ function filtros(camadaFiltrada){
                     else if(response.features[i].properties.tipo == "RUA"){
                         eixo_td = eixo_td + "<tr><td>" + "Rua" + "</td>";
                     }
-
+                    
+                    
                     eixo_td = eixo_td + "<td>" + response.features[i].properties.nome_logradouro + "</td>";
-                    eixo_td = eixo_td + '<td><img src="img/lupa.png" onclick="buscaVia()"></td></tr>';
+                    eixo_td = eixo_td + '<td><img src="img/lupa.png" onclick="buscaVia('+i+')"></td></tr>';
+                    
                 }
                 
                 var eixo_html_02  =`</table>
@@ -116,3 +143,5 @@ function filtros(camadaFiltrada){
     	});
     }
 }
+
+
