@@ -2,32 +2,56 @@ var controle = false;
 var tabela= "";
 var layerF;
 
-
-function buscaVia(posicao){
-   //usa a posição para identificar qual via deve ser exibida
-   var long=tabela.features[posicao].geometry.coordinates[0][0][0];
-   var lat=tabela.features[posicao].geometry.coordinates[0][0][1];
-    myMapa.getMapa().setView([lat,long],20);
-  
-    
-
-  var filtro= "( tipo LIKE '%"+tabela.features[posicao].properties.tipo+"%') and (nome_logradouro LIKE '%"+tabela.features[posicao].properties.nome_logradouro+"%')";
-  source = L.WMS.source(overlayHost, {
-            opacity: 1,
-            tiled: true,
-            maxZoom: 25,
-            "info_format": "application/json",
-            transparent: true,
-            format: 'image/png',
-            cql_filter:filtro,
-            styles:'quadras_sabrina'
-        });
-  source.getLayer(layerF.layers).addTo(myMapa.getMapa());
-      
+function exibe_propriedades_tabela(response){
+	var tabela = document.getElementById("eixoVias");
+	tabela.innerHTML = `
+		<div class="row">
+			<div class="modal-dialog" role="dialog" id="barra-rua">
+				<div class="modal-content">
+					<div class="modal-body" id="corpo-rua">
+					    <table id="tabela-rua">
+					    	<tr>
+					      		<th>Codigo</th>
+					      		<th>Id</th>
+                                <th>Secao_d</th>
+                                <th>Secao_e</th>
+					      	</tr>
+					      	<tr>
+						      	<td>`+response.properties.codigo+`</td>
+						      	<td>`+response.properties.id+`</td>
+						      	<td>`+response.properties.secao_d+`</td>
+						      	<td>`+response.properties.secao_e+`</td>
+					      	</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+	</div>
+	`
 }
 
+function buscaVia(posicao){
+    //usa a posição para identificar qual via deve ser exibida
 
+	var long=tabela.features[posicao].geometry.coordinates[0][0][0];
+	var lat=tabela.features[posicao].geometry.coordinates[0][0][1];
 
+	myMapa.getMapa().setView([lat,long],20);
+
+	var filtro= "( tipo LIKE '%"+tabela.features[posicao].properties.tipo+"%') and (nome_logradouro LIKE '%"+tabela.features[posicao].properties.nome_logradouro+"%')";
+	
+	source = L.WMS.source(overlayHost, {
+		            opacity: 1,
+		            tiled: true,
+		            maxZoom: 25,
+		            "info_format": "application/json",
+		            transparent: true,
+		            format: 'image/png',
+		            cql_filter:filtro,
+		            styles:'quadras_sabrina'
+		        });
+	source.getLayer(layerF.layers).addTo(myMapa.getMapa());
+}
 
 function filtros(camadaFiltrada){
     //Recebe a camada de pesquisa e concatena uma string com o conteúdo do cql_filter 
@@ -42,26 +66,26 @@ function filtros(camadaFiltrada){
             cql_filtro+=(resp!="")?(campo+" = "+ ""+resp+" "):"";
         }
 	}
-
   
     if(controle == true){
-        
         controle = false;
     }
+
     layerF = camadaFiltrada;
+
     if(controle == false){
 
         //Chama a camada como wms normal usando a classe wmsCamada criada no arquivo classes.js
-    source = L.WMS.source(overlayHost, {
-            opacity: 1,
-            tiled: true,
-            maxZoom: 25,
-            "info_format": "application/json",
-            transparent: true,
-            format: 'image/png'
-        });
+        /*source = L.WMS.source(overlayHost, {
+                opacity: 1,
+                tiled: true,
+                maxZoom: 25,
+                "info_format": "application/json",
+                transparent: true,
+                format: 'image/png'
+            });
 
-        source.getLayer(layerF.layers).addTo(myMapa.getMapa());
+        source.getLayer(layerF.layers).addTo(myMapa.getMapa());*/
 
         controle = true;
     }
@@ -90,7 +114,7 @@ function filtros(camadaFiltrada){
         cache: false, 
         jsonpCallback: 'getJson',
             success: function(response){
-                //Editar o json de resposta das quadras dos setores aqui em um popup
+            	//Transforma o response em variavel global por meio da variavel tabela
                 tabela=response;
                 
                 var eixo = document.getElementById("eixoVias");
@@ -111,7 +135,7 @@ function filtros(camadaFiltrada){
 				var eixo_td = "";	      					
                 for(var i=0; i<response.features.length; i++){
                     if(response.features[i].properties.tipo == "AVN"){
-                        eixo_td = eixo_td + "<tr><td>" + "Avendida" + "</td>";
+                        eixo_td = eixo_td + "<tr><td>" + "Avenida" + "</td>";
                     }
                     else if(response.features[i].properties.tipo == "PCA"){
                         eixo_td = eixo_td + "<tr><td>" + "Praça" + "</td>";
@@ -120,9 +144,10 @@ function filtros(camadaFiltrada){
                         eixo_td = eixo_td + "<tr><td>" + "Rua" + "</td>";
                     }
                     
-                    
                     eixo_td = eixo_td + "<td>" + response.features[i].properties.nome_logradouro + "</td>";
-                    eixo_td = eixo_td + '<td><img src="img/lupa.png" onclick="buscaVia('+i+')"></td></tr>';
+
+                    //Onclick chama duas funções
+                    eixo_td = eixo_td + '<td><img src="img/lupa.png" onclick="buscaVia('+i+'); exibe_propriedades_tabela(tabela.features['+i+'])"></td></tr>'; 
                     
                 }
                 
