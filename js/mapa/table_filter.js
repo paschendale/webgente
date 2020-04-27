@@ -2,13 +2,18 @@ var controle = false;
 var tabela= "";
 var layerF;
 
+function fecharTabela(){
+    var tabela = document.getElementById("eixoVias");
+    tabela.innerHTML = "";
+}
+
 function exibe_propriedades_tabela(response){
 	var tabela = document.getElementById("eixoVias");
 	tabela.innerHTML = `
 		<div class="row">
 			<div class="modal-dialog" role="dialog" id="barra-rua">
 				<div class="modal-content">
-					<div class="modal-body" id="corpo-rua">
+					<div class="modal-body" id="tabela_propriedades"><img src="img/botao-fechar.jpg" id="imagem-fechar" onclick="fecharTabela()">
 					    <table id="tabela-rua">
 					    	<tr>
 					      		<th>Codigo</th>
@@ -74,7 +79,6 @@ function filtros(camadaFiltrada){
     layerF = camadaFiltrada;
 
     if(controle == false){
-
         //Chama a camada como wms normal usando a classe wmsCamada criada no arquivo classes.js
         /*source = L.WMS.source(overlayHost, {
                 opacity: 1,
@@ -86,10 +90,10 @@ function filtros(camadaFiltrada){
             });
 
         source.getLayer(layerF.layers).addTo(myMapa.getMapa());*/
-
         controle = true;
     }
 
+    //Requisição WFS para buscar os dados a serem mostrados na tabela
     var defaultParameters = {
         service : 'WFS',
         version : '1.0.0',
@@ -105,9 +109,19 @@ function filtros(camadaFiltrada){
     var parameters = L.Util.extend(defaultParameters);
     var URL = "https://geoserver.genteufv.com.br/geoserver/ows" + L.Util.getParamString(parameters);
 
-    //Implementa requisição WFS somente para a camada de ruas 
-    
-    if(camadaFiltrada.nome == "Eixos de Vias"){
+    if(camadaFiltrada.nome == "Lotes"){
+        var xhr = $.ajax({
+        url: URL,
+        dataType: 'jsonp', 
+        cache: false, 
+        jsonpCallback: 'getJson',
+            success: function(response){
+                console.log(response);
+            }
+        })
+    }
+
+    else if(camadaFiltrada.nome == "Eixos de Vias"){
     	var xhr = $.ajax({
         url: URL,
         dataType: 'jsonp', 
@@ -123,7 +137,7 @@ function filtros(camadaFiltrada){
 					<div class="row">
 					  	<div class="modal-dialog" role="dialog" id="barra-rua">
 					    	<div class="modal-content">
-					      		<div class="modal-body" id="corpo-rua">
+					      		<div class="modal-body" id="corpo-rua"><img src="img/botao-fechar.jpg" id="imagem-fechar" onclick="fecharTabela()">
 					      			<table id="tabela-rua">
 					      				<tr>
 					      					<th>Tipo</th>

@@ -31,6 +31,9 @@ body,
 	margin-left: 5%;
 	z-index: 20000;
 }
+#tabela_propriedades{
+	height: 120px; 
+}
 #corpo-rua{
 	height: 400px; 
 	overflow-y: scroll; 
@@ -39,6 +42,9 @@ body,
 	position: relative; 
 	text-align: center;  
 	width: 340px;
+}
+#imagem-fechar{
+	margin-left: 90%;
 }
 
 table {width:280px;text-align:left;vertical-align:center;padding: 15px;border-bottom: 1px solid #ddd;font-family: Tahoma, Geneva, sans-serif;}
