@@ -4,31 +4,34 @@ var vetorLayer= new Array();
 
 
 function fecharTabela(){
-    var tabela = document.getElementById("eixoVias");
-    tabela.innerHTML = "";
+    var tabelaExibicao = document.getElementById("consultaPesquisa");
+    tabelaExibicao.innerHTML = "";
 }
 
 
 function exibe_propriedades_tabela(response){
-	var tabela = document.getElementById("eixoVias");
+	var tabelaExibicao = document.getElementById("consultaPesquisa");
+	var chaves = Object.keys(response.properties);
+    var colunas="";
+	var linhas="";
+	for( campos of chaves ){
+    colunas+= `<th>`+campos+`</th>`;   
+    colunas+=`\n`;
+	linhas+=`<td>`+response.properties[campos]+`</td>`;	
+	linhas+=`\n`;	
+	}	
 
-	tabela.innerHTML = `
+    tabelaExibicao.innerHTML = `
 		<div class="row">
 			<div class="modal-dialog" role="dialog" id="barra-rua">
 				<div class="modal-content">
 					<div class="modal-body" id="tabela_propriedades"><img src="img/botao-fechar.jpg" id="imagem-fechar" onclick="fecharTabela()">
 					    <table id="tabela-rua">
 					    	<tr>
-					      		<th>Codigo</th>
-					      		<th>Id</th>
-                                <th>Secao_d</th>
-                                <th>Secao_e</th>
+					      		`+colunas+`
 					      	</tr>
 					      	<tr>
-						      	<td>`+response.properties.codigo+`</td>
-						      	<td>`+response.properties.id+`</td>
-						      	<td>`+response.properties.secao_d+`</td>
-						      	<td>`+response.properties.secao_e+`</td>
+						      `+linhas+`
 					      	</tr>
 						</table>
 					</div>
@@ -128,71 +131,56 @@ function consultaFiltro (camadaFiltrada){
             	//Transforma o response em variavel global por meio da variavel tabela
                 tabela=response;
 
-                if(camadaFiltrada.nome == "Edificacoes"){
-                    console.log(camadaFiltrada.nome);
-                    console.log(response);
-                }
-                
-
-                if(camadaFiltrada.nome == "Lotes"){
-                    console.log(camadaFiltrada.nome);
-                    console.log(response);
-                }
-
-                if(camadaFiltrada.nome == "Quadras"){
-                    console.log(camadaFiltrada.nome);
-                    console.log(response);
-                }
-
-                if(camadaFiltrada.nome == "Eixos de Vias"){
-                    var eixo = document.getElementById("eixoVias");
-
-                    var eixo_html_01 = `
+                    var consulta = document.getElementById("consultaPesquisa");
+                    var coluna="";
+                    for (campos of layerF.prop_query){
+                          coluna+= `<th>`+campos+`</th>`
+                          coluna+=`\n`;
+                    }    
+                    var consulta_html_01 = `
     					<div class="row">
     					  	<div class="modal-dialog" role="dialog" id="barra-rua">
     					    	<div class="modal-content">
     					      		<div class="modal-body" id="corpo-rua"><img src="img/botao-fechar.jpg" id="imagem-fechar" onclick="fecharTabela()">
     					      			<table id="tabela-rua">
     					      				<tr>
-    					      					<th>Tipo</th>
-    					      					<th>Logradouro</th>
+    					      					`+coluna+`
                                                 <th>Ver</th>
     					      				</tr>
     				`;
 
-    				var eixo_td = "";	      					
+    				var consulta_td = "";	      					
                     for(var i=0; i<response.features.length; i++){
-                        if(response.features[i].properties.tipo == "AVN"){
-                            eixo_td = eixo_td + "<tr><td>" + "Avenida" + "</td>";
-                        }
-                        else if(response.features[i].properties.tipo == "PCA"){
-                            eixo_td = eixo_td + "<tr><td>" + "Praça" + "</td>";
-                        }
-                        else if(response.features[i].properties.tipo == "RUA"){
-                            eixo_td = eixo_td + "<tr><td>" + "Rua" + "</td>";
-                        }
+                             consulta_td+="<tr>"; 
+                            var linhas="";
+                            for (campos of layerF.prop_query){
+                                linhas+="<td>" + response.features[i].properties[campos] + "</td>";  
+                                 linhas+=`\n`;   
+                            
+                            } 
+                                            
                         
-                        eixo_td = eixo_td + "<td>" + response.features[i].properties.nome_logradouro + "</td>";
+                        consulta_td  += linhas;
 
                         //Onclick chama duas funções
-                        eixo_td = eixo_td + '<td><img src="img/lupa.png" onclick="buscaVia('+i+'); exibe_propriedades_tabela(tabela.features['+i+'])"></td></tr>'; 
+                        consulta_td += '<td><img src="img/lupa.png" onclick="buscaVia('+i+'); exibe_propriedades_tabela(tabela.features['+i+'])"></td></tr>'; 
                         
                     }
                     
-                    var eixo_html_02  =`</table>
+                    var consulta_html_02  =`</table>
                                     </div>
     					    	</div>
     					   	</div>
     					</div>
     				`; 
 
-    				eixo.innerHTML = eixo_html_01 + eixo_td + eixo_html_02;  
+    				consulta.innerHTML = consulta_html_01 + consulta_td + consulta_html_02;  
 
                      if(response.features.length == 0){
-                        eixo_td = eixo_td + "<td></td><td> ERRO: NENHUM RESULTADO</td><td></td>";
-                        eixo.innerHTML = eixo_html_01 + eixo_td + eixo_html_02; 
+                        consulta_td += "<td></td><td> ERRO: NENHUM RESULTADO</td><td></td>";
+                    consulta.innerHTML = consulta_html_01 + consulta_td + consulta_html_02;  
                     }
-    		    } 
+    		     
             }
     });
 }
