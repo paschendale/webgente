@@ -2,13 +2,16 @@ var tabela= "";
 var layerF;
 var vetorLayer= new Array();
 
+
 function fecharTabela(){
     var tabela = document.getElementById("eixoVias");
     tabela.innerHTML = "";
 }
 
+
 function exibe_propriedades_tabela(response){
 	var tabela = document.getElementById("eixoVias");
+
 	tabela.innerHTML = `
 		<div class="row">
 			<div class="modal-dialog" role="dialog" id="barra-rua">
@@ -35,6 +38,7 @@ function exibe_propriedades_tabela(response){
 	`
 }
 
+
 function buscaVia(posicao){
     //usa a posição para identificar qual via deve ser exibida
 
@@ -43,8 +47,7 @@ function buscaVia(posicao){
 
 	myMapa.getMapa().setView([lat,long],20);
 
-	var filtro= "( tipo LIKE '%"+tabela.features[posicao].properties.tipo+"%') and (nome_logradouro LIKE '%"+tabela.features[posicao].properties.nome_logradouro+"%')";
-	
+	var cql_filtro = filtro(layerF,tabela.features[posicao].properties);
 	source = L.WMS.source(overlayHost, {
 		            opacity: 1,
 		            tiled: true,
@@ -52,25 +55,19 @@ function buscaVia(posicao){
 		            "info_format": "application/json",
 		            transparent: true,
 		            format: 'image/png',
-		            cql_filter:filtro,
+		            cql_filter:cql_filtro,
 		            styles:'quadras_sabrina'
 		        });
-	layerF=source.getLayer(camadaFiltrada.layers); 
-    layerF.addTo(myMapa.getMapa());
-    vetorLayer.unshift(layerF);
+	vetorLayer.unshift(source.getLayer(layerF.layers));
+     vetorLayer[0].addTo(myMapa.getMapa());
 }
 
-function filtros(camadaFiltrada){
-    //Recebe a camada de pesquisa e concatena uma string com o conteúdo do cql_filter 
- if(vetorLayer.length > 0){
-        controle = false;
-        vetorLayer.forEach(apagaLayers);
-    	vetorLayer=[];
-    }
 
-    var cql_filtro="";
+function filtro (camadaFiltrada, objPesquisa){
+//Recebe a camada de pesquisa e concatena uma string com o conteúdo do cql_filter 
+		 var cql_filtro="";
     for(campo of camadaFiltrada.prop_query){
-        var resp = document.getElementById(campo).value;
+        var resp =(objPesquisa==null)? document.getElementById(campo).value:objPesquisa[campo];
        cql_filtro+=(resp!="" & cql_filtro!="")? " and ": "";
         if(Number.isNaN(parseInt(resp))){
             cql_filtro+=(resp!="")?("("+campo+" LIKE "+ " '%"+(resp.toLowerCase())+"%' or "+campo+" LIKE "+ " '%"+(resp.toUpperCase())+"%') " ):"";
@@ -78,6 +75,19 @@ function filtros(camadaFiltrada){
             cql_filtro+=(resp!="")?(campo+" = "+ ""+resp+" "):"";
         }
 	}
+return cql_filtro;
+}
+
+
+
+function consultaFiltro (camadaFiltrada){
+    
+ if(vetorLayer.length > 0){
+        controle = false;
+        vetorLayer.forEach(apagaLayers);
+    	vetorLayer=[];
+    }
+
     //Chama a camada como wms normal usando a classe wmsCamada criada no arquivo classes.js
         source = L.WMS.source(overlayHost, {
                 opacity: 1,
@@ -88,16 +98,17 @@ function filtros(camadaFiltrada){
                 format: 'image/png'
             });
 
-        layerF=source.getLayer(camadaFiltrada.layers); 
-        layerF.addTo(myMapa.getMapa());
-        vetorLayer.unshift(layerF);
+        layerF=camadaFiltrada;
+        vetorLayer.unshift(source.getLayer(layerF.layers));
+        vetorLayer[0].addTo(myMapa.getMapa());
+		var cql_filtro=filtro(camadaFiltrada,null);        
       
     //Requisição WFS para buscar os dados a serem mostrados na tabela
     var defaultParameters = {
         service : 'WFS',
         version : '1.0.0',
         request : 'GetFeature',
-        typeName : layerF.layers,
+        typeName :  layerF.layers,
         outputFormat : 'text/javascript',
         format_options : 'callback:getJson',
         SrsName : 'EPSG:4326',
@@ -188,6 +199,7 @@ function filtros(camadaFiltrada){
 
 
 function apagaLayers(layer){
+
 	myMapa.getMapa().removeLayer(layer);
 
 }

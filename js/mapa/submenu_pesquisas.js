@@ -9,6 +9,6 @@ function opcoes(n){
 	opcao.innerHTML = `
 		<form action="" method="POST">`
 	    	+camposPesquisaveis+
-	    	`<input type="button" value="Ok" onclick="filtros(vetorOverlay[`+n+`])"> 
+	    	`<input type="button" value="Ok" onclick="consultaFiltro(vetorOverlay[`+n+`])"> 
 	    </form>`
 }

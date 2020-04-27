@@ -69,6 +69,9 @@ class mapa{
 	else{
 		menu.innerHTML=" ";
 		menu=" ";
+		vetorLayer.forEach(apagaLayers);
+		vetorLayer=[];
+		fecharTabela();
 		}
 	}
 
