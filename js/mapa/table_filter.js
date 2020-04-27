@@ -1,6 +1,6 @@
-var controle = false;
 var tabela= "";
 var layerF;
+var vetorLayer= new Array();
 
 function fecharTabela(){
     var tabela = document.getElementById("eixoVias");
@@ -55,11 +55,18 @@ function buscaVia(posicao){
 		            cql_filter:filtro,
 		            styles:'quadras_sabrina'
 		        });
-	source.getLayer(layerF.layers).addTo(myMapa.getMapa());
+	layerF=source.getLayer(camadaFiltrada.layers); 
+    layerF.addTo(myMapa.getMapa());
+    vetorLayer.unshift(layerF);
 }
 
 function filtros(camadaFiltrada){
     //Recebe a camada de pesquisa e concatena uma string com o conteúdo do cql_filter 
+ if(vetorLayer.length > 0){
+        controle = false;
+        vetorLayer.forEach(apagaLayers);
+    	vetorLayer=[];
+    }
 
     var cql_filtro="";
     for(campo of camadaFiltrada.prop_query){
@@ -71,16 +78,8 @@ function filtros(camadaFiltrada){
             cql_filtro+=(resp!="")?(campo+" = "+ ""+resp+" "):"";
         }
 	}
-  
-    if(controle == true){
-        controle = false;
-    }
-
-    layerF = camadaFiltrada;
-
-    if(controle == false){
-        //Chama a camada como wms normal usando a classe wmsCamada criada no arquivo classes.js
-        /*source = L.WMS.source(overlayHost, {
+    //Chama a camada como wms normal usando a classe wmsCamada criada no arquivo classes.js
+        source = L.WMS.source(overlayHost, {
                 opacity: 1,
                 tiled: true,
                 maxZoom: 25,
@@ -89,10 +88,10 @@ function filtros(camadaFiltrada){
                 format: 'image/png'
             });
 
-        source.getLayer(layerF.layers).addTo(myMapa.getMapa());*/
-        controle = true;
-    }
-
+        layerF=source.getLayer(camadaFiltrada.layers); 
+        layerF.addTo(myMapa.getMapa());
+        vetorLayer.unshift(layerF);
+      
     //Requisição WFS para buscar os dados a serem mostrados na tabela
     var defaultParameters = {
         service : 'WFS',
@@ -114,7 +113,7 @@ function filtros(camadaFiltrada){
         dataType: 'jsonp', 
         cache: false, 
         jsonpCallback: 'getJson',
-            success: function(response){
+            success: function (response){
             	//Transforma o response em variavel global por meio da variavel tabela
                 tabela=response;
 
@@ -188,3 +187,7 @@ function filtros(camadaFiltrada){
 }
 
 
+function apagaLayers(layer){
+	myMapa.getMapa().removeLayer(layer);
+
+}
