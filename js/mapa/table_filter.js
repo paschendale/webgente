@@ -109,20 +109,7 @@ function filtros(camadaFiltrada){
     var parameters = L.Util.extend(defaultParameters);
     var URL = "https://geoserver.genteufv.com.br/geoserver/ows" + L.Util.getParamString(parameters);
 
-    if(camadaFiltrada.nome == "Lotes"){
-        var xhr = $.ajax({
-        url: URL,
-        dataType: 'jsonp', 
-        cache: false, 
-        jsonpCallback: 'getJson',
-            success: function(response){
-                console.log(response);
-            }
-        })
-    }
-
-    else if(camadaFiltrada.nome == "Eixos de Vias"){
-    	var xhr = $.ajax({
+    var xhr = $.ajax({
         url: URL,
         dataType: 'jsonp', 
         cache: false, 
@@ -130,57 +117,74 @@ function filtros(camadaFiltrada){
             success: function(response){
             	//Transforma o response em variavel global por meio da variavel tabela
                 tabela=response;
-                
-                var eixo = document.getElementById("eixoVias");
 
-                var eixo_html_01 = `
-					<div class="row">
-					  	<div class="modal-dialog" role="dialog" id="barra-rua">
-					    	<div class="modal-content">
-					      		<div class="modal-body" id="corpo-rua"><img src="img/botao-fechar.jpg" id="imagem-fechar" onclick="fecharTabela()">
-					      			<table id="tabela-rua">
-					      				<tr>
-					      					<th>Tipo</th>
-					      					<th>Logradouro</th>
-                                            <th>Ver</th>
-					      				</tr>
-					`;
-
-				var eixo_td = "";	      					
-                for(var i=0; i<response.features.length; i++){
-                    if(response.features[i].properties.tipo == "AVN"){
-                        eixo_td = eixo_td + "<tr><td>" + "Avenida" + "</td>";
-                    }
-                    else if(response.features[i].properties.tipo == "PCA"){
-                        eixo_td = eixo_td + "<tr><td>" + "Praça" + "</td>";
-                    }
-                    else if(response.features[i].properties.tipo == "RUA"){
-                        eixo_td = eixo_td + "<tr><td>" + "Rua" + "</td>";
-                    }
-                    
-                    eixo_td = eixo_td + "<td>" + response.features[i].properties.nome_logradouro + "</td>";
-
-                    //Onclick chama duas funções
-                    eixo_td = eixo_td + '<td><img src="img/lupa.png" onclick="buscaVia('+i+'); exibe_propriedades_tabela(tabela.features['+i+'])"></td></tr>'; 
-                    
+                if(camadaFiltrada.nome == "Edificacoes"){
+                    console.log(camadaFiltrada.nome);
+                    console.log(response);
                 }
                 
-                var eixo_html_02  =`</table>
-                                </div>
-					    	</div>
-					   	</div>
-					</div>
-				`; 
 
-				eixo.innerHTML = eixo_html_01 + eixo_td + eixo_html_02;  
-
-                 if(response.features.length == 0){
-                    eixo_td = eixo_td + "<td></td><td> ERRO: NENHUM RESULTADO</td><td></td>";
-                    eixo.innerHTML = eixo_html_01 + eixo_td + eixo_html_02; 
+                if(camadaFiltrada.nome == "Lotes"){
+                    console.log(camadaFiltrada.nome);
+                    console.log(response);
                 }
-    		}
-    	});
-    }
+
+                if(camadaFiltrada.nome == "Quadras"){
+                    console.log(camadaFiltrada.nome);
+                    console.log(response);
+                }
+
+                if(camadaFiltrada.nome == "Eixos de Vias"){
+                    var eixo = document.getElementById("eixoVias");
+
+                    var eixo_html_01 = `
+    					<div class="row">
+    					  	<div class="modal-dialog" role="dialog" id="barra-rua">
+    					    	<div class="modal-content">
+    					      		<div class="modal-body" id="corpo-rua"><img src="img/botao-fechar.jpg" id="imagem-fechar" onclick="fecharTabela()">
+    					      			<table id="tabela-rua">
+    					      				<tr>
+    					      					<th>Tipo</th>
+    					      					<th>Logradouro</th>
+                                                <th>Ver</th>
+    					      				</tr>
+    				`;
+
+    				var eixo_td = "";	      					
+                    for(var i=0; i<response.features.length; i++){
+                        if(response.features[i].properties.tipo == "AVN"){
+                            eixo_td = eixo_td + "<tr><td>" + "Avenida" + "</td>";
+                        }
+                        else if(response.features[i].properties.tipo == "PCA"){
+                            eixo_td = eixo_td + "<tr><td>" + "Praça" + "</td>";
+                        }
+                        else if(response.features[i].properties.tipo == "RUA"){
+                            eixo_td = eixo_td + "<tr><td>" + "Rua" + "</td>";
+                        }
+                        
+                        eixo_td = eixo_td + "<td>" + response.features[i].properties.nome_logradouro + "</td>";
+
+                        //Onclick chama duas funções
+                        eixo_td = eixo_td + '<td><img src="img/lupa.png" onclick="buscaVia('+i+'); exibe_propriedades_tabela(tabela.features['+i+'])"></td></tr>'; 
+                        
+                    }
+                    
+                    var eixo_html_02  =`</table>
+                                    </div>
+    					    	</div>
+    					   	</div>
+    					</div>
+    				`; 
+
+    				eixo.innerHTML = eixo_html_01 + eixo_td + eixo_html_02;  
+
+                     if(response.features.length == 0){
+                        eixo_td = eixo_td + "<td></td><td> ERRO: NENHUM RESULTADO</td><td></td>";
+                        eixo.innerHTML = eixo_html_01 + eixo_td + eixo_html_02; 
+                    }
+    		    } 
+            }
+    });
 }
 
 
