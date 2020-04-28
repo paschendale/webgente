@@ -14,6 +14,7 @@ function exibe_propriedades_tabela(response){
 	var chaves = Object.keys(response.properties);
     var colunas="";
 	var linhas="";
+
 	for( campos of chaves ){
         colunas+= `<th>`+campos+`</th>`;   
         colunas+=`\n`;
@@ -23,7 +24,7 @@ function exibe_propriedades_tabela(response){
 
     tabelaExibicao.innerHTML = `
 		<div class="row">
-			<div class="modal-dialog" role="dialog" id="barra-rua">
+			<div class="modal-dialog" role="dialog" id="propriedades">
 				<div class="modal-content">
 					<div class="modal-body" id="tabela_propriedades"><img src="img/botao-fechar.jpg" id="imagem-fechar" onclick="fecharTabela()">
 					    <table id="tabela-rua">
@@ -37,8 +38,8 @@ function exibe_propriedades_tabela(response){
 					</div>
 				</div>
 			</div>
-	</div>
-	`
+	   </div>
+	`;
 }
 
 

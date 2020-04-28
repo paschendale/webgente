@@ -44,7 +44,18 @@ body,
 	width: 340px;
 }
 #imagem-fechar{
-	margin-left: 90%;
+	margin-left: 95%;
+}
+#propriedades{
+	margin-top: 10%; 
+	margin-left: 5%;
+	z-index: 20000;
+}
+input{
+	border-radius: 2px;
+	border: solid 1px;
+	border-color: lightblue;
+	box-shadow: 3px 1px lightblue;
 }
 
 table {width:280px;text-align:left;vertical-align:center;padding: 15px;border-bottom: 1px solid #ddd;font-family: Tahoma, Geneva, sans-serif;}
