@@ -71,7 +71,7 @@ class mapa{
 		menu=" ";
 		vetorLayer.forEach(apagaLayers);
 		vetorLayer=[];
-		fecharTabela();
+		
 		}
 	}
 

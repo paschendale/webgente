@@ -15,10 +15,10 @@ function exibe_propriedades_tabela(response){
     var colunas="";
 	var linhas="";
 	for( campos of chaves ){
-    colunas+= `<th>`+campos+`</th>`;   
-    colunas+=`\n`;
-	linhas+=`<td>`+response.properties[campos]+`</td>`;	
-	linhas+=`\n`;	
+        colunas+= `<th>`+campos+`</th>`;   
+        colunas+=`\n`;
+    	linhas+=`<td>`+response.properties[campos]+`</td>`;	
+    	linhas+=`\n`;	
 	}	
 
     tabelaExibicao.innerHTML = `
@@ -156,7 +156,6 @@ function consultaFiltro (camadaFiltrada){
                             for (campos of layerF.prop_query){
                                 linhas+="<td>" + response.features[i].properties[campos] + "</td>";  
                                  linhas+=`\n`;   
-                            
                             } 
                                             
                         
@@ -191,3 +190,4 @@ function apagaLayers(layer){
 	myMapa.getMapa().removeLayer(layer);
 
 }
+
