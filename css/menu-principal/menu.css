@@ -1,15 +1,9 @@
-#usuario, #senha{
-	border-radius: 5px;
-}
-
-#login-texto{
-	text-align: center;
-}
-
-.modal-footer{
-	margin-left: 0%;
-}
-
-#cadastro{
+#texto-cabeçalho{
 	color: white;
+}
+#data-nascimento{
+	width: 150px;
+}
+#cpf, #faixa-etaria{
+	width: 250px;
 }

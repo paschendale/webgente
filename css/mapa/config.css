@@ -52,8 +52,6 @@ body,
 	z-index: 20000;
 }
 #usuario, #senha{
-	border-radius: 0px;
-	border: solid;
 	box-shadow: 0px 0px;
 }
 input{

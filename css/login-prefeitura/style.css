@@ -1,0 +1,21 @@
+#login{
+	margin-top: 10%;
+	border: solid;
+	border-color: #F5F5F5;
+	border-width: 2px;
+	padding: 50px 50px 50px 50px;
+}
+#usuario, #senha{
+	background-color: #F5F5F5;
+	border-radius: 0px;
+}
+#botao, .btn, .card{
+	border-radius: 0px;
+}
+#menu-principal{
+	border: solid 1px;
+	height: 600px;
+	border-color: #F5F5F5;
+	background-color: #F5F5F5;
+}
+

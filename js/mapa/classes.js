@@ -123,20 +123,12 @@ class mapa{
 				    var type = e.layerType,
 				               layer = e.layer;
 				    if(type == 'polyline'){
-				    	console.longitude(e);
 				        layer.bindPopup("Colocar tamanho em km da polyline");
 				    }
 				    if(type == 'marker'){
 				    	var coord = layer.getLatLng();
 				        
 				        var informacoesConsulta = `<div id="informacoes">
-				        							<form action="../php/redirecionamento-marker.php" methos="POST">
-				        								Mostrando dados abaixo:
-					        							<br><strong>Dado 01</strong>
-					        							<br><strong>Dado 02</strong>
-					        							<br><strong>Dado 03</strong>
-					        							<br><strong>Dado 04</strong>
-				        							</form>
 				        							</div>`;
 				        
 				        layer.bindPopup(informacoesConsulta);
@@ -144,8 +136,7 @@ class mapa{
 				    }
 				    if(type == 'polygon'){
 				         //Determina a quantidade de pontos que o usuário entrou
-		                let tamanho = e.layer._latlngs[0].length; 
-		                console.log("Polígono de " + tamanho +  " pontos");         
+		                let tamanho = e.layer._latlngs[0].length;         
 
 		                //Obtendo a area em m2
 		                var area = L.GeometryUtil.geodesicArea(e.layer.getLatLngs()[0]);

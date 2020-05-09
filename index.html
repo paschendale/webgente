@@ -136,10 +136,11 @@
               <li class="nav-item active">
                 <button type="button" class="btn btn-dark" onclick="barraEdicao()">Ferramentas</button>
               </li>
-              <!--
+              
               <li class="nav-item active">
-                <button type="button" class="btn btn-dark" onclick="exportar()">Exportar</button>
+                <button type="button" class="btn btn-dark" onclick="cadastro()">Cadastro</button>
               </li>
+              <!--
               <li class="nav-item active">
                 <button type="button" class="btn btn-dark" onclick="">Botão 4</button>
               </li>
@@ -154,47 +155,16 @@
               </li>-->
               <li class="nav-item active">
                 <button type="button" class="btn btn-dark"><a href="ajuda.html" target="_blank" style="color: white;">Ajuda</a></button>
-              </li>    
-
-              <!--Login como modal-->
-              <!--
-              <li class="nav-item active">
-                <button type="button" class="btn btn-dark btn btn-primary" id="login" data-toggle="modal" data-target="#myModal">Login</button>
-                  <div class="modal fade" tabindex="-1" role="dialog" id="myModal">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h5 class="modal-title">LOGIN</h5>
-                              <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                          </div>
-                          <div class="modal-body">
-                            <form method="POST" action="" id="formulario">
-                              	<div class="form-group">
-                              		<label for="exampleInputEmail1">Usuário:</label>
-                                	<input type="text" class="form-control" id="usuario" name="usuario" aria-describedby="emailHelp" placeholder="Nome do Usuário">
-                          		</div>
-                          		<div class="form-group">
-                              	<label for="exampleInputPassword1">Senha:</label>
-                                	<input type="password" class="form-control" id="senha" name="senha" placeholder="Senha">
-                                  	<small id="emailHelp" class="form-text text-muted">Mantenha em segurança seu login e senha</small>
-                          		</div>
-                          		<button type="submit" class="btn btn-primary btn-sm">Entrar</button>
-                          		<button type="button" class="btn btn-primary btn-sm" onclick="alterarSenha()">Alterar senha</button>
-                            </form>
-                          </div>
-                        </div>
-                    </div>
-                  </div>
-              </li>-->
-              
+              </li>   
+         
           </ul>
-          <form class="form-inline my-2 my-lg-0" action="" method="POST">
+          <form class="form-inline my-2 my-lg-0" action="../php/redirecionamento-login.php" method="POST">
             <input class="form-control mr-sm-2" type="text" placeholder="CPF" aria-label="Login" id="usuario" name="usuario" required>
             <input class="form-control mr-sm-2" type="password" placeholder="Senha" aria-label="Senha" id="senha" name="senha" required>
             <button class="btn btn-outline-primary my-2 my-sm-0" type="submit" id="enviar">Enviar</button>
           </form>
+          &nbsp
+          <button class="btn btn-outline-primary my-2 my-sm-0" type="button" onclick="recuperarSenha()">Nova senha</button>
 
         <!--A pesquisa deve ser uma consulta ao banco de dados e retornar um maker na posição retornada-->
         <!--
