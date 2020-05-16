@@ -1,13 +1,13 @@
 CREATE TABLE usuario(
 idUsuario int AUTO_INCREMENT NOT NULL,
-nome varchar(50),
+nome varchar(80),
 email varchar(50),
-senha varchar(50),
-faixaEtaria varchar(10),
-tipo varchar(50),
+senha varchar(60),
+faixaEtaria varchar(25),
+tipo varchar(10),
 dataNascimento date,
 sexo varchar (20),
-telefone varchar (20),
-cpf int,
+celular varchar (20),
+cpf varchar (20),
 PRIMARY KEY (idUsuario)
 );

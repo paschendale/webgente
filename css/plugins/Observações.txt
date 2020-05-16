@@ -1,2 +1,0 @@
--Control.MiniMap
-(Configuração css do mini mapa)
