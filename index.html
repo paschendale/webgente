@@ -113,6 +113,13 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.css">
     <script src="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.js"></script>
     
+    <!-- Jquery Mask -->
+     <script src="js/menu-principal/plugins/jquery.mask.min.js"></script>
+     <script src="js/menu-principal/plugins/jquery.validate.min.js"></script> 
+     <script src="js/menu-principal/plugins/additional-methods.min.js"></script>
+     <script src="js/menu-principal/plugins/localization/messages_pt_BR.js"></script> 
+     <script src="js/menu-principal/aplicacaoJMask.js"></script>
+
 
     <title>WebGENTE</title>
   </head>
@@ -158,7 +165,7 @@
               </li>   
          
           </ul>
-          <form class="form-inline my-2 my-lg-0" action="../php/redirecionamento-login.php" method="POST">
+          <form class="form-inline my-2 my-lg-0" action="../php/redirecionamento-login.php" method="POST" >
             <input class="form-control mr-sm-2" type="text" placeholder="CPF" aria-label="Login" id="usuario" name="usuario" required>
             <input class="form-control mr-sm-2" type="password" placeholder="Senha" aria-label="Senha" id="senha" name="senha" required>
             <button class="btn btn-outline-primary my-2 my-sm-0" type="submit" id="enviar">Enviar</button>

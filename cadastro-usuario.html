@@ -116,6 +116,13 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.css">
     <script src="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.js"></script>
     
+    <!-- Jquery Mask -->
+     <script src="js/menu-principal/plugins/jquery.mask.min.js"></script>
+     <script src="js/menu-principal/plugins/jquery.validate.min.js"></script> 
+     <script src="js/menu-principal/plugins/additional-methods.min.js"></script>
+     <script src="js/menu-principal/plugins/localization/messages_pt_BR.js"></script> 
+     <script src="js/menu-principal/aplicacaoJMask.js"></script>
+
     <title>WebGENTE</title>
   </head>
   <body>
@@ -137,7 +144,7 @@
         <div class="col-3"></div>
           <div class="col-6">
             <br>
-            <form action="" method="POST">
+            <form action="" method="POST" id="formulario" name="formulario">
               <label for="nome">Nome</label>
                 <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome completo" required>
               <label for="cpf">CPF</label> 
@@ -173,5 +180,6 @@
 
     <footer>
     </footer>
+
   </body>
 </html>
