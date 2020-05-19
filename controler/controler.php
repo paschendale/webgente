@@ -28,7 +28,18 @@ class controler{
 			header('refresh: 0.001; ../view/cadastro-usuario.html');
 			exit;
 		}
+	}
 
+	function cadastroPrefeitura(){
+		$nome = $_POST['nome'];
+		$email = $_POST['email'];
+		$senha = md5($_POST['senha']);
+		$tipo = "prefeitura";
+		$cpf = "00000000000";
+
+		$usuario = new usuario();
+		$usuario->constructor($nome, $cpf, "", "", "", "", $email, $senha, $tipo);
+		$usuario->setUsuario();
 	}
 
 	function login(){

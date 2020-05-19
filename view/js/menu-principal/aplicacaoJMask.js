@@ -14,7 +14,6 @@ $(document).ready(function(){
 $("#formulario").validate({
 		rules:{
 			nome: {
-				required: true,
 				maxlength:100,
 				minlength:5
 			},
@@ -33,10 +32,7 @@ $("#formulario").validate({
 				maxlength:20,
 				minlength:4
 			}
-},
-		submitHandler: function(form){
-			alert("Cadastro concluído!")
-		} 
+} 
 	})	
 
 })

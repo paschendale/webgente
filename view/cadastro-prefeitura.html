@@ -134,7 +134,7 @@
         </button>
         <a class="navbar-brand" href="#"><img src="img/webgente-fundo-escuro-120x40.png" alt=""></a>
           <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-            <p id="texto-cabeçalho">Preencha com suas informações pessoais</p>
+            <p id="texto-cabeçalho">Preencha as informações abaixo.</p>
         </div>
       </nav>
   	</header>
@@ -144,28 +144,9 @@
         <div class="col-3"></div>
           <div class="col-6">
             <br>
-            <form action="../php/redirecionamento-cadastro.php" method="POST" id="formulario" name="formulario">
+            <form action="../php/redirecionamento-cadastro-prefeitura.php" method="POST" id="formulario" name="formulario">
               <label for="nome">Nome</label>
-                <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome completo" required>
-              <label for="cpf">CPF</label> 
-                <input type="text" class="form-control" id="cpf" name="cpf" placeholder="CPF" required>
-              <label for="data-nascimento">Data de nascimento</label>
-                <input type="date" class="form-control" id="data-nascimento" name="data-nascimento" required>
-              <label for="sexo">Sexo</label>
-              <br>
-                <input type="radio" id="sexo" name="sexo" value="masculino"> Masculino
-                <input type="radio" id="sexo" name="sexo" value="feminino"> Feminino
-                <input type="radio" id="sexo" name="sexo" value="nao-informar"> Não informar
-              <br>
-              <label for="faixa-etaria">Faixa etária</label>
-                <select class="form-control" id="faixa-etaria" name="faixa-etaria">
-                  <option>----</option>
-                  <option value="menores-15-anos">Menores de 15 anos</option>
-                  <option value="entre-16-e-64-anos">Entre 16 e 64 anos</option>
-                  <option value="a-partir-de-65-anos">A partir de 65 anos</option>
-                </select>
-              <label for="celular">Celular</label>
-                <input type="text" class="form-control" id="celular" name="celular" placeholder="Celular">
+                <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome de usuário" required>
               <label for="email">Email</label>
                 <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
               <label for="senha">Senha</label>

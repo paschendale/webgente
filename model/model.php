@@ -51,6 +51,8 @@ class usuario{
 		$con = new conexao();
 		$con->abrindo_conexao();
 
+		$tipo = $this->tipo;
+
 		if($con){
 			$sql = "INSERT INTO usuario (nome, email, senha, faixaEtaria, tipo, dataNascimento, sexo, celular, cpf) VALUES ('$this->nome', '$this->email', '$this->senha', '$this->faixaEtaria', '$this->tipo', '$this->dataNascimento', '$this->sexo', '$this->celular', '$this->cpf')";
 
@@ -58,25 +60,29 @@ class usuario{
 			$con->fechando_conexao();
 
 			echo('<script>alert("Cadastro com sucesso. Realize o login.");</script>');
-			header('refresh: 0.001; ../view/cadastro-usuario.html');
+
+			if($tipo == "cidadao"){
+				header('refresh: 0.001; ../view/cadastro-usuario.html');
+			}
+			else if($tipo == "prefeitura"){
+				header('refresh: 0.001; ../view/cadastro-prefeitura.html');
+			}
 		}
 		else{
 			echo "Conexão com o banco não estabelecida";
 		}
-
-		$con->fechando_conexao();
 	}
 
 	function setLogin($cpf, $senha){ 
 		$con = new conexao();
 		$con->abrindo_conexao();
 
-		$sql = "SELECT senha, nome FROM usuario WHERE cpf = '$cpf'";
+		$sql = "SELECT senha, nome, tipo FROM usuario WHERE cpf = '$cpf'";
 
 		$resposta = mysqli_query($con->getConexao(), $sql);
  		$resultado = mysqli_fetch_assoc($resposta);
 
- 		if($resultado['senha'] == $senha){
+ 		if($resultado['senha'] == $senha && $resultado['tipo'] == 'cidadao'){
  			//Cria uma sessão de usuário caso ela não exista ainda
  			session_start();
  			//Inicia o usuário no sistema
@@ -84,6 +90,16 @@ class usuario{
  			$_SESSION['nome'] = $resultado['nome'];
 
  			header('refresh: 0.001; ../view/index-cidadao.php');
+ 			exit;
+ 		}
+ 		else if($resultado['senha'] == $senha && $resultado['tipo'] == 'prefeitura'){
+ 			//Cria uma sessão de usuário caso ela não exista ainda
+ 			session_start();
+ 			//Inicia o usuário no sistema
+ 			$_SESSION['cpf'] = $cpf;
+ 			$_SESSION['nome'] = $resultado['nome'];
+
+ 			header('refresh: 0.001; ../view/index-prefeitura.html');
  			exit;
  		}
  		else{
