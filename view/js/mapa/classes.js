@@ -221,12 +221,13 @@ class baseLayer{
 
 class overlay{
 	//public
-	constructor(nome, layers, grupo,prop_query, maxZoom, format, transparent,tiled){
+	constructor(nome, layers, grupo,prop_query,restricted, maxZoom, format, transparent,tiled){
 		//Parâmetros dinâmicos da classe
 		this.nome = nome;
 		this.layers = layers;
 		this.grupo = grupo;
-		this.prop_query=prop_query; 
+		this.prop_query=prop_query;
+		this.restricted=restricted; 
 		//Parâmetros default modificáveis da classe 
 		// O atributo recebe = (Se o parâmetro == undefined)? recebe o default: caso contrário recebe o parâmetro preenchido;   
 		this.maxZoom = (maxZoom==undefined)? 25: maxZoom;
@@ -242,6 +243,7 @@ class overlay{
 			layers : this.layers,
 			grupo : this.grupo,
 			prop_query:this.prop_query,
+			restricted:this.restricted,
 			maxZoom : this.maxZoom,
 			format : this.format,
 			transparent : this.transparent,
@@ -249,4 +251,16 @@ class overlay{
 		}
 		return overlay;
 	}
+}
+
+//função que deleta os atributos que não podem ser acessados
+function restrictedAtributes(objeto){
+	for(camada of vetorOverlay){
+		if(camada.restricted != undefined){
+		for(campos_restristos of camada.restricted){
+			delete objeto[campos_restristos];
+		}
+	}}
+	
+return objeto;
 }
