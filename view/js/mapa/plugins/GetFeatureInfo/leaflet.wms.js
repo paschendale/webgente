@@ -159,6 +159,7 @@ wms.Source = L.Layer.extend({
         var params = this.getFeatureInfoParams(point, layers),
             url = this._url + L.Util.getParamString(params, this._url);
 
+
         this.showWaiting();
         this.ajax(url, done);
 
@@ -220,15 +221,13 @@ wms.Source = L.Layer.extend({
             return;
         }     
         obj = JSON.parse(info);
-
-<<<<<<< HEAD
-=======
+        //Identificar quais layer ativas 
+        var layersMarked = this.getIdentifyLayers();
         for(var num=0; num<obj.features.length;num++){
-
-         obj.features[num].properties=restrictedAtributes(obj.features[num].properties);   
+         obj.features[num].properties=restrictedAtributes(obj.features[num].properties,layersMarked[num]);   
         }
 
->>>>>>> a3b149fac9aab2a3ed8b39023d1b81b38e96df8a
+
         optionsPopup = {
             width: 300,
             maxHeight: 300

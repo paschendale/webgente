@@ -1,9 +1,9 @@
 // Cria uma variável global para setar o tipo de informação a ser puxada no GetFeatureInfo, 1: Abre visualizador 360, 2: Abre tabela de atributos
 var opt_gfi = 2;
+//Variáveis globais para adicionar ou retirar a barra de Edição
 var drawnItems;
-var drawControl;
+var drawControl; 
 var menu = " ";
-//As variaveis devem ser globais para que a barra de Edição seja retirada
 //Função principal int main()
 function main(){
 
@@ -72,14 +72,6 @@ function main(){
     };
 
     vetorOverlay.forEach(adicionaSourceOverlay);
-
-    //Fução que retorna o nome da camada que foi ativada
-    myMapa.getMapa().on('layeradd', function(layer){
-        if(layer.layer._name != undefined){
-            var nome = layer.layer._name;
-            console.log(nome);
-        }
-    });
 
     // Testa se existe a camada do levantamento 360, definida dentro do arquivo conf/360.js, caso exista, carrega o botão de habilitar a camada e o visualizador 360.
 

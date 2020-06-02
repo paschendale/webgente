@@ -39,7 +39,6 @@ class mapa{
 			//As abas de pesquisas são definidas de acordo com as camadas que possuem campos pesquisáveis definidos em prop_query 
 			for (var n=0;n<vetorOverlay.length; n++ ){
 				obj_camada = vetorOverlay[n];
-				console.log(obj_camada.prop_query);
 				if(obj_camada.prop_query != undefined){
 					camadasPesquisaveis +=`
 					<li class="nav-item"><a class="nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false" onclick="opcoes(`+n+`)">`+ obj_camada.nome+`</a></li>`;
@@ -255,12 +254,13 @@ class overlay{
 }
 
 //função que deleta os atributos que não podem ser acessados
-function restrictedAtributes(objeto){
+function restrictedAtributes(objeto,nome){  
 	for(camada of vetorOverlay){
-		if(camada.restricted != undefined){
+		if(camada.restricted != undefined && nome==camada.layers){
 		for(campos_restristos of camada.restricted){
 			delete objeto[campos_restristos];
 		}
+		
 	}}
 	
 return objeto;

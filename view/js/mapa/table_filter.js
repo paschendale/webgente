@@ -11,7 +11,7 @@ function fecharTabela(){
 
 function exibe_propriedades_tabela(response){
 	var tabelaExibicao = document.getElementById("consultaPesquisa");
-	response.properties= restrictedAtributes(response.properties);
+	response.properties= restrictedAtributes(response.properties,layerF.layers);
     var chaves = Object.keys(response.properties);
     var colunas="";
 	var linhas="";
