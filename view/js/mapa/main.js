@@ -47,7 +47,7 @@ function main(){
     vetorBasemap.forEach(adicionaBasemap);
 
     // Cria o source, inicializado pelo plugin Leaflet.wms para a adição das camadas overlay, 
-    // o primeiro parametro é definido em conf/overlay.js, especificando o host do GeoServer de onde serão puxadas as camadas
+    // o primeiro parametro é definido em conf/overlay-, especificando o host do GeoServer de onde serão puxadas as camadas
     // o segundo parâmetro são as opções do plugin, especificando a requisição WMS e o GetFeatureInfo
 
     var source = L.WMS.source(overlayHost, {
@@ -67,11 +67,19 @@ function main(){
     function adicionaSourceOverlay (objeto){
     	k++;
         camadaOverlay[k] = source.getLayer(objeto.layers);
-        
+
         Lc.addOverlay(camadaOverlay[k], objeto.nome, objeto.grupo);
     };
 
     vetorOverlay.forEach(adicionaSourceOverlay);
+
+    //Fução que retorna o nome da camada que foi ativada
+    myMapa.getMapa().on('layeradd', function(layer){
+        if(layer.layer._name != undefined){
+            var nome = layer.layer._name;
+            console.log(nome);
+        }
+    });
 
     // Testa se existe a camada do levantamento 360, definida dentro do arquivo conf/360.js, caso exista, carrega o botão de habilitar a camada e o visualizador 360.
 

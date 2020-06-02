@@ -39,13 +39,14 @@ class mapa{
 			//As abas de pesquisas são definidas de acordo com as camadas que possuem campos pesquisáveis definidos em prop_query 
 			for (var n=0;n<vetorOverlay.length; n++ ){
 				obj_camada = vetorOverlay[n];
-
+				console.log(obj_camada.prop_query);
 				if(obj_camada.prop_query != undefined){
 					camadasPesquisaveis +=`
 					<li class="nav-item"><a class="nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false" onclick="opcoes(`+n+`)">`+ obj_camada.nome+`</a></li>`;
 					camadasPesquisaveis +=`\n`;
 				}
 			}
+
 		
 		menu.innerHTML = `
 			<div class="row">
