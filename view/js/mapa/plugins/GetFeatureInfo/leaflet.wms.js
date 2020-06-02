@@ -221,11 +221,20 @@ wms.Source = L.Layer.extend({
         }     
         obj = JSON.parse(info);
 
+<<<<<<< HEAD
+=======
+        for(var num=0; num<obj.features.length;num++){
+
+         obj.features[num].properties=restrictedAtributes(obj.features[num].properties);   
+        }
+
+>>>>>>> a3b149fac9aab2a3ed8b39023d1b81b38e96df8a
         optionsPopup = {
             width: 300,
             maxHeight: 300
         }
         if (opt_gfi == 2){
+
 
             this._map.openPopup(objects2div(obj.features), latlng, optionsPopup);
 
