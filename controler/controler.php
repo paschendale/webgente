@@ -35,7 +35,7 @@ class controler{
 		$email = $_POST['email'];
 		$senha = md5($_POST['senha']);
 		$tipo = "prefeitura";
-		$cpf = "00000000000";
+		$cpf = $_POST['cpf'];
 
 		$usuario = new usuario();
 		$usuario->constructor($nome, $cpf, "", "", "", "", $email, $senha, $tipo);

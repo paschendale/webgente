@@ -30,9 +30,10 @@ class mapa{
 	}
 
 	barraPesquisas(){
-	
+		
 		if(menu==" "){
 			menu = document.getElementById("barraPesquisas");
+
 			//Formulário dinâmico mostrado quando o usuário seleciona a opção de "Barra de Pesquisa"
 			var camadasPesquisaveis="";
 			var obj_camada;
@@ -46,24 +47,23 @@ class mapa{
 				}
 			}
 
-		
-		menu.innerHTML = `
-			<div class="row">
-			  	<div class="modal-dialog" role="dialog" id="barra-de-pesquisa">
-			    	<div class="modal-content">
-			      		<div class="modal-body">
-					     	<nav>
-							  <div class="nav nav-tabs" id="nav-tab" role="tablist">
-							 	<ul class="nav nav-tabs">` + camadasPesquisaveis + `</ul>
-							 </div>
-							</nav>
-							<br>
-							<div id="conteudo"></div>
-					    </div>
-			    	</div>
-			   	</div>
-			</div>
-		`;
+			menu.innerHTML = `
+				<div class="row">
+				  	<div class="modal-dialog" role="dialog" id="barra-de-pesquisa">
+				    	<div class="modal-content">
+				      		<div class="modal-body">
+						     	<nav>
+								  <div class="nav nav-tabs" id="nav-tab" role="tablist">
+								 	<ul class="nav nav-tabs">` + camadasPesquisaveis + `</ul>
+								 </div>
+								</nav>
+								<br>
+								<div id="conteudo"></div>
+						    </div>
+				    	</div>
+				   	</div>
+				</div>
+			`;
 		
 	}
 	else{

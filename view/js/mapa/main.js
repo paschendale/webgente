@@ -7,6 +7,9 @@ var menu = " ";
 //Função principal int main()
 function main(){
 
+    //L.DomEvent.disableClickPropagation(L.DomUtil.get('consultaPesquisa'));
+    L.DomEvent.disableScrollPropagation(L.DomUtil.get('consultaPesquisa'));
+
     //Variável global para controle da exibição ou não da "Barra de Edição" conforme o clique do usuário;
     barraEdicaoHabilitado = false;
 

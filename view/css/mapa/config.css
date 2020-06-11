@@ -14,6 +14,9 @@ body,
 	position: relative;
 	z-index: 900;
 }
+#consultaPesquisa{
+	position: relative;
+}
 #opcoesBarraFerramentas{
 	padding-top: 2px;
 	padding-left: 2px;

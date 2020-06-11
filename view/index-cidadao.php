@@ -187,8 +187,8 @@
   	</div>
   
     <!--Div onde o mapa será desenhado-->
+    <div id="barraPesquisas"></div>
     <div id="mapa">
-    	<div id="barraPesquisas"></div>
       	<div id="consultaPesquisa"></div>
     </div>
   </body>

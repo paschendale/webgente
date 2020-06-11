@@ -70,9 +70,25 @@ function buscaVia(posicao){
 
 function filtro (camadaFiltrada, objPesquisa){
 //Recebe a camada de pesquisa e concatena uma string com o conteúdo do cql_filter 
-		 var cql_filtro="";
+    var cql_filtro="";
     for(campo of camadaFiltrada.prop_query){
-        var resp =(objPesquisa==null)? document.getElementById(campo).value:objPesquisa[campo];
+
+
+        var tipo_eixo_de_vias = document.getElementById(campo).value;
+
+        //Possíveis variações que o usuário pode digitar
+        if(tipo_eixo_de_vias == 'praça' || tipo_eixo_de_vias == 'praca' || tipo_eixo_de_vias == 'Praca' || tipo_eixo_de_vias == 'Praça' || tipo_eixo_de_vias == 'PRACA' || tipo_eixo_de_vias == 'PRAÇA'){
+            tipo_eixo_de_vias = 'pca'
+        }
+        else if(tipo_eixo_de_vias == 'avenida' || tipo_eixo_de_vias == 'Avenida' || tipo_eixo_de_vias == 'AVENIDA'){
+            tipo_eixo_de_vias = 'avn'
+        }
+        
+        var resp =(objPesquisa==null)? tipo_eixo_de_vias : objPesquisa[campo];
+
+
+
+
        cql_filtro+=(resp!="" & cql_filtro!="")? " and ": "";
         if(Number.isNaN(parseInt(resp))){
             cql_filtro+=(resp!="")?("("+campo+" LIKE "+ " '%"+(resp.toLowerCase())+"%' or "+campo+" LIKE "+ " '%"+(resp.toUpperCase())+"%') " ):"";
@@ -86,7 +102,6 @@ return cql_filtro;
 
 
 function consultaFiltro (camadaFiltrada){
-    
  if(vetorLayer.length > 0){
         controle = false;
         vetorLayer.forEach(apagaLayers);
@@ -106,7 +121,7 @@ function consultaFiltro (camadaFiltrada){
         layerF=camadaFiltrada;
         vetorLayer.unshift(source.getLayer(layerF.layers));
         vetorLayer[0].addTo(myMapa.getMapa());
-		var cql_filtro=filtro(camadaFiltrada,null);        
+		var cql_filtro=filtro(camadaFiltrada,null);    
       
     //Requisição WFS para buscar os dados a serem mostrados na tabela
     var defaultParameters = {
