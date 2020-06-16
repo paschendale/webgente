@@ -11,6 +11,7 @@ function fecharTabela(){
 
 function exibe_propriedades_tabela(response){
 	var tabelaExibicao = document.getElementById("consultaPesquisa");
+	//variaveis que o tipo de usuário não pode ter acesso são excluídas com o método abaixo
 	response.properties= restrictedAtributes(response.properties,layerF.layers);
     var chaves = Object.keys(response.properties);
     var colunas="";
@@ -45,13 +46,10 @@ function exibe_propriedades_tabela(response){
 
 
 function buscaVia(posicao){
-    //usa a posição para identificar qual via deve ser exibida
-
-	var long=tabela.features[posicao].geometry.coordinates[0][0][0];
-	var lat=tabela.features[posicao].geometry.coordinates[0][0][1];
-
-	myMapa.getMapa().setView([lat,long],20);
-
+    //Usa a posição para retornar o objeto que vai ser filtrado e destacado
+	var coord= (tabela.features[posicao].geometry.coordinates[0]);
+	lalo = L.GeoJSON.coordsToLatLngs(coord);
+	myMapa.getMapa().fitBounds(lalo).setZoom(17);
 	var cql_filtro = filtro(layerF,tabela.features[posicao].properties);
 	source = L.WMS.source(overlayHost, {
 		            opacity: 1,
@@ -85,8 +83,6 @@ function filtro (camadaFiltrada, objPesquisa){
         }
         
         var resp =(objPesquisa==null)? tipo_eixo_de_vias : objPesquisa[campo];
-
-
 
 
        cql_filtro+=(resp!="" & cql_filtro!="")? " and ": "";
