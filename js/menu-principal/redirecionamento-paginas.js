@@ -11,3 +11,6 @@ function cadastro(){
 function logout(){
 	location.href='logout.php';
 }
+function login(){
+	location.href='login.html';
+}

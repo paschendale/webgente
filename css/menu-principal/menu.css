@@ -1,0 +1,56 @@
+#texto-cabeçalho{
+	color: white;
+}
+#data-nascimento{
+	width: 150px;
+}
+#cpf, #faixa-etaria{
+	width: 250px;
+}
+#bem-vindo{
+	color: white;
+	margin-right: 30px;
+	margin-top: 5px;
+}
+#saudacao{
+	color: white;
+	margin-right: 0px;
+}
+#login{
+	margin-top: 10%;
+	border: solid;
+	border-color: lightgrey;
+	border-width: 2px;
+	padding: 10px 10px 10px 10px;
+}
+
+@media(max-height: 576px){
+	#login{
+		margin-top: 5%;
+	}
+}
+
+
+@media(max-width: 576px){
+	#barra-rua{
+		margin-left: 5%;
+	}
+	#propriedades{
+		margin-top: 250px;
+		margin-left: -70px;
+	}
+}
+/*
+@media(max-width: 740px){
+	#barra-rua{
+		margin-top: 190px;
+	}
+	#propriedades{
+		margin-top: 190px;
+	}
+	#barra-de-pesquisa{
+		margin-left: 80px;
+		margin-top: 10px;
+	}
+}
+*/

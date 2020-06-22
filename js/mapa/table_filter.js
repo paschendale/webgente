@@ -27,7 +27,7 @@ function exibe_propriedades_tabela(response){
 		<div class="row">
 			<div class="modal-dialog" role="dialog" id="propriedades">
 				<div class="modal-content">
-					<div class="modal-body" id="tabela_propriedades"><img src="img/botao-fechar.jpg" id="imagem-fechar" onclick="fecharTabela()">
+					<div class="modal-body" id="tabela_propriedades"><div id="img_fechar"><img src="img/botao-fechar.jpg" onclick="fecharTabela()"></div>
 					    <table id="tabela-rua">
 					    	<tr>
 					      		`+colunas+`

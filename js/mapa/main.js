@@ -104,4 +104,12 @@ function main(){
 	    });
 	    estado.addTo(myMapa.getMapa());
 	};
+
+    var pesquisas = L.easyButton('<img src="img/lupa.png">', function(){
+        barraPesquisas();
+    }).addTo(myMapa.getMapa());
+
+    var ferramentas = L.easyButton('<img src="img/engineer.png">', function(){
+        barraEdicao();
+    }).addTo(myMapa.getMapa());
 }

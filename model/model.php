@@ -62,10 +62,10 @@ class usuario{
 			echo('<script>alert("Cadastro com sucesso. Realize o login.");</script>');
 
 			if($tipo == "cidadao"){
-				header('refresh: 0.001; ../view/cadastro-usuario.html');
+				header('refresh: 0.001; ../cadastro-usuario.html');
 			}
 			else if($tipo == "prefeitura"){
-				header('refresh: 0.001; ../view/cadastro-prefeitura.html');
+				header('refresh: 0.001; ../cadastro-prefeitura.html');
 			}
 		}
 		else{
@@ -89,7 +89,7 @@ class usuario{
  			$_SESSION['cpf'] = $cpf;
  			$_SESSION['nome'] = $resultado['nome'];
 
- 			header('refresh: 0.001; ../view/index-cidadao.php');
+ 			header('refresh: 0.001; ../index-cidadao.php');
  			exit;
  		}
  		else if($resultado['senha'] == $senha && $resultado['tipo'] == 'prefeitura'){
@@ -99,12 +99,12 @@ class usuario{
  			$_SESSION['cpf'] = $cpf;
  			$_SESSION['nome'] = $resultado['nome'];
 
- 			header('refresh: 0.001; ../view/index-prefeitura.html');
+ 			header('refresh: 0.001; ../index-prefeitura.php');
  			exit;
  		}
  		else{
  			echo('<script>alert("Usuario e/ou senha inválida. Tente novamente.");</script>');
- 			header('refresh: 0.001; ../view/index-anonimo.html');
+ 			header('refresh: 0.001; ../index-anonimo.html');
  			exit;
  		}
 

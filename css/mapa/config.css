@@ -6,10 +6,17 @@ html,
 body,
 
 #mapa{
-    height: 98%;
+    height: 97%;
     z-index:-1;
     position: relative;
 }
+
+/*Font geral da aplicação*/
+#enviar, #recuperarSenha, .container, #recuperar-senha, p, #cadastro-usuario, #formulario, .leaflet-control, #barra-de-pesquisa, #propriedades, #tabela_propriedades, #tabela-rua, #usuario, #senha, button, #bem-vindo{
+	font-family: "Helvetica, sans-serif";
+	font-size: 15px;
+}
+
 #barraFerramentas{
 	position: relative;
 	z-index: 900;
@@ -30,12 +37,17 @@ body,
 	z-index: 20000;
 }
 #barra-rua{
-	margin-top: 9%; 
+	margin-top: 15%; 
 	margin-left: 5%;
 	z-index: 20000;
 }
+#img_fechar{
+	margin-left: 93%;
+}
 #tabela_propriedades{
+	overflow-y: auto;
 	height: 120px; 
+	padding: 0;
 }
 #corpo-rua{
 	height: 400px; 
@@ -50,7 +62,7 @@ body,
 	margin-left: 95%;
 }
 #propriedades{
-	margin-top: 10%; 
+	margin-top: 15%; 
 	margin-left: 5%;
 	z-index: 20000;
 }
@@ -69,9 +81,17 @@ td,th {border-bottom: 1px solid #ddd;padding: 7px;}
 tr:hover {background-color: #f5f5f5;}
 th {background-color: #f5f5f5;}
 
+@media(max-width: 710px){
+	#barra-de-pesquisa, #barra-rua, #propriedades{
+		margin-left: 80px;
+	}
+	#barra-rua, #propriedades{
+		margin-top: 25%;
+	}
+}
 
-/*Configurando o css para visualização responsiva em smartphones*/
-@media(width: 360px){
+/*
+@media(max-width: 576px){
 	#barra-de-pesquisa{
 		opacity: 1.0; 
 		position: absolute; 
@@ -86,3 +106,4 @@ th {background-color: #f5f5f5;}
 		margin-left: -1%;	
 	}
 }
+*/

@@ -25,7 +25,7 @@ class controler{
 		}
 		else{
 			echo("<script>alert('CPF já cadastrado no sistema.');</script>");
-			header('refresh: 0.001; ../view/cadastro-usuario.html');
+			header('refresh: 0.001; ../cadastro-usuario.html');
 			exit;
 		}
 	}
@@ -63,12 +63,12 @@ class controler{
 		if($validaSenhaEmail){
 			$usuario->novaSenha($senhaNova);
 			echo("<script>alert('Senha atualizada com sucesso.');</script>");
-			header('refresh: 0.001; ../view/index-anonimo.html');
+			header('refresh: 0.001; ../index-anonimo.html');
  			exit;
 		}
 		else{
 			echo("<script>alert('Senha e/ou email incorreto.');</script>");
-			header('refresh: 0.001; ../view/recuperar-senha.html');
+			header('refresh: 0.001; ../recuperar-senha.html');
  			exit;
 
 		}
