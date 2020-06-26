@@ -81,4 +81,49 @@ var vetorOverlay =  [
 		'bomdespacho:HID_Trecho_Drenagem',
 		'Meio Ambiente'
 		)
+	,
+
+	/*Brenda*/
+	parametros_limite_expansao_urbana = new overlay(
+		'Área de Expansão Urbana',
+		'bomdespacho:limite_expansao_urbana',
+		'Limites'
+	),
+
+	parametros_lml_municipio = new overlay(
+		'Limite Municipal (IBGE)',
+		'bomdespacho:LML_Municipio',
+		'Limites'
+	),
+
+	parametros_tra_ponte = new overlay(
+		'Pontes (IBGE)',
+		'bomdespacho:TRA_Ponte',
+		'Malha Viária'
+	),
+
+	parametros_lml_cidade = new overlay(
+		'Perímetro Urbano',
+		'bomdespacho:LML_Cidade',
+		'Limites'
+	),
+
+	parametro_lml_distrito = new overlay(
+		'Limites Distritais (IBGE)',
+		'bomdespacho:LML_Distrito',
+		'Limites'
+	),
+
+	parametro_lml_localidade = new overlay(
+		'Localidades Rurais',
+		'bomdespacho:LML_Localidade',
+		'Malha Viária'
+	),
+
+	parametro_tra_quilometragem = new overlay(
+		'Pontos de Quilometragem',
+		'bomdespacho:TRA_Quilometragem',
+		'Malha Viária'
+	)
+
 ];
