@@ -175,5 +175,11 @@ var vetorOverlay =  [
 		'Pontos de Quilometragem',
 		'bomdespacho:TRA_Quilometragem',
 		'Malha Viária'
-	)	
+	),
+	
+	parametro_cbge_edificacoes_bci = new overlay(
+		'Edificações',
+		'bomdespacho:CBGE_Edificacoes_BCI',
+		'Cadastro Urbano'
+	),
 ];
