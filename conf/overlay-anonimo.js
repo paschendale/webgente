@@ -55,10 +55,12 @@ var vetorOverlay =  [
 		['distrito','setor','quadra']
 		)
 	,
+	/* eixo de vias mudou para a base cadastral. além disso, 
+	o grupo mudou para "malha viária" e o nome para "Arruamento*/
 	parametros_tra_trecho_arruamento = new overlay(
-		 'Eixos de Vias',
-		'bomdespacho:CBGE_Trecho_Arruamento',
-		 'Cadastro Urbano',
+		 'Arruamentos',
+		 'bomdespacho:CBGE_Trecho_Arruamento',
+		 'Malha Viária',
 		 ['tipo', 'nome_logradouro']
 		)
 	,
