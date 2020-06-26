@@ -1,6 +1,6 @@
 <?php
 
-include 'conexao.php';
+include '../conf/conexao.php';
 
 class usuario{
 	//private
@@ -51,26 +51,14 @@ class usuario{
 		$con = new conexao();
 		$con->abrindo_conexao();
 
-		$tipo = $this->tipo;
+		$sql = "INSERT INTO usuario (nome, email, senha, faixaEtaria, tipo, dataNascimento, sexo, celular, cpf) VALUES ('$this->nome', '$this->email', '$this->senha', '$this->faixaEtaria', '$this->tipo', '$this->dataNascimento', '$this->sexo', '$this->celular', '$this->cpf')";
 
-		if($con){
-			$sql = "INSERT INTO usuario (nome, email, senha, faixaEtaria, tipo, dataNascimento, sexo, celular, cpf) VALUES ('$this->nome', '$this->email', '$this->senha', '$this->faixaEtaria', '$this->tipo', '$this->dataNascimento', '$this->sexo', '$this->celular', '$this->cpf')";
+		$resposta = mysqli_query($con->getConexao(), $sql);
+		$con->fechando_conexao();
 
-			$resposta = mysqli_query($con->getConexao(), $sql);
-			$con->fechando_conexao();
-
-			echo('<script>alert("Cadastro com sucesso. Realize o login.");</script>');
-
-			if($tipo == "cidadao"){
-				header('refresh: 0.001; ../cadastro-usuario.html');
-			}
-			else if($tipo == "prefeitura"){
-				header('refresh: 0.001; ../cadastro-prefeitura.html');
-			}
-		}
-		else{
-			echo "Conexão com o banco não estabelecida";
-		}
+		echo('<script>alert("Cadastro com sucesso.");</script>');
+		header('refresh: 0.001; ../cadastro-usuario.php');
+ 		exit;
 	}
 
 	function setLogin($cpf, $senha){ 
@@ -82,17 +70,7 @@ class usuario{
 		$resposta = mysqli_query($con->getConexao(), $sql);
  		$resultado = mysqli_fetch_assoc($resposta);
 
- 		if($resultado['senha'] == $senha && $resultado['tipo'] == 'cidadao'){
- 			//Cria uma sessão de usuário caso ela não exista ainda
- 			session_start();
- 			//Inicia o usuário no sistema
- 			$_SESSION['cpf'] = $cpf;
- 			$_SESSION['nome'] = $resultado['nome'];
-
- 			header('refresh: 0.001; ../index-cidadao.php');
- 			exit;
- 		}
- 		else if($resultado['senha'] == $senha && $resultado['tipo'] == 'prefeitura'){
+ 		if($resultado['senha'] == $senha && $resultado['tipo'] == 'prefeitura'){
  			//Cria uma sessão de usuário caso ela não exista ainda
  			session_start();
  			//Inicia o usuário no sistema
@@ -102,9 +80,22 @@ class usuario{
  			header('refresh: 0.001; ../index-prefeitura.php');
  			exit;
  		}
+ 		else if(($resultado['senha'] == 'admin' && $senha == 'admin') && $resultado['tipo'] == 'administrador'){
+ 			header('refresh: 0.001; ../recuperar-senha.html');
+ 			exit;
+ 		}
+ 		else if($resultado['senha'] == $senha && $resultado['tipo'] == 'administrador'){
+ 			//Cria uma sessão de usuário caso ela não exista ainda
+ 			session_start();
+ 			//Inicia o usuário no sistema
+ 			$_SESSION['cpf'] = $cpf;
+ 			$_SESSION['nome'] = $resultado['nome'];
+ 			header('refresh: 0.001; ../tela-administrador.php');
+ 			exit;
+ 		}
  		else{
  			echo('<script>alert("Usuario e/ou senha inválida. Tente novamente.");</script>');
- 			header('refresh: 0.001; ../index-anonimo.html');
+ 			header('refresh: 0.001; ../login.php');
  			exit;
  		}
 
@@ -129,11 +120,11 @@ class usuario{
 		}
 	}
 
-	function novaSenha($senha){
+	function novaSenha($email, $senha){
 		$con = new conexao();
 		$con->abrindo_conexao();
 
-		$sql = "UPDATE usuario SET senha = '$senha'";
+		$sql = "UPDATE usuario SET senha = '$senha' WHERE email = '$email'";
 		$resposta = mysqli_query($con->getConexao(), $sql);
 
 		$con->fechando_conexao();

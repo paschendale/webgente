@@ -1,19 +1,17 @@
 <!doctype html>
 <html lang="pt">
   <head>
+  <?php
 
-    <?php
-
-      if(!isset($_SESSION)){
-        session_start();
-      }
-        if(!isset($_SESSION['nome'])){
-            session_destroy();
-            header('refresh: 0.001; ../view/index-anonimo.html');
+    if(!isset($_SESSION)){
+      session_start();
+    }
+    if(!isset($_SESSION['nome']) || !isset($_SESSION['cpf'])){
+      session_destroy();
+      header('refresh: 0.001; index-anonimo.html');
       exit;
-        }     
-
-    ?>
+    }     
+  ?>
     
     <!-- Required meta tags -->
     <meta charset="utf-8">

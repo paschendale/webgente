@@ -112,4 +112,8 @@ function main(){
     var ferramentas = L.easyButton('<img src="img/engineer.png">', function(){
         barraEdicao();
     }).addTo(myMapa.getMapa());
+
+    var informacao = L.easyButton('<img src="img/information.png">', function(){
+        alert("OK");
+    }).addTo(myMapa.getMapa());
 }

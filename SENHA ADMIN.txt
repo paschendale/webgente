@@ -1,0 +1,3 @@
+EMAIL: admin@admin
+LOGIN: 000.000.000-00
+SENHA DEFAULT: admin

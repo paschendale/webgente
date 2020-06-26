@@ -115,7 +115,9 @@
      <script src="js/menu-principal/plugins/additional-methods.min.js"></script>
      <script src="js/menu-principal/plugins/localization/messages_pt_BR.js"></script> 
      <script src="js/menu-principal/aplicacaoJMask.js"></script>
+
 <body>
+
     <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -138,9 +140,28 @@
                     <button type="submit" class="btn btn-secondary btn-lg btn-block" id="botao" name="botao">Enviar</button>
                     <br>
                     <br>
-                    <button type="button" class="btn btn-light btn-sm" onclick="">Esqueceu sua senha ?</button>
+                    <button type="button" class="btn btn-light btn-sm" data-toggle="modal" data-target="#exampleModalCenter">Esqueceu sua senha ?</button>
                     <button type="button" class="btn btn-light btn-sm" onclick="recuperarSenha()">Trocar senha</button>
-                    <button type="button" class="btn btn-light btn-sm" onclick="cadastro()">Cadastro</button>
+
+                    <!-- Modal -->
+                      <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLongTitle">Esqueci minha senha ?</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              <p>Solicite uma nova senha ao Admin do sistema, por favor.</p>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                 </div>
                 <div class="col-xl-4 col-sm-2" id="right">
                 </div>
