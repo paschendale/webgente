@@ -44,7 +44,7 @@ function main(){
         i++;
         camadaBase[i] = new wmsCamada(objeto);
         Lc.addBaseLayer(camadaBase[i].getLayer(),objeto.nome);
-        //if (objeto.padrao) {camadaBase[i].getLayer().addTo(myMapa.getMapa());};
+        if (objeto.padrao) {camadaBase[i].getLayer().addTo(myMapa.getMapa());};
     }
 
     vetorBasemap.forEach(adicionaBasemap);
