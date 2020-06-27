@@ -12,7 +12,7 @@ Engº Agrimensor e Cartógrafo pela UFV - Mestrando em Engenharia Civil, área d
 ## Desenvolvimento
 **Carlos Henrique Tavares - @TavaresCarlos**
 
-Estudante de Ciencias da Computação na UFV
+Estudante de Ciência da Computação na UFV
 
 **Sabrina Roberta - @sabrin577**
 
