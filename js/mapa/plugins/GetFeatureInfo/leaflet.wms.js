@@ -205,7 +205,7 @@ wms.Source = L.Layer.extend({
             'query_layers': layers.join(','),
             'X': Math.round(point.x),
             'Y': Math.round(point.y),
-            'feature_count': (((wmsParams.layers.match(/,/g) || []).length+1)*15 )
+            'feature_count': 100
        
             
         };
