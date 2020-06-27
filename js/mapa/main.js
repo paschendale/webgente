@@ -1,7 +1,7 @@
 // Cria uma variável global para setar o tipo de informação a ser puxada no GetFeatureInfo, 1: Abre visualizador 360, 2: Abre tabela de atributos
 var opt_gfi = 2;
 //Variável global para permitir ou não a exibição do popup do GetfeatureInfo, true: exibe o popup de infomações, false: impede a exibição. 
-var info_gfi=true; 
+var info_gfi=false; 
 //Variáveis globais para adicionar ou retirar a barra de Edição
 var drawnItems;
 var drawControl; 
@@ -124,7 +124,7 @@ function main(){
                     onClick: function(btn) {       
                         estado.state('information_enabled');
                         btn.state('information_enabled');  
-                        alert("Ativa");  
+                        info_gfi=true;  
                     }
                 }, {
                     stateName: 'information_enabled',   
@@ -133,7 +133,7 @@ function main(){
                     onClick: function(btn) {
                         estado.state('information_disabled');
                         btn.state('information_disabled'); 
-                        alert("Desativa");  
+                        info_gfi=false;   
                     }
             }]
         }).addTo(myMapa.getMapa());
