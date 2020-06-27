@@ -12,7 +12,7 @@ body,
 }
 
 /*Font geral da aplicação*/
-#enviar, #recuperarSenha, .container, #recuperar-senha, p, #cadastro-usuario, #formulario, .leaflet-control, #barra-de-pesquisa, #propriedades, #tabela_propriedades, #tabela-rua, #usuario, #senha, button, #bem-vindo{
+#enviar, #recuperarSenha, .container, #recuperar-senha, p, #cadastro-usuario, #formulario, .leaflet-control, #barra-de-pesquisa, #propriedades, #tabela_propriedades, #tabela-rua, #usuario, #senha, button, #local, #bem-vindo{
 	font-family: "Helvetica, sans-serif";
 	font-size: 15px;
 }

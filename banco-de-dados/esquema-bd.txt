@@ -4,10 +4,13 @@ nome varchar(80),
 email varchar(50),
 senha varchar(60),
 faixaEtaria varchar(25),
-tipo varchar(10),
+tipo varchar(15),
 dataNascimento date,
 sexo varchar (20),
 celular varchar (20),
 cpf varchar (20),
 PRIMARY KEY (idUsuario)
 );
+
+INSERT INTO usuario VALUES ('1', 'admin', 'admin@admin', 'admin', '', 'administrador', '', '', '', '000.000.000-00');
+INSERT INTO usuario VALUES ('2', 'gente', 'gente@gente', '0c382d01648741083608a6d0ceea1791', '', 'prefeitura', '', '', '', '000.000.000-01');

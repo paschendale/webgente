@@ -11,6 +11,15 @@ function cadastro(){
 function logout(){
 	location.href='logout.php';
 }
+
 function login(){
-	location.href='login.html';
+	location.href='login.php';
+}
+
+function cadastroUsuarios(){
+	location.href='cadastro-usuario.php';
+}
+
+function alterarSenha(){
+	location.href='alterar-senha.php';
 }

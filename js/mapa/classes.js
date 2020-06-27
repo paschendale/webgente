@@ -1,5 +1,24 @@
 //Cada plugin fica definido como uma função interna dessa classe, sendo chamado a medida que o usuário acha necessário
+var getJson = "";
+function gerarTXT(){
+    var textFile = null,
+    makeTextFile = function (text){
+	    var data = new Blob([text], {type: 'text/plain'});
+	    if (textFile !== null) {
+	        window.URL.revokeObjectURL(textFile);
+	    }
+	    textFile = window.URL.createObjectURL(data);
+    	return textFile;
+    };
 
+    var create = document.getElementById('create');
+
+    create.addEventListener('click', function (){
+        var link = document.getElementById('downloadlink');
+        link.href = makeTextFile(getJson);
+        link.style.display = 'block';
+    }, false);
+}
 class mapa{
 	//public
 	constructor(latitude, longitude, zoom){
@@ -77,7 +96,6 @@ class mapa{
 
 	//Plugin para desenhar as geometrias
 	barraEdicao(valor){
-	
 		if(valor == true){
 			drawnItems = new L.FeatureGroup();
 			//Definindo as funcionalidades da barra de controle lateral
@@ -135,15 +153,27 @@ class mapa{
 
 				    }
 				    if(type == 'polygon'){
-				         //Determina a quantidade de pontos que o usuário entrou
-		                let tamanho = e.layer._latlngs[0].length;         
-
-		                //Obtendo a area em m2
+				    	//Gerando o geojson com as coordenadas para download
+				    	var tamanho = e.layer._latlngs[0].length;
+				    	var coordenadas = "";
+				    	//Obtendo a area em m2
 		                var area = L.GeometryUtil.geodesicArea(e.layer.getLatLngs()[0]);
-		                //Convertendo a area de m2 para km2
-		                area = area/1000000;
+
+
+				    	for(var i=0; i<tamanho; i++){
+				    		if(i == tamanho-1){
+				    			coordenadas = coordenadas + '[' + e.layer._latlngs[0][i].lat + ','+  e.layer._latlngs[0][i].lng +']';
+				    		}
+				    		else{
+						 		coordenadas = coordenadas + '[' + e.layer._latlngs[0][i].lat + ','+  e.layer._latlngs[0][i].lng +'],';
+						 	}
+				    	}
+
+				    	getJson = `{ "type": "Feature", "geometry" : { "type" : "Polygon", "coordinates" : [` + coordenadas + `] }, "properties" : { "area" : "` + area.toFixed(2) + `"} }`;
+						console.log(getJson);
+		                         
 		               
-		                layer.bindPopup("Área aproximada: " + area.toFixed(5) + " km2");
+						layer.bindPopup('Área aproximada: ' + area.toFixed(2) + ' m2 <br><br><button type="button" id="create" onclick="gerarTXT()">Download (duplo clique)</button><a download="coordenadasPoligono.json" id="downloadlink" style="display: none">Clique aqui</a>');
 					}
 					drawnItems.addLayer(layer); //Define o desenho como uma camada
 				

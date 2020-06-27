@@ -114,4 +114,27 @@ function main(){
     var ferramentas = L.easyButton('<img src="img/engineer.png">', function(){
         barraEdicao();
     }).addTo(myMapa.getMapa());
+
+    //Criar dois estados para esse botão
+    var informacao = L.easyButton({
+        states: [{
+                    stateName: 'information_disabled',
+                    icon:      '<img src="img/information_active.png">',
+                    title:     'Ativa o popup de informações',   
+                    onClick: function(btn) {       
+                        estado.state('information_enabled');
+                        btn.state('information_enabled');  
+                        alert("Ativa");  
+                    }
+                }, {
+                    stateName: 'information_enabled',   
+                    icon:      '<img src="img/information_desactive.png">',               
+                    title:     'Desativa o popup de informações',
+                    onClick: function(btn) {
+                        estado.state('information_disabled');
+                        btn.state('information_disabled'); 
+                        alert("Desativa");  
+                    }
+            }]
+        }).addTo(myMapa.getMapa());
 }

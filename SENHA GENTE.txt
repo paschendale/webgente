@@ -1,0 +1,6 @@
+EMAIL: gente@gente
+LOGIN: 000.000.000-01
+SENHA: dm3c4enj
+
+SENHA CRIPTOGRAFADA: (Como fica salvo no bd)
+(0c382d01648741083608a6d0ceea1791)
