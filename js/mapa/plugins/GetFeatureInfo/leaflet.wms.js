@@ -84,6 +84,7 @@ wms.Source = L.Layer.extend({
     },
 
     'getEvents': function() {
+    	//Evento para adicionar camada pelo painel
         if (this.options.identify) {
             return {'click': this.identify};
         } else {
@@ -127,6 +128,7 @@ wms.Source = L.Layer.extend({
     },
 
     'refreshOverlay': function() {
+    	//sobreposição de atualização
         var subLayers = Object.keys(this._subLayers).join(",");
         if (!this._map) {
             return;
@@ -143,7 +145,7 @@ wms.Source = L.Layer.extend({
         // Identify map features in response to map clicks. To customize this
         // behavior, create a class extending wms.Source and override one or
         // more of the following hook functions.
-
+        if(info_gfi==true){
         var layers = this.getIdentifyLayers();
         if (!layers.length) {
             return;
@@ -152,6 +154,7 @@ wms.Source = L.Layer.extend({
             evt.containerPoint, evt.latlng, layers,
             this.showFeatureInfo
         );
+    }
 
     },
 
@@ -167,9 +170,9 @@ wms.Source = L.Layer.extend({
 
         function done(result) {
             this.hideWaiting();
-            var text = this.parseFeatureInfo(result, url);
-           
+  			var text = this.parseFeatureInfo(result, url);
             callback.call(this, latlng, text);
+            
         }
     },
 
