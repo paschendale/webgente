@@ -29,14 +29,17 @@ var vetorOverlay =  [
 	parametros_tra_vias_deslocamento = new overlay(
 		'Rodovias Municipais',
 		'bomdespacho:TRA_Via_Deslocamento',
-		'Malha Viária'
+		'Malha Viária',
+		['nome'],
+		['codigo_rbd', 'situacao', 'shape_leng', 'inicio', 'fim', 'revestimento']
 		)
 	,
 
 	parametros_tra_caminho_carrocavel = new overlay(
 		'Rodovias Privadas',
 		'bomdespacho:TRA_Caminho_Carrocavel',
-		'Malha Viária'
+		'Malha Viária',
+		['nome']
 		)
 
 	,
@@ -67,21 +70,26 @@ var vetorOverlay =  [
 	parametros_tra_trecho_rodoviario =new overlay(
 	    'Trecho Rodoviario',
 	    'bomdespacho:TRA_Trecho_Rodoviario',
-	    'Malha Viária'
- 
+	    'Malha Viária',
+		['nome'],
+		['tipoPavimentacao', 'trechoEmPerimetroUrbano', 'jurisdicao', 'administracao']
 		)
 	 ,
 
 	parametros_hid_massa_dagua = new overlay(
 		'Corpos D`Água',
 		'bomdespacho:HID_Massa_Dagua',
-		'Meio Ambiente'
+		'Meio Ambiente',
+		['nome'],
+		['tipoMassaDagua', 'regime']
 	),
 
 	parametros_hid_trecho_drenagem =new overlay(
 		'Hidrografia',
 		'bomdespacho:HID_Trecho_Drenagem',
-		'Meio Ambiente'
+		'Meio Ambiente',
+		['nome'],
+		['regime']
 		)
 	,
 
@@ -113,25 +121,32 @@ var vetorOverlay =  [
 	parametro_lml_distrito = new overlay(
 		'Limites Distritais (IBGE)',
 		'bomdespacho:LML_Distrito',
-		'Limites'
+		'Limites',
+		['nome']
 	),
 
 	parametro_lml_localidade = new overlay(
 		'Localidades Rurais',
 		'bomdespacho:LML_Localidade',
-		'Malha Viária'
+		'Malha Viária',
+		['nome']
 	),
 
 	parametro_tra_quilometragem = new overlay(
 		'Pontos de Quilometragem',
 		'bomdespacho:TRA_Quilometragem',
-		'Malha Viária'
+		'Malha Viária',
+		['km', 'codigo']
 	),
 
 	parametro_cbge_edificacoes_bci = new overlay(
 		'Edificações',
 		'bomdespacho:CBGE_Edificacoes_BCI',
-		'Cadastro Urbano'
+		'Cadastro Urbano',
+		['inscricao', 'numero_porta'],
+		['area_unidade_calculada', 'area_unidade_bci', 'proprietario', 'utilizacao', 'area_construida_total', 'tipo', 'alinhamento', 'situacao_edif', 'situacao_unid', 'estrutura', 'cobertura', 'parede']
+
+
 	),
 
 ];
