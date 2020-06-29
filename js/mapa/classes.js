@@ -251,12 +251,13 @@ class baseLayer{
 
 class overlay{
 	//public
-	constructor(nome, layers, grupo,prop_query,restricted, maxZoom, format, transparent,tiled){
+	constructor(nome, layers, grupo,prop_query,prop_alternative,restricted, maxZoom, format, transparent,tiled){
 		//Parâmetros dinâmicos da classe
 		this.nome = nome;
 		this.layers = layers;
 		this.grupo = grupo;
 		this.prop_query=prop_query;
+		this.prop_alternative=prop_alternative;
 		this.restricted=restricted; 
 		//Parâmetros default modificáveis da classe 
 		// O atributo recebe = (Se o parâmetro == undefined)? recebe o default: caso contrário recebe o parâmetro preenchido;   
@@ -273,6 +274,7 @@ class overlay{
 			layers : this.layers,
 			grupo : this.grupo,
 			prop_query:this.prop_query,
+			prop_alternative:this.prop_alternative,
 			restricted:this.restricted,
 			maxZoom : this.maxZoom,
 			format : this.format,

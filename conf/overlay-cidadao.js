@@ -15,6 +15,7 @@ tiled: true
 		layers, 
 		grupo,
 		prop_query,
+		prop_alternative,
 		restricted, 
 		maxZoom, 
 		format, 

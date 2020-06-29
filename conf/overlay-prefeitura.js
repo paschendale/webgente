@@ -15,6 +15,7 @@ tiled: true
 		layers, 
 		grupo,
 		prop_query,
+		prop_alternative,
 		restricted, 
 		maxZoom, 
 		format, 
@@ -44,7 +45,8 @@ var vetorOverlay =  [
 		'Edificacoes',
 		'bomdespacho:CBGE_Edificacoes',
 		'Cadastro Urbano',
-		['distrito','setor','quadra','lote','unidade']
+		['distrito','setor','quadra','lote','unidade'],
+		['Distrito','Setor','Quadra','Lote','Unidade']
 		)
 	,
 	
@@ -52,14 +54,16 @@ var vetorOverlay =  [
 		'Lotes',
 		'bomdespacho:CBGE_Lotes_Cadastral',
 		'Cadastro Urbano',
-		['distrito','setor','quadra','lote']
+		['distrito','setor','quadra','lote'],
+		['Distrito','Setor','Quadra','Lote']
 		)
 	,
 	parametros_cbge_quadras = new overlay(
 		'Quadras',
 		'bomdespacho:CBGE_Quadras',
 		'Cadastro Urbano',
-		['distrito','setor','quadra']
+		['distrito','setor','quadra'],
+		['Distrito','Setor','Quadra']
 		)
 	,
 	/* eixo de vias mudou para a base cadastral. além disso, 
@@ -68,8 +72,9 @@ var vetorOverlay =  [
 		'Arruamentos',
 		'bomdespacho:CBGE_Trecho_Arruamento',
 		'Malha Viária',
-		['tipo', 'nome_logradouro']
-	   )
+		['tipo', 'nome_logradouro'],
+		['Tipo', 'Nome']
+		)
 	,
 	parametros_tra_trecho_rodoviario =new overlay(
 	    'Trecho Rodoviario',
