@@ -32,7 +32,7 @@ var vetorOverlay =  [
 		'bomdespacho:TRA_Via_Deslocamento',
 		'Malha Viária',
 		['nome', 'codigo_rbd'],
-		['Nome','Código'],
+		['Nome','Código RGB'],
 		['jurisdicao', 'situacao', 'shape_leng', 'trecho', 'inicio', 'fim', 'revestimento', 'administracao', 'operacional', 'tipoVia', 'tipoPavimentacao', 'trafego']
 		)
 	,
