@@ -158,8 +158,12 @@ var vetorOverlay =  [
 		['inscricao', 'numero_porta'],
 		['Inscrição', 'Número'],
 		['area_unidade_calculada', 'area_unidade_bci', 'proprietario', 'cod_logradouro', 'cod_secao', 'ocupacao', 'utilizacao', 'del_frontal', 'area_construida_total', 'testada', 'tipo', 'alinhamento', 'situacao_edif', 'situacao_unid', 'estrutura', 'cobertura', 'parede', 'forro', 'revestimento']
+	),
 
-
+	parametro_PTO_Geod_Topo_Controle = new overlay (
+		'Rede Geodésica',
+		'bomdespacho:PTO_Geod_Topo_Controle',
+		'Geodésia'
 	),
 
 ];
