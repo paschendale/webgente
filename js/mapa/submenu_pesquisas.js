@@ -4,7 +4,7 @@ function opcoes(n){
 	var opcao = document.getElementById("conteudo");
 	var camposPesquisaveis = ""; 
 	for (campos of vetorOverlay[n].prop_query){
-		camposPesquisaveis+=` <input type="text" id=`+campos+` name=`+campos+` placeholder=`+campos+`>`
+		camposPesquisaveis+=` <input type="text" id="`+campos+`" name="`+campos+`" placeholder="`+campos+`">`
 	}
 	opcao.innerHTML = `
 		<form action="" method="POST">`
