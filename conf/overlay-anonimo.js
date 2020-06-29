@@ -32,7 +32,7 @@ var vetorOverlay =  [
 		'bomdespacho:TRA_Via_Deslocamento',
 		'Malha Viária',
 		['nome', 'codigo_rbd'],
-		['Nome','Código RGB'],
+		['Nome','Código da Rodovia Municipal'],
 		['jurisdicao', 'situacao', 'shape_leng', 'trecho', 'inicio', 'fim', 'revestimento', 'administracao', 'operacional', 'tipoVia', 'tipoPavimentacao', 'trafego']
 		)
 	,
@@ -60,7 +60,7 @@ var vetorOverlay =  [
 		'bomdespacho:CBGE_Quadras',
 		'Cadastro Urbano',
 		['distrito','setor','quadra'],
-		['Distrito','Setor','Quadra','Lote']
+		['Distrito','Setor','Quadra']
 		)
 	,
 	/* eixo de vias mudou para a base cadastral. além disso, 
@@ -70,7 +70,7 @@ var vetorOverlay =  [
 		 'bomdespacho:CBGE_Trecho_Arruamento',
 		 'Malha Viária',
 		 ['tipo', 'nome_logradouro', 'codigo'],
-		 ['Tipo', 'Nome', 'Código']
+		 ['Tipo', 'Nome', 'Código do Logradouro']
 		)
 	,
 	parametros_tra_trecho_rodoviario =new overlay(
@@ -78,7 +78,7 @@ var vetorOverlay =  [
 	    'bomdespacho:TRA_Trecho_Rodoviario',
 	    'Malha Viária',
 		['nome', 'codTrechoRod'],
-		['Nome', 'Código do Trecho Rodoviario'],
+		['Nome', 'Código do Trecho Federal ou Estadual'],
 		['jurisdicao', 'administracao', 'concessionaria', 'revestimento', 'operacional', 'situacaoFisica', 'canteiroDivisorio', 'trafego', 'tipoPavimentacao', 'tipoVia', 'trechoEmPerimetroUrbano', 'acostamento' ]
 		)
 	 ,
@@ -88,7 +88,7 @@ var vetorOverlay =  [
 		'bomdespacho:HID_Massa_Dagua',
 		'Meio Ambiente',
 		['nome', 'tipoMassaDagua'],
-		['Nome', 'Tipo de Massa Dagua'],
+		['Nome', 'Tipo de Massa Dágua'],
 		['regime']
 	),
 
@@ -97,7 +97,7 @@ var vetorOverlay =  [
 		'bomdespacho:HID_Trecho_Drenagem',
 		'Meio Ambiente',
 		['nome', 'navegavel', 'tipoTrechoDrenagem'],
-		['Nome', 'Navegavel', "Tipo"],
+		['Nome', 'É Navegável?', "Tipo"],
 		['regime']
 		)
 	,
@@ -148,7 +148,7 @@ var vetorOverlay =  [
 		'bomdespacho:TRA_Quilometragem',
 		'Malha Viária',
 		['km', 'codigo'],
-		['Quilometragem', 'Código']
+		['N° do Qulômetro da Rod. Municipal', 'Código']
 	),
 
 	parametro_cbge_edificacoes_bci = new overlay(
@@ -156,7 +156,7 @@ var vetorOverlay =  [
 		'bomdespacho:CBGE_Edificacoes_BCI',
 		'Cadastro Urbano',
 		['inscricao', 'numero_porta'],
-		['Inscrição', 'Número'],
+		['Inscrição', 'Número da Porta'],
 		['area_unidade_calculada', 'area_unidade_bci', 'proprietario', 'cod_logradouro', 'cod_secao', 'ocupacao', 'utilizacao', 'del_frontal', 'area_construida_total', 'testada', 'tipo', 'alinhamento', 'situacao_edif', 'situacao_unid', 'estrutura', 'cobertura', 'parede', 'forro', 'revestimento']
 	),
 
