@@ -1,5 +1,7 @@
 // Cria uma variável global para setar o tipo de informação a ser puxada no GetFeatureInfo, 1: Abre visualizador 360, 2: Abre tabela de atributos
 var opt_gfi = 2;
+//Variável global para permitir ou não a exibição do popup do GetfeatureInfo, true: exibe o popup de infomações, false: impede a exibição. 
+var info_gfi=false; 
 //Variáveis globais para adicionar ou retirar a barra de Edição
 var drawnItems;
 var drawControl; 
@@ -112,4 +114,27 @@ function main(){
     var ferramentas = L.easyButton('<img src="img/engineer.png">', function(){
         barraEdicao();
     }).addTo(myMapa.getMapa());
+
+    //Criar dois estados para esse botão
+    var informacao = L.easyButton({
+        states: [{
+                    stateName: 'information_disabled',
+                    icon:      '<img src="img/information_active.png">',
+                    title:     'Ativa o popup de informações',   
+                    onClick: function(btn) {       
+                        estado.state('information_enabled');
+                        btn.state('information_enabled');  
+                        info_gfi=true;  
+                    }
+                }, {
+                    stateName: 'information_enabled',   
+                    icon:      '<img src="img/information_desactive.png">',               
+                    title:     'Desativa o popup de informações',
+                    onClick: function(btn) {
+                        estado.state('information_disabled');
+                        btn.state('information_disabled'); 
+                        info_gfi=false;   
+                    }
+            }]
+        }).addTo(myMapa.getMapa());
 }

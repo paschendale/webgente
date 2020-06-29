@@ -32,6 +32,7 @@ if (!('keys' in Object)) {
         for (var i in obj) {
             if (obj.hasOwnProperty(i)) {
                 result.push(i);
+
             }
         }
         return result;
@@ -83,6 +84,7 @@ wms.Source = L.Layer.extend({
     },
 
     'getEvents': function() {
+    	//Evento para adicionar camada pelo painel
         if (this.options.identify) {
             return {'click': this.identify};
         } else {
@@ -126,6 +128,7 @@ wms.Source = L.Layer.extend({
     },
 
     'refreshOverlay': function() {
+    	//sobreposição de atualização
         var subLayers = Object.keys(this._subLayers).join(",");
         if (!this._map) {
             return;
@@ -142,7 +145,7 @@ wms.Source = L.Layer.extend({
         // Identify map features in response to map clicks. To customize this
         // behavior, create a class extending wms.Source and override one or
         // more of the following hook functions.
-
+        if(info_gfi==true){
         var layers = this.getIdentifyLayers();
         if (!layers.length) {
             return;
@@ -151,22 +154,25 @@ wms.Source = L.Layer.extend({
             evt.containerPoint, evt.latlng, layers,
             this.showFeatureInfo
         );
+    }
+
     },
 
     'getFeatureInfo': function(point, latlng, layers, callback) {
+    	
         // Request WMS GetFeatureInfo and call callback with results
         // (split from identify() to faciliate use outside of map events)
         var params = this.getFeatureInfoParams(point, layers),
-            url = this._url + L.Util.getParamString(params, this._url);
-
-
+            url = this._url + L.Util.getParamString(params, this._url);  
+            
         this.showWaiting();
         this.ajax(url, done);
 
         function done(result) {
             this.hideWaiting();
-            var text = this.parseFeatureInfo(result, url);
+  			var text = this.parseFeatureInfo(result, url);
             callback.call(this, latlng, text);
+            
         }
     },
 
@@ -193,15 +199,20 @@ wms.Source = L.Layer.extend({
             overlay.updateWmsParams(this._map);
             wmsParams = overlay.wmsParams;
             wmsParams.layers = layers.join(',');
+            
+          
+            
         }
         var infoParams = {
             'request': 'GetFeatureInfo',
             'query_layers': layers.join(','),
             'X': Math.round(point.x),
             'Y': Math.round(point.y),
-            'feature_count': (wmsParams.layers.match(/,/g) || []).length+1
+            'feature_count': 100
+       
+            
         };
-
+        
         return L.extend({}, wmsParams, infoParams);
     },
 
@@ -212,6 +223,7 @@ wms.Source = L.Layer.extend({
             // Try loading content in <iframe>.
             result = "<iframe src='" + url + "' style='border:none'>";
         }
+       
         return result;
     },
 

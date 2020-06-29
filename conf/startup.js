@@ -4,4 +4,3 @@ var init = {
 	longitude: -45.251930, 
 	zoomInicial: 17
 };
-

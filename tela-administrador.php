@@ -1,20 +1,18 @@
 <!doctype html>
 <html lang="pt">
   <head>
+    <?php
 
-  	<?php
-
-  		if(!isset($_SESSION)){
-  			session_start();
-  		}
-        if(!isset($_SESSION['nome'])){
-          	session_destroy();
-          	header('refresh: 0.001; ../view/index-anonimo.html');
- 			exit;
-        }     
+      if(!isset($_SESSION)){
+          session_start();
+      }
+      if(!isset($_SESSION['nome'])){
+          session_destroy();
+          header('refresh: 0.001; index-anonimo.html');
+          exit;
+      }     
 
     ?>
-
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
@@ -91,7 +89,7 @@
     <!-- Camadas do mapa -->
     <script src="conf/startup.js"></script>
     <script src="conf/base.js"></script>
-    <script src="conf/overlay-cidadao.js"></script>  
+    <script src="conf/overlay-anonimo.js"></script>  
     <script src="conf/360.js"></script>
 
     <!--Javascript do menu principal superior-->
@@ -127,38 +125,44 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.css">
     <script src="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.js"></script>
     
+    <!-- Jquery Mask -->
+     <script src="js/menu-principal/plugins/jquery.mask.min.js"></script>
+     <script src="js/menu-principal/plugins/jquery.validate.min.js"></script> 
+     <script src="js/menu-principal/plugins/additional-methods.min.js"></script>
+     <script src="js/menu-principal/plugins/localization/messages_pt_BR.js"></script> 
+     <script src="js/menu-principal/aplicacaoJMask.js"></script>
+
 
     <title>WebGENTE</title>
   </head>
-  <body onload="main()">
-  	<div id="menu">
-  		<nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <a class="navbar-brand" href="#"><img src="img/webgente-fundo-escuro-120x40.png" alt=""></a>
-          <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">  
+  <body>
+    <div id="menu">
+      <header>
+        <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <a class="navbar-brand" href="#"><img src="img/webgente-fundo-escuro-120x40.png" alt=""></a>
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+              <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
             </ul>
-
-          	<?php
-
-              	echo ("<div id='bem-vindo'>Seja bem-vindo ");
-              	echo ($_SESSION['nome']);
-              	echo ("</div>")
-
-            ?>
-
-          <button class="btn btn-outline-primary my-2 my-sm-0" type="button" onclick="logout()">Sair</button>
-
-        </div>
-      </nav>
-  	</div>
-  
-    <!--Div onde o mapa será desenhado-->
-    <div id="barraPesquisas"></div>
-    <div id="mapa">
-      	<div id="consultaPesquisa"></div>
+            <button type="button" class="btn btn-dark" onclick="logout()">Logout</button>
+          </div>
+        </nav>
+      </header>
+      <section>
+        <div class="row">
+          <div class="col-xl-1"></div>
+            <div class="card" style="width: 18rem;">
+              <img class="card-img-top" src="img/usuarios.jpg" alt="Adicionar subcategoria">
+                <div class="card-body">
+                  <h5 class="card-title">Novos usuários</h5>
+                  <p class="card-text">Cadastro de novos usuários da prefeitura no sistema.</p>
+                  <a href="#" class="btn btn-primary" id="cadastro-usuarios" name="cadastro-usuarios" onclick="cadastroUsuarios()">Usuários</a>
+                </div>
+            </div>
+        <div class="col-xl-1"></div>
+      </section>
     </div>
   </body>
 </html>
