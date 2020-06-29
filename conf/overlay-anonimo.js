@@ -30,8 +30,8 @@ var vetorOverlay =  [
 		'Rodovias Municipais',
 		'bomdespacho:TRA_Via_Deslocamento',
 		'Malha Viária',
-		['nome'],
-		['codigo_rbd', 'situacao', 'shape_leng', 'inicio', 'fim', 'revestimento']
+		['nome', 'codigo_rbd'],
+		['jurisdicao', 'situacao', 'shape_leng', 'trecho', 'inicio', 'fim', 'revestimento', 'administracao', 'operacional', 'tipoVia', 'tipoPavimentacao', 'trafego']
 		)
 	,
 
@@ -64,15 +64,15 @@ var vetorOverlay =  [
 		 'Arruamentos',
 		 'bomdespacho:CBGE_Trecho_Arruamento',
 		 'Malha Viária',
-		 ['tipo', 'nome_logradouro']
+		 ['tipo', 'nome_logradouro', 'codigo']
 		)
 	,
 	parametros_tra_trecho_rodoviario =new overlay(
 	    'Trecho Rodoviario',
 	    'bomdespacho:TRA_Trecho_Rodoviario',
 	    'Malha Viária',
-		['nome'],
-		['tipoPavimentacao', 'trechoEmPerimetroUrbano', 'jurisdicao', 'administracao']
+		['nome', 'codTrechoRod'],
+		['jurisdicao', 'administracao', 'concessionaria', 'revestimento', 'operacional', 'situacaoFisica', 'canteiroDivisorio', 'trafego', 'tipoPavimentacao', 'tipoVia', 'trechoEmPerimetroUrbano', 'acostamento' ]
 		)
 	 ,
 
@@ -80,15 +80,15 @@ var vetorOverlay =  [
 		'Corpos D`Água',
 		'bomdespacho:HID_Massa_Dagua',
 		'Meio Ambiente',
-		['nome'],
-		['tipoMassaDagua', 'regime']
+		['nome', 'tipoMassaDagua'],
+		['regime']
 	),
 
 	parametros_hid_trecho_drenagem =new overlay(
 		'Hidrografia',
 		'bomdespacho:HID_Trecho_Drenagem',
 		'Meio Ambiente',
-		['nome'],
+		['nome', 'navegavel', 'tipoTrechoDrenagem'],
 		['regime']
 		)
 	,
@@ -144,7 +144,7 @@ var vetorOverlay =  [
 		'bomdespacho:CBGE_Edificacoes_BCI',
 		'Cadastro Urbano',
 		['inscricao', 'numero_porta'],
-		['area_unidade_calculada', 'area_unidade_bci', 'proprietario', 'utilizacao', 'area_construida_total', 'tipo', 'alinhamento', 'situacao_edif', 'situacao_unid', 'estrutura', 'cobertura', 'parede']
+		['area_unidade_calculada', 'area_unidade_bci', 'proprietario', 'cod_logradouro', 'cod_secao', 'ocupacao', 'utilizacao', 'del_frontal', 'area_construida_total', 'testada', 'tipo', 'alinhamento', 'situacao_edif', 'situacao_unid', 'estrutura', 'cobertura', 'parede', 'forro', 'revestimento']
 
 
 	),
