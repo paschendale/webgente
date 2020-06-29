@@ -68,7 +68,7 @@ var vetorOverlay =  [
 		)
 	,
 	parametros_tra_trecho_rodoviario =new overlay(
-	    'Trecho Rodoviario',
+	    'Rodovias Federais e Estaduais',
 	    'bomdespacho:TRA_Trecho_Rodoviario',
 	    'Malha Viária',
 		['nome', 'codTrechoRod'],
