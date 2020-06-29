@@ -15,9 +15,11 @@ function objects2div (objeto){
 
     	div_id = 'tabela'+i;
 
-		title = (objeto[property].id).split('.')
+		title = (objeto[property].id).split('.');
 
-		div_content = '<div style="width:280px;"><div><div><div><p><a style="font-weight: bold; color: inherit;" data-toggle="collapse" href="#'+div_id+'">'+title[0]+'</a></p></div><div id="'+div_id+'" class="panel-collapse collapse"><div class="panel-body" style="height: 180px; overflow-y: auto;">'+properties2table(objeto[property].properties)+'</div></div></div></div></div>'
+        id = objeto[property].properties.id;
+
+		div_content = '<div style="width:280px;"><div><div><div><p><a style="font-weight: bold; color: inherit;" data-toggle="collapse" href="#'+div_id+'">'+title[0]+': '+id+'</a></p></div><div id="'+div_id+'" class="panel-collapse collapse"><div class="panel-body" style="height: 180px; overflow-y: auto;">'+properties2table(objeto[property].properties)+'</div></div></div></div></div>'
 
 		div_data = div_data + div_content + '<p></p>';
 
