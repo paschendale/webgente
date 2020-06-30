@@ -148,7 +148,7 @@ var vetorOverlay =  [
 		'bomdespacho:TRA_Quilometragem',
 		'Malha Viária',
 		['km', 'codigo'],
-		['N° do Qulômetro da Rod. Municipal', 'Código']
+		['N° Quilometragem Municipal', 'Código']
 	),
 
 	parametro_cbge_edificacoes_bci = new overlay(
