@@ -160,10 +160,23 @@ var vetorOverlay =  [
 		['area_unidade_calculada', 'area_unidade_bci', 'proprietario', 'cod_logradouro', 'cod_secao', 'ocupacao', 'utilizacao', 'del_frontal', 'area_construida_total', 'testada', 'tipo', 'alinhamento', 'situacao_edif', 'situacao_unid', 'estrutura', 'cobertura', 'parede', 'forro', 'revestimento']
 	),
 
-	parametro_PTO_Geod_Topo_Controle = new overlay (
-		'Rede Geodésica',
-		'bomdespacho:PTO_Geod_Topo_Controle',
-		'Geodésia'
+	parametro_PTO_Geod_Topo_Controle_RN = new overlay (
+		'Referência de Nível (IBGE)',
+		'bomdespacho:PTO_Geod_Topo_Controle_RN',
+		'Rede Cadastral (RRC)'
+	),
+
+	parametro_PTO_Geod_Topo_Controle_GPS = new overlay (
+		'Estações SAT GPS (IBGE)',
+		'bomdespacho:PTO_Geod_Topo_Controle_GPS',
+		'Rede Cadastral (RRC)'
+	),
+
+	parametro_PTO_Geod_Topo_Controle_VT = new overlay (
+		'Vértices de Triangulação Geodésica (IBGE)',
+		'bomdespacho:PTO_Geod_Topo_Controle_VT',
+		'Rede Cadastral (RRC)'
+
 	),
 
 ];
