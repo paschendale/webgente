@@ -61,7 +61,7 @@ class mapa{
 				obj_camada = vetorOverlay[n];
 				if(obj_camada.prop_query != undefined){
 					camadasPesquisaveis +=`
-					<li class="nav-item"><a class="nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false" onclick="opcoes(`+n+`)">`+ obj_camada.nome+`</a></li>`;
+					 <option value="`+ obj_camada.nome +`"onclick="opcoes(`+n+`)">`+ obj_camada.nome+`</option>`;
 					camadasPesquisaveis +=`\n`;
 				}
 			}
@@ -73,7 +73,7 @@ class mapa{
 				      		<div class="modal-body">
 						     	<nav>
 								  <div class="nav nav-tabs" id="nav-tab" role="tablist">
-								 	<ul class="nav nav-tabs">` + camadasPesquisaveis + `</ul>
+								 	<select>` + camadasPesquisaveis + `</select>
 								 </div>
 								</nav>
 								<br>
@@ -141,15 +141,26 @@ class mapa{
 				    var type = e.layerType,
 				               layer = e.layer;
 				    if(type == 'polyline'){
-				        layer.bindPopup("Colocar tamanho em km da polyline");
+				    	var tamanho = e.layer._latlngs.length;
+				    	var coordenadas = "";
+				    	var area = "Colocar tamanho em m da polyline";
+
+				    	for(var i=0; i<tamanho; i++){
+				    		if(i == tamanho-1){	
+				    			coordenadas = coordenadas + '[' + e.layer._latlngs[i].lat + ','+  e.layer._latlngs[i].lng +']';
+				    		}
+				    		else{
+				    			coordenadas = coordenadas + '[' + e.layer._latlngs[i].lat + ','+  e.layer._latlngs[i].lng +'],';
+				    		}
+				    	}
+				    	getJson = `{ "type": "Feature", "geometry" : { "type" : "LineString", "coordinates" : [` + coordenadas + `] }, "properties" : { "area" : "` + area + `"} }`;  
+				    	console.log(getJson);
+				    	layer.bindPopup('Área aproximada: ' + area + ' m <br><br><button type="button" id="create" onclick="gerarTXT()">Download (duplo clique)</button><a download="coordenadasLinha.json" id="downloadlink" style="display: none">Clique aqui</a>');
+
 				    }
 				    if(type == 'marker'){
-				    	var coord = layer.getLatLng();
-				        
-				        var informacoesConsulta = `<div id="informacoes">
-				        							</div>`;
-				        
-				        layer.bindPopup(informacoesConsulta);
+						getJson = `{ "type": "Feature", "geometry" : { "type" : "Point", "coordinates" : [` + e.layer._latlng.lat + ','+  e.layer._latlng.lng  + `] } }`;
+				        layer.bindPopup('<button type="button" id="create" onclick="gerarTXT()">Download (duplo clique)</button><a download="coordenadasMarcador.json" id="downloadlink" style="display: none">Clique aqui</a>');
 
 				    }
 				    if(type == 'polygon'){
@@ -169,9 +180,7 @@ class mapa{
 						 	}
 				    	}
 
-				    	getJson = `{ "type": "Feature", "geometry" : { "type" : "Polygon", "coordinates" : [` + coordenadas + `] }, "properties" : { "area" : "` + area.toFixed(2) + `"} }`;
-						console.log(getJson);
-		                         
+				    	getJson = `{ "type": "Feature", "geometry" : { "type" : "Polygon", "coordinates" : [[` + coordenadas + `]] }, "properties" : { "area" : "` + area.toFixed(2) + `"} }`;    
 		               
 						layer.bindPopup('Área aproximada: ' + area.toFixed(2) + ' m2 <br><br><button type="button" id="create" onclick="gerarTXT()">Download (duplo clique)</button><a download="coordenadasPoligono.json" id="downloadlink" style="display: none">Clique aqui</a>');
 					}
