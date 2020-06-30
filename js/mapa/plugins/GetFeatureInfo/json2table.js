@@ -19,7 +19,7 @@ function objects2div (objeto){
 
         id = objeto[property].properties.id;
 
-		div_content = '<div style="width:270px;"><div><div><div><p><a style="font-weight: bold; color: inherit;" data-toggle="collapse" href="#'+div_id+'">'+title[0]+': '+id+'</a></p></div><div id="'+div_id+'" class="panel-collapse collapse"><div class="panel-body" style="height: 180px; overflow-y: auto;">'+properties2table(objeto[property].properties)+'</div></div></div></div></div>'
+		div_content = '<div style="width:270px;"><p><a style="font-weight: bold; color: inherit;" data-toggle="collapse" href="#'+div_id+'">'+title[0]+': '+id+'</a></p></div><div id="'+div_id+'" class="panel-collapse collapse"><div class="panel-body" style="height: 120px; overflow-y: auto; overflow-x: hidden;">'+properties2table(objeto[property].properties)+'</div></div>'
 
 		div_data = div_data + div_content + '<p></p>';
 
@@ -27,14 +27,13 @@ function objects2div (objeto){
 
 	}
 
-	div_data = div_data + css;
+	div_data = '<div>' + div_data + css + '</div>';
 
 	return div_data;
 
 };
 
 function properties2table (objeto){
-
     tb_init = '<table><tr><th>Atributo</th><th>Valor</th></tr>';
 
     tb_data_acum = '';
@@ -61,7 +60,7 @@ function properties2table (objeto){
         
     };
 
-    css_table = '<style>table {width:250px;text-align:left;vertical-align:center;padding: 15px;border-bottom: 1px solid #ddd;font-family: Tahoma, Geneva, sans-serif;}td,th {border-bottom: 1px solid #ddd;padding: 1px;}tr:hover {background-color: #f5f5f5;}th {background-color: #f5f5f5;}</style>'
+    css_table = '<style>table {width:250px;text-align:left;vertical-align:center;padding: 15px;border-bottom: 1px solid #ddd;font-family: Tahoma, Geneva, sans-serif;}td,th {border-bottom: 1px solid #ddd;padding: 2px; overflow-y: scroll;}tr:hover {background-color: #f5f5f5;}th {background-color: #f5f5f5;}</style>'
 
     tb_final = '</table>';
 
