@@ -176,6 +176,7 @@ var vetorOverlay =  [
 		'Rede Cadastral (RRC)',
 		'bomdespacho:PTO_Geod_Topo_Controle_VT',
 		'Vértices de Triangulação Geodésica (IBGE)'
+		
 	),
 
 ];
