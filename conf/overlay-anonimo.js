@@ -161,22 +161,22 @@ var vetorOverlay =  [
 	),
 
 	parametro_PTO_Geod_Topo_Controle_RN = new overlay (
-		'Rede Cadastral (RRC)',
+		'Referência de Nível (IBGE)',
 		'bomdespacho:PTO_Geod_Topo_Controle_RN',
-		'Referência de Nível (IBGE)'
+		'Rede Cadastral (RRC)'
 	),
 
 	parametro_PTO_Geod_Topo_Controle_GPS = new overlay (
-		'Rede Cadastral (RRC)',
+		'Estações SAT GPS (IBGE)',
 		'bomdespacho:PTO_Geod_Topo_Controle_GPS',
-		'Estações SAT GPS (IBGE)'
+		'Rede Cadastral (RRC)'
 	),
 
 	parametro_PTO_Geod_Topo_Controle_VT = new overlay (
-		'Rede Cadastral (RRC)',
+		'Vértices de Triangulação Geodésica (IBGE)',
 		'bomdespacho:PTO_Geod_Topo_Controle_VT',
-		'Vértices de Triangulação Geodésica (IBGE)'
-		
+		'Rede Cadastral (RRC)'
+
 	),
 
 ];
