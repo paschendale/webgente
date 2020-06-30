@@ -29,6 +29,29 @@ function main(){
 
     // Cria o controle de camadas
 
+    //Criar dois estados para esse botão
+    var informacao = L.easyButton({
+        states: [{
+                    stateName: 'information_disabled',
+                    icon:      '<img src="img/information_active.png">',
+                    title:     'Ativa o popup de informações',   
+                    onClick: function(btn) {       
+                        estado.state('information_enabled');
+                        btn.state('information_enabled');  
+                        info_gfi=true;  
+                    }
+                }, {
+                    stateName: 'information_enabled',   
+                    icon:      '<img src="img/information_desactive.png">',               
+                    title:     'Desativa o popup de informações',
+                    onClick: function(btn) {
+                        estado.state('information_disabled');
+                        btn.state('information_disabled'); 
+                        info_gfi=false;   
+                    }
+            }]
+        }).addTo(myMapa.getMapa());
+
     var optionsControl = {
         collapsed: true,
         groupsCollapsable: true,
@@ -115,26 +138,5 @@ function main(){
         barraEdicao();
     }).addTo(myMapa.getMapa());
 
-    //Criar dois estados para esse botão
-    var informacao = L.easyButton({
-        states: [{
-                    stateName: 'information_disabled',
-                    icon:      '<img src="img/information_active.png">',
-                    title:     'Ativa o popup de informações',   
-                    onClick: function(btn) {       
-                        estado.state('information_enabled');
-                        btn.state('information_enabled');  
-                        info_gfi=true;  
-                    }
-                }, {
-                    stateName: 'information_enabled',   
-                    icon:      '<img src="img/information_desactive.png">',               
-                    title:     'Desativa o popup de informações',
-                    onClick: function(btn) {
-                        estado.state('information_disabled');
-                        btn.state('information_disabled'); 
-                        info_gfi=false;   
-                    }
-            }]
-        }).addTo(myMapa.getMapa());
+    
 }
