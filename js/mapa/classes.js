@@ -54,14 +54,16 @@ class mapa{
 			menu = document.getElementById("barraPesquisas");
 
 			//Formulário dinâmico mostrado quando o usuário seleciona a opção de "Barra de Pesquisa"
-			var camadasPesquisaveis="";
+			var camadasPesquisaveis=`<option value="-1"> </option`;
 			var obj_camada;
 			//As abas de pesquisas são definidas de acordo com as camadas que possuem campos pesquisáveis definidos em prop_query 
 			for (var n=0;n<vetorOverlay.length; n++ ){
 				obj_camada = vetorOverlay[n];
 				if(obj_camada.prop_query != undefined){
 					camadasPesquisaveis +=`
-					 <option value="`+ obj_camada.nome +`"onclick="opcoes(`+n+`)">`+ obj_camada.nome+`</option>`;
+
+					 <option value="`+ n +`")">`+ obj_camada.nome+`</option>`;
+
 					camadasPesquisaveis +=`\n`;
 				}
 			}
@@ -73,7 +75,7 @@ class mapa{
 				      		<div class="modal-body">
 						     	<nav>
 								  <div class="nav nav-tabs" id="nav-tab" role="tablist">
-								 	<select>` + camadasPesquisaveis + `</select>
+								 	<select id="barraPesquisa" onchange="opcoes()">` + camadasPesquisaveis + `</select>
 								 </div>
 								</nav>
 								<br>

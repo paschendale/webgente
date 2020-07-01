@@ -1,6 +1,7 @@
 //Gera campos pesquisaveis de acordo com os atributos definidos no vetor prop_query
 //e envia  camada a ser exibida
-function opcoes(n){
+function opcoes(){
+	var n = document.getElementById('barraPesquisa').value;
 	var opcao = document.getElementById("conteudo");
 	var camposPesquisaveis = ""; 
 	for (campos of vetorOverlay[n].prop_query){

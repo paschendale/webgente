@@ -60,7 +60,7 @@ function properties2table (objeto){
         
     };
 
-    css_table = '<style>table {width:250px;text-align:left;vertical-align:center;padding: 15px;border-bottom: 1px solid #ddd;font-family: Tahoma, Geneva, sans-serif;}td,th {border-bottom: 1px solid #ddd;padding: 2px; overflow-y: scroll;}tr:hover {background-color: #f5f5f5;}th {background-color: #f5f5f5;}</style>'
+    css_table = '<style>table {width:250px;text-align:left;vertical-align:center;padding: 15px;border-bottom: 1px solid #ddd;font-family: Tahoma, Geneva, sans-serif;}td,th {border-bottom: 1px solid #ddd;padding: 2px;}tr:hover {background-color: #f5f5f5;}th {background-color: #f5f5f5;}</style>'
 
     tb_final = '</table>';
 
