@@ -235,8 +235,11 @@ wms.Source = L.Layer.extend({
         obj = JSON.parse(info);
         //Identificar quais layer ativas 
         var layersMarked = this.getIdentifyLayers();
+        
         for(var num=0; num<obj.features.length;num++){
-         obj.features[num].properties=restrictedAtributes(obj.features[num].properties,layersMarked[num]);   
+            for(var n=0; n<layersMarked.length;n++){
+         obj.features[num].properties=restrictedAtributes(obj.features[num].properties,layersMarked[n]);  
+          }
         }
 
 
