@@ -41,7 +41,7 @@ var vetorOverlay =  [
 		'bomdespacho:TRA_Caminho_Carrocavel',
 		'Malha Viária',
 		['id', 'nome'],
-		['Identificação', 'Nome']
+		['ID', 'Nome']
 		)
 
 	,
