@@ -41,7 +41,7 @@ var vetorOverlay =  [
 		'bomdespacho:TRA_Caminho_Carrocavel',
 		'Malha Viária',
 		['id', 'nome'],
-		['Identificação', 'Nome']
+		['ID', 'Nome']
 		)
 
 	,
@@ -149,7 +149,7 @@ var vetorOverlay =  [
 		'Pontos de Quilometragem',
 		'bomdespacho:TRA_Quilometragem',
 		'Malha Viária',
-		['id'., 'codigo', 'km', 'coord_e', 'coord_n'],
+		['id', 'codigo', 'km', 'coord_e', 'coord_n'],
 		['ID', 'Código', 'N° Quilometragem', 'Coordenada UTM E', 'Coordenada UTM N']
 	),
 	
