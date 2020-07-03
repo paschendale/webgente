@@ -157,7 +157,7 @@ var vetorOverlay =  [
 		'Cadastro Urbano',
 		['inscricao', 'numero_porta'],
 		['Inscrição', 'Número da Porta'],
-		['area_unidade_calculada', 'area_unidade_bci', 'proprietario', 'cod_logradouro', 'cod_secao', 'ocupacao', 'complemento', 'ocupacao,', 'utilizacao', 'del_frontal', 'sit_quadra', 'area_construida_total', 'testada', 'tipo', 'alinhamento', 'situacao_edif', 'situacao_unid', 'estrutura', 'cobertura', 'parede', 'forro', 'revestimento']
+		['proprietario', 'cod_logradouro', 'cod_secao', 'ocupacao', 'complemento', 'ocupacao,', 'utilizacao', 'del_frontal', 'sit_quadra', 'area_construida_total', 'testada', 'tipo', 'alinhamento', 'situacao_edif', 'situacao_unid', 'estrutura', 'cobertura', 'parede', 'forro', 'revestimento']
 	),
 
 	parametro_PTO_Geod_Topo_Controle_RN = new overlay (
