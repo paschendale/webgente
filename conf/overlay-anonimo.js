@@ -114,25 +114,41 @@ var vetorOverlay =  [
 	parametros_limite_expansao_urbana = new overlay(
 		'Área de Expansão Urbana',
 		'bomdespacho:limite_expansao_urbana',
-		'Limites'
+		'Limites',
+		[],
+		[],
+		[],
+		[]
 	),
 
 	parametros_lml_municipio = new overlay(
 		'Limite Municipal (IBGE)',
 		'bomdespacho:LML_Municipio',
-		'Limites'
+		'Limites',
+		[],
+		[],
+		[],
+		[]
 	),
 
 	parametros_tra_ponte = new overlay(
 		'Pontes (IBGE)',
 		'bomdespacho:TRA_Ponte',
-		'Malha Viária'
+		'Malha Viária',
+		[],
+		[],
+		[],
+		[]
 	),
 
 	parametros_lml_cidade = new overlay(
 		'Perímetro Urbano',
 		'bomdespacho:LML_Cidade',
-		'Limites'
+		'Limites',
+		[],
+		[],
+		[],
+		[]
 	),
 
 	parametro_lml_distrito = new overlay(
@@ -175,20 +191,31 @@ var vetorOverlay =  [
 	parametro_PTO_Geod_Topo_Controle_RN = new overlay (
 		'Referência de Nível (IBGE)',
 		'bomdespacho:PTO_Geod_Topo_Controle_RN',
-		'Rede Cadastral (RRC)'
+		'Rede Cadastral (RRC)',
+		[],
+		[],
+		[],
+		[]
 	),
 
 	parametro_PTO_Geod_Topo_Controle_GPS = new overlay (
 		'Estações SAT GPS (IBGE)',
 		'bomdespacho:PTO_Geod_Topo_Controle_GPS',
-		'Rede Cadastral (RRC)'
+		'Rede Cadastral (RRC)',
+		[],
+		[],
+		[],
+		[]
 	),
 
 	parametro_PTO_Geod_Topo_Controle_VT = new overlay (
 		'Vértices de Triangulação Geodésica (IBGE)',
 		'bomdespacho:PTO_Geod_Topo_Controle_VT',
-		'Rede Cadastral (RRC)'
-
+		'Rede Cadastral (RRC)',
+		[],
+		[],
+		[],
+		[]
 	),
 
 ];

@@ -270,7 +270,9 @@ class overlay{
 		this.grupo = grupo;
 		this.alpha = alpha;
 		this.numeric = numeric;
-		this.prop_query = numeric + alpha;
+
+		this.prop_query = this.alpha.concat(this.numeric);
+
 		this.prop_alternative = prop_alternative;
 		this.restricted = restricted; 
 		//Parâmetros default modificáveis da classe 
