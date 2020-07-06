@@ -44,12 +44,28 @@ function exibe_propriedades_tabela(response){
 	`;
 }
 
+function coordFail(coord){
+	//função recursiva
+	if(coord.length>1){
+		return coord;
+	}else{
+		return coordFail(coord[0]);
+	}
+}
 
 function buscaVia(posicao){
     //Usa a posição para retornar o objeto que vai ser filtrado e destacado
 	var coord= (tabela.features[posicao].geometry.coordinates[0]);
-	lalo = L.GeoJSON.coordsToLatLngs(coord);
+	console.log(coord);
+	var lalo;
+	if(coord[0].length>1){
+	lalo= L.GeoJSON.coordsToLatLngs(coordFail(coord));
 	myMapa.getMapa().fitBounds(lalo).setZoom(17);
+	}else{ 
+		lalo= L.GeoJSON.coordsToLatLng(coordFail(coord));
+		myMapa.getMapa().setView(lalo,17); 
+	}
+
 	var cql_filtro = filtro(layerF,tabela.features[posicao].properties);
 	source = L.WMS.source(overlayHost, {
 		            opacity: 1,
@@ -86,9 +102,9 @@ function filtro (camadaFiltrada, objPesquisa){
 
 
        cql_filtro+=(resp!="" & cql_filtro!="")? " and ": "";
-        if(Number.isNaN(parseInt(resp))){
+        if(campo){
             cql_filtro+=(resp!="")?("("+campo+" LIKE "+ " '%"+(resp.toLowerCase())+"%' or "+campo+" LIKE "+ " '%"+(resp.toUpperCase())+"%') " ):"";
-        }else{
+       }else{
             cql_filtro+=(resp!="")?(campo+" = "+ ""+resp+" "):"";
         }
 	}

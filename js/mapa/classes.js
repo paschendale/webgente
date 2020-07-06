@@ -262,12 +262,15 @@ class baseLayer{
 
 class overlay{
 	//public
-	constructor(nome, layers, grupo,prop_query,prop_alternative,restricted, maxZoom, format, transparent,tiled){
+
+	constructor(nome, layers, grupo,alpha,numeric,prop_alternative,restricted, maxZoom, format, transparent,tiled){
 		//Parâmetros dinâmicos da classe
 		this.nome = nome;
 		this.layers = layers;
 		this.grupo = grupo;
-		this.prop_query=prop_query;
+		this.alpha=alpha;
+		this.numeric=numeric;
+		this.prop_query;
 		this.prop_alternative=prop_alternative;
 		this.restricted=restricted; 
 		//Parâmetros default modificáveis da classe 
@@ -284,7 +287,9 @@ class overlay{
 			nome : this.nome,
 			layers : this.layers,
 			grupo : this.grupo,
-			prop_query:this.prop_query,
+			alpha:this.alpha,
+			numeric:this.numeric,
+			prop_query:,
 			prop_alternative:this.prop_alternative,
 			restricted:this.restricted,
 			maxZoom : this.maxZoom,
@@ -292,9 +297,13 @@ class overlay{
 			transparent : this.transparent,
 			tiled : this.tiled
 		}
+	
 		return overlay;
+	
 	}
-}
+	
+	
+	}
 
 //função que deleta os atributos que não podem ser acessados
 function restrictedAtributes(objeto,nome){  
