@@ -8,7 +8,7 @@ class conexao{
 	public function abrindo_conexao(){
 		//================================================================================
 		//Parâmetros de conexão com o banco MySQL secundário
-		$host = '200.235.135.49'; //host de conexão
+		$host = 'localhost'; //host de conexão
 		$user = 'webgis_bd'; //usuário
 		$pass = '#.sxJZ]>8G'; //senha
 		$bd = 'webgente_bd'; //nome do banco
