@@ -90,7 +90,6 @@
     <script src="conf/startup.js"></script>
     <script src="conf/base.js"></script>
     <script src="conf/overlay-prefeitura.js"></script>  
-    <script src="conf/360.js"></script>
 
     <!--Javascript do menu principal superior-->
     <script src="js/menu-principal/barraEdicao.js"></script>

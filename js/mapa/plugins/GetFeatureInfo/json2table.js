@@ -41,22 +41,9 @@ function properties2table (objeto){
     for (var property in objeto) {
     if (!objeto.hasOwnProperty(property)) continue;
 
-    	switch (property) {
-    		case 'path_360': // Implementar no SIG!
-
-    			tb_data = '<a href="'+sitebase+obj.features[0].properties.Caminho+'" target="_blank">Abrir visualização 360° do imóvel</a>';
-
-    		case 'path_files': // Implementar!
-
-    			tb_data = '<a href="http://138.94.148.143:8225/share/page/user/geoufv/dashboard" target="_blank">Abrir arquivos do imóvel</a>';
-
-    		default:
-
-	    		tb_data = '<tr><td>'+property+'</td><td>'+objeto[property]+'</td></tr>';
-
-    	}   
-
-    	tb_data_acum = tb_data_acum+tb_data;     
+    tb_data = '<tr><td>'+property+'</td><td>'+objeto[property]+'</td></tr>';
+     
+    tb_data_acum = tb_data_acum+tb_data;     
         
     };
 
@@ -67,7 +54,6 @@ function properties2table (objeto){
     tb = css_table+tb_init+tb_data_acum+tb_final;
 
     return tb;
-
 };
 
 

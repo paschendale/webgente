@@ -14,7 +14,8 @@ tiled: true
      	nome, 
 		layers, 
 		grupo,
-		prop_query,
+		prop_query alpha,
+		pro_query numeric,
 		prop_alternative,
 		restricted, 
 		maxZoom, 
@@ -27,12 +28,30 @@ var overlayHost = 'https://geoserver.genteufv.com.br/geoserver/ows?';
 
 
 var vetorOverlay =  [
+
+	parametros_mub_panoramas = new overlay(
+		'Imagens 360°',
+		'bomdespacho:MUB_Panoramas',
+		'Imagens 360°',
+		[],
+		[],
+		[]
+		)
+	,
+
+
 	parametros_tra_vias_deslocamento = new overlay(
 		'Rodovias Municipais',
 		'bomdespacho:TRA_Via_Deslocamento',
 		'Malha Viária',
+<<<<<<< HEAD
 		['nome', 'codigo_rbd'],
 		['Nome','Código da Rodovia Municipal'],
+=======
+		['nome'],
+		['codigo_rbd'],
+		['Nome', 'Código RBD'],
+>>>>>>> 76e803deb078290201977ddebfc6a3854abf2fc6
 		['jurisdicao', 'situacao', 'shape_leng', 'trecho', 'inicio', 'fim', 'revestimento', 'administracao', 'operacional', 'tipoVia', 'tipoPavimentacao', 'trafego']
 		)
 	,
@@ -51,6 +70,10 @@ var vetorOverlay =  [
 		'Lotes',
 		'bomdespacho:CBGE_Lotes_Cadastral',
 		'Cadastro Urbano',
+<<<<<<< HEAD
+=======
+		[],
+>>>>>>> 76e803deb078290201977ddebfc6a3854abf2fc6
 		['distrito','setor','quadra','lote'],
 		['Distrito','Setor','Quadra','Lote']
 		)
@@ -88,17 +111,28 @@ var vetorOverlay =  [
 		'bomdespacho:HID_Massa_Dagua',
 		'Meio Ambiente',
 		['nome', 'tipoMassaDagua'],
+<<<<<<< HEAD
 		['Nome', 'Tipo de Massa Dágua'],
 		['regime']
+=======
+		['regime'],
+		[ 'Nome','Tipo de Massa Dágua','Regime']
+>>>>>>> 76e803deb078290201977ddebfc6a3854abf2fc6
 	),
 
 	parametros_hid_trecho_drenagem =new overlay(
 		'Hidrografia',
 		'bomdespacho:HID_Trecho_Drenagem',
 		'Meio Ambiente',
+<<<<<<< HEAD
 		['nome', 'navegavel', 'tipoTrechoDrenagem'],
 		['Nome', 'É Navegável?', "Tipo"],
 		['regime']
+=======
+		['nome', 'navegavel'],
+		['tipoTrechoDrenagem'],
+		['Nome', 'É Navegável?', "Tipo"]
+>>>>>>> 76e803deb078290201977ddebfc6a3854abf2fc6
 		)
 	,
 
@@ -155,7 +189,12 @@ var vetorOverlay =  [
 		'Edificações',
 		'bomdespacho:CBGE_Edificacoes_BCI',
 		'Cadastro Urbano',
+<<<<<<< HEAD
 		['inscricao', 'numero_porta'],
+=======
+		['inscricao'],
+		['numero_porta'],
+>>>>>>> 76e803deb078290201977ddebfc6a3854abf2fc6
 		['Inscrição', 'Número da Porta'],
 		['area_unidade_calculada', 'area_unidade_bci', 'proprietario', 'cod_logradouro', 'cod_secao', 'ocupacao', 'utilizacao', 'del_frontal', 'area_construida_total', 'testada', 'tipo', 'alinhamento', 'situacao_edif', 'situacao_unid', 'estrutura', 'cobertura', 'parede', 'forro', 'revestimento']
 	),
@@ -164,19 +203,31 @@ var vetorOverlay =  [
 		'Referência de Nível (IBGE)',
 		'bomdespacho:PTO_Geod_Topo_Controle_RN',
 		'Rede Cadastral (RRC)'
+<<<<<<< HEAD
+=======
+	
+>>>>>>> 76e803deb078290201977ddebfc6a3854abf2fc6
 	),
 
 	parametro_PTO_Geod_Topo_Controle_GPS = new overlay (
 		'Estações SAT GPS (IBGE)',
 		'bomdespacho:PTO_Geod_Topo_Controle_GPS',
 		'Rede Cadastral (RRC)'
+<<<<<<< HEAD
+=======
+		
+>>>>>>> 76e803deb078290201977ddebfc6a3854abf2fc6
 	),
 
 	parametro_PTO_Geod_Topo_Controle_VT = new overlay (
 		'Vértices de Triangulação Geodésica (IBGE)',
 		'bomdespacho:PTO_Geod_Topo_Controle_VT',
 		'Rede Cadastral (RRC)'
+<<<<<<< HEAD
 
+=======
+		
+>>>>>>> 76e803deb078290201977ddebfc6a3854abf2fc6
 	),
 
 ];

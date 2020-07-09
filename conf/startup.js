@@ -4,3 +4,6 @@ var init = {
 	longitude: -45.251930, 
 	zoomInicial: 17
 };
+
+// Definindo site base para processamento do 360
+var sitebase = 'https://www.genteufv.com.br/psv/index.html?';

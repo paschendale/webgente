@@ -247,24 +247,20 @@ wms.Source = L.Layer.extend({
             width: 300,
             maxHeight: 300
         }
-        if (opt_gfi == 2){
 
+        if (typeof obj.features[0].properties.path_360 != 'undefined'){
 
-            this._map.openPopup(objects2div(obj.features), latlng, optionsPopup);
+            fullscreen = '<a href="'+sitebase+obj.features[0].properties.path_360+'" target="_blank">Abrir visualizador 360° em tela cheia</a>';
 
-        } else if (typeof obj.features[0].properties.Caminho != 'undefined'){
-
-            fullscreen = '<a href="'+sitebase+obj.features[0].properties.Caminho+'" target="_blank">Abrir visualizador 360° em tela cheia</a>';
-
-            html = '<div> <iframe src="'+sitebase+obj.features[0].properties.Caminho+'" style="overflow:auto;width:300px;height:200px;border:none"></iframe><p align="center">'+fullscreen+'</p></div>';
+            html = '<div> <iframe src="'+sitebase+obj.features[0].properties.path_360+'" style="overflow:auto;width:300px;height:200px;border:none"></iframe><p align="center">'+fullscreen+'</p></div>';
 
             this._map.openPopup(html, latlng, optionsPopup);
 
         } else {
 
-            this._map.openPopup('Clique em um ponto da camada de imagens 360 ou desative as camadas que o sobrepoem', latlng)
+            this._map.openPopup(objects2div(obj.features), latlng, optionsPopup);
 
-        };
+        }
     },
 
     'showWaiting': function() {
