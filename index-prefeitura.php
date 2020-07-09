@@ -133,14 +133,20 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
+
         <a class="navbar-brand" href="#"><img src="img/webgente-fundo-escuro-120x40.png" alt=""></a>
+
+
+        <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#exampleModalLong">Ajuda</button>
+
+        
           <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
          
           </ul>
           <p id="bem-vindo">Prefeitura Municipal de Bom Despacho</p>
           &nbsp
-          <button class="btn btn-outline-primary my-2 my-sm-0" type="button" onclick="logout()">Sair</button>
+          <button class="btn btn-secondary btn-sm" type="button" onclick="logout()">Sair</button>
 
         </div>
       </nav>
@@ -153,3 +159,91 @@
     </div>
   </body>
 </html>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLongTitle">Documentação de Ajuda do WebGENTE</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+        <h4>Habilitando camadas</h4>
+        <div class="row align-items-center">
+        <div class="col-sm-2">
+        <img src="img/layercontrol.PNG"></img>
+        </div>
+        <div class="col-sm">
+        <p>Passe o mouse sobre a ferramenta para habilitar o controle de camadas, selecione cada camada, ou grupo de camadas, da forma como desejar, as camadas são sobrepostas na ordem da ativação, ou seja, se uma camada sobrepôs a outra de forma indesejada, basta desativar a e reativar novamente na ordem desejada.</p>
+        </div>
+        </div>
+        </div> 
+        <!--Fim do container-->
+        <!-- Container de itens da help-->
+        <div class="container">
+        <br></br>
+        <h4>Comandos de Zoom</h4>
+        <div class="row align-items-center">
+        <div class="col-sm-2">
+        <img src="img/zoom-home.PNG"></img>
+        </div>
+        <div class="col-sm">
+        <p>Os comandos com os símbolos '+' e '-' aumentam os níveis de zoom, para restaurar o nivel de zoom original do sistema, utilize o ícone <img src="img/home.png"></img>.</p>
+        </div>
+        </div>
+        </div> 
+        <!--Fim do container--> 
+        <!-- Container de itens da help-->
+        <div class="container">
+        <br></br>
+        <h4>Visualizar Informações</h4>
+        <div class="row align-items-center">
+        <div class="col-sm-2">
+        <img src="img/info-but.PNG"></img>
+        </div>
+        <div class="col-sm">
+        <p>Ao habilitar a ferramenta basta clicar em qualquer camada ativa para visualizar os atributos.</p>
+        </div>
+        </div>
+        </div> 
+        <!--Fim do container-->
+        <!-- Container de itens da help-->
+        <div class="container">
+        <br></br>
+        <h4>Pesquisa de Atributos</h4>
+        <div class="row align-items-center">
+        <div class="col-sm-2">
+        <img src="img/search-but.PNG"></img>
+        </div>
+        <div class="col-sm">
+        <p>...</p>
+        </div>
+        </div>
+        </div> 
+        <!--Fim do container-->  
+        <!-- Container de itens da help-->
+        <div class="container">
+        <br></br>
+        <h4>Ferramentas de Desenho</h4>
+        <div class="row align-items-center">
+        <div class="col-sm-2">
+        <img  src="img/tools-but.PNG"></img>
+        </div>
+        <div class="col-sm">
+        <p>...</p>
+        </div>
+        </div>
+        </div> 
+        <!--Fim do container-->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
