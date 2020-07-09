@@ -8,7 +8,7 @@ var levantamento_360 = {
 		grupo: 'Cadastro Urbano',
 		tipo: '360',
 		maxZoom: 25,
-        layers: 'bomdespacho:pontos_levantamento_360',
+        layers: 'bomdespacho:MUB_Panoramas',
         format: 'image/png',
         transparent: true,
         tiled: true

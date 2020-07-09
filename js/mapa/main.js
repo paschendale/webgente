@@ -102,32 +102,6 @@ function main(){
     vetorOverlay.forEach(adicionaSourceOverlay);    
     // Testa se existe a camada do levantamento 360, definida dentro do arquivo conf/360.js, caso exista, carrega o botão de habilitar a camada e o visualizador 360.
 
-	if (typeof levantamento_360 != 'undefined') {
-    	var camada360 = source.getLayer(levantamento_360.layers);
-
-	    var estado = L.easyButton({
-	        states: [{
-	                stateName: '360_disabled',
-	                icon:      '<img src="img/360-degree.png">',
-	                title:     'Liga o visualizador de imagens 360°',   
-	                onClick: function(btn, map) {       
-	                    opt_gfi = 1;
-	                    camada360.addTo(myMapa.getMapa());
-	                    estado.state('360_enabled');    
-	                }
-	            }, {
-	                stateName: '360_enabled',   
-	                icon:      '<img src="img/360-degree-clicked.png">',               
-	                title:     'Desativa o visualizador de imagens 360°',
-	                onClick: function(btn, map) {
-	                    opt_gfi = 2;
-	                    myMapa.getMapa().removeLayer(camada360);
-	                    estado.state('360_disabled');
-	                }
-	        }]
-	    });
-	    estado.addTo(myMapa.getMapa());
-	};
 
     var pesquisas = L.easyButton('<img src="img/lupa.png">', function(){
         barraPesquisas();

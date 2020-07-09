@@ -28,13 +28,25 @@ var overlayHost = 'https://geoserver.genteufv.com.br/geoserver/ows?';
 
 
 var vetorOverlay =  [
+
+	parametros_mub_panoramas = new overlay(
+		'Imagens 360°',
+		'bomdespacho:MUB_Panoramas',
+		'Imagens 360°',
+		[],
+		[],
+		[]
+		)
+	,
+
+
 	parametros_tra_vias_deslocamento = new overlay(
 		'Rodovias Municipais',
 		'bomdespacho:TRA_Via_Deslocamento',
 		'Malha Viária',
 		['nome'],
 		['codigo_rbd'],
-		['Nome', 'Código rgb'],
+		['Nome', 'Código RBD'],
 		['jurisdicao', 'situacao', 'shape_leng', 'trecho', 'inicio', 'fim', 'revestimento', 'administracao', 'operacional', 'tipoVia', 'tipoPavimentacao', 'trafego']
 		)
 	,
