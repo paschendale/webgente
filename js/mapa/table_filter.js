@@ -26,10 +26,10 @@ function exibe_propriedades_tabela(response){
 
     tabelaExibicao.innerHTML = `
 		<div class="row">
-			<div class="modal-dialog" role="dialog" id="propriedades">
-				<div class="modal-content">
+			<div class="modal-dialog col-5 col-sm-9 col-xl-3" role="dialog" id="propriedades">
+				<div class="modal-content" id="tabela-conteudo">
 					<div class="modal-body" id="tabela_propriedades"><div id="img_fechar"><img src="img/botao-fechar.jpg" onclick="fecharTabela()"></div>
-					    <table id="tabela-rua">
+					    <table id="tabela_rua_propriedades">
 					    	<tr>
 					      		`+colunas+`
 					      	</tr>
@@ -44,28 +44,12 @@ function exibe_propriedades_tabela(response){
 	`;
 }
 
-function coordFail(coord){
-	//função recursiva
-	if(coord.length>1){
-		return coord;
-	}else{
-		return coordFail(coord[0]);
-	}
-}
 
 function buscaVia(posicao){
     //Usa a posição para retornar o objeto que vai ser filtrado e destacado
 	var coord= (tabela.features[posicao].geometry.coordinates[0]);
-	console.log(coord);
-	var lalo;
-	if(coord[0].length>1){
-	lalo= L.GeoJSON.coordsToLatLngs(coordFail(coord));
+	lalo = L.GeoJSON.coordsToLatLngs(coord);
 	myMapa.getMapa().fitBounds(lalo).setZoom(17);
-	}else{ 
-		lalo= L.GeoJSON.coordsToLatLng(coordFail(coord));
-		myMapa.getMapa().setView(lalo,17); 
-	}
-
 	var cql_filtro = filtro(layerF,tabela.features[posicao].properties);
 	source = L.WMS.source(overlayHost, {
 		            opacity: 1,
@@ -102,9 +86,9 @@ function filtro (camadaFiltrada, objPesquisa){
 
 
        cql_filtro+=(resp!="" & cql_filtro!="")? " and ": "";
-        if(campo){
+        if(Number.isNaN(parseInt(resp))){
             cql_filtro+=(resp!="")?("("+campo+" LIKE "+ " '%"+(resp.toLowerCase())+"%' or "+campo+" LIKE "+ " '%"+(resp.toUpperCase())+"%') " ):"";
-       }else{
+        }else{
             cql_filtro+=(resp!="")?(campo+" = "+ ""+resp+" "):"";
         }
 	}
@@ -168,7 +152,7 @@ function consultaFiltro (camadaFiltrada){
                     }    
                     var consulta_html_01 = `
     					<div class="row">
-    					  	<div class="modal-dialog" role="dialog" id="barra-rua">
+    					  	<div class="modal-dialog col-9 col-xl-3" role="dialog" id="barra-rua">
     					    	<div class="modal-content">
     					      		<div class="modal-body" id="corpo-rua"><img src="img/botao-fechar.jpg" id="imagem-fechar" onclick="fecharTabela()">
     					      			<table id="tabela-rua">

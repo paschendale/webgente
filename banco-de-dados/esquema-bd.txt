@@ -1,9 +1,3 @@
-CREATE USER 'webgis_bd'@'localhost' IDENTIFIED BY '#.sxJZ]>8G';
-
-GRANT ALL PRIVILEGES ON * . * TO 'webgis_bd'@'localhost';
-
-CREATE DATABASE webgente_bd;
-
 CREATE TABLE usuario(
 idUsuario int AUTO_INCREMENT NOT NULL,
 nome varchar(80),
@@ -18,5 +12,5 @@ cpf varchar (20),
 PRIMARY KEY (idUsuario)
 );
 
-INSERT INTO usuario VALUES ('1', 'admin', 'admin@admin', 'admin', '', 'administrador', '2020-01-01', '', '', '000.000.000-00');
-INSERT INTO usuario VALUES ('2', 'gente', 'gente@gente', '0c382d01648741083608a6d0ceea1791', '', 'prefeitura', '2020-01-01', '', '', '000.000.000-01');
+INSERT INTO usuario VALUES ('1', 'admin', 'admin@admin', 'admin', '', 'administrador', '', '', '', '000.000.000-00');
+INSERT INTO usuario VALUES ('2', 'gente', 'gente@gente', '0c382d01648741083608a6d0ceea1791', '', 'prefeitura', '', '', '', '000.000.000-01');
