@@ -99,7 +99,7 @@ function main(){
         Lc.addOverlay(camadaOverlay[k], objeto.nome, objeto.grupo);
     };
 
-    vetorOverlay.forEach(adicionaSourceOverlay);
+    vetorOverlay.forEach(adicionaSourceOverlay);    
     // Testa se existe a camada do levantamento 360, definida dentro do arquivo conf/360.js, caso exista, carrega o botão de habilitar a camada e o visualizador 360.
 
 	if (typeof levantamento_360 != 'undefined') {

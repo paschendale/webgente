@@ -14,7 +14,8 @@ tiled: true
      	nome, 
 		layers, 
 		grupo,
-		prop_query,
+		prop_query alpha,
+		pro_query numeric,
 		prop_alternative,
 		restricted, 
 		maxZoom, 
@@ -54,7 +55,7 @@ var vetorOverlay =  [
 		'bomdespacho:CBGE_Lotes_Cadastral',
 		'Cadastro Urbano',
 		[],
-		['distrito','setor','quadra','Lote'],
+		['distrito','setor','quadra','lote'],
 		['Distrito','Setor','Quadra','Lote']
 		)
 	,
@@ -94,19 +95,17 @@ var vetorOverlay =  [
 		'bomdespacho:HID_Massa_Dagua',
 		'Meio Ambiente',
 		['nome', 'tipoMassaDagua'],
-		[],
-		['Nome', 'Tipo de Massa Dágua'],
-		['regime']
+		['regime'],
+		[ 'Nome','Tipo de Massa Dágua','Regime']
 	),
 
 	parametros_hid_trecho_drenagem =new overlay(
 		'Hidrografia',
 		'bomdespacho:HID_Trecho_Drenagem',
 		'Meio Ambiente',
-		['nome', 'navegavel', 'tipoTrechoDrenagem'],
-		[],
-		['Nome', 'É Navegável?', "Tipo"],
-		['regime']
+		['nome', 'navegavel'],
+		['tipoTrechoDrenagem'],
+		['Nome', 'É Navegável?', "Tipo"]
 		)
 	,
 
@@ -114,41 +113,25 @@ var vetorOverlay =  [
 	parametros_limite_expansao_urbana = new overlay(
 		'Área de Expansão Urbana',
 		'bomdespacho:limite_expansao_urbana',
-		'Limites',
-		[],
-		[],
-		[],
-		[]
+		'Limites'
 	),
 
 	parametros_lml_municipio = new overlay(
 		'Limite Municipal (IBGE)',
 		'bomdespacho:LML_Municipio',
-		'Limites',
-		[],
-		[],
-		[],
-		[]
+		'Limites'
 	),
 
 	parametros_tra_ponte = new overlay(
 		'Pontes (IBGE)',
 		'bomdespacho:TRA_Ponte',
-		'Malha Viária',
-		[],
-		[],
-		[],
-		[]
+		'Malha Viária'
 	),
 
 	parametros_lml_cidade = new overlay(
 		'Perímetro Urbano',
 		'bomdespacho:LML_Cidade',
-		'Limites',
-		[],
-		[],
-		[],
-		[]
+		'Limites'
 	),
 
 	parametro_lml_distrito = new overlay(
@@ -182,8 +165,8 @@ var vetorOverlay =  [
 		'Edificações',
 		'bomdespacho:CBGE_Edificacoes_BCI',
 		'Cadastro Urbano',
-		[],
-		['inscricao', 'numero_porta'],
+		['inscricao'],
+		['numero_porta'],
 		['Inscrição', 'Número da Porta'],
 		['proprietario', 'cod_logradouro', 'cod_secao', 'ocupacao', 'complemento', 'ocupacao,', 'utilizacao', 'del_frontal', 'sit_quadra', 'area_construida_total', 'testada', 'tipo', 'alinhamento', 'situacao_edif', 'situacao_unid', 'estrutura', 'cobertura', 'parede', 'forro', 'revestimento']
 	),
@@ -191,31 +174,22 @@ var vetorOverlay =  [
 	parametro_PTO_Geod_Topo_Controle_RN = new overlay (
 		'Referência de Nível (IBGE)',
 		'bomdespacho:PTO_Geod_Topo_Controle_RN',
-		'Rede Cadastral (RRC)',
-		[],
-		[],
-		[],
-		[]
+		'Rede Cadastral (RRC)'
+	
 	),
 
 	parametro_PTO_Geod_Topo_Controle_GPS = new overlay (
 		'Estações SAT GPS (IBGE)',
 		'bomdespacho:PTO_Geod_Topo_Controle_GPS',
-		'Rede Cadastral (RRC)',
-		[],
-		[],
-		[],
-		[]
+		'Rede Cadastral (RRC)'
+		
 	),
 
 	parametro_PTO_Geod_Topo_Controle_VT = new overlay (
 		'Vértices de Triangulação Geodésica (IBGE)',
 		'bomdespacho:PTO_Geod_Topo_Controle_VT',
-		'Rede Cadastral (RRC)',
-		[],
-		[],
-		[],
-		[]
+		'Rede Cadastral (RRC)'
+		
 	),
 
 ];

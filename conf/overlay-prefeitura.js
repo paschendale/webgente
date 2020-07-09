@@ -14,7 +14,8 @@ tiled: true
      	nome, 
 		layers, 
 		grupo,
-		prop_query,
+		prop_query alpha,
+		prop_query numeric,
 		prop_alternative,
 		restricted, 
 		maxZoom, 
@@ -31,8 +32,9 @@ var vetorOverlay =  [
 		'Rodovias Municipais',
 		'bomdespacho:TRA_Via_Deslocamento',
 		'Malha Viária',
-		['nome', 'jurisdicao','codigo_rbd','trecho','situacao','inicio','fim', 'administracao', 'revestimento', 'operacional', 'situacao', 'canteiroDivisorio','trafego', 'tipoPavimentacao', 'tipoVia'],
-		['Nome', 'Jurisdição', 'Código da Via', 'Nome Trecho', 'Situação', 'Início', 'Fim', 'Revestimento', 'Operacional', 'Situação da Via', 'Tem Canteiro Divisório?', 'Tráfego', 'Tipo de Pavimentação', 'Tipo da Via']
+		['nome', 'jurisdicao','trecho','situacao','inicio','fim', 'administracao', 'revestimento', 'operacional', 'situacao', 'canteiroDivisorio','trafego', 'tipoPavimentacao', 'tipoVia'],
+		['codigo_rbd',],
+		['Nome', 'Jurisdição', 'Nome Trecho', 'Situação', 'Início', 'Fim', 'Revestimento', 'Operacional', 'Situação da Via', 'Tem Canteiro Divisório?', 'Tráfego', 'Tipo de Pavimentação', 'Tipo da Via','Código da Via']
 		)
 	,
 
@@ -40,8 +42,9 @@ var vetorOverlay =  [
 		'Rodovias Privadas',
 		'bomdespacho:TRA_Caminho_Carrocavel',
 		'Malha Viária',
-		['id', 'nome'],
-		['ID', 'Nome']
+		['nome'],
+		['id'],
+		['Nome','ID']
 		)
 
 	,
@@ -50,6 +53,7 @@ var vetorOverlay =  [
 		'Lotes',
 		'bomdespacho:CBGE_Lotes_Cadastral',
 		'Cadastro Urbano',
+		[],
 		['distrito','setor','quadra','lote'],
 		['Distrito','Setor','Quadra','Lote']
 		)
@@ -58,6 +62,7 @@ var vetorOverlay =  [
 		'Quadras',
 		'bomdespacho:CBGE_Quadras',
 		'Cadastro Urbano',
+		[],
 		['distrito','setor','quadra'],
 		['Distrito','Setor','Quadra']
 		)
@@ -67,16 +72,18 @@ var vetorOverlay =  [
 		'Arruamentos',
 		'bomdespacho:CBGE_Trecho_Arruamento',
 		'Malha Viária',
-		['tipo', 'nome_logradouro', 'codigo', 'secao_d', 'secao_e'],
-		['Tipo', 'Nome', 'Código de Logradouro', 'Seção Direita', 'Seção Esquerda']
+		['tipo', 'nome_logradouro', 'secao_d', 'secao_e'],
+		[ 'codigo'],
+		['Tipo', 'Nome', 'Seção Direita', 'Seção Esquerda','Código de Logradouro']
 		)
 	,
 	parametros_tra_trecho_rodoviario =new overlay(
-	    'Trecho Rodoviario',
+	    'Trecho Rodoviario'
 	    'bomdespacho:TRA_Trecho_Rodoviario',
 		'Malha Viária',
-		['nome', 'sigla', 'codTrechoRod', 'jurisdicao', 'administracao', 'concessionaria', 'revestimento', 'operacional', 'situacaoFisica', 'canteiroDivisorio', 'trafego', 'tipoPavimentacao', 'tipoVia', 'trechoEmPerimetroUrbano', 'acostamento'],
-		['Nome', 'Sigla', 'Código do Trecho', 'Jurisdicao', 'Administração', 'Concessionária', 'Revestimento', 'É operacional?', 'Situação Física', 'Canteiro Divisório?', 'Tráfego', 'Tipo de Pavimentação', 'Tipo da Via', 'Trecho em Perímetro Urbano?', 'Acostamento?']
+		['nome', 'sigla', 'jurisdicao', 'administracao', 'concessionaria', 'revestimento', 'operacional', 'situacaoFisica', 'canteiroDivisorio', 'trafego', 'tipoPavimentacao', 'tipoVia', 'trechoEmPerimetroUrbano', 'acostamento'],
+		['codTrechoRod'],
+		['Nome', 'Sigla', 'Jurisdicao', 'Administração', 'Concessionária', 'Revestimento', 'É operacional?', 'Situação Física', 'Canteiro Divisório?', 'Tráfego', 'Tipo de Pavimentação', 'Tipo da Via', 'Trecho em Perímetro Urbano?', 'Acostamento?', 'Código do Trecho']
  
 		)
 	 ,
@@ -86,6 +93,7 @@ var vetorOverlay =  [
 		'bomdespacho:HID_Massa_Dagua',
 		'Meio Ambiente',
 		['nome', 'regime', 'tipoMassaDagua', 'salgada', 'dominialidade', 'artificial', 'possuiTrechoDrenagem'],
+		[],
 		['Nome', 'Regime', 'Tipo de Massa Dágua', 'Aguá doce ou salgada?', 'Dominialidade', 'É artificial?', 'Possui Trecho de Drenagem?']
 	),
 
@@ -93,8 +101,9 @@ var vetorOverlay =  [
 		'Hidrografia',
 		'bomdespacho:HID_Trecho_Drenagem',
 		'Meio Ambiente',
-		['id', 'nome','tipoTrechoDrenagem', 'regime', 'navegavel', 'larguraMedia', 'encoberto'],
-		['ID', 'Nome', 'Tipo', 'Regime', 'É Navegável?', 'Largura Média', 'Encoberto?']
+		['id', 'nome','tipoTrechoDrenagem', 'regime', 'navegavel', 'encoberto'],
+		['larguraMedia'],
+		['ID', 'Nome', 'Tipo', 'Regime', 'É Navegável?', 'Encoberto?', 'Largura Média']
 	),
 
 		/*Brenda*/
@@ -108,8 +117,9 @@ var vetorOverlay =  [
 		'Limite Municipal (IBGE)',
 		'bomdespacho:LML_Municipio',
 		'Limites',
-		['geocodigo', 'anoDeReferencia'],
-		['Geocódigo', 'Ano de Referência']
+		['anoDeReferencia'],
+		['geocodigo'],
+		[ 'Ano de Referência','Geocódigo']
 	),
 
 	parametros_tra_ponte = new overlay(
@@ -117,6 +127,7 @@ var vetorOverlay =  [
 		'bomdespacho:TRA_Ponte',
 		'Malha Viária',
 		['descricao', 'tipoponte'],
+		[],
 		['Descrição', 'Tipo de Ponte']
 	),
 
@@ -124,6 +135,7 @@ var vetorOverlay =  [
 		'Perímetro Urbano',
 		'bomdespacho:LML_Cidade',
 		'Limites',
+		[],
 		['geocodigo'],
 		['Geocódigo']
 	),
@@ -132,7 +144,8 @@ var vetorOverlay =  [
 		'Limites Distritais (IBGE)',
 		'bomdespacho:LML_Distrito',
 		'Limites',
-		['nome', 'geocodigo'],
+		['nome'],
+		['geocodigo'],
 		['Nome', 'Geocódigo']
 	),
 
@@ -140,7 +153,8 @@ var vetorOverlay =  [
 		'Localidades Rurais',
 		'bomdespacho:LML_Localidade',
 		'Malha Viária',
-		['nome', 'geocodigo'],
+		['nome'],
+		['geocodigo'],
 		['Nome', 'Geocódigo']
 	),
 
@@ -148,6 +162,7 @@ var vetorOverlay =  [
 		'Pontos de Quilometragem',
 		'bomdespacho:TRA_Quilometragem',
 		'Malha Viária',
+		[],
 		['id', 'codigo', 'km', 'coord_e', 'coord_n'],
 		['ID', 'Código', 'N° Quilometragem', 'Coordenada UTM E', 'Coordenada UTM N']
 	),
@@ -156,8 +171,9 @@ var vetorOverlay =  [
 		'Edificações',
 		'bomdespacho:CBGE_Edificacoes_BCI',
 		'Cadastro Urbano',
-		['id','inscricao', 'area_unidade_calculada', 'area_unidade_bci', 'cod_logradouro', 'cod_secao', 'numero_porta', 'complemento', 'proprietario', 'ocupacao', 'utilizacao', 'del_frontal', 'sit_quadra', 'area_unidade', 'total_unidade', 'area_construida_total', 'testada', 'tipo', 'alinhamento', 'situacao_edif', 'situacao_unid', 'estrutura', 'cobertura', 'parede', 'forro', 'revestimento'],
-		['ID', 'Inscrição', 'Área da Unidade Calculada', 'Área da Unidade no BCI', 'Código de Logradouro', 'Código da Seção', 'Número da Porta', 'Complemento', 'Proprietário', 'Ocupação', 'Utilização', 'Delimitação Frontal', 'Situação da Quadra', 'Área da Unidade', 'Unidades Totais', 'Área Construída Total', 'Distância da Testada', 'Tipo', 'Alinhamento', 'Situação da Edificação', 'Tipo da Estrutura', 'Tipo da Cobertura', 'Tipo de Parede', 'Tipo de Forro', 'Revestimento']
+		['inscricao', 'complemento', 'proprietario', 'ocupacao', 'utilizacao','sit_quadra', 'testada', 'tipo', 'alinhamento', 'situacao_edif', 'situacao_unid', 'estrutura', 'cobertura', 'parede', 'forro', 'revestimento'],
+		['id', 'area_unidade_calculada', 'area_unidade_bci', 'cod_logradouro', 'cod_secao', 'numero_porta', 'del_frontal' , 'area_unidade', 'total_unidade', 'area_construida_total'],
+		['Inscrição', 'Complemento', 'Proprietário', 'Ocupação', 'Utilização', 'Situação da Quadra',  'Distância da Testada', 'Tipo', 'Alinhamento', 'Situação da Edificação', 'Tipo da Estrutura', 'Tipo da Cobertura', 'Tipo de Parede', 'Tipo de Forro', 'Revestimento','ID', 'Área da Unidade Calculada', 'Área da Unidade no BCI', 'Código de Logradouro', 'Código da Seção', 'Número da Porta', 'Delimitação Frontal','Área da Unidade', 'Unidades Totais', 'Área Construída Total']
 
 	),
 ];
