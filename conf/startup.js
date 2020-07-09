@@ -2,7 +2,7 @@
 var init = {
 	latitude: -19.737342, 
 	longitude: -45.251930, 
-	zoomInicial: 17
+	zoomInicial: 18
 };
 
 // Definindo site base para processamento do 360
