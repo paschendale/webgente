@@ -1,6 +1,7 @@
 body{
 	padding: 0;
     margin: 0;
+    overflow: hidden;
 }
 html,
 body,
@@ -33,21 +34,18 @@ body,
 	position: absolute; 
 	margin-left: 5%; 
 	margin-top: 1%; 
-	width: 500px; 
+	width: auto; 
+	max-width: 500px;
 	z-index: 20000;
 }
 #barra-rua{
-	margin-top: 15%; 
+	padding: 0px 0px 0px 0px;
+	margin-top: 10%; 
 	margin-left: 5%;
 	z-index: 20000;
 }
 #img_fechar{
 	margin-left: 93%;
-}
-#tabela_propriedades{
-	overflow-y: auto;
-	height: 120px; 
-	padding: 0;
 }
 #corpo-rua{
 	height: 400px; 
@@ -58,13 +56,33 @@ body,
 	text-align: center;  
 	width: 340px;
 }
+
+
+
+
+
+#propriedades{
+	margin-top: 10%; 
+	margin-left: 4%;
+	z-index: 20000;
+}
+#tabela_propriedades{
+	position: relative;
+	/*height: auto;*/
+	padding: 1px;
+}
+#tabela-conteudo{
+	width: 630px;
+}
+
+#tabela_rua_propriedades{
+}
+
+
+
+
 #imagem-fechar{
 	margin-left: 95%;
-}
-#propriedades{
-	margin-top: 15%; 
-	margin-left: 5%;
-	z-index: 20000;
 }
 #usuario, #senha{
 	box-shadow: 0px 0px;
@@ -76,34 +94,35 @@ input, select{
 	box-shadow: 3px 1px lightblue;
 }
 
-table {width:280px;text-align:left;vertical-align:center;padding: 15px;border-bottom: 1px solid #ddd;font-family: Tahoma, Geneva, sans-serif;}
+table {width:280px;text-align:left;vertical-align:center;padding: 5px;border-bottom: 1px solid #ddd;font-family: Tahoma, Geneva, sans-serif;}
 td,th {border-bottom: 1px solid #ddd;padding: 7px;}
 tr:hover {background-color: #f5f5f5;}
 th {background-color: #f5f5f5;}
 
-@media(max-width: 710px){
-	#barra-de-pesquisa, #barra-rua, #propriedades{
-		margin-left: 80px;
-	}
-	#barra-rua, #propriedades{
-		margin-top: 25%;
-	}
-}
 
-/*
-@media(max-width: 576px){
+/*@media(max-width: 576px){
 	#barra-de-pesquisa{
-		opacity: 1.0; 
-		position: absolute; 
-		margin-left: 5%; 
-		margin-top: 3%; 
-		width: 240px; 
-		z-index: 2000;
-		margin-left: 20%;
+		max-width: 250px;
+		left: -4%;
 	}
 	#barra-rua{
 		margin-top: 50%;
-		margin-left: -1%;	
+		left: 11%;
 	}
-}
-*/
+	#corpo-rua{
+		height: 300px;
+	}
+	#tabela-rua{
+		padding: 0px 0px 0px 0px;
+		width: 2px;
+		height: 1px;
+	}
+	#tabela_propriedades{
+		margin-left: 500px;
+	}
+	#tabela-conteudo{
+		width: 500px;
+		margin-left: 20%;
+	}
+}*/
+
