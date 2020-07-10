@@ -58,8 +58,8 @@ var vetorOverlay =  [
 		'Quadras',
 		'bomdespacho:CBGE_Quadras',
 		'Cadastro Urbano',
-		['distrito','setor','quadra'],
-		['Distrito','Setor','Quadra']
+		['distrito','setor','quadra', 'unificada com'],
+		['Distrito','Setor','Quadra', "Unificada com:"]
 		)
 	,
 	/* eixo de vias mudou para a base cadastral. além disso, 
