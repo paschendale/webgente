@@ -75,9 +75,9 @@ var vetorOverlay =  [
 		'Quadras',
 		'bomdespacho:CBGE_Quadras',
 		'Cadastro Urbano',
-		[],
+		['unificada com'],
 		['distrito','setor','quadra'],
-		['Distrito','Setor','Quadra']
+		['Unificada com quadra:', 'Distrito','Setor','Quadra']
 		)
 	,
 	/* eixo de vias mudou para a base cadastral. além disso, 
@@ -124,13 +124,13 @@ var vetorOverlay =  [
 	/*Brenda*/
 	parametros_limite_expansao_urbana = new overlay(
 		'Área de Expansão Urbana',
-		'bomdespacho:limite_expansao_urbana',
+		'bomdespacho:MUB_Area_Expansao_Urbana',
 		'Limites'
 	),
 
 	parametros_lml_municipio = new overlay(
-		'Limite Municipal (IBGE)',
-		'bomdespacho:LML_Municipio',
+		'Limite Municipal (FJP)',
+		'bomdespacho:LML_Municipio_Bom_Despacho',
 		'Limites'
 	),
 
@@ -142,7 +142,7 @@ var vetorOverlay =  [
 
 	parametros_lml_cidade = new overlay(
 		'Perímetro Urbano',
-		'bomdespacho:LML_Cidade',
+		'bomdespacho:MUB_Municipio',
 		'Limites'
 	),
 
