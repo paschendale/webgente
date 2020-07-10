@@ -106,18 +106,18 @@ var vetorOverlay =  [
 		'Corpos D`Água',
 		'bomdespacho:HID_Massa_Dagua',
 		'Meio Ambiente',
-		['nome', 'tipoMassaDagua'],
-		['regime'],
-		[ 'Nome','Tipo de Massa Dágua','Regime']
+		['nome', 'tipoMassaDagua', 'regime'],
+		['id'],
+		[ 'Nome','Tipo de Massa Dágua','Regime', 'Identificação']
 	),
 
 	parametros_hid_trecho_drenagem =new overlay(
 		'Hidrografia',
 		'bomdespacho:HID_Trecho_Drenagem',
 		'Meio Ambiente',
-		['nome', 'navegavel','tipoTrechoDrenagem'],
-		[],
-		['Nome', 'É Navegável?', "Tipo"]
+		['nome', 'navegavel', 'tipoTrechoDrenagem'],
+		['id'],
+		['Nome', 'É Navegável?', "Tipo", 'Identificação']
 		)
 	,
 
@@ -168,19 +168,19 @@ var vetorOverlay =  [
 		'Pontos de Quilometragem',
 		'bomdespacho:TRA_Quilometragem',
 		'Malha Viária',
-		[],
-		['km', 'codigo'],
-		['N° Quilometragem Municipal', 'Código']
+		['codigo'],
+		['km'],
+		['Código', 'N° Quilometragem Municipal']
 	),
 
 	parametro_cbge_edificacoes_bci = new overlay(
 		'Edificações',
 		'bomdespacho:CBGE_Edificacoes_BCI',
 		'Cadastro Urbano',
-		['inscricao'],
-		['numero_porta'],
+		['inscricao', 'numero_porta'],
+		[],
 		['Inscrição', 'Número da Porta'],
-		['proprietario', 'cod_logradouro', 'cod_secao', 'ocupacao', 'complemento', 'ocupacao,', 'utilizacao', 'del_frontal', 'sit_quadra', 'area_construida_total', 'testada', 'tipo', 'alinhamento', 'situacao_edif', 'situacao_unid', 'estrutura', 'cobertura', 'parede', 'forro', 'revestimento']
+		['complemento', 'proprietario', 'ocupacao', 'utilizacao', 'del_frontal', 'sit_quadra', 'testada', 'tipo', 'alinhamento', 'situacao_edif', 'situacao_unid', 'estrutura', 'cobertura', 'parede', 'forro', 'revestimento','id', 'area_unidade_calculada', 'area_unidade_bci', 'cod_logradouro', 'cod_secao' , 'area_unidade', 'total_unidade', 'area_construida_total']
 	),
 
 	parametro_PTO_Geod_Topo_Controle_RN = new overlay (

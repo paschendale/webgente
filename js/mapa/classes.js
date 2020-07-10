@@ -25,7 +25,7 @@ function gerarTXT(){
 class mapa{
 	//public
 	constructor(latitude, longitude, zoom){
-		this.mapa = L.map('mapa').setView([latitude, longitude], zoom); 
+		this.mapa = L.map('mapa', {zoomSnap: 0, zoomDelta: 0.5}).setView([latitude, longitude], zoom); 
 	}
 
 	setValor(valor){
