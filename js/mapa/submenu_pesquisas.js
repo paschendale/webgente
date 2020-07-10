@@ -11,6 +11,6 @@ function opcoes(){
 	opcao.innerHTML = `
 		<form action="" method="POST">`
 	    	+camposPesquisaveis+
-	    	` <input type="button" value="Ok" onclick="consultaFiltro(vetorOverlay[`+n+`])"> 
+	    	` <br><br><input type="button" value="Ok" onclick="consultaFiltro(vetorOverlay[`+n+`])"> 
 	    </form>`
 }

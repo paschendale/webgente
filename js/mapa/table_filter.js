@@ -35,7 +35,8 @@ function link_shp (i){
 
 function exibe_propriedades_tabela(i){
     var response=tabela.features[i];
-	var tabelaExibicao = document.getElementById("consultaPesquisa");
+	var tabelaExibicao = document.getElementById("conteudo");
+    tabelaExibicao = "";
 	//variaveis que o tipo de usuário não pode ter acesso são excluídas com o método abaixo
 	response.properties= restrictedAtributes(response.properties,layerF.layers);
     var chaves = Object.keys(response.properties);
@@ -49,7 +50,7 @@ function exibe_propriedades_tabela(i){
     	linhas+=`\n`;	
 	}	
 //'<td><img src="img/lupa.png" onclick="buscaVia('+i+'); exibe_propriedades_tabela(tabela.features['+i+'])"></td></tr>';
-    tabelaExibicao.innerHTML = `
+    /*tabelaExibicao.innerHTML = `
 		<div class="row">
 			<div class="modal-dialog" role="dialog" id="propriedades">
 				<div class="modal-content">
@@ -68,7 +69,23 @@ function exibe_propriedades_tabela(i){
 				</div>
 			</div>
 	   </div>
-	`;
+	`;*/
+    tabelaExibicao.innerHTML = `
+        <div class="row">
+            <div id="propriedades">
+                <table id="tabela-rua">
+                    <tr>
+                        `+colunas+`
+                        <th> Donwload </th>
+                    </tr>
+                    <tr>
+                    `+linhas+`
+                    <td> <img src="img/donwload.png" onclick="link_shp(`+i+`)"></td>  
+                    </tr>
+                </table>
+            </div>
+       </div>
+    `;
 }
 
 function coordFail(coord){
@@ -190,22 +207,21 @@ function consultaFiltro (camadaFiltrada){
             	//Transforma o response em variavel global por meio da variavel tabela
                 tabela=response;
 
-                    var consulta = document.getElementById("consultaPesquisa");
+                    var consulta = document.getElementById("conteudo");
                     var coluna="";
                     for (campos of layerF.prop_query){
                           coluna+= `<th>`+layerF.prop_alternative[layerF.prop_query.indexOf(campos)]+`</th>`
                           coluna+=`\n`;
                     }    
-                    var consulta_html_01 = `
-    					<div class="row">
-    					  	<div class="modal-dialog" role="dialog" id="barra-rua">
-    					    	<div class="modal-content">
-    					      		<div class="modal-body" id="corpo-rua"><img src="img/botao-fechar.jpg" id="imagem-fechar" onclick="fecharTabela()">
-    					      			<table id="tabela-rua">
-    					      				<tr>
-    					      					`+coluna+`
-                                                <th>Ver</th>
-    					      				</tr>
+
+    				var consulta_html_01 = `
+    				<div id="resultado_pesquisa">
+    					<table id="tabela_pesquisa">
+    						<tr>
+    					      	`+coluna+`
+                                <th>Ver</th>
+    					    </tr>
+    				</div>
     				`;
 
     				var consulta_td = "";	      					

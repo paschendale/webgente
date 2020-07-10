@@ -76,19 +76,11 @@ class mapa{
 
 			menu.innerHTML = `
 				<div class="row">
-				  	<div class="modal-dialog" role="dialog" id="barra-de-pesquisa">
-				    	<div class="modal-content">
-				      		<div class="modal-body">
-						     	<nav>
-								  <div class="nav nav-tabs" id="nav-tab" role="tablist">
-								 	<select id="barraPesquisa" onchange="opcoes()">` + camadasPesquisaveis + `</select>
-								 </div>
-								</nav>
-								<br>
-								<div id="conteudo"></div>
-						    </div>
-				    	</div>
-				   	</div>
+				  	<div id="barra-de-pesquisa" class="ui-widget-content">
+						<select id="barraPesquisa" onchange="opcoes()">` + camadasPesquisaveis + `</select>
+						<br>
+						<div id="conteudo"></div>
+					</div>
 				</div>
 			`;
 		
