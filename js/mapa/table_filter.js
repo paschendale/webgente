@@ -102,7 +102,7 @@ function buscaVia(posicao){
 		            format: 'image/png',
                     output_format:'shape-zip',
 		            cql_filter:cql_filtro,
-		            styles:'quadras_sabrina'
+		            styles:'selecao'
 		        });
 	vetorLayer.unshift(source.getLayer(layerF.layers));
      vetorLayer[0].addTo(myMapa.getMapa());
