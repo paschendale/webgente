@@ -4,6 +4,8 @@ function gerarTXT(){
     var textFile = null,
     makeTextFile = function (text){
 	    var data = new Blob([text], {type: 'text/plain'});
+	    console.log(data);
+	    console.log(text);
 	    if (textFile !== null) {
 	        window.URL.revokeObjectURL(textFile);
 	    }
@@ -15,8 +17,9 @@ function gerarTXT(){
 
     create.addEventListener('click', function (){
         var link = document.getElementById('downloadlink');
+        console.log(getJson);
         link.href = makeTextFile(getJson);
-        link.style.display = 'block';
+       link.style.display = 'block';
     }, false);
 }
 class mapa{
@@ -57,9 +60,12 @@ class mapa{
 			var camadasPesquisaveis=`<option value="-1"> </option`;
 			var obj_camada;
 			//As abas de pesquisas são definidas de acordo com as camadas que possuem campos pesquisáveis definidos em prop_query 
+			
 			for (var n=0;n<vetorOverlay.length; n++ ){
+
 				obj_camada = vetorOverlay[n];
-				if(obj_camada.prop_query != undefined){
+				if(obj_camada.prop_query != "" && obj_camada.prop_query !=undefined){
+				
 					camadasPesquisaveis +=`
 
 					 <option value="`+ n +`")">`+ obj_camada.nome+`</option>`;
@@ -156,7 +162,7 @@ class mapa{
 				    		}
 				    	}
 				    	getJson = `{ "type": "Feature", "geometry" : { "type" : "LineString", "coordinates" : [` + coordenadas + `] }, "properties" : { "area" : "` + area + `"} }`;  
-				    	console.log(getJson);
+				    	
 				    	layer.bindPopup('Área aproximada: ' + area + ' m <br><br><button type="button" id="create" onclick="gerarTXT()">Download (duplo clique)</button><a download="coordenadasLinha.json" id="downloadlink" style="display: none">Clique aqui</a>');
 
 				    }
@@ -262,21 +268,24 @@ class baseLayer{
 
 class overlay{
 	//public
-	constructor(nome, layers, grupo,prop_query,prop_alternative,restricted, maxZoom, format, transparent,tiled){
+
+	constructor(nome, layers, grupo,alpha,numeric,prop_alternative,restricted, maxZoom, format, transparent,tiled){
 		//Parâmetros dinâmicos da classe
 		this.nome = nome;
 		this.layers = layers;
 		this.grupo = grupo;
-		this.prop_query=prop_query;
-		this.prop_alternative=prop_alternative;
-		this.restricted=restricted; 
+		//inicializa os arrays alpha e numeric para serem concatenados no prop_querry
+		this.alpha =(alpha==undefined)?[]:alpha ;
+		this.numeric =(numeric==undefined)? []: numeric;
+		this.prop_query = this.alpha.concat(this.numeric);
+		this.prop_alternative = prop_alternative;
+		this.restricted = restricted; 
 		//Parâmetros default modificáveis da classe 
 		// O atributo recebe = (Se o parâmetro == undefined)? recebe o default: caso contrário recebe o parâmetro preenchido;   
 		this.maxZoom = (maxZoom==undefined)? 25: maxZoom;
 		this.format = (format==undefined)? "image/jpeg": format;
 		this.transparent = (transparent==undefined)? true: transparent;
 		this.tiled = (tiled==undefined)? true: tiled;
-		
 	}
 
 	getOverlay(){
@@ -284,9 +293,11 @@ class overlay{
 			nome : this.nome,
 			layers : this.layers,
 			grupo : this.grupo,
-			prop_query:this.prop_query,
-			prop_alternative:this.prop_alternative,
-			restricted:this.restricted,
+			alpha : this.alpha,
+			numeric : this.numeric,
+			prop_query : this.prop_query,
+			prop_alternative : this.prop_alternative,
+			restricted : this.restricted,
 			maxZoom : this.maxZoom,
 			format : this.format,
 			transparent : this.transparent,

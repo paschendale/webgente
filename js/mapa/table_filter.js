@@ -44,12 +44,27 @@ function exibe_propriedades_tabela(response){
 	`;
 }
 
+function coordFail(coord){
+	//função recursiva que extrai uma matriz de coordenadas
+	if(coord.length>1){
+		return coord;
+	}else{
+		return coordFail(coord[0]);
+	}
+}
 
 function buscaVia(posicao){
     //Usa a posição para retornar o objeto que vai ser filtrado e destacado
 	var coord= (tabela.features[posicao].geometry.coordinates[0]);
-	lalo = L.GeoJSON.coordsToLatLngs(coord);
+	var lalo;
+	if(coord[0].length>1){
+	lalo= L.GeoJSON.coordsToLatLngs(coordFail(coord));
 	myMapa.getMapa().fitBounds(lalo).setZoom(17);
+	}else{ 
+		lalo= L.GeoJSON.coordsToLatLng(coordFail(coord));
+		myMapa.getMapa().setView(lalo,17); 
+	}
+
 	var cql_filtro = filtro(layerF,tabela.features[posicao].properties);
 	source = L.WMS.source(overlayHost, {
 		            opacity: 1,
@@ -72,27 +87,28 @@ function filtro (camadaFiltrada, objPesquisa){
     for(campo of camadaFiltrada.prop_query){
 
 
-        var tipo_eixo_de_vias = document.getElementById(campo).value;
+        var tipo_texto= document.getElementById(campo).value;
 
         //Possíveis variações que o usuário pode digitar
-        if(tipo_eixo_de_vias == 'praça' || tipo_eixo_de_vias == 'praca' || tipo_eixo_de_vias == 'Praca' || tipo_eixo_de_vias == 'Praça' || tipo_eixo_de_vias == 'PRACA' || tipo_eixo_de_vias == 'PRAÇA'){
-            tipo_eixo_de_vias = 'pca'
+        if(tipo_texto == 'praça' || tipo_texto == 'praca' || tipo_texto == 'Praca' || tipo_texto == 'Praça' || tipo_texto == 'PRACA' || tipo_texto == 'PRAÇA'){
+            tipo_texto = 'pca'
         }
-        else if(tipo_eixo_de_vias == 'avenida' || tipo_eixo_de_vias == 'Avenida' || tipo_eixo_de_vias == 'AVENIDA'){
-            tipo_eixo_de_vias = 'avn'
+        else if(tipo_texto == 'avenida' || tipo_texto == 'Avenida' || tipo_texto == 'AVENIDA'){
+            tipo_texto = 'avn'
         }
         
-        var resp =(objPesquisa==null)? tipo_eixo_de_vias : objPesquisa[campo];
+        var resp =(objPesquisa==null)? tipo_texto : objPesquisa[campo];
 
 
        cql_filtro+=(resp!="" & cql_filtro!="")? " and ": "";
-        if(Number.isNaN(parseInt(resp))){
+        if(camadaFiltrada.numeric.indexOf(campo)==-1){
             cql_filtro+=(resp!="")?("("+campo+" LIKE "+ " '%"+(resp.toLowerCase())+"%' or "+campo+" LIKE "+ " '%"+(resp.toUpperCase())+"%') " ):"";
-        }else{
+       }else{
             cql_filtro+=(resp!="")?(campo+" = "+ ""+resp+" "):"";
         }
 	}
 return cql_filtro;
+
 }
 
 
@@ -147,7 +163,7 @@ function consultaFiltro (camadaFiltrada){
                     var consulta = document.getElementById("consultaPesquisa");
                     var coluna="";
                     for (campos of layerF.prop_query){
-                          coluna+= `<th>`+campos+`</th>`
+                          coluna+= `<th>`+layerF.prop_alternative[layerF.prop_query.indexOf(campos)]+`</th>`
                           coluna+=`\n`;
                     }    
                     var consulta_html_01 = `
@@ -168,6 +184,7 @@ function consultaFiltro (camadaFiltrada){
                             var linhas="";
                             for (campos of layerF.prop_query){
                                 linhas+="<td>" + response.features[i].properties[campos] + "</td>";  
+                
                                  linhas+=`\n`;   
                             } 
                                             

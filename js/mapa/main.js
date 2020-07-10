@@ -1,11 +1,11 @@
-// Cria uma variável global para setar o tipo de informação a ser puxada no GetFeatureInfo, 1: Abre visualizador 360, 2: Abre tabela de atributos
-var opt_gfi = 2;
-//Variável global para permitir ou não a exibição do popup do GetfeatureInfo, true: exibe o popup de infomações, false: impede a exibição. 
+// Variável global para permitir ou não a exibição do popup do GetfeatureInfo, true: exibe o popup de infomações, false: impede a exibição. 
 var info_gfi=false; 
-//Variáveis globais para adicionar ou retirar a barra de Edição
+
+// Variáveis globais para adicionar ou retirar a barra de Edição
 var drawnItems;
 var drawControl; 
 var menu = " ";
+
 //Função principal int main()
 function main(){
 
@@ -27,16 +27,16 @@ function main(){
         map.setView(initial,init.zoomInicial);
     }).addTo(myMapa.getMapa());
 
-    // Cria o controle de camadas
 
-    //Criar dois estados para esse botão
+    //Adicionando o botao de visualizar informacoes com dois estados
+
     var informacao = L.easyButton({
         states: [{
                     stateName: 'information_disabled',
                     icon:      '<img src="img/information_active.png">',
                     title:     'Ativa o popup de informações',   
                     onClick: function(btn) {       
-                        estado.state('information_enabled');
+                        informacao.state('information_enabled');
                         btn.state('information_enabled');  
                         info_gfi=true;  
                     }
@@ -45,7 +45,7 @@ function main(){
                     icon:      '<img src="img/information_desactive.png">',               
                     title:     'Desativa o popup de informações',
                     onClick: function(btn) {
-                        estado.state('information_disabled');
+                        informacao.state('information_disabled');
                         btn.state('information_disabled'); 
                         info_gfi=false;   
                     }
@@ -95,44 +95,19 @@ function main(){
     function adicionaSourceOverlay (objeto){
     	k++;
         camadaOverlay[k] = source.getLayer(objeto.layers);
-
+        objeto.alpha=[];
         Lc.addOverlay(camadaOverlay[k], objeto.nome, objeto.grupo);
     };
 
-    vetorOverlay.forEach(adicionaSourceOverlay);
+    vetorOverlay.forEach(adicionaSourceOverlay);    
 
-    // Testa se existe a camada do levantamento 360, definida dentro do arquivo conf/360.js, caso exista, carrega o botão de habilitar a camada e o visualizador 360.
-
-	if (typeof levantamento_360 != 'undefined') {
-    	var camada360 = source.getLayer(levantamento_360.layers);
-
-	    var estado = L.easyButton({
-	        states: [{
-	                stateName: '360_disabled',
-	                icon:      '<img src="img/360-degree.png">',
-	                title:     'Liga o visualizador de imagens 360°',   
-	                onClick: function(btn, map) {       
-	                    opt_gfi = 1;
-	                    camada360.addTo(myMapa.getMapa());
-	                    estado.state('360_enabled');    
-	                }
-	            }, {
-	                stateName: '360_enabled',   
-	                icon:      '<img src="img/360-degree-clicked.png">',               
-	                title:     'Desativa o visualizador de imagens 360°',
-	                onClick: function(btn, map) {
-	                    opt_gfi = 2;
-	                    myMapa.getMapa().removeLayer(camada360);
-	                    estado.state('360_disabled');
-	                }
-	        }]
-	    });
-	    estado.addTo(myMapa.getMapa());
-	};
+    // Cria botao para ativar a ferramenta de pesquisas
 
     var pesquisas = L.easyButton('<img src="img/lupa.png">', function(){
         barraPesquisas();
     }).addTo(myMapa.getMapa());
+
+    // Cria botao para ativar as ferramentas de desenho
 
     var ferramentas = L.easyButton('<img src="img/engineer.png">', function(){
         barraEdicao();

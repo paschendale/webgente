@@ -14,7 +14,8 @@ tiled: true
      	nome, 
 		layers, 
 		grupo,
-		prop_query,
+		prop_query alpha,
+		pro_query numeric,
 		prop_alternative,
 		restricted, 
 		maxZoom, 
@@ -27,12 +28,25 @@ var overlayHost = 'https://geoserver.genteufv.com.br/geoserver/ows?';
 
 
 var vetorOverlay =  [
+
+	parametros_mub_panoramas = new overlay(
+		'Imagens 360°',
+		'bomdespacho:MUB_Panoramas',
+		'Imagens 360°',
+		[],
+		[],
+		[]
+		)
+	,
+
+
 	parametros_tra_vias_deslocamento = new overlay(
 		'Rodovias Municipais',
 		'bomdespacho:TRA_Via_Deslocamento',
 		'Malha Viária',
-		['nome', 'codigo_rbd'],
-		['Nome','Código da Rodovia Municipal'],
+		['nome'],
+		['codigo_rbd'],
+		['Nome', 'Código RBD'],
 		['jurisdicao', 'situacao', 'shape_leng', 'trecho', 'inicio', 'fim', 'revestimento', 'administracao', 'operacional', 'tipoVia', 'tipoPavimentacao', 'trafego']
 		)
 	,
@@ -42,6 +56,7 @@ var vetorOverlay =  [
 		'bomdespacho:TRA_Caminho_Carrocavel',
 		'Malha Viária',
 		['nome'],
+		[],
 		['Nome']
 		)
 
@@ -51,6 +66,7 @@ var vetorOverlay =  [
 		'Lotes',
 		'bomdespacho:CBGE_Lotes_Cadastral',
 		'Cadastro Urbano',
+		[],
 		['distrito','setor','quadra','lote'],
 		['Distrito','Setor','Quadra','Lote']
 		)
@@ -59,8 +75,9 @@ var vetorOverlay =  [
 		'Quadras',
 		'bomdespacho:CBGE_Quadras',
 		'Cadastro Urbano',
-		['distrito','setor','quadra', 'unificada com'],
-		['Distrito','Setor','Quadra', "Unificada com:"]
+		['unificada com'],
+		['distrito','setor','quadra'],
+		['Unificada com quadra:', 'Distrito','Setor','Quadra']
 		)
 	,
 	/* eixo de vias mudou para a base cadastral. além disso, 
@@ -69,7 +86,8 @@ var vetorOverlay =  [
 		 'Arruamentos',
 		 'bomdespacho:CBGE_Trecho_Arruamento',
 		 'Malha Viária',
-		 ['tipo', 'nome_logradouro', 'codigo'],
+		 ['tipo', 'nome_logradouro'],
+		 [ 'codigo'],
 		 ['Tipo', 'Nome', 'Código do Logradouro']
 		)
 	,
@@ -77,7 +95,8 @@ var vetorOverlay =  [
 	    'Rodovias Federais e Estaduais',
 	    'bomdespacho:TRA_Trecho_Rodoviario',
 	    'Malha Viária',
-		['nome', 'codTrechoRod'],
+		['nome'],
+		['codTrechoRod'],
 		['Nome', 'Código do Trecho Federal ou Estadual'],
 		['jurisdicao', 'administracao', 'concessionaria', 'revestimento', 'operacional', 'situacaoFisica', 'canteiroDivisorio', 'trafego', 'tipoPavimentacao', 'tipoVia', 'trechoEmPerimetroUrbano', 'acostamento' ]
 		)
@@ -88,17 +107,17 @@ var vetorOverlay =  [
 		'bomdespacho:HID_Massa_Dagua',
 		'Meio Ambiente',
 		['nome', 'tipoMassaDagua'],
-		['Nome', 'Tipo de Massa Dágua'],
-		['regime']
+		['regime'],
+		[ 'Nome','Tipo de Massa Dágua','Regime']
 	),
 
 	parametros_hid_trecho_drenagem =new overlay(
 		'Hidrografia',
 		'bomdespacho:HID_Trecho_Drenagem',
 		'Meio Ambiente',
-		['nome', 'navegavel', 'tipoTrechoDrenagem'],
-		['Nome', 'É Navegável?', "Tipo"],
-		['regime']
+		['nome', 'navegavel'],
+		['tipoTrechoDrenagem'],
+		['Nome', 'É Navegável?', "Tipo"]
 		)
 	,
 
@@ -132,6 +151,7 @@ var vetorOverlay =  [
 		'bomdespacho:LML_Distrito',
 		'Limites',
 		['nome'],
+		[],
 		['Nome']
 	),
 
@@ -140,6 +160,7 @@ var vetorOverlay =  [
 		'bomdespacho:LML_Localidade',
 		'Malha Viária',
 		['nome'],
+		[],
 		['Nome']
 	),
 
@@ -147,6 +168,7 @@ var vetorOverlay =  [
 		'Pontos de Quilometragem',
 		'bomdespacho:TRA_Quilometragem',
 		'Malha Viária',
+		[],
 		['km', 'codigo'],
 		['N° Quilometragem Municipal', 'Código']
 	),
@@ -155,7 +177,8 @@ var vetorOverlay =  [
 		'Edificações',
 		'bomdespacho:CBGE_Edificacoes_BCI',
 		'Cadastro Urbano',
-		['inscricao', 'numero_porta'],
+		['inscricao'],
+		['numero_porta'],
 		['Inscrição', 'Número da Porta'],
 		['proprietario', 'cod_logradouro', 'cod_secao', 'ocupacao', 'complemento', 'ocupacao,', 'utilizacao', 'del_frontal', 'sit_quadra', 'area_construida_total', 'testada', 'tipo', 'alinhamento', 'situacao_edif', 'situacao_unid', 'estrutura', 'cobertura', 'parede', 'forro', 'revestimento']
 	),
@@ -164,19 +187,21 @@ var vetorOverlay =  [
 		'Referência de Nível (IBGE)',
 		'bomdespacho:PTO_Geod_Topo_Controle_RN',
 		'Rede Cadastral (RRC)'
+	
 	),
 
 	parametro_PTO_Geod_Topo_Controle_GPS = new overlay (
 		'Estações SAT GPS (IBGE)',
 		'bomdespacho:PTO_Geod_Topo_Controle_GPS',
 		'Rede Cadastral (RRC)'
+		
 	),
 
 	parametro_PTO_Geod_Topo_Controle_VT = new overlay (
 		'Vértices de Triangulação Geodésica (IBGE)',
 		'bomdespacho:PTO_Geod_Topo_Controle_VT',
 		'Rede Cadastral (RRC)'
-
+		
 	),
 
 ];
