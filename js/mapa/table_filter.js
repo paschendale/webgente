@@ -1,29 +1,54 @@
 var tabela= "";
 var layerF;
 var vetorLayer= new Array();
-
+var link="";
 
 function fecharTabela(){
     var tabelaExibicao = document.getElementById("consultaPesquisa");
     tabelaExibicao.innerHTML = "";
 }
+function link_shp (i){
+    var response= tabela.features[i];
+    response.properties= restrictedAtributes(response.properties,layerF.layers);
+    var chaves = Object.keys(response.properties);  
+    
 
+    var cql_filtro = filtro(layerF,response.properties);
+    var defaultParameters = {
+        service : 'WFS',
+        version : '1.0.0',
+        request : 'GetFeature',
+        typeName :  layerF.layers,
+        outputFormat : 'shape-zip',
+        format_options : 'callback:getJson',
+       // propertyName:  chaves,
+        SrsName : 'EPSG:4326',
+        cql_filter: cql_filtro
+        //Cql filter adicionado também na requisição wfs
+    };
 
-function exibe_propriedades_tabela(response){
+    var parameters = L.Util.extend(defaultParameters);
+    var URL = "https://geoserver.genteufv.com.br/geoserver/ows" + L.Util.getParamString(parameters);
+   window.open(URL);
+    
+    }
+
+function exibe_propriedades_tabela(i){
+    var response=tabela.features[i];
 	var tabelaExibicao = document.getElementById("consultaPesquisa");
 	//variaveis que o tipo de usuário não pode ter acesso são excluídas com o método abaixo
 	response.properties= restrictedAtributes(response.properties,layerF.layers);
     var chaves = Object.keys(response.properties);
     var colunas="";
 	var linhas="";
-
+    
 	for( campos of chaves ){
         colunas+= `<th>`+campos+`</th>`;   
         colunas+=`\n`;
     	linhas+=`<td>`+response.properties[campos]+`</td>`;	
     	linhas+=`\n`;	
 	}	
-
+//'<td><img src="img/lupa.png" onclick="buscaVia('+i+'); exibe_propriedades_tabela(tabela.features['+i+'])"></td></tr>';
     tabelaExibicao.innerHTML = `
 		<div class="row">
 			<div class="modal-dialog" role="dialog" id="propriedades">
@@ -32,9 +57,11 @@ function exibe_propriedades_tabela(response){
 					    <table id="tabela-rua">
 					    	<tr>
 					      		`+colunas+`
+                                <th> Donwload </th>
 					      	</tr>
 					      	<tr>
 						      `+linhas+`
+                               <td> <img src="img/donwload.png" onclick="link_shp(`+i+`)"></td>  
 					      	</tr>
 						</table>
 					</div>
@@ -73,11 +100,15 @@ function buscaVia(posicao){
 		            "info_format": "application/json",
 		            transparent: true,
 		            format: 'image/png',
+                    output_format:'shape-zip',
 		            cql_filter:cql_filtro,
 		            styles:'quadras_sabrina'
 		        });
 	vetorLayer.unshift(source.getLayer(layerF.layers));
      vetorLayer[0].addTo(myMapa.getMapa());
+    
+
+
 }
 
 
@@ -150,7 +181,6 @@ function consultaFiltro (camadaFiltrada){
 
     var parameters = L.Util.extend(defaultParameters);
     var URL = "https://geoserver.genteufv.com.br/geoserver/ows" + L.Util.getParamString(parameters);
-
     var xhr = $.ajax({
         url: URL,
         dataType: 'jsonp', 
@@ -192,7 +222,7 @@ function consultaFiltro (camadaFiltrada){
                         consulta_td  += linhas;
 
                         //Onclick chama duas funções
-                        consulta_td += '<td><img src="img/lupa.png" onclick="buscaVia('+i+'); exibe_propriedades_tabela(tabela.features['+i+'])"></td></tr>'; 
+                        consulta_td += '<td><img src="img/lupa.png" onclick="buscaVia('+i+'); exibe_propriedades_tabela('+i+')"></td></tr>'; 
                         
                     }
                     
