@@ -115,8 +115,8 @@ var vetorOverlay =  [
 		'Hidrografia',
 		'bomdespacho:HID_Trecho_Drenagem',
 		'Meio Ambiente',
-		['nome', 'navegavel'],
-		['tipoTrechoDrenagem'],
+		['nome', 'navegavel','tipoTrechoDrenagem'],
+		[],
 		['Nome', 'É Navegável?', "Tipo"]
 		)
 	,
