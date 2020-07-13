@@ -195,9 +195,9 @@ var vetorOverlay =  [
 		'bomdespacho:CBGE_Edificacoes_BCI',
 		'Cadastro Urbano',
 		['inscricao', 'numero_porta'],
-		[],
-		['Inscrição', 'Número da Porta'],
-		['complemento', 'proprietario', 'ocupacao', 'utilizacao', 'del_frontal', 'sit_quadra', 'testada', 'tipo', 'alinhamento', 'situacao_edif', 'situacao_unid', 'estrutura', 'cobertura', 'parede', 'forro', 'revestimento','id', 'area_unidade_calculada', 'area_unidade_bci', 'cod_logradouro', 'cod_secao' , 'area_unidade', 'total_unidade', 'area_construida_total']
+		['id'],
+		['Inscrição', 'Número da Porta', 'Identificação'],
+		['complemento', 'proprietario', 'ocupacao', 'utilizacao', 'del_frontal', 'sit_quadra', 'testada', 'tipo', 'alinhamento', 'situacao_edif', 'situacao_unid', 'estrutura', 'cobertura', 'parede', 'forro', 'revestimento', 'area_unidade_calculada', 'area_unidade_bci', 'cod_logradouro', 'cod_secao' , 'area_unidade', 'total_unidade', 'area_construida_total']
 	),
 
 	parametro_PTO_Geod_Topo_Controle_RN = new overlay (
