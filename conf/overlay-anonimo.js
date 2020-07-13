@@ -47,7 +47,7 @@ var vetorOverlay =  [
 		['nome'],
 		['codigo_rbd'],
 		['Nome', 'Código RBD'],
-		['jurisdicao', 'situacao', 'shape_leng', 'trecho', 'inicio', 'fim', 'revestimento', 'administracao', 'operacional', 'tipoVia', 'tipoPavimentacao', 'trafego']
+		['situacaoFisica', 'geometriaAproximada', 'concessionaria', 'canteiroDivisorio', 'nrPistas', 'nrFaixas', 'codigo', 'id_3', 'id', 'jurisdicao', 'situacao', 'shape_leng', 'trecho', 'inicio', 'fim', 'revestimento', 'administracao', 'operacional', 'tipoVia', 'tipoPavimentacao', 'trafego']
 		)
 	,
 
@@ -77,7 +77,8 @@ var vetorOverlay =  [
 		'Cadastro Urbano',
 		['unificada com'],
 		['distrito','setor','quadra'],
-		['Unificada com quadra:', 'Distrito','Setor','Quadra']
+		['Unificada com quadra:', 'Distrito','Setor','Quadra'],
+		['resp_vetorizacao', 'status_vetorizacao']
 		)
 	,
 	/* eixo de vias mudou para a base cadastral. além disso, 
@@ -88,7 +89,8 @@ var vetorOverlay =  [
 		 'Malha Viária',
 		 ['tipo', 'nome_logradouro'],
 		 [ 'codigo'],
-		 ['Tipo', 'Nome', 'Código do Logradouro']
+		 ['Tipo', 'Nome', 'Código do Logradouro'],
+		 ['secao_d','secao_e']
 		)
 	,
 	parametros_tra_trecho_rodoviario =new overlay(
@@ -106,9 +108,10 @@ var vetorOverlay =  [
 		'Corpos D`Água',
 		'bomdespacho:HID_Massa_Dagua',
 		'Meio Ambiente',
-		['nome', 'tipoMassaDagua', 'regime'],
+		['nome', 'tipoMassaDagua', 'regime', 'salgada'],
 		['id'],
-		[ 'Nome','Tipo de Massa Dágua','Regime', 'Identificação']
+		[ 'Nome','Tipo de Massa Dágua','Regime', 'Tipo de Água', 'Identificação'],
+		['dominialidade', 'artificial', 'possuiTrechoDrenagem']
 	),
 
 	parametros_hid_trecho_drenagem =new overlay(
@@ -117,7 +120,8 @@ var vetorOverlay =  [
 		'Meio Ambiente',
 		['nome', 'navegavel', 'tipoTrechoDrenagem'],
 		['id'],
-		['Nome', 'É Navegável?', "Tipo", 'Identificação']
+		['Nome', 'É Navegável?', "Tipo", 'Identificação'],
+		['regime', 'geometriaAproximada', 'larguraMedia', 'encoberto']
 		)
 	,
 
@@ -131,19 +135,31 @@ var vetorOverlay =  [
 	parametros_lml_municipio = new overlay(
 		'Limite Municipal (FJP)',
 		'bomdespacho:LML_Municipio_Bom_Despacho',
-		'Limites'
+		'Limites',
+		[],
+		[],
+		[],
+		['GEOCODIGO', 'ANODEREFER', 'AREA']
 	),
 
 	parametros_tra_ponte = new overlay(
 		'Pontes (IBGE)',
 		'bomdespacho:TRA_Ponte',
-		'Malha Viária'
+		'Malha Viária',
+		['tipoponte'],
+		['id_0'],
+		['Tipo de Ponte', 'Identificação'],
+		['id', 'descricao', 'vaolivreho', 'vaovertica', 'cargasupor', 'geom']
 	),
 
 	parametros_lml_cidade = new overlay(
 		'Perímetro Urbano',
 		'bomdespacho:MUB_Municipio',
-		'Limites'
+		'Limites',
+		[],
+		[],
+		[],
+		['geometriaa', 'geocodigo']
 	),
 
 	parametro_lml_distrito = new overlay(
@@ -152,7 +168,8 @@ var vetorOverlay =  [
 		'Limites',
 		['nome'],
 		[],
-		['Nome']
+		['Nome'],
+		['id_2', 'id_1', 'id_0', 'geometriaAproximada', 'geocodigo', 'anoDeReferencia']
 	),
 
 	parametro_lml_localidade = new overlay(
