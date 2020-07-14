@@ -74,6 +74,7 @@ function exibe_propriedades_tabela(i){
         <div class="row">
             <div id="propriedades">
                 <table id="tabela-rua">
+                <div id="img_fechar"><img src="img/botao-fechar.jpg" onclick="opcoes(-1)"></div>
                     <tr>
                         `+colunas+`
                         <th> Donwload </th>
@@ -216,6 +217,7 @@ function consultaFiltro (camadaFiltrada){
 
     				var consulta_html_01 = `
     				<div id="resultado_pesquisa">
+    				<div id="img_fechar"><img src="img/botao-fechar.jpg" onclick="opcoes(-1)"></div>
     					<table id="tabela_pesquisa">
     						<tr>
     					      	`+coluna+`
