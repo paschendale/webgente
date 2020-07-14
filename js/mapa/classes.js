@@ -76,7 +76,7 @@ class mapa{
 
 			menu.innerHTML = `
 				<div class="row">
-				  	<div id="barra-de-pesquisa" class="ui-widget-content">
+				  	<div id="barra-de-pesquisa">
 						<select id="barraPesquisa" onchange="opcoes()">` + camadasPesquisaveis + `</select>
 						<br>
 						<div id="conteudo"></div>
