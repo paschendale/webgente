@@ -4,7 +4,7 @@ var vetorLayer= new Array();
 var link="";
 
 function fecharTabela(){
-    var tabelaExibicao = document.getElementById("consultaPesquisa");
+    var tabelaExibicao = document.getElementById("conteudo");
     tabelaExibicao.innerHTML = "";
 }
 function link_shp (i){
@@ -34,9 +34,10 @@ function link_shp (i){
     }
 
 function exibe_propriedades_tabela(i){
+
     var response=tabela.features[i];
-	var tabelaExibicao = document.getElementById("conteudo");
-    tabelaExibicao = "";
+	var resposta = document.getElementById("conteudo");
+	
 	//variaveis que o tipo de usuário não pode ter acesso são excluídas com o método abaixo
 	response.properties= restrictedAtributes(response.properties,layerF.layers);
     var chaves = Object.keys(response.properties);
@@ -49,32 +50,12 @@ function exibe_propriedades_tabela(i){
     	linhas+=`<td>`+response.properties[campos]+`</td>`;	
     	linhas+=`\n`;	
 	}	
-//'<td><img src="img/lupa.png" onclick="buscaVia('+i+'); exibe_propriedades_tabela(tabela.features['+i+'])"></td></tr>';
-    /*tabelaExibicao.innerHTML = `
-		<div class="row">
-			<div class="modal-dialog" role="dialog" id="propriedades">
-				<div class="modal-content">
-					<div class="modal-body" id="tabela_propriedades"><div id="img_fechar"><img src="img/botao-fechar.jpg" onclick="fecharTabela()"></div>
-					    <table id="tabela-rua">
-					    	<tr>
-					      		`+colunas+`
-                                <th> Donwload </th>
-					      	</tr>
-					      	<tr>
-						      `+linhas+`
-                               <td> <img src="img/donwload.png" onclick="link_shp(`+i+`)"></td>  
-					      	</tr>
-						</table>
-					</div>
-				</div>
-			</div>
-	   </div>
-	`;*/
-    tabelaExibicao.innerHTML = `
+	
+    resposta.innerHTML = `
         <div class="row">
             <div id="propriedades">
                 <table id="tabela-rua">
-                <div id="img_fechar"><img src="img/botao-fechar.jpg" onclick="opcoes(-1)"></div>
+                <div id="img_fechar"><img src="img/botao-fechar.jpg" onclick="fecharTabela(-1)"></div>
                     <tr>
                         `+colunas+`
                         <th> Donwload </th>
@@ -87,6 +68,7 @@ function exibe_propriedades_tabela(i){
             </div>
        </div>
     `;
+   
 }
 
 function coordFail(coord){
@@ -100,6 +82,7 @@ function coordFail(coord){
 
 function buscaVia(posicao){
     //Usa a posição para retornar o objeto que vai ser filtrado e destacado
+   
 	var coord= (tabela.features[posicao].geometry.coordinates[0]);
 	var lalo;
 	if(coord[0].length>1){
@@ -109,8 +92,29 @@ function buscaVia(posicao){
 		lalo= L.GeoJSON.coordsToLatLng(coordFail(coord));
 		myMapa.getMapa().setView(lalo,17); 
 	}
+	var selecao='';
+	
+	//De acordo com o tipo de geometria seleciona um estilo específico
+	switch(tabela.features[posicao].geometry['type']){
+		case 'Polygon':
+		case 'MultiPolygon':
+		selecao='poligono_selecao';
+		break;
+		case 'MultiPoint':
+		case 'Point':
+		selecao='ponto_selecao';
+		break; 
+		case 'MultiLineString':
+		case 'LineString':
+		selecao='linha_selecao';
+		break;
+		default:
+		selecao='selecao';
+	}
+
 
 	var cql_filtro = filtro(layerF,tabela.features[posicao].properties);
+	
 	source = L.WMS.source(overlayHost, {
 		            opacity: 1,
 		            tiled: true,
@@ -120,7 +124,7 @@ function buscaVia(posicao){
 		            format: 'image/png',
                     output_format:'shape-zip',
 		            cql_filter:cql_filtro,
-		            styles:'selecao'
+		            styles: selecao
 		        });
 	vetorLayer.unshift(source.getLayer(layerF.layers));
      vetorLayer[0].addTo(myMapa.getMapa());
@@ -136,7 +140,7 @@ function filtro (camadaFiltrada, objPesquisa){
     for(campo of camadaFiltrada.prop_query){
 
 
-        var tipo_texto= document.getElementById(campo).value;
+        var tipo_texto=(objPesquisa==null)?  document.getElementById(campo).value: objPesquisa[campo];
 
         //Possíveis variações que o usuário pode digitar
         if(tipo_texto == 'praça' || tipo_texto == 'praca' || tipo_texto == 'Praca' || tipo_texto == 'Praça' || tipo_texto == 'PRACA' || tipo_texto == 'PRAÇA'){
@@ -146,16 +150,17 @@ function filtro (camadaFiltrada, objPesquisa){
             tipo_texto = 'avn'
         }
         
-        var resp =(objPesquisa==null)? tipo_texto : objPesquisa[campo];
-
-
+        var resp =tipo_texto ;
+        
+       
        cql_filtro+=(resp!="" & cql_filtro!="")? " and ": "";
         if(camadaFiltrada.numeric.indexOf(campo)==-1){
-            cql_filtro+=(resp!="")?("("+campo+" LIKE "+ " '%"+(resp.toLowerCase())+"%' or "+campo+" LIKE "+ " '%"+(resp.toUpperCase())+"%') " ):"";
+            cql_filtro+=(resp!="" && resp!=null)?("("+campo+" LIKE "+ " '%"+(resp.toLowerCase())+"%' or "+campo+" LIKE "+ " '%"+(resp.toUpperCase())+"%') " ):"";
        }else{
             cql_filtro+=(resp!="")?(campo+" = "+ ""+resp+" "):"";
         }
 	}
+	
 return cql_filtro;
 
 }
