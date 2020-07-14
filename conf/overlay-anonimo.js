@@ -47,7 +47,7 @@ var vetorOverlay =  [
 		['nome'],
 		['codigo_rbd'],
 		['Nome', 'Código RBD'],
-		['situacaoFisica', 'geometriaAproximada', 'concessionaria', 'canteiroDivisorio', 'nrPistas', 'nrFaixas', 'codigo', 'id_3', 'id', 'jurisdicao', 'situacao', 'shape_leng', 'trecho', 'inicio', 'fim', 'revestimento', 'administracao', 'operacional', 'tipoVia', 'tipoPavimentacao', 'trafego']
+		['situacaoFisica', 'geometriaAproximada', 'concessionaria', 'canteiroDivisorio', 'nrPistas', 'nrFaixas', 'codigo', 'jurisdicao', 'situacao', 'shape_leng', 'trecho', 'inicio', 'fim', 'revestimento', 'administracao', 'operacional', 'tipoVia', 'tipoPavimentacao', 'trafego']
 		)
 	,
 
@@ -88,9 +88,9 @@ var vetorOverlay =  [
 		 'bomdespacho:CBGE_Trecho_Arruamento',
 		 'Malha Viária',
 		 ['tipo', 'nome_logradouro'],
-		 [ 'codigo'],
-		 ['Tipo', 'Nome', 'Código do Logradouro'],
-		 ['secao_d','secao_e']
+		 ['codigo', 'id'],
+		 ['Tipo', 'Nome', 'Código do Logradouro', 'Identificação'],
+		 ['secao_d','secao_e', 'nome']
 		)
 	,
 	parametros_tra_trecho_rodoviario =new overlay(
@@ -98,8 +98,8 @@ var vetorOverlay =  [
 	    'bomdespacho:TRA_Trecho_Rodoviario',
 	    'Malha Viária',
 		['nome'],
-		['codTrechoRod'],
-		['Nome', 'Código do Trecho Federal ou Estadual'],
+		['codTrechoRod', 'id'],
+		['Nome', 'Código do Trecho Federal ou Estadual', 'Identificação'],
 		['jurisdicao', 'administracao', 'concessionaria', 'revestimento', 'operacional', 'situacaoFisica', 'canteiroDivisorio', 'trafego', 'tipoPavimentacao', 'tipoVia', 'trechoEmPerimetroUrbano', 'acostamento' ]
 		)
 	 ,
@@ -177,8 +177,9 @@ var vetorOverlay =  [
 		'bomdespacho:LML_Localidade',
 		'Malha Viária',
 		['nome'],
-		[],
-		['Nome']
+		['id'],
+		['Nome', 'Identificação'],
+		['geocodigo']
 	),
 
 	parametro_tra_quilometragem = new overlay(
