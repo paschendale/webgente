@@ -44,7 +44,7 @@ body,
 	margin-left: 8%; 
 	margin-top: 1%; 
 	/*width: auto;*/
-	max-width: 420px;
+	max-width: 470px;
 	min-width: 20px;
 
 	height: auto;
@@ -56,14 +56,16 @@ body,
 }
 #tabela_pesquisa{
 	margin: 0px 0px 0px 0px;
+	width: auto;
 }
 #conteudo{
 	width: auto;
 }
 #resultado_pesquisa{
-	width: 350px;
+	/*width: 350px;*/
+	width: auto;
 	height: auto;
-	max-height: 360px;
+	max-height: 370px;
 	overflow-y: auto;
 }
 #propriedades{
@@ -92,7 +94,7 @@ input, select{
 	box-shadow: 3px 1px lightblue;
 }
 
-table {width:280px;text-align:left;vertical-align:center;padding: 15px;border-bottom: 1px solid #ddd;font-family: Tahoma, Geneva, sans-serif;}
+table {width:280px; text-align:center; vertical-align:center;padding: 15px;border-bottom: 1px solid #ddd;font-family: Tahoma, Geneva, sans-serif;}
 td,th {border-bottom: 1px solid #ddd;padding: 7px;}
 tr:hover {background-color: #f5f5f5;}
 th {background-color: #f5f5f5;}
@@ -108,11 +110,11 @@ th {background-color: #f5f5f5;}
 
 
 @media(max-width: 576px){
-	table {width: 223px; text-align:left; vertical-align:center; padding: 1px; border-bottom: 1px solid #ddd; font-family: Tahoma, Geneva, sans-serif;}
-	td,th {border-bottom: 1px solid #ddd; padding: 1px; font-size: 11px; width: 10px;}
+	table {width: auto; text-align:center; vertical-align:center; padding: 1px; border-bottom: 1px solid #ddd; font-family: Tahoma, Geneva, sans-serif;}
+	td,th {border-bottom: 1px solid #ddd; padding: 1px; font-size: 11px; /*width: 10px;*/}
 	#barra-de-pesquisa{
 		opacity: 1.0; 
-		width: 240px;
+		width: auto;
 		position: absolute; 
 		margin-left: 5%; 
 		margin-top: 3%; 
@@ -126,6 +128,9 @@ th {background-color: #f5f5f5;}
 	}
 	#resultado_pesquisa{
 		width: auto;
+	}
+	#tabela_pesquisa{
+		width: 240px;
 	}
 	#img_fechar{
 		margin-left: 90%;
