@@ -36,8 +36,9 @@ function link_shp (i){
 function exibe_propriedades_tabela(i){
 
     var response=tabela.features[i];
-	var resposta = document.getElementById("conteudo");
-	
+    
+	var consulta = document.getElementById("conteudo");
+
 	//variaveis que o tipo de usuário não pode ter acesso são excluídas com o método abaixo
 	response.properties= restrictedAtributes(response.properties,layerF.layers);
     var chaves = Object.keys(response.properties);
@@ -50,25 +51,22 @@ function exibe_propriedades_tabela(i){
     	linhas+=`<td>`+response.properties[campos]+`</td>`;	
     	linhas+=`\n`;	
 	}	
-	
-    resposta.innerHTML = `
-        <div class="row">
-            <div id="propriedades">
-                <table id="tabela-rua">
-                <div id="img_fechar"><img src="img/botao-fechar.jpg" onclick="fecharTabela(-1)"></div>
-                    <tr>
-                        `+colunas+`
-                        <th> Donwload </th>
-                    </tr>
-                    <tr>
+
+    consulta.innerHTML = `
+        <div id="img_fechar"><img src="img/botao-fechar.jpg" onclick="opcoes(-1)"></div>
+            <table id="tabela_propriedades">
+                <tr>
+                    `+colunas+`
+                    <th> Donwload </th>
+                </tr>
+                <tr>
                     `+linhas+`
                     <td> <img src="img/donwload.png" onclick="link_shp(`+i+`)"></td>  
-                    </tr>
-                </table>
-            </div>
-       </div>
-    `;
-   
+                </tr>
+            </table>
+        </div>
+            
+    `;  
 }
 
 function coordFail(coord){
