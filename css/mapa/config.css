@@ -33,9 +33,17 @@ body,
 	margin-left: 93%;
 }
 #tabela_propriedades{
+	background-color: #FFFFFF;
 	overflow-y: auto;
-	height: 180px; 
 	padding: 0;
+}
+#propriedades{
+	background-color: #FFFFFF;
+	opacity: 0.9; 
+	position: absolute; 
+	border: solid black 1px;
+	margin-left: 58%; 
+	margin-top: 1%; 
 }
 #barra-de-pesquisa{
 	background-color: #FFFFFF;
@@ -53,6 +61,9 @@ body,
 	z-index: 20000;
 	border: solid lightgrey 2px;
 	border-radius: 0px;
+	overflow: auto;
+	resize: both;
+  
 }
 #tabela_pesquisa{
 	margin: 0px 0px 0px 0px;
@@ -67,11 +78,6 @@ body,
 	height: auto;
 	max-height: 370px;
 	overflow-y: auto;
-}
-#propriedades{
-	background-color: #FFFFFF;
-	opacity: 0.9; 
-	position: absolute; 
 }
 
 
@@ -95,7 +101,7 @@ input, select{
 }
 
 table {width:280px; text-align:center; vertical-align:center;padding: 15px;border-bottom: 1px solid #ddd;font-family: Tahoma, Geneva, sans-serif;}
-td,th {border-bottom: 1px solid #ddd;padding: 7px;}
+td,th {border-bottom: 1px solid #ddd;padding: 5px;}
 tr:hover {background-color: #f5f5f5;}
 th {background-color: #f5f5f5;}
 
@@ -114,13 +120,15 @@ th {background-color: #f5f5f5;}
 	td,th {border-bottom: 1px solid #ddd; padding: 1px; font-size: 11px; /*width: 10px;*/}
 	#barra-de-pesquisa{
 		opacity: 1.0; 
-		width: auto;
+		width: 240px;
 		position: absolute; 
 		margin-left: 5%; 
 		margin-top: 3%; 
 		/*width: 240px; */
 		z-index: 2000;
 		margin-left: 20%;
+		
+		
 	}
 	#barra-rua{
 		margin-top: 50%;
@@ -135,5 +143,13 @@ th {background-color: #f5f5f5;}
 	#img_fechar{
 		margin-left: 90%;
 	}
+	#tabela_propriedades{
+		/*width: 150px;*/
+		width: auto;
+	}
+	#conteudo{
+		overflow-x: auto;
+	}
 }
+
 
