@@ -61,6 +61,9 @@ body,
 	z-index: 20000;
 	border: solid lightgrey 2px;
 	border-radius: 0px;
+	overflow: auto;
+	resize: both;
+  
 }
 #tabela_pesquisa{
 	margin: 0px 0px 0px 0px;
@@ -124,6 +127,8 @@ th {background-color: #f5f5f5;}
 		/*width: 240px; */
 		z-index: 2000;
 		margin-left: 20%;
+		
+		
 	}
 	#barra-rua{
 		margin-top: 50%;
@@ -146,4 +151,5 @@ th {background-color: #f5f5f5;}
 		overflow-x: auto;
 	}
 }
+
 
