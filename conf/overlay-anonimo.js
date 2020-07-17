@@ -147,9 +147,9 @@ var vetorOverlay =  [
 		'bomdespacho:TRA_Ponte',
 		'Malha Viária',
 		['tipoponte'],
-		['id_0'],
+		['id'],
 		['Tipo de Ponte', 'Identificação'],
-		['id', 'descricao', 'vaolivreho', 'vaovertica', 'cargasupor', 'geom']
+		['descricao', 'vaolivreho', 'vaovertica', 'cargasupor', 'geom']
 	),
 
 	parametros_lml_cidade = new overlay(
@@ -169,7 +169,7 @@ var vetorOverlay =  [
 		['nome'],
 		[],
 		['Nome'],
-		['id_2', 'id_1', 'id_0', 'geometriaAproximada', 'geocodigo', 'anoDeReferencia']
+		['geometriaAproximada', 'geocodigo', 'anoDeReferencia']
 	),
 
 	parametro_lml_localidade = new overlay(
