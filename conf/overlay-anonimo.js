@@ -64,7 +64,7 @@ var vetorOverlay =  [
 	
 	parametros_cbge_lotes = new overlay(
 		'Lotes',
-		'bomdespacho:CBGE_Lotes_Cadastral',
+		'bomdespacho:CBGE_Lotes',
 		'Cadastro Urbano',
 		[],
 		['distrito','setor','quadra','lote'],
