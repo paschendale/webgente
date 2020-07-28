@@ -10,9 +10,8 @@ function fecharTabela(){
 function link_shp (i){
     var response= tabela.features[i];
     response.properties= restrictedAtributes(response.properties,layerF.layers);
-    var chaves = Object.keys(response.properties);  
-    
-
+    var chaves = Object.keys(response.properties);
+    chaves.unshift("geom");
     var cql_filtro = filtro(layerF,response.properties);
     var defaultParameters = {
         service : 'WFS',
@@ -21,7 +20,7 @@ function link_shp (i){
         typeName :  layerF.layers,
         outputFormat : 'shape-zip',
         format_options : 'callback:getJson',
-       // propertyName:  chaves,
+        propertyName: chaves,
         SrsName : 'EPSG:4326',
         cql_filter: cql_filtro
         //Cql filter adicionado também na requisição wfs
@@ -153,7 +152,8 @@ function filtro (camadaFiltrada, objPesquisa){
        
        cql_filtro+=(resp!="" & cql_filtro!="")? " and ": "";
         if(camadaFiltrada.numeric.indexOf(campo)==-1){
-            cql_filtro+=(resp!="" && resp!=null)?("("+campo+" LIKE "+ " '%"+(resp.toLowerCase())+"%' or "+campo+" LIKE "+ " '%"+(resp.toUpperCase())+"%') " ):"";
+        
+            cql_filtro+=(resp!="" && resp!=null)?("("+campo+" LIKE "+ " '%"+resp+"%' or "+campo+" LIKE "+ " '%"+(resp.toLowerCase())+"%' or "+campo+" LIKE "+ " '%"+(resp.toUpperCase())+"%') " ):"";
        }else{
             cql_filtro+=(resp!="")?(campo+" = "+ ""+resp+" "):"";
         }

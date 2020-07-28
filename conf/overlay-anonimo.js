@@ -75,9 +75,9 @@ var vetorOverlay =  [
 		'Quadras',
 		'bomdespacho:CBGE_Quadras',
 		'Cadastro Urbano',
-		['unificada com'],
+		[],
 		['distrito','setor','quadra'],
-		['Unificada com quadra:', 'Distrito','Setor','Quadra'],
+		['Distrito','Setor','Quadra'],
 		['resp_vetorizacao', 'status_vetorizacao']
 		)
 	,
