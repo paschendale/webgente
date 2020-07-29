@@ -25,7 +25,7 @@ function main(){
     var homeBut = L.easyButton('<img src="img/home.png">', function(btn, map){
         var initial = [init.latitude,init.longitude];
         map.setView(initial,init.zoomInicial);
-    }).addTo(myMapa.getMapa());
+    },'Voltar o mapa à vista inicial').addTo(myMapa.getMapa());
 
 
     //Adicionando o botao de visualizar informacoes com dois estados
@@ -34,7 +34,7 @@ function main(){
         states: [{
                     stateName: 'information_disabled',
                     icon:      '<img src="img/information_active.png">',
-                    title:     'Ativa o popup de informações',   
+                    title:     'Habilita a ferramenta de visualização de informações das camadas',   
                     onClick: function(btn) {       
                         informacao.state('information_enabled');
                         btn.state('information_enabled');  
@@ -43,7 +43,7 @@ function main(){
                 }, {
                     stateName: 'information_enabled',   
                     icon:      '<img src="img/information_desactive.png">',               
-                    title:     'Desativa o popup de informações',
+                    title:     'Desabilita a ferramenta de visualização de informações das camadas',
                     onClick: function(btn) {
                         informacao.state('information_disabled');
                         btn.state('information_disabled'); 
@@ -105,13 +105,13 @@ function main(){
 
     var pesquisas = L.easyButton('<img src="img/lupa.png">', function(){
         barraPesquisas();
-    }).addTo(myMapa.getMapa());
+    },'Habilitar ferramenta de pesquisa por atributo nas camadas').addTo(myMapa.getMapa());
 
     // Cria botao para ativar as ferramentas de desenho
 
     var ferramentas = L.easyButton('<img src="img/engineer.png">', function(){
         barraEdicao();
-    }).addTo(myMapa.getMapa());
+    },'Habilitar ferramentas de desenho no mapa').addTo(myMapa.getMapa());
 
     
 }
