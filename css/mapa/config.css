@@ -63,13 +63,38 @@ body,
 	border-radius: 0px;
 	overflow: auto;
 	resize: both;
-  
+
+}
+#barraPesquisa{ /* Seletor da camada pesquisável */
+	margin: 5px 5px;
+	box-sizing: border-box;
+	border-radius: 4px;
+	border-style: solid;
+	box-shadow: inset 0px 0px 0px 0px red;
+	border: solid lightgrey 2px;
+}
+#botao-ok{
+	background-color: #e6e6e6; /* Green */
+	border: solid lightgrey 0px;
+	border-radius: 10px
+	color: white;
+	padding: 3px 5px;
+	margin: 2px 2px 2px 2px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	box-shadow: inset 0px 0px 0px 0px red;
+	font-size: 14px;
+}
+#botao-ok:hover{
+	background: #8c8c8c;
 }
 #tabela_pesquisa{
 	margin: 0px 0px 0px 0px;
 	width: auto;
 }
 #conteudo{
+	margin: 5px 5px;
 	width: auto;
 }
 #resultado_pesquisa{

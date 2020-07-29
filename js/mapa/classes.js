@@ -57,7 +57,7 @@ class mapa{
 			menu = document.getElementById("barraPesquisas");
 
 			//Formulário dinâmico mostrado quando o usuário seleciona a opção de "Barra de Pesquisa"
-			var camadasPesquisaveis=`<option value="-1"> </option`;
+			var camadasPesquisaveis=`<option value="-1"> </option><option selected disabled hidden>Nada selecionado</option`;
 			var obj_camada;
 			//As abas de pesquisas são definidas de acordo com as camadas que possuem campos pesquisáveis definidos em prop_query 
 			
@@ -77,8 +77,8 @@ class mapa{
 			menu.innerHTML = `
 				<div class="row">
 				  	<div id="barra-de-pesquisa">
+				  		<p style="margin:5px 5px;font-weight:bold">Selecione uma camada para realizar a pesquisa:</p>
 						<select id="barraPesquisa" onchange="opcoes()">` + camadasPesquisaveis + `</select>
-						<br>
 						<div id="conteudo"></div>
 					</div>
 				</div>

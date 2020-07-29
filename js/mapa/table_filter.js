@@ -52,11 +52,11 @@ function exibe_propriedades_tabela(i){
 	}	
 
     consulta.innerHTML = `
-        <div id="img_fechar"><img src="img/botao-fechar.jpg" onclick="opcoes(-1)"></div>
+        <div id="img_fechar"><img src="img/left-arrow.png" alt="Voltar ao painel de pesquisas" onclick="opcoes(-1)"></div>
             <table id="tabela_propriedades">
                 <tr>
                     `+colunas+`
-                    <th> Donwload </th>
+                    <th> Download </th>
                 </tr>
                 <tr>
                     `+linhas+`
@@ -220,7 +220,7 @@ function consultaFiltro (camadaFiltrada){
 
     				var consulta_html_01 = `
     				<div id="resultado_pesquisa">
-    				<div id="img_fechar"><img src="img/botao-fechar.jpg" onclick="opcoes(-1)"></div>
+    				<div id="img_fechar"><img src="img/left-arrow.png" alt="Voltar ao painel de pesquisas" onclick="opcoes(-1)"></div>
     					<table id="tabela_pesquisa">
     						<tr>
     					      	`+coluna+`
