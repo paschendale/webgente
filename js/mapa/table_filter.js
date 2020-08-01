@@ -186,6 +186,7 @@ function consultaFiltro (camadaFiltrada){
         vetorLayer.unshift(source.getLayer(layerF.layers));
         vetorLayer[0].addTo(myMapa.getMapa());
 		var cql_filtro=filtro(camadaFiltrada,null);    
+
       
     //Requisição WFS para buscar os dados a serem mostrados na tabela
     var defaultParameters = {
@@ -201,7 +202,12 @@ function consultaFiltro (camadaFiltrada){
     };
 
     var parameters = L.Util.extend(defaultParameters);
-    var URL = "https://geoserver.genteufv.com.br/geoserver/ows" + L.Util.getParamString(parameters);
+
+    var URL = "https://geoserver.genteufv.com.br/geoserver/ows" + L.Util.getParamString(parameters) + "&format_options=CHARSET:UTF-8";
+
+    //Descomente linha abaixo e comente o cql_filter em "defaultParametes" para resolver o problema de acentuação
+    //var URL = "https://geoserver.genteufv.com.br/geoserver/ows" + L.Util.getParamString(parameters) + "&cql_filter(" + cql_filtro +")";
+
     var xhr = $.ajax({
         url: URL,
         dataType: 'jsonp', 
