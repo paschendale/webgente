@@ -3,6 +3,7 @@ var layerF;
 var vetorLayer= new Array();
 var link="";
 
+
 function fecharTabela(){
     var tabelaExibicao = document.getElementById("conteudo");
     tabelaExibicao.innerHTML = "";
@@ -47,7 +48,13 @@ function exibe_propriedades_tabela(i){
 	for( campos of chaves ){
         colunas+= `<th>`+campos+`</th>`;   
         colunas+=`\n`;
-    	linhas+=`<td>`+response.properties[campos]+`</td>`;	
+        if(campos == 'path_folder'){
+        	linhas+=`<td> <img src="img/folder.png" onClick="window.open('`+response.properties[campos]+`')"</td>`;
+        }else{
+
+        	linhas+=`<td>`+response.properties[campos]+`</td>`;	
+        }
+    	
     	linhas+=`\n`;	
 	}	
 
