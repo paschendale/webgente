@@ -39,6 +39,16 @@ var vetorOverlay =  [
 		)
 	,
 
+	parametros_mub_panoramas = new overlay(
+		'Geocodificacao',
+		'bomdespacho:CAD_Geocodificacao',
+		'Cadastro Urbano',
+		[],
+		[],
+		[]
+		)
+	,
+
 
 	parametros_tra_vias_deslocamento = new overlay(
 		'Rodovias Municipais',

@@ -41,8 +41,12 @@ function properties2table (objeto){
     for (var property in objeto) {
     if (!objeto.hasOwnProperty(property)) continue;
 
-    tb_data = '<tr><td>'+property+'</td><td>'+objeto[property]+'</td></tr>';
-     
+    if (property == 'path_folder') {
+        tb_data = '<tr><td>Arquivos associados</td><td><a href="'+ objeto[property]+'" target="_blank"><img alt="Acessar o sistema Alfresco" src="img/folder.png"></a></td></tr>';
+    } else {
+        tb_data = '<tr><td>'+property+'</td><td>'+objeto[property]+'</td></tr>';
+    }
+
     tb_data_acum = tb_data_acum+tb_data;     
         
     };
