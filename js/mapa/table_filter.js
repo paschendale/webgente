@@ -22,13 +22,11 @@ function link_shp (i){
         outputFormat : 'shape-zip',
         format_options : 'callback:getJson',
         propertyName: chaves,
-        SrsName : 'EPSG:4326',
-        cql_filter: cql_filtro
-        //Cql filter adicionado também na requisição wfs
+        SrsName : 'EPSG:4326'
     };
 
     var parameters = L.Util.extend(defaultParameters);
-    var URL = "https://geoserver.genteufv.com.br/geoserver/ows" + L.Util.getParamString(parameters);
+    var URL = "https://geoserver.genteufv.com.br/geoserver/ows" + L.Util.getParamString(parameters) + "&cql_filter(" + cql_filtro +")";
    window.open(URL);
     
     }
@@ -63,11 +61,11 @@ function exibe_propriedades_tabela(i){
             <table id="tabela_propriedades">
                 <tr>
                     `+colunas+`
-                    <th> Download </th>
+                    
                 </tr>
                 <tr>
                     `+linhas+`
-                    <td> <img src="img/donwload.png" onclick="link_shp(`+i+`)"></td>  
+                   
                 </tr>
             </table>
         </div>
@@ -208,7 +206,7 @@ function consultaFiltro (camadaFiltrada){
     };
 
     var parameters = L.Util.extend(defaultParameters);
-    var URL = "https://geoserver.genteufv.com.br/geoserver/ows" + L.Util.getParamString(parameters);
+    var URL = "https://geoserver.genteufv.com.br/geoserver/ows" + L.Util.getParamString(parameters) ;
     var xhr = $.ajax({
         url: URL,
         dataType: 'jsonp', 
@@ -232,6 +230,7 @@ function consultaFiltro (camadaFiltrada){
     						<tr>
     					      	`+coluna+`
                                 <th>Ver</th>
+                                <th>Download</th>
     					    </tr>
     				</div>
     				`;
@@ -250,8 +249,8 @@ function consultaFiltro (camadaFiltrada){
                         consulta_td  += linhas;
 
                         //Onclick chama duas funções
-                        consulta_td += '<td><img src="img/lupa.png" onclick="buscaVia('+i+'); exibe_propriedades_tabela('+i+')"></td></tr>'; 
-                        
+                        consulta_td += '<td><img src="img/lupa.png" onclick="buscaVia('+i+'); exibe_propriedades_tabela('+i+')"></td>'; 
+                        consulta_td+= `<td> <img src="img/donwload.png" onclick="link_shp(`+i+`)"></td> </tr>`; 
                     }
                     
                     var consulta_html_02  =`</table>
