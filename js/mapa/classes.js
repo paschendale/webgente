@@ -143,7 +143,34 @@ class mapa{
 				    if(type == 'polyline'){
 				    	var tamanho = e.layer._latlngs.length;
 				    	var coordenadas = "";
-				    	var area = "Colocar tamanho em m da polyline";
+
+				    	//Distância de exemplo
+                        var distanciaTeste = 0;
+
+				    	//Calculando na mão o tamanho em 'm' da polyline com base no algoritmo de geodésia (https://www.mapanet.eu/PT/resources/Script-Distance.htm)
+                        var tamanho = e.layer._latlngs.length;
+                        for(var i=0; i<tamanho; i++){
+                            if((i+1) < tamanho){
+
+                                var lat1 = e.layer._latlngs[i].lat;
+                                var lat2 = e.layer._latlngs[i+1].lat;
+
+                                var long1 =  e.layer._latlngs[i].lng;
+                                var long2 = e.layer._latlngs[i+1].lng;
+
+                                var r = 6378.137;
+
+                                var dLat = ((lat2 - lat1)*Math.PI/180);
+                                var dLong = ((long2 - long1)*Math.PI/180);
+
+                                var a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.cos(lat1*Math.PI/180) * Math.cos(lat2*Math.PI/180) * Math.sin(dLong/2) * Math.sin(dLong/2);
+                                var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+                                            
+                                distanciaTeste = distanciaTeste + c*r;
+                             }
+                        }
+
+				    	var area = distanciaTeste*1000;
 
 				    	for(var i=0; i<tamanho; i++){
 				    		if(i == tamanho-1){	
@@ -155,7 +182,7 @@ class mapa{
 				    	}
 				    	getJson = `{ "type": "Feature", "geometry" : { "type" : "LineString", "coordinates" : [` + coordenadas + `] }, "properties" : { "area" : "` + area + `"} }`;  
 				    	
-				    	layer.bindPopup('Área aproximada: ' + area + ' m <br><br><button type="button" id="create" onclick="gerarTXT()">Download (duplo clique)</button><a download="coordenadasLinha.json" id="downloadlink" style="display: none">Clique aqui</a>');
+				    	layer.bindPopup('Área aproximada: ' + area.toFixed(2) + ' m <br><br><button type="button" id="create" onclick="gerarTXT()">Download (duplo clique)</button><a download="coordenadasLinha.json" id="downloadlink" style="display: none">Clique aqui</a>');
 
 				    }
 				    if(type == 'marker'){
@@ -199,41 +226,30 @@ class mapa{
 
 	//Plugin para exportar o mapa
 	//imprime o mapa diretamento no navegador 
+	//https://github.com/Igor-Vladyka/leaflet.browser.print
 	exportar(){
-		var customActionToPrint = function(context, mode) {
-			return function() {
-				window.alert("We are printing the MAP. Let's do Custom print here!");
-				context._printCustom(mode);
-			}
-		}
 		L.control.browserPrint({
-			title: 'Impressão',
-			documentTitle: 'Mapa download',
-			//Usa o endereço da Tile para exibir o mapa de impressão
-			printLayer: L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',{
-							attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-							subdomains: 'abcd',
-							minZoom: 1,
-							maxZoom: 16,
-							ext: 'jpg'
-						}),
-			closePopupsOnPrint: false,
+			documentTitle: "WebGENTE-Download",
 			printModes: [
-				L.control.browserPrint.mode.landscape("TABLOID VIEW", "tabloid"),
-				L.control.browserPrint.mode("Alert", "User specified print action", "A6", customActionToPrint, false),
-				L.control.browserPrint.mode.landscape(),
-				"Portrait",
-				L.control.browserPrint.mode.auto("Automatico", "B4"),
-				L.control.browserPrint.mode.custom("Selecione a área", "B5")
-			],
-			manualMode: true
+				L.control.browserPrint.mode.landscape("Imagem em tela"),
+				L.control.browserPrint.mode.custom("Seleção da imagem", "A4")
+			]
 		}).addTo(this.mapa);
+
+		window.print = function (){
+				return domtoimage
+						.toPng(document.querySelector(".grid-print-container"))
+						.then(function (dataUrl) {
+							var link = document.createElement('a');
+							link.download = 'WebGENTE-Download.png';
+							link.href = dataUrl;
+							link.click();
+						});
+		};
 	}
+
 }
  
-
-
-
 class wmsCamada{
 	//public
 	constructor(objetoCamada){

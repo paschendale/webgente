@@ -1,0 +1,9 @@
+*Necessário instalar o XAMPP (https://www.apachefriends.org/download.html)
+
+Após o download, instale o XAMPP e start o Apache e o MySQL.
+Em localhost/phpmyadmin clique em New, defina um nome para a base de dados e clique em "Criar"
+Após selecionar o banco de dados, clique em "SQL"
+Insira todo o texto contido no arquivo "esquema-bd.txt"
+Pronto. A tabela "usuario" está criada e pronto para receber os dados cadastrados pelo administrador do sistema.
+
+Obs: O nome da base de dados deve ser o mesmo definido no arquivo conf/conexao.php
