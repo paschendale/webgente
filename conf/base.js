@@ -37,4 +37,20 @@ var vetorBasemap = [
         attribution: 'Mapa Base do Cadastro Territorial elaborado pelo GENTE em 2020'
     }
 ];
+
+var vetorMDE = [
+    parametros_mde = {
+        nome: 'Modelo Digital de Elevação',
+        host: 'https://geoserver.genteufv.com.br/geoserver/ows?',
+        padrao: false,
+        maxZoom: 22,
+        layers: 'bomdespacho:mde_bomdespacho',
+        mde: true,
+        format: 'image/png',
+        transparent: false,
+        tiled: true,
+        attribution: 'Mapa Base do Cadastro Territorial elaborado pelo GENTE em 2020'
+    }
+];
+
     
