@@ -2,32 +2,35 @@ var tabela= "";
 var layerF;
 var vetorLayer= new Array();
 var link="";
-
+var filtrado=new Array();
+var chaves= "";
 
 function fecharTabela(){
     var tabelaExibicao = document.getElementById("conteudo");
     tabelaExibicao.innerHTML = "";
 }
-function link_shp (i){
-    var response= tabela.features[i];
-    response.properties= restrictedAtributes(response.properties,layerF.layers);
-    var chaves = Object.keys(response.properties);
-    chaves.unshift("geom");
-    var cql_filtro = filtro(layerF,response.properties);
+
+function link_shp (i, formato){
+//Exportar resultar em shp, gml e scv
+	chaves.unshift("geom");
     var defaultParameters = {
         service : 'WFS',
         version : '1.0.0',
         request : 'GetFeature',
         typeName :  layerF.layers,
-        outputFormat : 'shape-zip',
+        outputFormat : formato,
         format_options : 'callback:getJson',
         propertyName: chaves,
-        SrsName : 'EPSG:4326'
+        SrsName : 'EPSG:4326',
+        cql_filter: filtrado[i]
     };
-
+ 
     var parameters = L.Util.extend(defaultParameters);
-    var URL = "https://geoserver.genteufv.com.br/geoserver/ows" + L.Util.getParamString(parameters) + "&cql_filter(" + cql_filtro +")";
+   var URL = "https://geoserver.genteufv.com.br/geoserver/ows" + L.Util.getParamString(parameters);
+ 
    window.open(URL);
+   chaves.splice(0,1);
+  
     
     }
 
@@ -38,8 +41,7 @@ function exibe_propriedades_tabela(i){
 	var consulta = document.getElementById("conteudo");
 
 	//variaveis que o tipo de usuário não pode ter acesso são excluídas com o método abaixo
-	response.properties= restrictedAtributes(response.properties,layerF.layers);
-    var chaves = Object.keys(response.properties);
+	
     var colunas="";
 	var linhas="";
     
@@ -115,7 +117,7 @@ function buscaVia(posicao){
 	}
 
 
-	var cql_filtro = filtro(layerF,tabela.features[posicao].properties);
+	filtro(posicao);
 	
 	source = L.WMS.source(overlayHost, {
 		            opacity: 1,
@@ -125,9 +127,10 @@ function buscaVia(posicao){
 		            transparent: true,
 		            format: 'image/png',
                     output_format:'shape-zip',
-		            cql_filter:cql_filtro,
+		            cql_filter:filtrado[1],
 		            styles: selecao
 		        });
+	
 	vetorLayer.unshift(source.getLayer(layerF.layers));
      vetorLayer[0].addTo(myMapa.getMapa());
     
@@ -136,13 +139,13 @@ function buscaVia(posicao){
 }
 
 
-function filtro (camadaFiltrada, objPesquisa){
+function filtro ( objPesquisa){
 //Recebe a camada de pesquisa e concatena uma string com o conteúdo do cql_filter 
     var cql_filtro="";
-    for(campo of camadaFiltrada.prop_query){
+    for(campo of layerF.prop_query){
 
 
-        var tipo_texto=(objPesquisa==null)?  document.getElementById(campo).value: objPesquisa[campo];
+        var tipo_texto=(objPesquisa==null)?  document.getElementById(campo).value: tabela.features[objPesquisa].properties[campo];
 
         //Possíveis variações que o usuário pode digitar
         if(tipo_texto == 'praça' || tipo_texto == 'praca' || tipo_texto == 'Praca' || tipo_texto == 'Praça' || tipo_texto == 'PRACA' || tipo_texto == 'PRAÇA'){
@@ -156,7 +159,7 @@ function filtro (camadaFiltrada, objPesquisa){
         
        
        cql_filtro+=(resp!="" & cql_filtro!="")? " and ": "";
-        if(camadaFiltrada.numeric.indexOf(campo)==-1){
+        if(layerF.numeric.indexOf(campo)==-1){
         
             cql_filtro+=(resp!="" && resp!=null)?("("+campo+" LIKE "+ " '%"+resp+"%' or "+campo+" LIKE "+ " '%"+(resp.toLowerCase())+"%' or "+campo+" LIKE "+ " '%"+(resp.toUpperCase())+"%') " ):"";
        }else{
@@ -164,7 +167,11 @@ function filtro (camadaFiltrada, objPesquisa){
         }
 	}
 	
-return cql_filtro;
+if(objPesquisa==null){
+	filtrado[0]=cql_filtro;
+}else{
+	filtrado[1]=cql_filtro;
+}
 
 }
 
@@ -190,8 +197,8 @@ function consultaFiltro (camadaFiltrada){
         layerF=camadaFiltrada;
         vetorLayer.unshift(source.getLayer(layerF.layers));
         vetorLayer[0].addTo(myMapa.getMapa());
-		var cql_filtro=filtro(camadaFiltrada,null);    
-      
+		filtro(null);    
+      	
     //Requisição WFS para buscar os dados a serem mostrados na tabela
     var defaultParameters = {
         service : 'WFS',
@@ -201,7 +208,7 @@ function consultaFiltro (camadaFiltrada){
         outputFormat : 'text/javascript',
         format_options : 'callback:getJson',
         SrsName : 'EPSG:4326',
-        cql_filter: cql_filtro
+        cql_filter: filtrado[0]
         //Cql filter adicionado também na requisição wfs
     };
 
@@ -215,17 +222,23 @@ function consultaFiltro (camadaFiltrada){
             success: function (response){
             	//Transforma o response em variavel global por meio da variavel tabela
                 tabela=response;
-
+                chaves = Object.keys(restrictedAtributes(tabela.features[0].properties,layerF.layers));
+               
                     var consulta = document.getElementById("conteudo");
                     var coluna="";
                     for (campos of layerF.prop_query){
                           coluna+= `<th>`+layerF.prop_alternative[layerF.prop_query.indexOf(campos)]+`</th>`
                           coluna+=`\n`;
                     }    
-
+                    
+                    
     				var consulta_html_01 = `
     				<div id="resultado_pesquisa">
     				<div id="img_fechar"><img src="img/left-arrow.png" alt="Voltar ao painel de pesquisas" onclick="opcoes(-1)"></div>
+    				<button type="button" class="btn " onclick="link_shp(0,'shape-zip')" ><strong>SHP</strong></button>
+    				<button type="button"  class="btn " onclick="link_shp(0, 'csv' ) "><strong>CSV</strong></button>
+    				<button type="button"  class="btn " onclick="link_shp( 0,'GML3') "><strong>GML</strong></button>
+    				
     					<table id="tabela_pesquisa">
     						<tr>
     					      	`+coluna+`
@@ -234,7 +247,7 @@ function consultaFiltro (camadaFiltrada){
     					    </tr>
     				</div>
     				`;
-
+    	
     				var consulta_td = "";	      					
                     for(var i=0; i<response.features.length; i++){
                              consulta_td+="<tr>"; 
@@ -250,7 +263,7 @@ function consultaFiltro (camadaFiltrada){
 
                         //Onclick chama duas funções
                         consulta_td += '<td><img src="img/lupa.png" onclick="buscaVia('+i+'); exibe_propriedades_tabela('+i+')"></td>'; 
-                        consulta_td+= `<td> <img src="img/donwload.png" onclick="link_shp(`+i+`)"></td> </tr>`; 
+                        consulta_td+= `<td> <img src="img/donwload.png" onclick="filtro(`+i+`);link_shp(`+1+`,'shape-zip')"></td> </tr>`; 
                     }
                     
                     var consulta_html_02  =`</table>
