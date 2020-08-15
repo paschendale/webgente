@@ -113,5 +113,17 @@ function main(){
         barraEdicao();
     },'Habilitar ferramentas de desenho no mapa').addTo(myMapa.getMapa());
 
-    
+    var mapaDownload = L.easyPrint({
+            title: 'Download do mapa',
+            tileLayer: camadaOverlay,
+            sizeModes: ['Current'],
+            defaultSizeTitles: {Current: 'Tela Cheia'},
+            filename: 'WebGENTE-Download',
+            exportOnly: true,
+            hideControlContainer: true
+        }).addTo(myMapa.getMapa());
+
+    function manualPrint () {
+        printer.printMap('CurrentSize', 'MyManualPrint')
+    }
 }
