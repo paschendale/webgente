@@ -573,7 +573,7 @@
         options: {
             title: "Print map",
             position: "topleft",
-            sizeModes: ["Current"],
+            sizeModes: ["Current", "A4 Landscape", "A4 Portrait"],
             filename: "map",
             exportOnly: !1,
             hidden: !1,
@@ -610,6 +610,7 @@
                 this._addCss(), L.DomEvent.addListener(t, "mouseover", this._togglePageSizeButtons, this), L.DomEvent.addListener(t, "mouseout", this._togglePageSizeButtons, this);
                 var e = "leaflet-control-easyPrint-button";
                 this.options.exportOnly && (e += "-export"), this.link = L.DomUtil.create("a", e, t), this.link.id = "leafletEasyPrint", this.link.title = this.options.title, this.holder = L.DomUtil.create("ul", "easyPrintHolder", t), this.options.sizeModes.forEach(function(t) {
+                    
                     var e = L.DomUtil.create("li", "easyPrintSizeMode", this.holder);
                     e.title = t.name;
                     L.DomUtil.create("a", t.className, e);

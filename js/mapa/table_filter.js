@@ -1,9 +1,9 @@
-var tabela= "";
+var tabela = "";
 var layerF;
-var vetorLayer= new Array();
-var link="";
-var filtrado=new Array();
-var chaves= "";
+var vetorLayer = new Array();
+var link = "";
+var filtrado = new Array();
+var chaves = "";
 
 function fecharTabela(){
     var tabelaExibicao = document.getElementById("conteudo");
@@ -11,8 +11,9 @@ function fecharTabela(){
 }
 
 function link_shp (i, formato){
-//Exportar resultar em shp, gml e scv
+	//Exportar resultar em shp, gml e scv
 	chaves.unshift("geom");
+    
     var defaultParameters = {
         service : 'WFS',
         version : '1.0.0',
@@ -26,13 +27,11 @@ function link_shp (i, formato){
     };
  
     var parameters = L.Util.extend(defaultParameters);
-   var URL = "https://geoserver.genteufv.com.br/geoserver/ows" + L.Util.getParamString(parameters);
+   	var URL = "https://geoserver.genteufv.com.br/geoserver/ows" + L.Util.getParamString(parameters);
  
-   window.open(URL);
-   chaves.splice(0,1);
-  
-    
-    }
+   	window.open(URL);
+   	chaves.splice(0,1);
+}
 
 function exibe_propriedades_tabela(i){
 
@@ -63,15 +62,12 @@ function exibe_propriedades_tabela(i){
             <table id="tabela_propriedades">
                 <tr>
                     `+colunas+`
-                    
                 </tr>
                 <tr>
                     `+linhas+`
-                   
                 </tr>
             </table>
-        </div>
-            
+        </div> 
     `;  
 }
 
@@ -79,7 +75,8 @@ function coordFail(coord){
 	//função recursiva que extrai uma matriz de coordenadas
 	if(coord.length>1){
 		return coord;
-	}else{
+	}
+	else{
 		return coordFail(coord[0]);
 	}
 }
@@ -88,11 +85,12 @@ function buscaVia(posicao){
     //Usa a posição para retornar o objeto que vai ser filtrado e destacado
    
 	var coord= (tabela.features[posicao].geometry.coordinates[0]);
-	var lalo;
+	var lalo = "";
 	if(coord[0].length>1){
-	lalo= L.GeoJSON.coordsToLatLngs(coordFail(coord));
-	myMapa.getMapa().fitBounds(lalo).setZoom(17);
-	}else{ 
+		lalo= L.GeoJSON.coordsToLatLngs(coordFail(coord));
+		myMapa.getMapa().fitBounds(lalo).setZoom(17);
+	}
+	else{ 
 		lalo= L.GeoJSON.coordsToLatLng(coordFail(coord));
 		myMapa.getMapa().setView(lalo,17); 
 	}
@@ -132,18 +130,13 @@ function buscaVia(posicao){
 		        });
 	
 	vetorLayer.unshift(source.getLayer(layerF.layers));
-     vetorLayer[0].addTo(myMapa.getMapa());
-    
-
-
+    vetorLayer[0].addTo(myMapa.getMapa());
 }
 
-
-function filtro ( objPesquisa){
+function filtro (objPesquisa){
 //Recebe a camada de pesquisa e concatena uma string com o conteúdo do cql_filter 
     var cql_filtro="";
     for(campo of layerF.prop_query){
-
 
         var tipo_texto=(objPesquisa==null)?  document.getElementById(campo).value: tabela.features[objPesquisa].properties[campo];
 
@@ -156,7 +149,6 @@ function filtro ( objPesquisa){
         }
         
         var resp =tipo_texto ;
-        
        
        cql_filtro+=(resp!="" & cql_filtro!="")? " and ": "";
         if(layerF.numeric.indexOf(campo)==-1){
@@ -167,15 +159,13 @@ function filtro ( objPesquisa){
         }
 	}
 	
-if(objPesquisa==null){
-	filtrado[0]=cql_filtro;
-}else{
-	filtrado[1]=cql_filtro;
+	if(objPesquisa==null){
+		filtrado[0]=cql_filtro;
+	}
+	else{
+		filtrado[1]=cql_filtro;
+	}
 }
-
-}
-
-
 
 function consultaFiltro (camadaFiltrada){
  if(vetorLayer.length > 0){
@@ -213,7 +203,10 @@ function consultaFiltro (camadaFiltrada){
     };
 
     var parameters = L.Util.extend(defaultParameters);
-    var URL = "https://geoserver.genteufv.com.br/geoserver/ows" + L.Util.getParamString(parameters) ;
+    var URL = "https://geoserver.genteufv.com.br/geoserver/ows" + L.Util.getParamString(parameters);
+
+    console.log(URL);
+
     var xhr = $.ajax({
         url: URL,
         dataType: 'jsonp', 
@@ -279,15 +272,10 @@ function consultaFiltro (camadaFiltrada){
                         consulta_td += "<td></td><td> ERRO: NENHUM RESULTADO</td><td></td>";
                     consulta.innerHTML = consulta_html_01 + consulta_td + consulta_html_02;  
                     }
-    		     
             }
     });
 }
 
-
 function apagaLayers(layer){
-
 	myMapa.getMapa().removeLayer(layer);
-
 }
-
