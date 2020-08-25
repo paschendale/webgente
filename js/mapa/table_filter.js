@@ -35,9 +35,8 @@ function link_shp (i, formato){
     }
 
 function exibe_propriedades_tabela(i){
-
+	
     var response=tabela.features[i];
-    
 	var consulta = document.getElementById("conteudo");
 
 	//variaveis que o tipo de usuário não pode ter acesso são excluídas com o método abaixo
@@ -117,7 +116,6 @@ function buscaVia(posicao){
 	}
 
 
-	filtro(posicao);
 	
 	source = L.WMS.source(overlayHost, {
 		            opacity: 1,
@@ -126,7 +124,6 @@ function buscaVia(posicao){
 		            "info_format": "application/json",
 		            transparent: true,
 		            format: 'image/png',
-                    output_format:'shape-zip',
 		            cql_filter:filtrado[1],
 		            styles: selecao
 		        });
@@ -142,11 +139,12 @@ function buscaVia(posicao){
 function filtro ( objPesquisa){
 //Recebe a camada de pesquisa e concatena uma string com o conteúdo do cql_filter 
     var cql_filtro="";
+ 
+ 	 
+   
+   if(objPesquisa==null){
     for(campo of layerF.prop_query){
-
-
-        var tipo_texto=(objPesquisa==null)?  document.getElementById(campo).value: tabela.features[objPesquisa].properties[campo];
-
+    	var tipo_texto=document.getElementById(campo).value;
         //Possíveis variações que o usuário pode digitar
         if(tipo_texto == 'praça' || tipo_texto == 'praca' || tipo_texto == 'Praca' || tipo_texto == 'Praça' || tipo_texto == 'PRACA' || tipo_texto == 'PRAÇA'){
             tipo_texto = 'pca'
@@ -166,12 +164,14 @@ function filtro ( objPesquisa){
             cql_filtro+=(resp!="")?(campo+" = "+ ""+resp+" "):"";
         }
 	}
-	
-if(objPesquisa==null){
 	filtrado[0]=cql_filtro;
 }else{
-	filtrado[1]=cql_filtro;
-}
+		cql_filtro+="id = "+  tabela.features[objPesquisa].properties['id'];
+		filtrado[1]=cql_filtro;
+
+	}
+	
+
 
 }
 
@@ -262,8 +262,9 @@ function consultaFiltro (camadaFiltrada){
                         consulta_td  += linhas;
 
                         //Onclick chama duas funções
-                        consulta_td += '<td><img src="img/lupa.png" onclick="buscaVia('+i+'); exibe_propriedades_tabela('+i+')"></td>'; 
-                        consulta_td+= `<td> <img src="img/donwload.png" onclick="filtro(`+i+`);link_shp(`+1+`,'shape-zip')"></td> </tr>`; 
+                        consulta_td += '<td><img src="img/lupa.png" onclick="filtro('+i+');buscaVia('+i+'); exibe_propriedades_tabela('+i+')"></td>'; 
+                        consulta_td+= `<td> <img src="img/donwload.png" onclick="filtro(`+i+`);link_shp(`+1+`,'shape-zip')"></td> </tr>`;
+
                     }
                     
                     var consulta_html_02  =`</table>
