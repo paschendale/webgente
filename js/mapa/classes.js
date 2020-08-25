@@ -94,6 +94,20 @@ class mapa{
 		}
 	}
 
+	exportar(){
+		domtoimage.toJpeg(document.getElementById('mapa'), {
+				quality: 0.95,
+				width: 1400,
+				height: 605
+			 })
+		    .then(function (dataUrl) {
+		        var link = document.createElement('a');
+		        link.download = 'WebGENTE-mapa.jpeg';
+		        link.href = dataUrl;
+		        link.click();
+		    });
+	}
+
 	//Plugin para desenhar as geometrias
 	barraEdicao(valor){
 		if(valor == true){
@@ -132,14 +146,14 @@ class mapa{
 			            featureGroup: drawnItems,
 			            remove: true
 			        }
-			    });
+			});
 			    
-			    this.mapa.addControl(drawControl);
+			this.mapa.addControl(drawControl);
 
 			    //Texto mostrado quando o usuário clica na geometria desenhada
-			    this.mapa.on('draw:created', function(e){ 
-				    var type = e.layerType,
-				               layer = e.layer;
+			this.mapa.on('draw:created', function(e){ 
+				var type = e.layerType,
+				           ayer = e.layer;
 				    if(type == 'polyline'){
 				    	var tamanho = e.layer._latlngs.length;
 				    	var coordenadas = "";
@@ -215,39 +229,13 @@ class mapa{
 				
 				});
 			
-			}else if(valor == false){
+			}
+			else if(valor == false){
 				this.mapa.removeControl(drawControl);
 				this.mapa.removeLayer(drawnItems);
 			//Remove a Barra de Edição já existente  	
-
 			}
-
-				}
-
-	//Plugin para exportar o mapa
-	//imprime o mapa diretamento no navegador 
-	//https://github.com/Igor-Vladyka/leaflet.browser.print
-	exportar(){
-		L.control.browserPrint({
-			documentTitle: "WebGENTE-Download",
-			printModes: [
-				L.control.browserPrint.mode.landscape("Imagem em tela"),
-				L.control.browserPrint.mode.custom("Seleção da imagem", "A4")
-			]
-		}).addTo(this.mapa);
-
-		window.print = function (){
-				return domtoimage
-						.toPng(document.querySelector(".grid-print-container"))
-						.then(function (dataUrl) {
-							var link = document.createElement('a');
-							link.download = 'WebGENTE-Download.png';
-							link.href = dataUrl;
-							link.click();
-						});
-		};
-	}
-
+		}
 }
  
 class wmsCamada{

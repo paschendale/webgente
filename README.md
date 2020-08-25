@@ -22,3 +22,7 @@ Estudante de Engenharia de Agrimensura e Cartográfica na UFV
 **Brenda Batista de Almeida - @brendalmeida**
 
 Estudante de Engenharia de Agrimensura e Cartográfica na UFV
+
+#Notas a serem adicionadas na documentação
+
+O download de feições individuais é realizado utilizando como base a chave única da tabela, que deverá se chamar **id** na base de dados.

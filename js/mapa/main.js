@@ -99,7 +99,7 @@ function main(){
         Lc.addOverlay(camadaOverlay[k], objeto.nome, objeto.grupo);
     };
 
-    vetorOverlay.forEach(adicionaSourceOverlay);    
+    vetorOverlay.forEach(adicionaSourceOverlay);  
 
     // Cria botao para ativar a ferramenta de pesquisas
 
@@ -113,17 +113,7 @@ function main(){
         barraEdicao();
     },'Habilitar ferramentas de desenho no mapa').addTo(myMapa.getMapa());
 
-    var mapaDownload = L.easyPrint({
-            title: 'Download do mapa',
-            tileLayer: camadaOverlay,
-            sizeModes: ['Current'],
-            defaultSizeTitles: {Current: 'Tela Cheia'},
-            filename: 'WebGENTE-Download',
-            exportOnly: true,
-            hideControlContainer: true
-        }).addTo(myMapa.getMapa());
-
-    function manualPrint () {
-        printer.printMap('CurrentSize', 'MyManualPrint')
-    }
+    var exportar = L.easyButton('<img src="img/donwload.png">', function(btn, map){
+        exportarMapa();
+    },'Download do mapa em tela').addTo(myMapa.getMapa());
 }
