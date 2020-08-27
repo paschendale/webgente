@@ -119,6 +119,29 @@
      <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.js"></script> <!--Plugin externo para download png do mapa-->
      <script src="js/mapa/plugins/Leaflet-EasyPrint/dist/bundle.js"></script>
 
+     <script>
+     	function tutorial01(){
+     		var tutorial = document.getElementById('tutorial01');
+     		tutorial.innerHTML = '<img src="img/tut_camadas.gif" width="100%">';
+     	}
+     	function tutorial02(){
+     		var tutorial = document.getElementById('tutorial02');
+     		tutorial.innerHTML = '<img src="img/tut_zoom.gif" width="100%">';
+     	}
+     	function tutorial03(){
+     		var tutorial = document.getElementById('tutorial03');
+     		tutorial.innerHTML = '<img src="img/tut_atributos.gif" width="100%">';
+     	}
+     	function tutorial04(){
+     		var tutorial = document.getElementById('tutorial04');
+     		tutorial.innerHTML = '<img src="img/tut_360.gif" width="100%">';
+     	}
+     	function tutorial05(){
+     		var tutorial = document.getElementById('tutorial05');
+     		tutorial.innerHTML = '<img src="img/tut_pesquisa.gif" width="100%">';
+     	}
+     </script>
+
     <title>WebGENTE</title>
   </head>
   <body onload="main()">
@@ -177,11 +200,11 @@
         <!-- Container de itens da help-->
         <div class="container">
           <div class="row align-items-center">
-            <a href="#tut-camadas" data-toggle="collapse">+ Habilitando camadas</a>
+            <a href="#tut-camadas" data-toggle="collapse" onclick="tutorial01()">+ Habilitando camadas</a>
             <div class="col-xs-12">
               <div id="tut-camadas" class="collapse">
                 <br>
-                <img src="img/tut_camadas.gif" width="100%">
+                <div id="tutorial01"></div>
               </div>
             </div>
           </div>
@@ -192,11 +215,11 @@
         <div class="container">
           <div class="row align-items-center">
             <br>
-            <a href="#tut-zoom" data-toggle="collapse">+ Comandos de Zoom e movimento da tela</a>
+            <a href="#tut-zoom" data-toggle="collapse" onclick="tutorial02()">+ Comandos de Zoom e movimento da tela</a>
             <div class="col-xs-12">
               <div id="tut-zoom" class="collapse">
                 <br>
-                <img src="img/tut_zoom.gif" width="100%">
+                <div id="tutorial02"></div>
               </div>
             </div>
           </div>
@@ -207,11 +230,11 @@
         <div class="container">
           <div class="row align-items-center">
             <br>
-            <a href="#tut-atributos" data-toggle="collapse">+ Visualizando os atributos das camadas</a>
+            <a href="#tut-atributos" data-toggle="collapse" onclick="tutorial03()">+ Visualizando os atributos das camadas</a>
             <div class="col-xs-12">
               <div id="tut-atributos" class="collapse">
                 <br>
-                <img src="img/tut_atributos.gif" width="100%">
+                <div id="tutorial03"></div>
               </div>
             </div>
           </div>
@@ -222,11 +245,11 @@
         <div class="container">
           <div class="row align-items-center">
             <br>
-            <a href="#tut-360" data-toggle="collapse">+ Visualizando as imagens 360°</a>
+            <a href="#tut-360" data-toggle="collapse" onclick="tutorial04()">+ Visualizando as imagens 360°</a>
             <div class="col-xs-12">
               <div id="tut-360" class="collapse">
                 <br>
-                <img src="img/tut_360.gif" width="100%">
+                <div id="tutorial04"></div>
               </div>
             </div>
           </div>
@@ -237,11 +260,11 @@
         <div class="container">
           <div class="row align-items-center">
             <br>
-            <a href="#tut-pesquisa" data-toggle="collapse">+ Pesquisando uma camada pelos atributos</a>
+            <a href="#tut-pesquisa" data-toggle="collapse" onclick="tutorial05()">+ Pesquisando uma camada pelos atributos</a>
             <div class="col-xs-12">
               <div id="tut-pesquisa" class="collapse">
                 <br>
-                <img src="img/tut_pesquisa.gif" width="100%">
+                <div id="tutorial05"></div>
               </div>
             </div>
           </div>
