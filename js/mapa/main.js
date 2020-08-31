@@ -116,4 +116,8 @@ function main(){
     var exportar = L.easyButton('<img src="img/donwload.png">', function(btn, map){
         exportarMapa();
     },'Download do mapa em tela').addTo(myMapa.getMapa());
+
+    var minhaLocalização = L.easyButton('<img src="img/location.png">', function(btn, map){
+        localizacao();
+    },'Minha localização').addTo(myMapa.getMapa());
 }

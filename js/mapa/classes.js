@@ -94,13 +94,55 @@ class mapa{
 		}
 	}
 
+	showPosition(position){
+		alert(position.coords.latitude);
+		alert(position.coords.longitude);
+	}
+
+	minhaLocalizacao(){
+		//Código definido para esperar 10 segundos
+		/*setInterval(function(){
+			if(navigator.geolocation){
+				//navigator.geolocation.watchPosition(...)
+    			navigator.geolocation.getCurrentPosition(showPosition, null, {
+    				enableHighAccuracy: true
+    			});
+  			}	 
+	  		else{
+	    		alert("Navegador não suporta esse tipo de operação. Mude de navegador ou atualize-o.");
+	  		}
+
+	  		function showPosition(position){
+	  			L.marker([position.coords.latitude, position.coords.longitude]).addTo(myMapa.getMapa());
+	  			myMapa.getMapa().panTo([position.coords.latitude, position.coords.longitude],init.zoomInicial);
+			}
+		}, 10000);*/
+
+		//Código que chama o geolocation uma única vez
+		if(navigator.geolocation){
+			//navigator.geolocation.watchPosition(...)
+    		navigator.geolocation.getCurrentPosition(showPosition, null, {
+    			enableHighAccuracy: true
+    		});
+  		}	 
+	  	else{
+	    	alert("Navegador não suporta esse tipo de operação. Mude de navegador ou atualize-o.");
+	  	}
+
+	  	function showPosition(position){
+	  		L.marker([position.coords.latitude, position.coords.longitude]).addTo(myMapa.getMapa());
+	  		myMapa.getMapa().panTo([position.coords.latitude, position.coords.longitude],init.zoomInicial);
+		}
+	}
+
 	exportar(){
+		alert("Baixando a imagem. Aguarde.");
 		domtoimage.toJpeg(document.getElementById('mapa'), {
 				quality: 0.95,
 				width: 1400,
-				height: 605
+				height: 625
 			 })
-		    .then(function (dataUrl) {
+		    .then(function(dataUrl) {
 		        var link = document.createElement('a');
 		        link.download = 'WebGENTE-mapa.jpeg';
 		        link.href = dataUrl;
