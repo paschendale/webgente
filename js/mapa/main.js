@@ -128,8 +128,6 @@ function main(){
                     
                     xyz=true;
                  mde.addTo(myMapa.getMapa());  
-                   
-                   // xyz=false; 
                         coordenadas.state('coordenadas_enabled');
                         btn.state('coordenadas_enabled');  
                           
