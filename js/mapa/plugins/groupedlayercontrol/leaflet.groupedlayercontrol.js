@@ -102,8 +102,8 @@ L.Control.GroupedLayers = L.Control.extend({
     if (this.options.collapsed) {
       if (!L.Browser.android) {
         L.DomEvent
-            .on(container, 'mouseover', this._expand, this)
-            .on(container, 'mouseout', this._collapse, this);
+            .on(container, 'click', this._expand, this)
+            .on(container, 'dblclick', this._collapse, this);
       }
       var link = this._layersLink = L.DomUtil.create('a', className + '-toggle', container);
       link.href = '#';

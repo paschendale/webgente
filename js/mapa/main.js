@@ -1,11 +1,11 @@
 // Variável global para permitir ou não a exibição do popup do GetfeatureInfo, true: exibe o popup de infomações, false: impede a exibição. 
 var info_gfi=false; 
-
+var xyz=false;
 // Variáveis globais para adicionar ou retirar a barra de Edição
 var drawnItems;
 var drawControl; 
 var menu = " ";
-
+var mde= "";
 //Função principal int main()
 function main(){
 
@@ -64,7 +64,7 @@ function main(){
 
     i = 0; // Inicializa contador
     var camadaBase = [0]; // Inicializa vetor externo à função para armazenamento das camadas base
-	 
+    
     function adicionaBasemap(objeto){
         i++;
         camadaBase[i] = new wmsCamada(objeto);
@@ -100,7 +100,7 @@ function main(){
     };
 
     vetorOverlay.forEach(adicionaSourceOverlay);  
-
+    mde= source.getLayer(vetorMDE[0].layers);
     // Cria botao para ativar a ferramenta de pesquisas
 
     var pesquisas = L.easyButton('<img src="img/lupa.png">', function(){
@@ -116,4 +116,34 @@ function main(){
     var exportar = L.easyButton('<img src="img/donwload.png">', function(btn, map){
         exportarMapa();
     },'Download do mapa em tela').addTo(myMapa.getMapa());
+     
+
+
+    var coordenadas = L.easyButton({
+        states: [{
+                    stateName: 'coordenadas_disabled',
+                    icon:      '<img src="img/coordenadas_active.png">',
+                    title:     'Habilita a ferramenta de visualização de coordenadas',   
+                    onClick: function(btn) {   
+                    
+                    xyz=true;
+                 mde.addTo(myMapa.getMapa());  
+                   
+                   // xyz=false; 
+                        coordenadas.state('coordenadas_enabled');
+                        btn.state('coordenadas_enabled');  
+                          
+                    }
+                }, {
+                    stateName: 'coordenadas_enabled',   
+                    icon:      '<img src="img/coordenadas_desactive.png">',               
+                    title:     'Desabilita a ferramenta de visualização de coordenadas',
+                    onClick: function(btn) {
+                        coordenadas.state('coordenadas_disabled');
+                        btn.state('coordenadas_disabled'); 
+                        xyz=false;   
+                    }
+            }]
+        }).addTo(myMapa.getMapa());
+
 }

@@ -68,13 +68,17 @@ wms.Source = L.Layer.extend({
         // Create overlay with all options other than untiled & identify
         var overlayOptions = {};
         for (var opt in this.options) {
+            
             if (opt != 'untiled' && opt != 'identify') {
+                
                 overlayOptions[opt] = this.options[opt];
             }
         }
         if (untiled) {
+            
             return wms.overlay(this._url, overlayOptions);
         } else {
+            
             return wms.tileLayer(this._url, overlayOptions);
         }
     },
@@ -85,7 +89,10 @@ wms.Source = L.Layer.extend({
 
     'getEvents': function() {
     	//Evento para adicionar camada pelo painel
+      
+         
         if (this.options.identify) {
+       
             return {'click': this.identify};
         } else {
             return {};
@@ -129,13 +136,19 @@ wms.Source = L.Layer.extend({
 
     'refreshOverlay': function() {
     	//sobreposição de atualização
+      //  this._subLayers= this._subLayers.replace(mde+",","");
+     delete this._subLayers[mde._name];
+       
         var subLayers = Object.keys(this._subLayers).join(",");
+        
+        
         if (!this._map) {
             return;
         }
         if (!subLayers) {
             this._overlay.remove();
         } else {
+
             this._overlay.setParams({'layers': subLayers});
             this._overlay.addTo(this._map);
         }
@@ -184,7 +197,16 @@ wms.Source = L.Layer.extend({
         // Hook to determine which layers to identify
         if (this.options.identifyLayers)
             return this.options.identifyLayers;
-        return Object.keys(this._subLayers);
+        //return Object.keys(this._subLayers);
+        var layer= new Array();
+       if(xyz==true){
+       layer[0]= 'bomdespacho:mde_bomdespacho' ;
+       layer=layer.concat(Object.keys(this._subLayers));
+            }else{
+       layer=Object.keys(this._subLayers);
+            }
+
+        return layer ;
      },
 
     'getFeatureInfoParams': function(point, layers) {
@@ -235,7 +257,15 @@ wms.Source = L.Layer.extend({
         obj = JSON.parse(info);
         //Identificar quais layer ativas 
         var layersMarked = this.getIdentifyLayers();
-        
+        if(xyz==true){
+            obj.features[0].properties={
+                N:latlng['lng'],
+                E:latlng['lat'],
+                Z: obj.features[0].properties['GRAY_INDEX']
+            };
+              obj.features[0].id='Coordenadas';
+              obj.id='Valor';
+            }
         for(var num=0; num<obj.features.length;num++){
             for(var n=0; n<layersMarked.length;n++){
          obj.features[num].properties=restrictedAtributes(obj.features[num].properties,layersMarked[n]);  
@@ -382,6 +412,7 @@ wms.Overlay = L.Layer.extend({
     },
 
     'setParams': function(params) {
+       
         L.extend(this.wmsParams, params);
         this.update();
     },
@@ -411,6 +442,7 @@ wms.Overlay = L.Layer.extend({
     },
 
     'update': function() {
+
         if (!this._map) {
             return;
         }
