@@ -117,7 +117,9 @@ function main(){
         exportarMapa();
     },'Download do mapa em tela').addTo(myMapa.getMapa());
      
-
+    var minhaLocalização = L.easyButton('<img src="img/location.png">', function(btn, map){
+        localizacao();
+    },'Minha localização').addTo(myMapa.getMapa());
 
     var coordenadas = L.easyButton({
         states: [{

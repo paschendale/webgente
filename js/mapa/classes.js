@@ -101,25 +101,23 @@ class mapa{
 
 	minhaLocalizacao(){
 		//Código definido para esperar 10 segundos
-		/*setInterval(function(){
-			if(navigator.geolocation){
-				//navigator.geolocation.watchPosition(...)
-    			navigator.geolocation.getCurrentPosition(showPosition, null, {
-    				enableHighAccuracy: true
-    			});
-  			}	 
-	  		else{
-	    		alert("Navegador não suporta esse tipo de operação. Mude de navegador ou atualize-o.");
-	  		}
+		if(navigator.geolocation){
+	    	navigator.geolocation.watchPosition(showPosition, null, {
+	    		enableHighAccuracy: true
+	    	});
+  		}	 
+	  	else{
+	    	alert("Navegador não suporta esse tipo de operação. Mude de navegador ou atualize-o.");
+	  	}
 
-	  		function showPosition(position){
-	  			L.marker([position.coords.latitude, position.coords.longitude]).addTo(myMapa.getMapa());
-	  			myMapa.getMapa().panTo([position.coords.latitude, position.coords.longitude],init.zoomInicial);
-			}
-		}, 10000);*/
+	  	function showPosition(position){
+	  		console.log("AQUI");
+	  		L.marker([position.coords.latitude, position.coords.longitude]).addTo(myMapa.getMapa());
+	  		myMapa.getMapa().panTo([position.coords.latitude, position.coords.longitude],init.zoomInicial);
+		}
 
 		//Código que chama o geolocation uma única vez
-		if(navigator.geolocation){
+		/*if(navigator.geolocation){
 			//navigator.geolocation.watchPosition(...)
     		navigator.geolocation.getCurrentPosition(showPosition, null, {
     			enableHighAccuracy: true
@@ -132,7 +130,7 @@ class mapa{
 	  	function showPosition(position){
 	  		L.marker([position.coords.latitude, position.coords.longitude]).addTo(myMapa.getMapa());
 	  		myMapa.getMapa().panTo([position.coords.latitude, position.coords.longitude],init.zoomInicial);
-		}
+		}*/
 	}
 
 	exportar(){
