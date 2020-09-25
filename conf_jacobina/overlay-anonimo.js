@@ -2,27 +2,49 @@ var overlayHost = 'https://geoserver.genteufv.com.br/geoserver/ows?';
 
 // Definindo camadas overlay
 var vetorOverlay = [
-	lotes = {
-		nome: 'Lotes CTM',
-		grupo: 'Cadastro Urbano',
-		host: 'https://geoserver.genteufv.com.br/geoserver/ows?',
-		maxZoom: 25,
-        layers: 'jacobina:Lotes',
-        format: 'image/png',
-        transparent: true,
-        tiled: true
-	},
+	parametros_lotes = new overlay(
+		'Lotes CTM',
+		'jacobina:Lotes',
+		'Cadastro Urbano',
+		[],
+		['n_setor','n_quadra','n_lote'],
+		['Setor','Quadra','Lote'],
+		[]
+		)
+	,
 
-	meio_fio = {
-		nome: 'Meio Fio',
-		grupo: 'Infraestrutura Urbana',
-		host: 'https://geoserver.genteufv.com.br/geoserver/ows?',
-		maxZoom: 25,
-        layers: 'jacobina:Meio_Fio',
-        format: 'image/png',
-        transparent: true,
-        tiled: true
-	},
+	/*
+	parametros_meio_fio = new overlay(
+		'Meio Fio',
+		'jacobina:Meio_Fio',
+		'Infraestrutura Urbana',
+		[],
+		[],
+		[]
+		)
+	,*/
+
+	parametros_quadras = new overlay(
+		'Quadras CTM',
+		'jacobina:Quadras',
+		'Cadastro Urbano',
+		[],
+		[],
+		[],
+		[]
+		)
+	,
+
+	parametros_inscricoes = new overlay(
+		'Inscricoes de Lote',
+		'jacobina:inscricoes_lotes',
+		'Cadastro Urbano',
+		[],
+		[],
+		[],
+		[]
+		)
+	/*,
 
 	quadras = {
 		nome: 'Quadras CTM',
@@ -132,5 +154,5 @@ var vetorOverlay = [
         format: 'image/png',
         transparent: true,
         tiled: true
-	}
+	}*/
 ];
