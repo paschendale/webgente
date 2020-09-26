@@ -49,12 +49,14 @@ if (!('keys' in Object)) {
  * tiled mode, via an internal wms.Overlay or wms.TileLayer, respectively.
  */
 wms.Source = L.Layer.extend({
+
     'options': {
         'untiled': true,
         'identify': true
     },
 
     'initialize': function(url, options) {
+        
         L.setOptions(this, options);
         if (this.options.tiled) {
             this.options.untiled = false;
@@ -89,7 +91,7 @@ wms.Source = L.Layer.extend({
 
     'getEvents': function() {
     	//Evento para adicionar camada pelo painel
-      
+     
          
         if (this.options.identify) {
        
@@ -137,7 +139,7 @@ wms.Source = L.Layer.extend({
     'refreshOverlay': function() {
     	//sobreposição de atualização
       //  this._subLayers= this._subLayers.replace(mde+",","");
-     delete this._subLayers[mde._name];
+     
        
         var subLayers = Object.keys(this._subLayers).join(",");
         
@@ -150,7 +152,9 @@ wms.Source = L.Layer.extend({
         } else {
 
             this._overlay.setParams({'layers': subLayers});
+            
             this._overlay.addTo(this._map);
+            
         }
     },
 
@@ -197,8 +201,8 @@ wms.Source = L.Layer.extend({
         // Hook to determine which layers to identify
         if (this.options.identifyLayers)
             return this.options.identifyLayers;
-        //return Object.keys(this._subLayers);
-        var layer= new Array();
+        return Object.keys(this._subLayers);
+      /*  var layer= new Array();
        if(xyz==true){
        layer[0]= 'bomdespacho:mde_bomdespacho' ;
        layer=layer.concat(Object.keys(this._subLayers));
@@ -206,7 +210,7 @@ wms.Source = L.Layer.extend({
        layer=Object.keys(this._subLayers);
             }
 
-        return layer ;
+        return layer ;*/
      },
 
     'getFeatureInfoParams': function(point, layers) {
@@ -257,7 +261,7 @@ wms.Source = L.Layer.extend({
         obj = JSON.parse(info);
         //Identificar quais layer ativas 
         var layersMarked = this.getIdentifyLayers();
-        if(xyz==true){
+        /*if(xyz==true){
             obj.features[0].properties={
                 N:latlng['lng'],
                 E:latlng['lat'],
@@ -265,7 +269,7 @@ wms.Source = L.Layer.extend({
             };
               obj.features[0].id='Coordenadas';
               obj.id='Valor';
-            }
+            }*/
         for(var num=0; num<obj.features.length;num++){
             for(var n=0; n<layersMarked.length;n++){
          obj.features[num].properties=restrictedAtributes(obj.features[num].properties,layersMarked[n]);  

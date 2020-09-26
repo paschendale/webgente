@@ -4,8 +4,7 @@ function gerarTXT(){
     var textFile = null,
     makeTextFile = function (text){
 	    var data = new Blob([text], {type: 'text/plain'});
-	    console.log(data);
-	    console.log(text);
+	  
 	    if (textFile !== null) {
 	        window.URL.revokeObjectURL(textFile);
 	    }
@@ -17,7 +16,7 @@ function gerarTXT(){
 
     create.addEventListener('click', function (){
         var link = document.getElementById('downloadlink');
-        console.log(getJson);
+      
         link.href = makeTextFile(getJson);
        link.style.display = 'block';
     }, false);
@@ -57,21 +56,21 @@ class mapa{
 			menu = document.getElementById("barraPesquisas");
 
 			//Formulário dinâmico mostrado quando o usuário seleciona a opção de "Barra de Pesquisa"
-			var camadasPesquisaveis=`<option value="-1"> </option><option selected disabled hidden>Nada selecionado</option`;
+			var camadasPesquisaveis=`<option value="-1"> </option><option selected disabled hidden>Nada selecionado</option>`;
 			var obj_camada;
 			//As abas de pesquisas são definidas de acordo com as camadas que possuem campos pesquisáveis definidos em prop_query 
 			
 			for (var n=0;n<vetorOverlay.length; n++ ){
 
 				obj_camada = vetorOverlay[n];
+
 				if(obj_camada.prop_query != "" && obj_camada.prop_query !=undefined){
 				
-					camadasPesquisaveis +=`
-
-					 <option value="`+ n +`")">`+ obj_camada.nome+`</option>`;
-
+					camadasPesquisaveis +=`<option value="`+ n +`")">`+ obj_camada.nome+`</option>`;
+					 
 					camadasPesquisaveis +=`\n`;
 				}
+
 			}
 
 			menu.innerHTML = `
@@ -111,7 +110,7 @@ class mapa{
 	  	}
 
 	  	function showPosition(position){
-	  		console.log("AQUI");
+	  		
 	  		L.marker([position.coords.latitude, position.coords.longitude]).addTo(myMapa.getMapa());
 	  		myMapa.getMapa().panTo([position.coords.latitude, position.coords.longitude],init.zoomInicial);
 		}

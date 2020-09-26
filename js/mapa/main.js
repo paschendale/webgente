@@ -100,8 +100,9 @@ function main(){
     };
 
     vetorOverlay.forEach(adicionaSourceOverlay);  
-    mde= source.getLayer(vetorMDE[0].layers);
+   // mde= source.getLayer(vetorMDE[0].layers);
     // Cria botao para ativar a ferramenta de pesquisas
+
 
     var pesquisas = L.easyButton('<img src="img/lupa.png">', function(){
         barraPesquisas();
@@ -121,7 +122,7 @@ function main(){
         localizacao();
     },'Minha localização').addTo(myMapa.getMapa());
 
-    var coordenadas = L.easyButton({
+  /*  var coordenadas = L.easyButton({
         states: [{
                     stateName: 'coordenadas_disabled',
                     icon:      '<img src="img/coordenadas_active.png">',
@@ -145,5 +146,5 @@ function main(){
                     }
             }]
         }).addTo(myMapa.getMapa());
-
+*/
 }
