@@ -76,9 +76,11 @@ function exibe_propriedades_tabela(i){
 
 function coordFail(coord){
 	//função recursiva que extrai uma matriz de coordenadas
-	if(coord.length>1){
+	if(coord.length>1 && coord[0].length>1 || coord.length>1 && coord[0].length==undefined ){
+       
 		return coord;
 	}else{
+       
 		return coordFail(coord[0]);
 	}
 }
@@ -86,13 +88,17 @@ function coordFail(coord){
 function buscaVia(posicao){
     //Usa a posição para retornar o objeto que vai ser filtrado e destacado
    
-	var coord= (tabela.features[posicao].geometry.coordinates[0]);
+	var coord=coordFail (tabela.features[posicao].geometry.coordinates);
+    
+
 	var lalo;
 	if(coord[0].length>1){
-	lalo= L.GeoJSON.coordsToLatLngs(coordFail(coord));
-	myMapa.getMapa().fitBounds(lalo).setZoom(17);
+       
+	lalo= L.GeoJSON.coordsToLatLngs(coord);
+	myMapa.getMapa().fitBounds(lalo);
 	}else{ 
-		lalo= L.GeoJSON.coordsToLatLng(coordFail(coord));
+        
+		lalo= L.GeoJSON.coordsToLatLng(coord);
 		myMapa.getMapa().setView(lalo,17); 
 	}
 	var selecao='';
@@ -130,8 +136,7 @@ function buscaVia(posicao){
 	
 	vetorLayer.unshift(source.getLayer(layerF.layers));
      vetorLayer[0].addTo(myMapa.getMapa());
-    
-
+   
 
 }
 
@@ -211,7 +216,7 @@ function consultaFiltro (camadaFiltrada){
         cql_filter: filtrado[0]
         //Cql filter adicionado também na requisição wfs
     };
-
+    
     var parameters = L.Util.extend(defaultParameters);
     var URL = "https://geoserver.genteufv.com.br/geoserver/ows" + L.Util.getParamString(parameters) ;
     var xhr = $.ajax({
@@ -222,6 +227,7 @@ function consultaFiltro (camadaFiltrada){
             success: function (response){
             	//Transforma o response em variavel global por meio da variavel tabela
                 tabela=response;
+                
                 chaves = Object.keys(restrictedAtributes(tabela.features[0].properties,layerF.layers));
                
                     var consulta = document.getElementById("conteudo");
