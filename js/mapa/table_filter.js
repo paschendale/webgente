@@ -89,11 +89,10 @@ function buscaVia(posicao){
     //Usa a posição para retornar o objeto que vai ser filtrado e destacado
    
 	var coord=coordFail (tabela.features[posicao].geometry.coordinates);
-    
+  
 
 	var lalo;
-	if(coord[0].length>1){
-       
+	if(coord[0].length>1){ 
 	lalo= L.GeoJSON.coordsToLatLngs(coord);
 	myMapa.getMapa().fitBounds(lalo);
 	}else{ 
@@ -133,6 +132,7 @@ function buscaVia(posicao){
 		            cql_filter:filtrado[1],
 		            styles: selecao
 		        });
+
 	
 	vetorLayer.unshift(source.getLayer(layerF.layers));
      vetorLayer[0].addTo(myMapa.getMapa());
@@ -166,9 +166,13 @@ function filtro ( objPesquisa){
         
             cql_filtro+=(resp!="" && resp!=null)?("("+campo+" LIKE "+ " '%"+resp+"%' or "+campo+" LIKE "+ " '%"+(resp.toLowerCase())+"%' or "+campo+" LIKE "+ " '%"+(resp.toUpperCase())+"%') " ):"";
        }else{
-            cql_filtro+=(resp!="")?(campo+" = "+ ""+resp+" "):"";
+        
+          
+        cql_filtro+=(resp!="")? (isNaN(resp))? (campo+" = 000"):(campo+" = "+ ""+resp+" "):"";
+           
         }
-	}
+        }
+	
 	filtrado[0]=cql_filtro;
 }else{
 		cql_filtro+="id = "+  tabela.features[objPesquisa].properties['id'];
@@ -203,7 +207,7 @@ function consultaFiltro (camadaFiltrada){
         vetorLayer.unshift(source.getLayer(layerF.layers));
         vetorLayer[0].addTo(myMapa.getMapa());
 		filtro(null);    
-      	
+     
     //Requisição WFS para buscar os dados a serem mostrados na tabela
     var defaultParameters = {
         service : 'WFS',
@@ -227,8 +231,7 @@ function consultaFiltro (camadaFiltrada){
             success: function (response){
             	//Transforma o response em variavel global por meio da variavel tabela
                 tabela=response;
-                
-                chaves = Object.keys(restrictedAtributes(tabela.features[0].properties,layerF.layers));
+                chaves = (response.features.length == 0)?" ":Object.keys(restrictedAtributes(tabela.features[0].properties,layerF.layers));
                
                     var consulta = document.getElementById("conteudo");
                     var coluna="";
