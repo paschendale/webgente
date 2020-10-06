@@ -187,6 +187,14 @@ function filtro ( objPesquisa){
 
 
 function consultaFiltro (camadaFiltrada){
+
+    var loading = document.getElementById('barra-loading');
+    loading.innerHTML = `<button class="btn btn-primary" type="button" disabled>
+                          <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                          Carregando camada
+                        </button>`;
+
+
  if(vetorLayer.length > 0){
         controle = false;
         vetorLayer.forEach(apagaLayers);
@@ -220,7 +228,9 @@ function consultaFiltro (camadaFiltrada){
         cql_filter: filtrado[0]
         //Cql filter adicionado também na requisição wfs
     };
+
     
+
     var parameters = L.Util.extend(defaultParameters);
     var URL = "https://geoserver.genteufv.com.br/geoserver/ows" + L.Util.getParamString(parameters) ;
     var xhr = $.ajax({
@@ -289,7 +299,7 @@ function consultaFiltro (camadaFiltrada){
                         consulta_td += "<td></td><td> ERRO: NENHUM RESULTADO</td><td></td>";
                     consulta.innerHTML = consulta_html_01 + consulta_td + consulta_html_02;  
                     }
-    		     
+    		  loading.innerHTML = '';
             }
     });
 }
