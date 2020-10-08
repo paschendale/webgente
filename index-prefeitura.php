@@ -83,13 +83,13 @@
     <script src="js/mapa/main.js"></script>
     <script src="js/mapa/submenu_pesquisas.js"></script>
     <script src="js/mapa/classes.js"></script>
-      <script src="js/mapa/table_filter.js"></script>
+    <script src="js/mapa/table_filter.js"></script>
     <!--<script src="js/mapa/drag-and-drop.js"></script>-->
 
-    <!-- Camadas do mapa -->
+    <!-- Carregando configurações de mapa para o usuário logado -->
     <script src="conf/startup.js"></script>
-    <script src="conf/base.js"></script>
-    <script src="conf/overlay-prefeitura.js"></script>  
+    <script src="conf/logged/base.js"></script>
+    <script src="conf/logged/overlay.js"></script>   
 
     <!--Javascript do menu principal superior-->
     <script src="js/menu-principal/barraEdicao.js"></script>
