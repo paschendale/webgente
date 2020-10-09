@@ -1,3 +1,62 @@
+//Gera campos pesquisaveis de acordo com os atributos definidos no vetor prop_query
+//e envia  camada a ser exibida
+function opcoes(){
+	var n = document.getElementById('barraPesquisa').value;
+	var opcao = document.getElementById("conteudo");
+	var camposPesquisaveis = ""; 
+	for (campos of vetorOverlay[n].prop_query){
+		var nome_alternativo= vetorOverlay[n].prop_alternative[vetorOverlay[n].prop_query.indexOf(campos)];
+		camposPesquisaveis+=` <input type="text" id="`+campos+`" name="`+ campos +`" placeholder="`+nome_alternativo+`">`
+	}
+
+	opcao.innerHTML = `
+		<style> 
+			input[type=text] {
+			  margin: 2px 2px 2px 2px;
+			  box-sizing: border-box;
+			  border-radius: 4px;
+			  border-style: solid;
+			  box-shadow: inset 0px 0px 0px 0px red;
+			  border: solid lightgrey 2px;
+			}
+			input[type=text]:hover {
+			  background: #e6e6e6;
+			}
+		</style>
+		<form action="" method="POST">`
+	    	+camposPesquisaveis+
+	    	`<input type="button" id="botao-ok" value="Ok" onclick="consultaFiltro(vetorOverlay[`+n+`])"> 
+	    </form>`
+}
+
+var getJson = "";
+
+function gerarTXT(){
+    var textFile = null,
+    makeTextFile = function (text){
+        var data = new Blob([text], {type: 'text/plain'});
+      
+        if (textFile !== null) {
+            window.URL.revokeObjectURL(textFile);
+        }
+        textFile = window.URL.createObjectURL(data);
+        return textFile;
+    };
+
+    var create = document.getElementById('create');
+
+    create.addEventListener('click', function (){
+        var link = document.getElementById('downloadlink');
+      
+        link.href = makeTextFile(getJson);
+       link.style.display = 'block';
+    }, false);
+}
+
+
+
+
+
 var tabela= "";
 var layerF;
 var vetorLayer= new Array();
@@ -311,3 +370,67 @@ function apagaLayers(layer){
 
 }
 
+
+// getfeatureinfo
+
+function objects2div (objeto){
+
+    div_init = '<div';
+
+    div_final = '</div>';
+
+    div_data = '';
+
+    i = 0;
+
+    css = '<style>a {font-weight: bold; color: inherit;}</style>';
+
+    for (var property in objeto) {
+    if (!objeto.hasOwnProperty(property)) continue;
+
+        div_id = 'tabela'+i;
+
+        title = (objeto[property].id).split('.');
+
+        id = objeto[property].properties.id;
+
+        div_content = '<div style="width:270px;"><p><a style="font-weight: bold; color: inherit;" data-toggle="collapse" href="#'+div_id+'">'+title[0]+': '+id+'</a></p></div><div id="'+div_id+'" class="panel-collapse collapse"><div class="panel-body" style="height: 120px; overflow-y: auto; overflow-x: hidden;">'+properties2table(objeto[property].properties)+'</div></div>'
+
+        div_data = div_data + div_content + '<p></p>';
+
+        i++;
+
+    }
+
+    div_data = '<div>' + div_data + css + '</div>';
+
+    return div_data;
+
+};
+
+function properties2table (objeto){
+    tb_init = '<table><tr><th>Atributo</th><th>Valor</th></tr>';
+
+    tb_data_acum = '';
+
+    for (var property in objeto) {
+    if (!objeto.hasOwnProperty(property)) continue;
+
+    if (property == 'path_folder') {
+        tb_data = '<tr><td>Arquivos associados</td><td><a href="'+ objeto[property]+'" target="_blank"><img alt="Acessar o sistema Alfresco" src="img/folder.png"></a></td></tr>';
+    } else {
+        tb_data = '<tr><td>'+property+'</td><td>'+objeto[property]+'</td></tr>';
+    }
+
+    tb_data_acum = tb_data_acum+tb_data;     
+        
+    };
+
+    css_table = '<style>table {width:250px;text-align:left;vertical-align:center;padding: 15px;border-bottom: 1px solid #ddd;font-family: Tahoma, Geneva, sans-serif;}td,th {border-bottom: 1px solid #ddd;padding: 2px;}tr:hover {background-color: #f5f5f5;}th {background-color: #f5f5f5;}</style>'
+
+    tb_final = '</table>';
+
+    tb = css_table+tb_init+tb_data_acum+tb_final;
+
+    return tb;
+};
