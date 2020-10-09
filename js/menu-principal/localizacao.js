@@ -1,3 +1,0 @@
-function localizacao(){
-	myMapa.minhaLocalizacao();
-}
