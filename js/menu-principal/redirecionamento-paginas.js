@@ -1,27 +1,3 @@
-function exportarMapa(){
-	myMapa.exportar();
-}
-
-function barraPesquisas(){
-	myMapa.barraPesquisas();
-}
-
-function barraEdicao(){
-	if(barraEdicaoHabilitado == false){
-		myMapa.barraEdicao(true);
-		barraEdicaoHabilitado = true;
-	}
-	else if(barraEdicaoHabilitado == true){
-		myMapa.barraEdicao(false);
-		barraEdicaoHabilitado = false;
-		
-	}
-}
-
-function localizacao(){
-	myMapa.minhaLocalizacao();
-}
-
 //Redirecionamento de páginas com javascript
 
 function recuperarSenha(){
