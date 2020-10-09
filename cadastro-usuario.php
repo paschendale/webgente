@@ -1,18 +1,18 @@
 <!doctype html>
 <html lang="pt">
   <head>
-  <?php
+    <?php
 
-    if(!isset($_SESSION)){
-      session_start();
-    }
-    if(!isset($_SESSION['nome']) || !isset($_SESSION['cpf'])){
-      session_destroy();
-      header('refresh: 0.001; index-anonimo.html');
-      exit;
-    }     
-  ?>
-    
+      if(!isset($_SESSION)){
+          session_start();
+      }
+      if(!isset($_SESSION['nome'])){
+          session_destroy();
+          header('refresh: 0.001; index-anonimo.html');
+          exit;
+      }     
+
+    ?>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
@@ -26,7 +26,7 @@
     <script src="js/leaflet/leaflet-src.esm.js"></script>
     <script src="js/leaflet/leaflet-src.js"></script>
 
-    <!--Plugin photosphereviewer: https://github.com/JeremyHeleine/WP-Photo-Sphere-->
+    <!--Plugin photosphereviewer-->
     <script src="js/mapa/plugins/photosphere/three.min.js"></script>
     <script src="js/mapa/plugins/photosphere/photo-sphere-viewer.min.js"></script>
 
@@ -78,6 +78,9 @@
     <!-- jQuery CDN --> 
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script> 
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    
+    <!--Jquery máscara CDN-->
+    <script src=""></script>
 
     <!--Javascript do mapa-->
     <script src="js/mapa/main.js"></script>
@@ -86,10 +89,11 @@
     <script src="js/mapa/table_filter.js"></script>
     <!--<script src="js/mapa/drag-and-drop.js"></script>-->
 
-    <!-- Carregando configurações de mapa para o usuário logado -->
+    <!-- Camadas do mapa -->
     <script src="conf/startup.js"></script>
-    <script src="conf/logged/base.js"></script>
-    <script src="conf/logged/overlay.js"></script>   
+    <script src="conf/base.js"></script>
+    <script src="conf/overlay.js"></script>  
+    <script src="conf/360.js"></script>
 
     <!--Javascript do menu principal superior-->
     <script src="js/menu-principal/barraEdicao.js"></script>
@@ -124,32 +128,73 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.css">
     <script src="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.js"></script>
     
+    <!-- Jquery Mask -->
+     <script src="js/menu-principal/plugins/jquery.mask.min.js"></script>
+     <script src="js/menu-principal/plugins/jquery.validate.min.js"></script> 
+     <script src="js/menu-principal/plugins/additional-methods.min.js"></script>
+     <script src="js/menu-principal/plugins/localization/messages_pt_BR.js"></script> 
+     <script src="js/menu-principal/aplicacaoJMask.js"></script>
 
     <title>WebGENTE</title>
   </head>
-  <body onload="main()">
-  	<div id="menu">
+  <body>
+
+  	<header>
   		<nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <a class="navbar-brand" href="#"><img src="img/webgente-fundo-escuro-120x40.png" alt=""></a>
           <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-         
-          </ul>
-          <p id="bem-vindo">Prefeitura Municipal de Bom Despacho</p>
-          &nbsp
-          <button class="btn btn-outline-primary my-2 my-sm-0" type="button" onclick="logout()">Sair</button>
-
+            <p id="texto-cabeçalho">Cadastro de novos usuários.</p>
         </div>
       </nav>
-  	</div>
-  
-    <!--Div onde o mapa será desenhado-->
-    <div id="barraPesquisas"></div>
-    <div id="mapa">
-      <div id="consultaPesquisa"></div>
-    </div>
+  	</header>
+
+    <section id="cadastro-usuario">
+      <div id="local">
+          <a href="tela-administrador.php">Painel do administrador</a>/ Cadastro de novos usuários
+        </div>
+      <div class="row">
+        <div class="col-1 col-sm-2 col-xl-2"></div>
+          <div class="col-10 col-sm-8 col-xl-8">
+            <br>
+            <form action="php/redirecionamento-cadastro.php" method="POST" id="formulario" name="formulario">
+              <label for="nome">Nome</label>
+                <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome completo" required>
+              <label for="cpf">CPF</label> 
+                <input type="text" class="form-control" id="cpf" name="cpf" placeholder="CPF" required>
+              <label for="data-nascimento">Data de nascimento</label>
+                <input type="date" class="form-control" id="data-nascimento" name="data-nascimento" required>
+              <label for="sexo">Sexo</label>
+              <br>
+                <input type="radio" id="sexo" name="sexo" value="masculino"> Masculino
+                <input type="radio" id="sexo" name="sexo" value="feminino"> Feminino
+                <input type="radio" id="sexo" name="sexo" value="nao-informar"> Não informar
+              <br>
+              <label for="faixa-etaria">Faixa etária</label>
+                <select class="form-control" id="faixa-etaria" name="faixa-etaria">
+                  <option>----</option>
+                  <option value="menores-15-anos">Menores de 15 anos</option>
+                  <option value="entre-16-e-64-anos">Entre 16 e 64 anos</option>
+                  <option value="a-partir-de-65-anos">A partir de 65 anos</option>
+                </select>
+              <label for="celular">Celular</label>
+                <input type="text" class="form-control" id="celular" name="celular" placeholder="Celular">
+              <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
+              <label for="senha">Senha</label>
+                <input type="password" class="form-control" id="senha" name="senha" placeholder="Senha" required>
+              <br>
+              <button type="submit" class="btn btn-secondary btn-lg btn-block" id="enviar">Cadastrar</button>
+            </form>
+          </div>
+        <div class="col-1 col-sm-2 col-xl-2"></div>
+      </div>
+    </section>
+
+    <footer>
+    </footer>
+
   </body>
 </html>
