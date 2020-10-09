@@ -78,10 +78,17 @@
       <script src="js/mapa/table_filter.js"></script>
     <!--<script src="js/mapa/drag-and-drop.js"></script>-->
 
+<<<<<<< HEAD
     <!-- Carregando configurações de mapa para o usuário anonimo -->
     <script src="conf/startup.js"></script>
     <script src="conf/anon/base.js"></script>
     <script src="conf/anon/overlay.js"></script>  
+=======
+    <!-- Camadas do mapa -->
+    <script src="conf/startup.js"></script>
+    <script src="conf/base.js"></script>
+    <script src="conf/overlay-prefeitura.js"></script>  
+>>>>>>> c4507dcb0089bb7df6ff265412b2c4e5458ea263
 
     <!--Javascript do menu principal superior-->
     <script src="js/menu-principal/barraEdicao.js"></script>

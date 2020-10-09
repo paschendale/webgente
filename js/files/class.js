@@ -1,26 +1,5 @@
 //Cada plugin fica definido como uma função interna dessa classe, sendo chamado a medida que o usuário acha necessário
-var getJson = "";
-function gerarTXT(){
-    var textFile = null,
-    makeTextFile = function (text){
-	    var data = new Blob([text], {type: 'text/plain'});
-	  
-	    if (textFile !== null) {
-	        window.URL.revokeObjectURL(textFile);
-	    }
-	    textFile = window.URL.createObjectURL(data);
-    	return textFile;
-    };
 
-    var create = document.getElementById('create');
-
-    create.addEventListener('click', function (){
-        var link = document.getElementById('downloadlink');
-      
-        link.href = makeTextFile(getJson);
-       link.style.display = 'block';
-    }, false);
-}
 class mapa{
 	//public
 	constructor(latitude, longitude, zoom){
