@@ -1,7 +1,11 @@
 //Redirecionamento de páginas com javascript
 
-function recuperarSenha(){
+function recuperarSenhaDeslogado(){
 	window.open('recuperar-senha.html', '_blank');
+}
+
+function recuperarSenhaLogado(){
+	window.open('../recuperar-senha.html', '_blank');
 }
 
 function cadastro(){
@@ -12,8 +16,12 @@ function logout(){
 	location.href='logout.php';
 }
 
+function logoutPrefeitura(){
+	location.href='php/logout.php';
+}
+
 function login(){
-	location.href='login.php';
+	location.href='php/login.php';
 }
 
 function cadastroUsuarios(){

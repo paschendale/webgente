@@ -32,11 +32,13 @@ class controler{
 
 	function login(){
 		$cpf = $_POST['usuario'];
-		$senha = $_POST['senha'];
+		$senha = $_POST['senha'];	
 
 		if($senha != 'admin'){
 			$senha = md5($_POST['senha']);
 		} 
+
+		//echo getcwd();
 
 		$usuario = new usuario();
 		$usuario->setLogin($cpf, $senha);
@@ -52,7 +54,7 @@ class controler{
 		if($senhaAntiga == 'admin' && ($email == 'admin@admin' || $email == 'gente@gente')){
 			$usuario->novaSenha($email, $senhaNova);
 			echo("<script>alert('Senha atualizada com sucesso.');</script>");
-			header('refresh: 0.001; ../login.php');
+			header('refresh: 0.001; ../php/login.php');
 	 		exit;
 		}
 		else{
@@ -64,7 +66,7 @@ class controler{
 			if($validaSenhaEmail){
 				$usuario->novaSenha($senhaNova);
 				echo("<script>alert('Senha atualizada com sucesso.');</script>");
-				header('refresh: 0.001; ../login.php');
+				header('refresh: 0.001; ../php/login.php');
 	 			exit;
 			}
 			else{

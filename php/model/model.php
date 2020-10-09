@@ -1,6 +1,6 @@
 <?php
 
-include '../conf/conexao.php';
+include '../../conf/conexao.php';
 
 class usuario{
 	//private
@@ -77,11 +77,11 @@ class usuario{
  			$_SESSION['cpf'] = $cpf;
  			$_SESSION['nome'] = $resultado['nome'];
 
- 			header('refresh: 0.001; ../index-prefeitura.php');
+ 			header('refresh: 0.001; ../../index-prefeitura.php');
  			exit;
  		}
  		else if(($resultado['senha'] == 'admin' && $senha == 'admin') && $resultado['tipo'] == 'administrador'){
- 			header('refresh: 0.001; ../recuperar-senha.html');
+ 			header('refresh: 0.001; ../../recuperar-senha.html');
  			exit;
  		}
  		else if($resultado['senha'] == $senha && $resultado['tipo'] == 'administrador'){

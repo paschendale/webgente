@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
 
     <link rel="icon" href="img/favicon.ico">
+    
     <!--CSS do Leaflet-->
     <link rel="stylesheet" href="css/leaflet/leaflet.css">
 
@@ -85,8 +86,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     <!--CSS criado-->
-    <link rel="stylesheet" href="css/mapa/config.css">
-    <link rel="stylesheet" href="css/menu-principal/menu.css">
+    <link rel="stylesheet" href="css/files/mapa/config.css">
+    <link rel="stylesheet" href="css/files/menu-principal/menu.css">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="css/bootstrap/bootstrap.css">
@@ -103,14 +104,6 @@
     <!-- EasyButton -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.css">
     <script src="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.js"></script>
-    
-    <!-- Jquery Mask      
-    <script src="js/menu-principal/plugins/jquery.mask.min.js"></script>
-     <script src="js/menu-principal/plugins/jquery.validate.min.js"></script> 
-     <script src="js/menu-principal/plugins/additional-methods.min.js"></script>
-     <script src="js/menu-principal/plugins/localization/messages_pt_BR.js"></script> 
-     <script src="js/menu-principal/aplicacaoJMask.js"></script>
-     -->
 
      <!--Plugin: https://github.com/rowanwins/leaflet-easyPrint-->
      <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.js"></script> <!--Plugin externo para download png do mapa-->
@@ -158,21 +151,10 @@
           </ul>
           <button class="btn btn-secondary btn-sm" type="button" id="enviar" onclick="login()">Login</button>
           &nbsp
-          <button class="btn btn-secondary btn-sm" type="button" id="recuperarSenha" onclick="recuperarSenha()">Alterar senha</button>
+          <button class="btn btn-secondary btn-sm" type="button" id="recuperarSenha" onclick="recuperarSenhaDeslogado()">Alterar senha</button>
         </div>
       </nav>
   	</div>
-  	
-  	  <!--
-      <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  	  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  	  <script>
-  		  $(function(){
-  		    $( "#barraPesquisas").draggable();
-  		    //$( "#barraPesquisas").resizable();
-  		  });
-  	  </script>
-      -->
 
     <!--Div onde o mapa será desenhado-->
     <div id="barraPesquisas"></div>

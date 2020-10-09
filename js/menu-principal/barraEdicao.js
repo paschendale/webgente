@@ -6,6 +6,5 @@ function barraEdicao(){
 	else if(barraEdicaoHabilitado == true){
 		myMapa.barraEdicao(false);
 		barraEdicaoHabilitado = false;
-		
 	}
 }
