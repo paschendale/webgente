@@ -23,6 +23,7 @@ Estudante de Engenharia de Agrimensura e Cartográfica na UFV
 
 Estudante de Engenharia de Agrimensura e Cartográfica na UFV
 
-#Notas a serem adicionadas na documentação
+## Referências
 
-O download de feições individuais é realizado utilizando como base a chave única da tabela, que deverá se chamar **id** na base de dados.
+[Marotta et al, 2020 - WebGENTE - Desenvolvimento de um framework open source para um WebGIS cadastral](https://www.researchgate.net/publication/344570062_WEBGENTE_DESENVOLVIMENTO_DE_UM_FRAMEWORK_OPEN_SOURCE_PARA_UM_WEBGIS_CADASTRAL)
+
