@@ -171,7 +171,7 @@ class mapa{
 			    //Texto mostrado quando o usuário clica na geometria desenhada
 			this.mapa.on('draw:created', function(e){ 
 				var type = e.layerType,
-				           ayer = e.layer;
+				           layer = e.layer;
 				    if(type == 'polyline'){
 				    	var tamanho = e.layer._latlngs.length;
 				    	var coordenadas = "";

@@ -38,10 +38,10 @@ class controler{
 			$senha = md5($_POST['senha']);
 		} 
 
-		//echo getcwd();
+		echo getcwd();
 
-		$usuario = new usuario();
-		$usuario->setLogin($cpf, $senha);
+		//$usuario = new usuario();
+		//$usuario->setLogin($cpf, $senha);
 	}
 
 	function recuperarSenha(){

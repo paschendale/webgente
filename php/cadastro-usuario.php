@@ -27,54 +27,68 @@
     <script src="../js/leaflet/leaflet-src.esm.js"></script>
     <script src="../js/leaflet/leaflet-src.js"></script>
 
-    <!--Plugin photosphereviewer-->
-    <script src="../js/mapa/plugins/photosphere/three.min.js"></script>
-    <script src="../js/mapa/plugins/photosphere/photo-sphere-viewer.min.js"></script>
+    <!--Plugin photosphereviewer: https://github.com/JeremyHeleine/WP-Photo-Sphere-->
+    <script src="../js/plugins/photosphere/three.min.js"></script>
+    <script src="../js/plugins/photosphere/photo-sphere-viewer.min.js"></script>
 
     <!-- Plugin mini mapa: https://github.com/Norkart/Leaflet-MiniMap -->
     <link rel="stylesheet" href="../css/plugins/Control.MiniMap.css">
-    <script src="../js/mapa/plugins/Control.MiniMap.min.js" type="text/javascript"></script>
+    <script src="../js/plugins/Control.MiniMap.min.js" type="text/javascript"></script>
 
     <!-- Plugin para agurpar camadas: https://github.com/ismyrnow/leaflet-groupedlayercontrol  -->
     <link rel="stylesheet" href="../css/plugins/groupedlayercontrol/leaflet.groupedlayercontrol.css">
-    <script src="../js/mapa/plugins/groupedlayercontrol/leaflet.groupedlayercontrol.js" type="text/javascript"></script>
+    <script src="../js/plugins/groupedlayercontrol/leaflet.groupedlayercontrol.js" type="text/javascript"></script>
 
     <!--Plugin de desenho de polígonos: https://github.com/Leaflet/Leaflet.draw/tree/leaflet-master-->
     <link rel="stylesheet" href="../css/plugins/leaflet.draw.css">
-    <script src="../js/mapa/plugins/Leaflet.draw/Leaflet.draw.js"></script>
+    <script src="../js/plugins/Leaflet.draw/Leaflet.draw.js"></script>
 
-    <script src="../js/mapa/plugins/Leaflet.draw/edit/handler/Edit.Poly.js"></script>
-    <script src="../js/mapa/plugins/Leaflet.draw/edit/handler/Edit.SimpleShape.js"></script>
-    <script src="../js/mapa/plugins/Leaflet.draw/edit/handler/Edit.Circle.js"></script>
-    <script src="../js/mapa/plugins/Leaflet.draw/edit/handler/Edit.Rectangle.js"></script>
+    <script src="../js/plugins/Leaflet.draw/edit/handler/Edit.Poly.js"></script>
+    <script src="../js/plugins/Leaflet.draw/edit/handler/Edit.SimpleShape.js"></script>
+    <script src="../js/plugins/Leaflet.draw/edit/handler/Edit.Circle.js"></script>
+    <script src="../js/plugins/Leaflet.draw/edit/handler/Edit.Rectangle.js"></script>
 
-    <script src="../js/mapa/plugins/Leaflet.draw/draw/handler/Draw.Feature.js"></script>
-    <script src="../js/mapa/plugins/Leaflet.draw/draw/handler/Draw.Polyline.js"></script>
-    <script src="../js/mapa/plugins/Leaflet.draw/draw/handler/Draw.Polygon.js"></script>
-    <script src="../js/mapa/plugins/Leaflet.draw/draw/handler/Draw.SimpleShape.js"></script>
-    <script src="../js/mapa/plugins/Leaflet.draw/draw/handler/Draw.Rectangle.js"></script>
-    <script src="../js/mapa/plugins/Leaflet.draw/draw/handler/Draw.Circle.js"></script>
-    <script src="../js/mapa/plugins/Leaflet.draw/draw/handler/Draw.Marker.js"></script>
+    <script src="../js/plugins/Leaflet.draw/draw/handler/Draw.Feature.js"></script>
+    <script src="../js/plugins/Leaflet.draw/draw/handler/Draw.Polyline.js"></script>
+    <script src="../js/plugins/Leaflet.draw/draw/handler/Draw.Polygon.js"></script>
+    <script src="../js/plugins/Leaflet.draw/draw/handler/Draw.SimpleShape.js"></script>
+    <script src="../js/plugins/Leaflet.draw/draw/handler/Draw.Rectangle.js"></script>
+    <script src="../js/plugins/Leaflet.draw/draw/handler/Draw.Circle.js"></script>
+    <script src="../js/plugins/Leaflet.draw/draw/handler/Draw.Marker.js"></script>
 
-    <script src="../js/mapa/plugins/Leaflet.draw/ext/LatLngUtil.js"></script>
-    <script src="../js/mapa/plugins/Leaflet.draw/ext/GeometryUtil.js"></script>
-    <script src="../js/mapa/plugins/Leaflet.draw/ext/LineUtil.Intersect.js"></script>
-    <script src="../js/mapa/plugins/Leaflet.draw/ext/Polyline.Intersect.js"></script>
-    <script src="../js/mapa/plugins/Leaflet.draw/ext/Polygon.Intersect.js"></script>
+    <script src="../js/plugins/Leaflet.draw/ext/LatLngUtil.js"></script>
+    <script src="../js/plugins/Leaflet.draw/ext/GeometryUtil.js"></script>
+    <script src="../js/plugins/Leaflet.draw/ext/LineUtil.Intersect.js"></script>
+    <script src="../js/plugins/Leaflet.draw/ext/Polyline.Intersect.js"></script>
+    <script src="../js/plugins/Leaflet.draw/ext/Polygon.Intersect.js"></script>
 
-    <script src="../js/mapa/plugins/Leaflet.draw/Control.Draw.js"></script>
-    <script src="../js/mapa/plugins/Leaflet.draw/Tooltip.js"></script>
-    <script src="../js/mapa/plugins/Leaflet.draw/Toolbar.js"></script>
+    <script src="../js/plugins/Leaflet.draw/Control.Draw.js"></script>
+    <script src="../js/plugins/Leaflet.draw/Tooltip.js"></script>
+    <script src="../js/plugins/Leaflet.draw/Toolbar.js"></script>
 
-    <script src="../js/mapa/plugins/Leaflet.draw/draw/DrawToolbar.js"></script>
-    <script src="../js/mapa/plugins/Leaflet.draw/edit/EditToolbar.js"></script>
-    <script src="../js/mapa/plugins/Leaflet.draw/edit/handler/EditToolbar.Edit.js"></script>
-    <script src="../js/mapa/plugins/Leaflet.draw/edit/handler/EditToolbar.Delete.js"></script>
+    <script src="../js/plugins/Leaflet.draw/draw/DrawToolbar.js"></script>
+    <script src="../js/plugins/Leaflet.draw/edit/EditToolbar.js"></script>
+    <script src="../js/plugins/Leaflet.draw/edit/handler/EditToolbar.Edit.js"></script>
+    <script src="../js/plugins/Leaflet.draw/edit/handler/EditToolbar.Delete.js"></script>
 
     <!--Plugin para imprimir mapa: https://github.com/Igor-Vladyka/leaflet.browser.print-->
-    <script src="../js/mapa/plugins/Leaflet.browser.print/leaflet.browser.print.js"></script>
-    <script src="../js/mapa/plugins/Leaflet.browser.print/leaflet.browser.print.sizes.js"></script>
-    <script src="../js/mapa/plugins/Leaflet.browser.print/leaflet.browser.print.utils.js"></script>
+    <script src="../js/plugins/Leaflet.browser.print/leaflet.browser.print.js"></script>
+    <script src="../js/plugins/Leaflet.browser.print/leaflet.browser.print.sizes.js"></script>
+    <script src="../js/plugins/Leaflet.browser.print/leaflet.browser.print.utils.js"></script>
+
+    <!--GetFeatureInfo plugin-->
+    <script src="../js/plugins/GetFeatureInfo/leaflet.wms.js"></script>
+    <script src="../js/plugins/GetFeatureInfo/json2table.js"></script>
+    
+    <!-- EasyButton -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.css">
+    <script src="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.js"></script>
+
+    <!--Plugin: https://github.com/rowanwins/leaflet-easyPrint-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.js"></script> 
+
+    <!--Plugin externo para download png do mapa-->
+    <script src="../js/plugins/Leaflet-EasyPrint/dist/bundle.js"></script>
 
     <!-- jQuery CDN --> 
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script> 
@@ -93,11 +107,13 @@
     <script src="../conf/overlay-anonimo.js"></script>  
     <script src="../conf/360.js"></script>
 
+    <!--Javascript do mapa-->
+    <script src="../js/files/main.js"></script>   
+    <script src="../js/files/class.js"></script>
+    <script src="../js/files/functions.js"></script>
+
     <!--Javascript do menu principal superior-->
-    <script src="../js/menu-principal/barraEdicao.js"></script>
-    <script src="../js/menu-principal/barraPesquisas.js"></script>
-    <script src="../js/menu-principal/redirecionamento-paginas.js"></script>
-    <script src="../js/menu-principal/exportar-mapa.js"></script>
+    <script src="../js/files/call_functions.js"></script>
 
     <!-- Bootstrap JS-->
     <script src="../js/bootstrap/bootstrap.bundle.js"></script>
@@ -107,10 +123,10 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     <!--CSS criado-->
-    <link rel="stylesheet" href="../css/files/mapa/config.css">
-    <link rel="stylesheet" href="../css/files/menu-principal/menu.css">
-    <link rel="stylesheet" href="../css/files/login/login.css">
-    <link rel="stylesheet" href="../css/files/login-prefeitura/style.css">
+    <link rel="stylesheet" href="../css/files/mapa.css">
+    <link rel="stylesheet" href="../css/files/menu.css">
+    <link rel="stylesheet" href="../css/files/login.css">
+    <link rel="stylesheet" href="../css/files/login-prefeitura.css">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="../css/bootstrap/bootstrap.css">
@@ -119,14 +135,6 @@
     <link rel="stylesheet" href="../css/bootstrap/bootstrap-grid.min.css">
     <link rel="stylesheet" href="../css/bootstrap/bootstrap-reboot.css" >
     <link rel="stylesheet" href="../css/bootstrap/bootstrap-reboot.min.css">
-
-    <!--GetFeatureInfo plugin-->
-    <script src="../js/mapa/plugins/GetFeatureInfo/leaflet.wms.js"></script>
-    <script src="../js/mapa/plugins/GetFeatureInfo/json2table.js"></script>
-    
-    <!-- EasyButton -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.css">
-    <script src="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.js"></script>
     
     <!-- Jquery Mask -->
      <script src="../js/menu-principal/plugins/jquery.mask.min.js"></script>
