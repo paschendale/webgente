@@ -149,7 +149,7 @@
           </ul>
           <p id="bem-vindo">Prefeitura Municipal de Bom Despacho</p>
           &nbsp
-          <button class="btn btn-outline-primary my-2 my-sm-0" type="button" onclick="logout()">Sair</button>
+          <button class="btn btn-outline-primary my-2 my-sm-0" type="button" onclick="logoutPrefeitura()">Sair</button>
 
         </div>
       </nav>

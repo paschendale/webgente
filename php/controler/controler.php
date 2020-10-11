@@ -38,10 +38,8 @@ class controler{
 			$senha = md5($_POST['senha']);
 		} 
 
-		echo getcwd();
-
-		//$usuario = new usuario();
-		//$usuario->setLogin($cpf, $senha);
+		$usuario = new usuario();
+		$usuario->setLogin($cpf, $senha);
 	}
 
 	function recuperarSenha(){
@@ -54,7 +52,7 @@ class controler{
 		if($senhaAntiga == 'admin' && ($email == 'admin@admin' || $email == 'gente@gente')){
 			$usuario->novaSenha($email, $senhaNova);
 			echo("<script>alert('Senha atualizada com sucesso.');</script>");
-			header('refresh: 0.001; ../php/login.php');
+			header('refresh: 0.001; ../login.php');
 	 		exit;
 		}
 		else{
