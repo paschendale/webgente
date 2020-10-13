@@ -95,7 +95,7 @@ class mapa{
 		}
 
 		//Código que chama o geolocation uma única vez
-		/*if(navigator.geolocation){
+		if(navigator.geolocation){
 			//navigator.geolocation.watchPosition(...)
     		navigator.geolocation.getCurrentPosition(showPosition, null, {
     			enableHighAccuracy: true
@@ -108,7 +108,7 @@ class mapa{
 	  	function showPosition(position){
 	  		L.marker([position.coords.latitude, position.coords.longitude]).addTo(myMapa.getMapa());
 	  		myMapa.getMapa().panTo([position.coords.latitude, position.coords.longitude],init.zoomInicial);
-		}*/
+		}
 	}
 
 	exportar(){
@@ -170,6 +170,7 @@ class mapa{
 
 			    //Texto mostrado quando o usuário clica na geometria desenhada
 			this.mapa.on('draw:created', function(e){ 
+
 				var type = e.layerType,
 				           layer = e.layer;
 				    if(type == 'polyline'){
@@ -321,15 +322,3 @@ class overlay{
 	}
 }
 
-//função que deleta os atributos que não podem ser acessados
-function restrictedAtributes(objeto,nome){  
-	for(camada of vetorOverlay){
-		if(camada.restricted != undefined && nome==camada.layers){
-		for(campos_restristos of camada.restricted){
-			delete objeto[campos_restristos];
-		}
-		
-	}}
-	
-return objeto;
-}

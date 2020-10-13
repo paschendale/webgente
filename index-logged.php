@@ -70,7 +70,7 @@
 
     <!--GetFeatureInfo plugin-->
     <script src="js/plugins/GetFeatureInfo/leaflet.wms.js"></script>
-    <script src="js/files/functions.js"></script>
+    <script src="js/auxiliary_functions.js"></script>
     
     <!-- EasyButton -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.css">
@@ -89,12 +89,12 @@
      
 
     <!--Javascript do mapa-->
-    <script src="js/files/main.js"></script>   
-    <script src="js/files/class.js"></script>
-    <script src="js/files/functions.js"></script>
+    <script src="js/main.js"></script>   
+    <script src="js/class.js"></script>
+    <script src="js/serch_functions.js"></script>
 
     <!--Javascript do menu principal superior-->
-    <script src="js/files/call_functions.js"></script>
+    <script src="js/call_functions.js"></script>
 
     <!--<script src="js/mapa/drag-and-drop.js"></script>-->
 
