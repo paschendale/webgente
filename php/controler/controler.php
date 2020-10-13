@@ -25,7 +25,7 @@ class controler{
 		}
 		else{
 			echo("<script>alert('CPF já cadastrado no sistema.');</script>");
-			header('refresh: 0.001; ../cadastro-usuario.html');
+			header('refresh: 0.001; ../register.php');
 			exit;
 		}
 	}
@@ -69,7 +69,7 @@ class controler{
 			}
 			else{
 				echo("<script>alert('Senha e/ou email incorreto.');</script>");
-				header('refresh: 0.001; ../recuperar-senha.html');
+				header('refresh: 0.001; ../recoverPassword.html');
 	 			exit;
 			}
 		}

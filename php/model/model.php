@@ -57,7 +57,7 @@ class usuario{
 		$con->fechando_conexao();
 
 		echo('<script>alert("Cadastro com sucesso.");</script>');
-		header('refresh: 0.001; ../cadastro-usuario.php');
+		header('refresh: 0.001; ../register.php');
  		exit;
 	}
 
@@ -77,11 +77,11 @@ class usuario{
  			$_SESSION['cpf'] = $cpf;
  			$_SESSION['nome'] = $resultado['nome'];
 
- 			header('refresh: 0.001; ../../index-prefeitura.php');
+ 			header('refresh: 0.001; ../../index-logged.php');
  			exit;
  		}
  		else if(($resultado['senha'] == 'admin' && $senha == 'admin') && $resultado['tipo'] == 'administrador'){
- 			header('refresh: 0.001; ../../recuperar-senha.html');
+ 			header('refresh: 0.001; ../../recoverPassword.html');
  			exit;
  		}
  		else if($resultado['senha'] == $senha && $resultado['tipo'] == 'administrador'){
@@ -90,7 +90,7 @@ class usuario{
  			//Inicia o usuário no sistema
  			$_SESSION['cpf'] = $cpf;
  			$_SESSION['nome'] = $resultado['nome'];
- 			header('refresh: 0.001; ../tela-administrador.php');
+ 			header('refresh: 0.001; ../admin.php');
  			exit;
  		}
  		else{

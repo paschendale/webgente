@@ -8,7 +8,7 @@
       }
       if(!isset($_SESSION['nome'])){
           session_destroy();
-          header('refresh: 0.001; index-anonimo.html');
+          header('refresh: 0.001; index.html');
           exit;
       }     
 
@@ -18,6 +18,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
 
     <link rel="icon" href="favicon.ico">
+    
     <!--CSS do Leaflet-->
     <link rel="stylesheet" href="../css/leaflet/leaflet.css">
 
@@ -122,10 +123,10 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     <!--CSS criado-->
-    <link rel="stylesheet" href="../css/files/mapa.css">
+    <link rel="stylesheet" href="../css/files/map.css">
     <link rel="stylesheet" href="../css/files/menu.css">
     <link rel="stylesheet" href="../css/files/login.css">
-    <link rel="stylesheet" href="../css/files/login-prefeitura.css">
+    <link rel="stylesheet" href="../css/files/index-logged.css">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="../css/bootstrap/bootstrap.css">
@@ -142,37 +143,66 @@
      <script src="../js/menu-principal/plugins/localization/messages_pt_BR.js"></script> 
      <script src="../js/menu-principal/aplicacaoJMask.js"></script>
 
-
     <title>WebGENTE</title>
   </head>
   <body>
-    <div id="menu">
-      <header>
-        <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <a class="navbar-brand" href="#"><img src="img/webgente-fundo-escuro-120x40.png" alt=""></a>
-            <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-              <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-            </ul>
-            <button type="button" class="btn btn-dark" onclick="logout()">Logout</button>
+
+  	<header>
+  		<nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="#"><img src="img/webgente-fundo-escuro-120x40.png" alt=""></a>
+          <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+            <p id="texto-cabeçalho">Cadastro de novos usuários.</p>
+        </div>
+      </nav>
+  	</header>
+
+    <section id="cadastro-usuario">
+      <div id="local">
+          <a href="admin.php">Painel do administrador</a>/ Cadastro de novos usuários
+        </div>
+      <div class="row">
+        <div class="col-1 col-sm-2 col-xl-2"></div>
+          <div class="col-10 col-sm-8 col-xl-8">
+            <br>
+            <form action="redirect/redirecionamento-cadastro.php" method="POST" id="formulario" name="formulario">
+              <label for="nome">Nome</label>
+                <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome completo" required>
+              <label for="cpf">CPF</label> 
+                <input type="text" class="form-control" id="cpf" name="cpf" placeholder="CPF" required>
+              <label for="data-nascimento">Data de nascimento</label>
+                <input type="date" class="form-control" id="data-nascimento" name="data-nascimento" required>
+              <label for="sexo">Sexo</label>
+              <br>
+                <input type="radio" id="sexo" name="sexo" value="masculino"> Masculino
+                <input type="radio" id="sexo" name="sexo" value="feminino"> Feminino
+                <input type="radio" id="sexo" name="sexo" value="nao-informar"> Não informar
+              <br>
+              <label for="faixa-etaria">Faixa etária</label>
+                <select class="form-control" id="faixa-etaria" name="faixa-etaria">
+                  <option>----</option>
+                  <option value="menores-15-anos">Menores de 15 anos</option>
+                  <option value="entre-16-e-64-anos">Entre 16 e 64 anos</option>
+                  <option value="a-partir-de-65-anos">A partir de 65 anos</option>
+                </select>
+              <label for="celular">Celular</label>
+                <input type="text" class="form-control" id="celular" name="celular" placeholder="Celular">
+              <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
+              <label for="senha">Senha</label>
+                <input type="password" class="form-control" id="senha" name="senha" placeholder="Senha" required>
+              <br>
+              <button type="submit" class="btn btn-secondary btn-lg btn-block" id="enviar">Cadastrar</button>
+            </form>
           </div>
-        </nav>
-      </header>
-      <section>
-        <div class="row">
-          <div class="col-xl-1"></div>
-            <div class="card" style="width: 18rem;">
-              <img class="card-img-top" src="../img/usuarios.jpg" alt="Adicionar subcategoria">
-                <div class="card-body">
-                  <h5 class="card-title">Novos usuários</h5>
-                  <p class="card-text">Cadastro de novos usuários da prefeitura no sistema.</p>
-                  <a href="#" class="btn btn-primary" id="cadastro-usuarios" name="cadastro-usuarios" onclick="cadastroUsuarios()">Usuários</a>
-                </div>
-            </div>
-        <div class="col-xl-1"></div>
-      </section>
-    </div>
+        <div class="col-1 col-sm-2 col-xl-2"></div>
+      </div>
+    </section>
+
+    <footer>
+    </footer>
+
   </body>
 </html>

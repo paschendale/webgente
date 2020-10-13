@@ -23,17 +23,16 @@ function localizacao(){
 }
 
 //Redirecionamento de páginas com javascript
-
 function recuperarSenhaDeslogado(){
-	window.open('recuperar-senha.html', '_blank');
+	window.open('recoverPassword.html', '_blank');
 }
 
 function recuperarSenhaLogado(){
-	window.open('../recuperar-senha.html', '_blank');
+	window.open('../recoverPassword.html', '_blank');
 }
 
 function cadastro(){
-	window.open('cadastro-usuario.html', '_blank');
+	window.open('register.html', '_blank');
 }
 
 function logout(){
@@ -49,7 +48,7 @@ function login(){
 }
 
 function cadastroUsuarios(){
-	location.href='cadastro-usuario.php';
+	location.href='register.php';
 }
 
 function alterarSenha(){
