@@ -1,7 +1,7 @@
 L.Draw = {};
 
 L.Draw.Feature = L.Handler.extend({
-	includes: L.Mixin.Events,
+	includes: L.Evented.prototype,
 
 	initialize: function (map, options) {
 		this._map = map;

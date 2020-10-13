@@ -10,8 +10,6 @@
 
     <!--Javascript do Leaflet-->
     <script src="../js/leaflet/leaflet.js"></script>
-    <script src="../js/leaflet/leaflet-src.esm.js"></script>
-    <script src="../js/leaflet/leaflet-src.js"></script>
 
     <!--Plugin photosphereviewer: https://github.com/JeremyHeleine/WP-Photo-Sphere-->
     <script src="../js/plugins/photosphere/three.min.js"></script>
@@ -57,14 +55,10 @@
     <script src="../js/plugins/Leaflet.draw/edit/handler/EditToolbar.Edit.js"></script>
     <script src="../js/plugins/Leaflet.draw/edit/handler/EditToolbar.Delete.js"></script>
 
-    <!--Plugin para imprimir mapa: https://github.com/Igor-Vladyka/leaflet.browser.print-->
-    <script src="../js/plugins/Leaflet.browser.print/leaflet.browser.print.js"></script>
-    <script src="../js/plugins/Leaflet.browser.print/leaflet.browser.print.sizes.js"></script>
-    <script src="../js/plugins/Leaflet.browser.print/leaflet.browser.print.utils.js"></script>
 
     <!--GetFeatureInfo plugin-->
     <script src="../js/plugins/GetFeatureInfo/leaflet.wms.js"></script>
-    <script src="../js/plugins/GetFeatureInfo/json2table.js"></script>
+    
     
     <!-- EasyButton -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.css">
@@ -81,17 +75,17 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
     <!--Javascript do mapa-->
-    <script src="../js/mapa/main.js"></script>
-    <script src="../js/mapa/submenu_pesquisas.js"></script>
-    <script src="../js/mapa/classes.js"></script>
-      <script src="../js/mapa/table_filter.js"></script>
+    <script src="../js/files/main.js"></script>
+    <script src="../js/files/call_functions.js"></script>
+    <script src="../js/files/class.js"></script>
+      <script src="../js/files/functions.js"></script>
     <!--<script src="js/mapa/drag-and-drop.js"></script>-->
 
     <!-- Camadas do mapa -->
     <script src="../conf/startup.js"></script>
-    <script src="../conf/base.js"></script>
-    <script src="../conf/overlay-anonimo.js"></script>  
-    <script src="../conf/360.js"></script>
+    <script src="../conf/anon/base.js"></script>
+    <script src="../conf/anon/overlay.js"></script>  
+   
 
     <!--Javascript do mapa-->
     <script src="../js/files/main.js"></script>   
@@ -123,11 +117,11 @@
     <link rel="stylesheet" href="../css/bootstrap/bootstrap-reboot.min.css">
     
     <!-- Jquery Mask -->
-     <script src="../js/menu-principal/plugins/jquery.mask.min.js"></script>
-     <script src="../js/menu-principal/plugins/jquery.validate.min.js"></script> 
-     <script src="../js/menu-principal/plugins/additional-methods.min.js"></script>
-     <script src="../js/menu-principal/plugins/localization/messages_pt_BR.js"></script> 
-     <script src="../js/menu-principal/aplicacaoJMask.js"></script>
+     <script src="../js/plugins/jquery.mask/jquery.mask.min.js"></script>
+     <script src="../js/plugins/jquery.mask/jquery.validate.min.js"></script> 
+     <script src="../js/plugins/jquery.mask/additional-methods.min.js"></script>
+     <script src="../js/plugins/jquery.mask/messages_pt_BR.js"></script> 
+     
 
 <body>
 
@@ -135,7 +129,7 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <a class="navbar-brand" href="#"><img src="img/webgente-fundo-escuro-120x40.png" alt=""></a>
+        <a class="navbar-brand" href="#"><img src="../img/webgente-fundo-escuro-120x40.png" alt=""></a>
     </nav>
     <div class="container">
         <form method="POST" action="redirect/redirecionamento-login.php">

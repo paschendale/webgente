@@ -3,7 +3,7 @@ L.EditToolbar.Delete = L.Handler.extend({
 		TYPE: 'remove' // not delete as delete is reserved in js
 	},
 
-	includes: L.Mixin.Events,
+	includes: L.Evented.prototype,
 
 	initialize: function (map, options) {
 		L.Handler.prototype.initialize.call(this, map);

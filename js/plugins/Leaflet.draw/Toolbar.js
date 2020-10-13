@@ -1,5 +1,5 @@
 L.Toolbar = L.Class.extend({
-	includes: [L.Mixin.Events],
+	includes: [L.Evented.prototype],
 
 	initialize: function (options) {
 		L.setOptions(this, options);

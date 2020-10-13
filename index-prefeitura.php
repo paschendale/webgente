@@ -23,8 +23,6 @@
 
     <!--Javascript do Leaflet-->
     <script src="js/leaflet/leaflet.js"></script>
-    <script src="js/leaflet/leaflet-src.esm.js"></script>
-    <script src="js/leaflet/leaflet-src.js"></script>
 
     <!--Plugin photosphereviewer: https://github.com/JeremyHeleine/WP-Photo-Sphere-->
     <script src="js/plugins/photosphere/three.min.js"></script>
