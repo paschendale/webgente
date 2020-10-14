@@ -94,7 +94,7 @@
     <!--Javascript do mapa-->
     <script src="../js/main.js"></script>
     <script src="../js/class.js"></script>
-    <script src="../js/serch_functions.js"></script>
+    <script src="../js/search_functions.js"></script>
 
     <!--<script src="js/mapa/drag-and-drop.js"></script>-->
 
