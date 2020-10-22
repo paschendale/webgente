@@ -1,18 +1,6 @@
 // Definindo camadas base
 var vetorBasemap = [
-    /* Brenda: tirar a camada base dos limites municipais
-    parametros_limites_municipais = {
-        nome: 'Limites Municipais',
-        host: 'https://geoserver.genteufv.com.br/geoserver/ows?',
-        padrao: false,
-        maxZoom: 25,
-        layers: 'bomdespacho:limites_municipais',
-        format: 'image/png',
-        transparent: false,
-        tiled: true,
-        attribution: 'Limites Municipais obtidos através do IBGE (2010) e Prefeitura Municipal de Bom Despacho (2019)'
-    },*/
-
+    
     parametros_imageamento = {
         nome: 'Imageamento Aéreo e Orbital',
         host: 'https://geoserver.genteufv.com.br/geoserver/ows?',
