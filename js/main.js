@@ -1,23 +1,58 @@
 // Variável global para permitir ou não a exibição do popup do GetfeatureInfo, true: exibe o popup de infomações, false: impede a exibição. 
+
 var info_gfi=false; 
 var xyz=false;
+
 // Variáveis globais para adicionar ou retirar a barra de Edição
+
 var drawnItems;
 var drawControl; 
 var menu = " ";
 var mde= "";
+
 //Função principal int main()
+
+/* A função main descrita abaixo exerce o papel de inicilizar toda a interface do WebGENTE, abrindo o mapa inicial com
+configurações estabelecidas na pasta "conf". Dentro dessa pasta, podemos encontrar outras duas pastas "anon" e "logged" 
+que definem a inicialização da interface para um usuário anônimo e para um usuário que possui acesso a informações restritas, 
+respectivamente. Além dessas duas pastas, possuímos um arquivo PHP chamado "conexão" (conexão.php) que é responsável pela conexão 
+com o Banco de Dados para fins de cadastro de usuário e o arquivo JavaScript "startup" (startup.js) que define configurações 
+iniciais de latitude, longitude, zoom inicial e define um site base para buscar as imagens em 360º do WebGENTE. */
+
 function main(){
 
     // Inicializa o mapa conforme configurações em conf/startup.js
+
+    /* Aqui estamos criando um objeto que inicializa a interface inicial do mapa de acordo com as configurações estabelecidas na 
+    pasta conf/startup.js */
+    
+    /* Observe que a variável "init" foi definida no arquivo startup.js e está sendo chamada aqui justamente para retornar as 
+    configurações de inicialização do mapa. */
+
+    /* O objeto myMapa foi construído com base na classe "mapa", definida no arquivo js/class.js */
+
     myMapa = new mapa(init.latitude,init.longitude,init.zoomInicial);
+
+    /* Aqui estamos chamando uma propriedade do objeto myMapa criado, que retorna uma escala para o mapa e a exibe no canto inferior 
+    esquerdo da interface do WebGENTE. */
+
+    /* Essa propriedade do objeto myMapa que se chama "scale" é um plugin que está definido dentro da classe "mapa" no arquivo js/class.js */
+
     myMapa.scale();
+
+    /* A variável criada abaixo (optionsControl) utiliza o plugin "collapse" que serve para mostrar e esconder conteúdo. Basicamente
+    essa variável faz com que quando clicamos em um botão apareça uma informação contida nele e permite também o fechamento desse botão */
 
     var optionsControl = {
         collapsed: true,
         groupsCollapsable: true,
         groupCheckboxes: true
     };
+    
+    /* O objeto "Lc" criado abaixo utiliza o pluguin "groupedLayers" que organiza a exibição das layers (camadas) na interface do
+    WebGENTE. Observe que ele utiliza a variável "optionsControl" para tornar o botão de layers colapsável, assim como as caixas
+    de marcar (Checkboxes) das camadas. Além disso, esse obejto faz com que as camadas ativadas sejam adicionadas sobrepostas ao 
+    mapa base que estiver ativado */
     
     Lc = L.control.groupedLayers(null, null, optionsControl).addTo(myMapa.getMapa());
 
