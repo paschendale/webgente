@@ -1,13 +1,3 @@
-// Definindo camadas overlay
-
-/*
-maxZoom: 25,
-format: 'image/png',
-transparent: true,
-tiled: true
-
-*/
-
 /*
 	Ordem de preenchimento da classe overlay:
    new overlay (
@@ -24,8 +14,12 @@ tiled: true
 		tiled )
 */
 
-var overlayHost = 'https://geoserver.genteufv.com.br/geoserver/ows?';
+/* Variável overlayHost para definir o host/local em que as camadas estarão em um servidor de mapas */
+var overlayHost = 'http://localhost:8080/geoserver/ows?';
 
+
+/* Variável vetorOverlay para acrescentar as camadas overlay ao WebGENTE, seguindo uma ordem de preenchimento de parâmetros
+importante para a criação das camadas */ 
 
 var vetorOverlay =  [
 
@@ -91,8 +85,7 @@ var vetorOverlay =  [
 		['resp_vetorizacao', 'status_vetorizacao']
 		)
 	,
-	/* eixo de vias mudou para a base cadastral. além disso, 
-	o grupo mudou para "malha viária" e o nome para "Arruamento*/
+
 	parametros_tra_trecho_arruamento = new overlay(
 		 'Arruamentos',
 		 'bomdespacho:CBGE_Trecho_Arruamento',
@@ -135,7 +128,6 @@ var vetorOverlay =  [
 		)
 	,
 
-	/*Brenda*/
 	parametros_limite_expansao_urbana = new overlay(
 		'Área de Expansão Urbana',
 		'bomdespacho:MUB_Area_Expansao_Urbana',
@@ -208,7 +200,7 @@ var vetorOverlay =  [
 		['inscricao', 'numero_porta'],
 		['id'],
 		['Inscrição', 'Número da Porta', 'Identificação'],
-		['complemento', 'proprietario', 'ocupacao', 'utilizacao', 'del_frontal', 'sit_quadra', 'testada', 'tipo', 'alinhamento', 'situacao_edif', 'situacao_unid', 'estrutura', 'cobertura', 'parede', 'forro', 'revestimento', 'area_unidade_calculada', 'area_unidade_bci', 'cod_logradouro', 'cod_secao' , 'area_unidade', 'total_unidade', 'area_construida_total']
+		['complemento', 'ocupacao', 'utilizacao', 'del_frontal', 'sit_quadra', 'testada', 'tipo', 'alinhamento', 'situacao_edif', 'situacao_unid', 'estrutura', 'cobertura', 'parede', 'forro', 'revestimento', 'area_unidade_calculada', 'area_unidade_bci', 'cod_logradouro', 'cod_secao' , 'area_unidade', 'total_unidade', 'area_construida_total']
 	),
 
 	parametro_PTO_Geod_Topo_Controle_RN = new overlay (
