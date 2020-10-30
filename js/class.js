@@ -1,5 +1,7 @@
 //Cada plugin fica definido como uma função interna dessa classe, sendo chamado a medida que o usuário acha necessário
 
+/* A classe main foi criada nesse arquivo e é chamada no arquivo main.js para inicializar toda a interface do WebGENTE, definindo uma
+latitude, longitude e zoom iniciais, assim como a escala, o status, os botões da barra de pesquisa, barra de edição, botões de informações, etc*/
 class mapa{
 	//public
 	constructor(latitude, longitude, zoom){
@@ -20,6 +22,9 @@ class mapa{
 	}
 
 	//Plugin da Barra de escala
+	/* O objeto scale vai definir as opções de escala do WebGENTE utilizando o plugin de barra de escada além de também adicionar
+	uma barra de escala no mapa. Esse plugin tem duas opções de unidades: metros/quilômetros (metric) e milhas/pés (imperial).
+	Ele é chamado no arquivo main.js para apresentar a escala na interface do WebGENTE */
 	scale(){
 	    var optionsScale = {
 	    	metric: true, //Define a unidade em m/km
@@ -29,6 +34,9 @@ class mapa{
 	    L.control.scale(optionsScale).addTo(this.mapa);
 	}
 
+
+	/* O objeto barraPesquisa irá fazer todas as opções para habilitar a ferramenta de pesquisas que será chamada no arquivo main.js
+	Com esse objeto é possível pesquisar em qualquer camada os atributos escolhidos pelo usuário */
 	barraPesquisas(){
 		
 		if(menu==" "){
@@ -38,7 +46,7 @@ class mapa{
 			var camadasPesquisaveis=`<option value="-1"> </option><option selected disabled hidden>Nada selecionado</option>`;
 			var obj_camada;
 			//As abas de pesquisas são definidas de acordo com as camadas que possuem campos pesquisáveis definidos em prop_query 
-			
+			/* Interação para pesquisar em toda a camada presente no vetorOverlay apresentado no arquivo main e na pasta conf */
 			for (var n=0;n<vetorOverlay.length; n++ ){
 
 				obj_camada = vetorOverlay[n];
@@ -52,6 +60,7 @@ class mapa{
 
 			}
 
+			/* essa parte do código vai estilizar em HTML a aparência na interface do WebGENTE da barra de pesquisa para o usuário*/
 			menu.innerHTML = `
 				<div class="row">
 				  	<div id="barra-de-pesquisa">
