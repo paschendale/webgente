@@ -145,7 +145,7 @@ ao usuário*/
 	}
 
 	//Plugin para desenhar as geometrias
-	/* O objeto barraEdicao é chamado no arquivo main.js e é usado para o usuário poder habilitar e desabilitar as ferramentas de desenhos
+	/* O objeto barraEdicao é chamado no arquivo call_functions.js e main.js; é usado para o usuário poder habilitar e desabilitar as ferramentas de desenhos
 	como desenhar polilinha, círculo, retângulo, polígono, inserir um marcador e etc. Esse plugin de desenhar geometrias também vai ajudar
 	para que, por exemplo, ao usuário criar uma linha no mapa do WebGENTE ele consiga saber o tamanho da mesma em metros ou quilômetros. */
 	barraEdicao(valor){
