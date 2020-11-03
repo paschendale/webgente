@@ -1,6 +1,6 @@
 //Cada plugin fica definido como uma função interna dessa classe, sendo chamado a medida que o usuário acha necessário
 
-/* A classe main foi criada nesse arquivo e é chamada no arquivo main.js para inicializar toda a interface do WebGENTE, definindo uma
+/* A classe mapa foi criada nesse arquivo e é chamada no arquivo main.js para inicializar toda a interface do WebGENTE, definindo uma
 latitude, longitude e zoom iniciais, assim como a escala, o status, os botões da barra de pesquisa, barra de edição, botões de informações, etc*/
 class mapa{
 	//public
@@ -35,8 +35,8 @@ class mapa{
 	}
 
 
-	/* O objeto barraPesquisa irá fazer todas as opções para habilitar a ferramenta de pesquisas que será chamada no arquivo main.js
-	Com esse objeto é possível pesquisar em qualquer camada os atributos escolhidos pelo usuário */
+	/* O objeto barraPesquisa irá fazer todas as opções para habilitar (e desabilitar) a ferramenta de pesquisas. Esse objeto é
+	chamado no arquivo main.js e com ele é possível pesquisar em qualquer camada presente no WebGENTE os atributos escolhidos pelo usuário */
 	barraPesquisas(){
 		
 		if(menu==" "){
@@ -60,7 +60,8 @@ class mapa{
 
 			}
 
-			/* essa parte do código vai estilizar em HTML a aparência na interface do WebGENTE da barra de pesquisa para o usuário*/
+/* essa parte do código vai estilizar em HTML a aparência na interface do WebGENTE da barra de pesquisa para algo mais agradável visualmente
+ao usuário*/
 			menu.innerHTML = `
 				<div class="row">
 				  	<div id="barra-de-pesquisa">
@@ -81,11 +82,14 @@ class mapa{
 		}
 	}
 
+
 	showPosition(position){
 		alert(position.coords.latitude);
 		alert(position.coords.longitude);
 	}
 
+	/* O objeto minhaLocalizacao é usado para mostrar a localização do usuário quando a ferramenta for habilitada pelo
+	usuário. Esse objeto é chamado no arquivo main.js para apresentação dele na interface do WebGENTE */
 	minhaLocalizacao(){
 		//Código definido para esperar 10 segundos
 		if(navigator.geolocation){
@@ -97,6 +101,7 @@ class mapa{
 	    	alert("Navegador não suporta esse tipo de operação. Mude de navegador ou atualize-o.");
 	  	}
 
+		/* Função showPosition mostra as coordenadas da posição em que o usuário se encontra no WebGENTE e adicionam elas no mapa */  
 	  	function showPosition(position){
 	  		
 	  		L.marker([position.coords.latitude, position.coords.longitude]).addTo(myMapa.getMapa());
@@ -120,6 +125,10 @@ class mapa{
 		}
 	}
 
+
+	/* O objeto "exportar" é usado para exportar o mapa do WebGENTE em jpeg. Esse objeto é chamado no arquivo main.js de forma a criar um
+	botão na interface do WebGENTE para a exportação do mapa ser feito. Esse mapa seria baixado com qualidade, tamanho e largura já pré
+	definidos*/
 	exportar(){
 		alert("Baixando a imagem. Aguarde.");
 		domtoimage.toJpeg(document.getElementById('mapa'), {
@@ -136,7 +145,11 @@ class mapa{
 	}
 
 	//Plugin para desenhar as geometrias
+	/* O objeto barraEdicao é chamado no arquivo main.js e é usado para o usuário poder habilitar e desabilitar as ferramentas de desenhos
+	como desenhar polilinha, círculo, retângulo, polígono, inserir um marcador e etc. Esse plugin de desenhar geometrias também vai ajudar
+	para que, por exemplo, ao usuário criar uma linha no mapa do WebGENTE ele consiga saber o tamanho da mesma em metros ou quilômetros. */
 	barraEdicao(valor){
+		/* Se a barra de edição for habilitada pelo usuário, as opções de desenho vão aparecer para o usuário*/
 		if(valor == true){
 			drawnItems = new L.FeatureGroup();
 			//Definindo as funcionalidades da barra de controle lateral
@@ -180,8 +193,13 @@ class mapa{
 			    //Texto mostrado quando o usuário clica na geometria desenhada
 			this.mapa.on('draw:created', function(e){ 
 
+				/* Essa variável type vai ler o tipo de edição que o usuário quer fazer (polilinha, polígono, entre outros) e vai calcular
+				informações (como o tamanho, área e coordenadas) baseados nesse tipo de edição */
 				var type = e.layerType,
-				           layer = e.layer;
+						   layer = e.layer;
+						   
+					/* Se o usuário escolher uma edição/desenho do tipo polilinha, será possível calcular a distância (tamanho da polilinha), 
+					assim como a área aproximada caso ela seja uma polilinha fechada */
 				    if(type == 'polyline'){
 				    	var tamanho = e.layer._latlngs.length;
 				    	var coordenadas = "";
@@ -226,12 +244,19 @@ class mapa{
 				    	
 				    	layer.bindPopup('Área aproximada: ' + area.toFixed(2) + ' m <br><br><button type="button" id="create" onclick="gerarTXT()">Download (duplo clique)</button><a download="coordenadasLinha.json" id="downloadlink" style="display: none">Clique aqui</a>');
 
-				    }
+					}
+					
+					/* Se o usuário escolher uma edição/desenho do tipo "marker", o marcador será inserido onde selecionado e retornará um GeoJSON 
+					com as coordenadas e outras informações a respeito de onde o marcador foi inserido" */
 				    if(type == 'marker'){
 						getJson = `{ "type": "Feature", "geometry" : { "type" : "Point", "coordinates" : [` + e.layer._latlng.lat + ','+  e.layer._latlng.lng  + `] } }`;
 				        layer.bindPopup('<button type="button" id="create" onclick="gerarTXT()">Download (duplo clique)</button><a download="coordenadasMarcador.json" id="downloadlink" style="display: none">Clique aqui</a>');
 
-				    }
+					}
+					
+					/* Se o usuário escolher uma edição/desenho do tipo polígono, será possível gerar um arquivo GeoJSON com as coordenadas caso o usuário queira
+					realizar o download da edição feita. Além disso, informações a respeito da área aproximada do polígono em metros quadrados também serão
+					disponibilizadas*/
 				    if(type == 'polygon'){
 				    	//Gerando o geojson com as coordenadas para download
 				    	var tamanho = e.layer._latlngs[0].length;
@@ -253,19 +278,23 @@ class mapa{
 		               
 						layer.bindPopup('Área aproximada: ' + area.toFixed(2) + ' m2 <br><br><button type="button" id="create" onclick="gerarTXT()">Download (duplo clique)</button><a download="coordenadasPoligono.json" id="downloadlink" style="display: none">Clique aqui</a>');
 					}
-					drawnItems.addLayer(layer); //Define o desenho como uma camada
+					drawnItems.addLayer(layer); //Define o desenho feito pelo usuário como uma camada
 				
 				});
 			
 			}
+
+			/* Se a barra de edição for desabilitada pelo usuário, as opções de desenho não aparecerão na interface do WebGENTE
+			ou seja, a barra de edição será removida */
 			else if(valor == false){
 				this.mapa.removeControl(drawControl);
-				this.mapa.removeLayer(drawnItems);
-			//Remove a Barra de Edição já existente  	
+				this.mapa.removeLayer(drawnItems);	
 			}
 		}
 }
  
+/* A classe wmsCamada é usada para gerar as camadas base do WebGENTE (presentes na pasta conf tanto em logged > base.js quanto em anon > base.js).
+Essa classe vai definir um host e um objetoCamada para que as camadas base sejam apresentadas no WebGENTE */
 class wmsCamada{
 	//public
 	constructor(objetoCamada){
@@ -290,6 +319,10 @@ class baseLayer{
 	}
 }
 
+/*A classe overlay é usada para gerar as camadas overlays do WebGENTE (presentes na pasta conf tanto em logged > overlay.js quanto em anon > overlay.js).
+Essa classe vai definir vários parâmetros para as camadas overlay como o nome que vai aparecer no WebGENTE, onde essa camada se encontra no
+servidor de mapas GeoServer (workspace:camada), o nome do grupo que estará essa camada no WebGENTE, a criação de arrays (prop_querys) para 
+definir os atributos que serão apresentados (alpha, numeric e alternative) e os que serão restritos, assim como atributos default modificáveis*/
 class overlay{
 	//public
 
