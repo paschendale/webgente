@@ -50,7 +50,7 @@ function fecharTabela(){
     tabelaExibicao.innerHTML = "";
 }
 
-/* Função para exportar os resultados da pesquisa em formatos shapefile, gml e scv */
+/* Função para exportar os resultados da pesquisa em formatos shapefile, gml e scv, puxando as informações presentes no GeoServer */
 function link_shp (i, formato){
 //Exportar resultar em shp, gml e scv
 	chaves.unshift("geom");
@@ -189,7 +189,7 @@ function buscaVia(posicao){
 }
 
 
-/* Vai receber a camada que o usuário deseja pesquisar e o que ele digitar no campo de pesquisar para retornar os possíveis resultados */
+/* Função receber a camada que o usuário deseja pesquisar e o que ele digitar no campo de pesquisar para retornar os possíveis resultados */
 function filtro ( objPesquisa){
 //Recebe a camada de pesquisa e concatena uma string com o conteúdo do cql_filter 
     var cql_filtro="";
@@ -234,7 +234,7 @@ function filtro ( objPesquisa){
 }
 
 
-/* Função que analisa a camada que vai ser filtrada na pesquisa. */
+/* Função que analisa/consulta a camada que vai ser filtrada na pesquisa. */
 function consultaFiltro (camadaFiltrada){
 
     /* Estilo em HTML da pesquisa enquanto estiver carregando a camada escolhida pelo usuário */
