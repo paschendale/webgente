@@ -1,4 +1,7 @@
-/* -------------- Funções para pesquisa ---------- */
+/* -------- Funções para os usuários pesquisarem, na "Barra de Pesquisa" da interface do WebGENTE, os atributos desejados das camadas 
+selecionadas -------- */
+
+
 
 /* Variáveis necessárias para a criação de funções pesquisáveis */ 
 var tabela= "";
