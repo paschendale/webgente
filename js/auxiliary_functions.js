@@ -1,5 +1,9 @@
+/* -------- Funções que são repetidas mais vezes em todo o código do WebGENTE ---------- */
+
+/* Variável para gerar o GeoJSON*/
 var getJson = "";
 
+/* Função de gerar txt */
 function gerarTXT(){
     var textFile = null,
     makeTextFile = function (text){
@@ -24,7 +28,7 @@ function gerarTXT(){
 
 
 // getfeatureinfo
-
+/* Função para trabalhar o plugin do getFeatureInfo */
 function objects2div (objeto){
 
     div_init = '<div';
@@ -60,6 +64,8 @@ function objects2div (objeto){
 
 };
 
+/* Função para tornar visível os atributos presentes nas camadas que irão aparecer no WebGENTE. Habilita sistemas e arquivos que possuem um 
+"path folder", como por exemplo o sistema Alfresco da prefeitura de Bom Despacho - MG  */
 function properties2table (objeto){
     tb_init = '<table><tr><th>Atributo</th><th>Valor</th></tr>';
 
@@ -89,6 +95,7 @@ function properties2table (objeto){
 
 
 //função que deleta os atributos que não podem ser acessados
+/* Função para restringir os atributos/informações que o usuário anônimo não pode ter acesso. */
 function restrictedAtributes(objeto,nome){  
     for(camada of vetorOverlay){
         if(camada.restricted != undefined && nome==camada.layers){
