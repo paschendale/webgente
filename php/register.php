@@ -159,7 +159,7 @@
         <div class="col-1 col-sm-2 col-xl-2"></div>
           <div class="col-10 col-sm-8 col-xl-8">
             <br>
-            <form action="redirect/redirecionamento-cadastro.php" method="POST" id="formulario" name="formulario">
+            <form action="redirect/redirect-register.php" method="POST" id="formulario" name="formulario">
               <label for="nome">Nome</label>
                 <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome completo" required>
               <label for="cpf">CPF</label> 

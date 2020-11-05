@@ -127,7 +127,7 @@
         <a class="navbar-brand" href="#"><img src="../img/webgente-fundo-escuro-120x40.png" alt=""></a>
     </nav>
     <div class="container">
-        <form method="POST" action="redirect/redirecionamento-login.php">
+        <form method="POST" action="redirect/redirect-login.php">
              <div class = row>
                 <div class="col-xl-4 col-sm-2" id="left">
                 </div>

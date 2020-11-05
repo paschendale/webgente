@@ -6,7 +6,7 @@ html,
 body,
 
 #mapa{
-    height: 97%;
+    height: 100%;
     z-index:-1;
     position: relative;
 }
