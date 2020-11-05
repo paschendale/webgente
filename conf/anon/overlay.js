@@ -14,11 +14,13 @@
 		tiled )
 */
 
-/* Variável overlayHost para definir o host/local em que as camadas estarão em um servidor de mapas */
+/* A variável overlayHost foi criada para definir o host/local em que as camadas estarão no servidor de mapas, que no caso do WebGENTE 
+é o GeoServer */
+
 var overlayHost = 'http://localhost:8080/geoserver/ows?';
 
 
-/* Variável vetorOverlay para acrescentar as camadas overlay ao WebGENTE, seguindo uma ordem de preenchimento de parâmetros
+/* A variável vetorOverlay acrescenta as camadas overlay ao WebGENTE, seguindo uma ordem de preenchimento de parâmetros
 importante para a criação das camadas */ 
 
 var vetorOverlay =  [
