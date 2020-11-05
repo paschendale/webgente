@@ -67,7 +67,7 @@ function link_shp (i, formato){
     };
  
     var parameters = L.Util.extend(defaultParameters);
-   var URL = "https://geoserver.genteufv.com.br/geoserver/ows" + L.Util.getParamString(parameters);
+   var URL = overlayHost + L.Util.getParamString(parameters);
  
    window.open(URL);
    chaves.splice(0,1);
@@ -282,7 +282,7 @@ function consultaFiltro (camadaFiltrada){
     
 
     var parameters = L.Util.extend(defaultParameters);
-    var URL = "https://geoserver.genteufv.com.br/geoserver/ows" + L.Util.getParamString(parameters) ;
+    var URL = overlayHost + L.Util.getParamString(parameters) ;
     var xhr = $.ajax({
         url: URL,
         dataType: 'jsonp', 
