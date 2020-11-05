@@ -1,4 +1,6 @@
+/* -------------- Funções para pesquisa ---------- */
 
+/* Variáveis necessárias para a criação de funções pesquisáveis */ 
 var tabela= "";
 var layerF;
 var vetorLayer= new Array();
@@ -17,6 +19,7 @@ function opcoes(){
 		camposPesquisaveis+=` <input type="text" id="`+campos+`" name="`+ campos +`" placeholder="`+nome_alternativo+`">`
 	}
 
+    /* Estilo em HTML dos campos pesquisáveis que aparecerão na barra de pesquisas */
 	opcao.innerHTML = `
 		<style> 
 			input[type=text] {
@@ -38,12 +41,13 @@ function opcoes(){
 }
 
 
-
+/* Função de fechar a tabela de pesquisa quando o usuário terminar de usá-la */
 function fecharTabela(){
     var tabelaExibicao = document.getElementById("conteudo");
     tabelaExibicao.innerHTML = "";
 }
 
+/* Função para exportar os resultados da pesquisa em formatos shapefile, gml e scv */
 function link_shp (i, formato){
 //Exportar resultar em shp, gml e scv
 	chaves.unshift("geom");
@@ -68,6 +72,8 @@ function link_shp (i, formato){
     
     }
 
+/* Função para exibir propriedades das camadas, ou seja, os atributos presentes nelas. Mas restringe os atributos que não podem ser visualizados
+pelo usuário anônimo. */
 function exibe_propriedades_tabela(i){
 	
     var response=tabela.features[i];
@@ -91,6 +97,7 @@ function exibe_propriedades_tabela(i){
     	linhas+=`\n`;	
 	}	
 
+    /* Código HTML para o estilo para consulta de atributos que o usuário irá realizar */
     consulta.innerHTML = `
         <div id="img_fechar"><img src="img/left-arrow.png" alt="Voltar ao painel de pesquisas" onclick="opcoes(-1)"></div>
             <table id="tabela_propriedades">
@@ -108,6 +115,7 @@ function exibe_propriedades_tabela(i){
     `;  
 }
 
+
 function coordFail(coord){
 	//função recursiva que extrai uma matriz de coordenadas
 	if(coord.length>1 && coord[0].length>1 || coord.length>1 && coord[0].length==undefined ){
@@ -119,6 +127,8 @@ function coordFail(coord){
 	}
 }
 
+/* Função feita para pesquisar e selecionar uma via que o usuário deseja. É atribuído a ela um estilo de seleção no GeoServer para destacar
+sua seleção*/
 function buscaVia(posicao){
     //Usa a posição para retornar o objeto que vai ser filtrado e destacado
    
@@ -136,7 +146,8 @@ function buscaVia(posicao){
 	}
 	var selecao='';
 	
-	//De acordo com o tipo de geometria seleciona um estilo específico
+    //De acordo com o tipo de geometria seleciona um estilo específico que foi criado antes no GeoServer. Isso é feito para que a seleção seja 
+    //feita de maneira perceptível ao usuário.
 	switch(tabela.features[posicao].geometry['type']){
 		case 'Polygon':
 		case 'MultiPolygon':
@@ -155,7 +166,7 @@ function buscaVia(posicao){
 	}
 
 
-	
+	/* Aplica o estilo de seleção na camada e atributos pesquisáveis pelo usuário */
 	source = L.WMS.source(overlayHost, {
 		            opacity: 1,
 		            tiled: true,
@@ -175,6 +186,7 @@ function buscaVia(posicao){
 }
 
 
+/* Vai receber a camada que o usuário deseja pesquisar e o que ele digitar no campo de pesquisar para retornar os possíveis resultados */
 function filtro ( objPesquisa){
 //Recebe a camada de pesquisa e concatena uma string com o conteúdo do cql_filter 
     var cql_filtro="";
@@ -219,9 +231,10 @@ function filtro ( objPesquisa){
 }
 
 
-
+/* Função que analisa a camada que vai ser filtrada na pesquisa. */
 function consultaFiltro (camadaFiltrada){
 
+    /* Estilo em HTML da pesquisa enquanto estiver carregando a camada escolhida pelo usuário */
     var loading = document.getElementById('barra-loading');
     loading.innerHTML = `<button class="btn btn-primary" type="button" disabled>
                           <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
