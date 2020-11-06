@@ -58,7 +58,7 @@ body,
 	height: auto;
 	max-height: 400px;
 	padding: 5px 5px 5px 5px;
-	/*z-index: 20000;*/
+	z-index: 20000;
 	border: solid lightgrey 2px;
 	border-radius: 0px;
 	overflow: auto;
