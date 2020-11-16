@@ -13,6 +13,8 @@ var chaves= "";
 
 //Gera campos pesquisaveis de acordo com os atributos definidos no vetor prop_query
 //e envia  camada a ser exibida
+/* Essa função gera todos os campos pesquisáveis de acordo com os atributos que foram definidos anteriormente a aparecer quando o usuário
+clicar na barra de pesquisas. Depois de gerar esses campos, a camada a ser exibida e suas informações serão enviadas */
 function opcoes(){
 	var n = document.getElementById('barraPesquisa').value;
 	var opcao = document.getElementById("conteudo");
@@ -44,13 +46,14 @@ function opcoes(){
 }
 
 
-/* Função de fechar a tabela de pesquisa quando o usuário terminar de usá-la */
+/* Função de fechar a tabela de pesquisa quando o usuário terminar de usá-la, ou seja, quando o usuário desabilitá-la. */
 function fecharTabela(){
     var tabelaExibicao = document.getElementById("conteudo");
     tabelaExibicao.innerHTML = "";
 }
 
-/* Função para exportar os resultados da pesquisa em formatos shapefile, gml e scv, puxando as informações presentes no GeoServer */
+/* Função para exportar os resultados da pesquisa realizada pelo usuário em formatos shapefile, gml e scv. Os resultados são obtidos através 
+do GeoServer, logo torna-se necessário apresentar a overlayHost no final do código, caso contrário não será exportado nenhuma informação. */
 function link_shp (i, formato){
 //Exportar resultar em shp, gml e scv
 	chaves.unshift("geom");
@@ -75,14 +78,14 @@ function link_shp (i, formato){
     
     }
 
-/* Função para exibir propriedades das camadas, ou seja, os atributos presentes nelas. Mas restringe os atributos que não podem ser visualizados
-pelo usuário anônimo. */
+/* Função para exibir as propriedades das camadas, ou seja, os atributos presentes nelas. Mas essa exibição restringe os atributos que 
+não podem ser visualizados pelo usuário anônimo, atributos esses que foram inseridos no arquivo conf > anon > overlay.. */
 function exibe_propriedades_tabela(i){
 	
     var response=tabela.features[i];
 	var consulta = document.getElementById("conteudo");
 
-	//variaveis que o tipo de usuário não pode ter acesso são excluídas com o método abaixo
+	//variaveis que o tipo de usuário não pode ter acesso são excluídas com o método abaixo:
 	
     var colunas="";
 	var linhas="";
