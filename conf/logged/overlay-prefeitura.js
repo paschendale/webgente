@@ -24,7 +24,7 @@ tiled: true
 		tiled )
 */
 
-var overlayHost = 'http://localhost:8080/geoserver/ows';
+var overlayHost = 'http://localhost:8080/geoserver/ows?';
 
 
 var vetorOverlay =  [
