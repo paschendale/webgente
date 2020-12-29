@@ -100,8 +100,8 @@
 
     <!-- Carregando configurações de mapa para o usuário anonimo -->
     <script src="conf/startup.js"></script>
-    <script src="conf/anon/base.js"></script>
-    <script src="conf/anon/overlay.js"></script>  
+    <script src="conf/logged/base.js"></script>
+    <script src="conf/logged/overlay-prefeitura.js"></script>  
 
     <!-- Bootstrap JS-->
     <script src="js/bootstrap/bootstrap.bundle.js"></script>
