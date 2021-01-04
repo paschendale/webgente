@@ -141,6 +141,11 @@
                     </div>
                     <button type="submit" class="btn btn-secondary btn-lg btn-block" id="botao" name="botao">Enviar</button>
                     <br>
+                    <center>or<center>
+                    <br>
+                    <div class="col-md-12"> 
+                        <a class="btn btn-lg btn-google btn-block btn-outline" id="loginGoogle" href="#"><img src="https://img.icons8.com/color/16/000000/google-logo.png"> Login using Google</a>
+                    </div>
                     <br>
                     <button type="button" class="btn btn-light btn-sm" data-toggle="modal" data-target="#exampleModalCenter">Esqueceu sua senha ?</button>
                     <button type="button" class="btn btn-light btn-sm" onclick="recuperarSenhaLogado()">Trocar senha</button>

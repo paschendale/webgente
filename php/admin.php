@@ -1,6 +1,6 @@
-<!doctype html>
-<html lang="pt">
-  <head>
+<!DOCTYPE html>
+<html>
+<head>
     <?php
 
       if(!isset($_SESSION)){
@@ -13,158 +13,119 @@
       }     
 
     ?>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <link rel="icon" href="favicon.ico">
-    <!--CSS do Leaflet-->
-    <link rel="stylesheet" href="../css/leaflet/leaflet.css">
+    <title>Prefeitura Municipal</title>
 
-    <!--Javascript do Leaflet-->
-    <script src="../js/leaflet/leaflet.js"></script>
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <!-- Our Custom CSS -->
+    <link rel="stylesheet" href="../css/files/style-user-logado.css">
 
-    <!--Plugin photosphereviewer: https://github.com/JeremyHeleine/WP-Photo-Sphere-->
-    <script src="../js/plugins/photosphere/three.min.js"></script>
-    <script src="../js/plugins/photosphere/photo-sphere-viewer.min.js"></script>
-
-    <!-- Plugin mini mapa: https://github.com/Norkart/Leaflet-MiniMap -->
-    <link rel="stylesheet" href="../css/plugins/Control.MiniMap.css">
-    <script src="../js/plugins/Control.MiniMap.min.js" type="text/javascript"></script>
-
-    <!-- Plugin para agurpar camadas: https://github.com/ismyrnow/leaflet-groupedlayercontrol  -->
-    <link rel="stylesheet" href="../css/plugins/groupedlayercontrol/leaflet.groupedlayercontrol.css">
-    <script src="../js/plugins/groupedlayercontrol/leaflet.groupedlayercontrol.js" type="text/javascript"></script>
-
-    <!--Plugin de desenho de polígonos: https://github.com/Leaflet/Leaflet.draw/tree/leaflet-master-->
-    <link rel="stylesheet" href="../css/plugins/leaflet.draw.css">
-    <script src="../js/plugins/Leaflet.draw/Leaflet.draw.js"></script>
-
-    <script src="../js/plugins/Leaflet.draw/edit/handler/Edit.Poly.js"></script>
-    <script src="../js/plugins/Leaflet.draw/edit/handler/Edit.SimpleShape.js"></script>
-    <script src="../js/plugins/Leaflet.draw/edit/handler/Edit.Circle.js"></script>
-    <script src="../js/plugins/Leaflet.draw/edit/handler/Edit.Rectangle.js"></script>
-
-    <script src="../js/plugins/Leaflet.draw/draw/handler/Draw.Feature.js"></script>
-    <script src="../js/plugins/Leaflet.draw/draw/handler/Draw.Polyline.js"></script>
-    <script src="../js/plugins/Leaflet.draw/draw/handler/Draw.Polygon.js"></script>
-    <script src="../js/plugins/Leaflet.draw/draw/handler/Draw.SimpleShape.js"></script>
-    <script src="../js/plugins/Leaflet.draw/draw/handler/Draw.Rectangle.js"></script>
-    <script src="../js/plugins/Leaflet.draw/draw/handler/Draw.Circle.js"></script>
-    <script src="../js/plugins/Leaflet.draw/draw/handler/Draw.Marker.js"></script>
-
-    <script src="../js/plugins/Leaflet.draw/ext/LatLngUtil.js"></script>
-    <script src="../js/plugins/Leaflet.draw/ext/GeometryUtil.js"></script>
-    <script src="../js/plugins/Leaflet.draw/ext/LineUtil.Intersect.js"></script>
-    <script src="../js/plugins/Leaflet.draw/ext/Polyline.Intersect.js"></script>
-    <script src="../js/plugins/Leaflet.draw/ext/Polygon.Intersect.js"></script>
-
-    <script src="../js/plugins/Leaflet.draw/Control.Draw.js"></script>
-    <script src="../js/plugins/Leaflet.draw/Tooltip.js"></script>
-    <script src="../js/plugins/Leaflet.draw/Toolbar.js"></script>
-
-    <script src="../js/plugins/Leaflet.draw/draw/DrawToolbar.js"></script>
-    <script src="../js/plugins/Leaflet.draw/edit/EditToolbar.js"></script>
-    <script src="../js/plugins/Leaflet.draw/edit/handler/EditToolbar.Edit.js"></script>
-    <script src="../js/plugins/Leaflet.draw/edit/handler/EditToolbar.Delete.js"></script>
-
-    <!--Plugin para imprimir mapa: https://github.com/Igor-Vladyka/leaflet.browser.print-->
-    <script src="../js/plugins/Leaflet.browser.print/leaflet.browser.print.js"></script>
-    <script src="../js/plugins/Leaflet.browser.print/leaflet.browser.print.sizes.js"></script>
-    <script src="../js/plugins/Leaflet.browser.print/leaflet.browser.print.utils.js"></script>
-
-    <!--GetFeatureInfo plugin-->
-    <script src="../js/plugins/GetFeatureInfo/leaflet.wms.js"></script>
-    <script src="../js/auxiliary_functions.js"></script>
-    
-    <!-- EasyButton -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.css">
-    <script src="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.js"></script>
-
-    <!--Plugin: https://github.com/rowanwins/leaflet-easyPrint-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.js"></script> 
-
-    <!--Plugin externo para download png do mapa-->
-    <script src="../js/plugins/Leaflet-EasyPrint/dist/bundle.js"></script>
-
-    <!-- jQuery CDN --> 
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script> 
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
-    <!--Javascript do mapa-->
-    <script src="../js/main.js"></script>
-    <script src="../js/class.js"></script>
-    <script src="../js/search_functions.js"></script>
-
-    <!--<script src="js/mapa/drag-and-drop.js"></script>-->
-
-    <!-- Camadas do mapa -->
-    <script src="../conf/startup.js"></script>
-    <script src="../conf/anon/base.js"></script>
-    <script src="../conf/anon/overlay.js"></script> 
-
+    <!-- Font Awesome JS -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
 
     <!--Javascript do menu principal superior-->
     <script src="../js/call_functions.js"></script>
 
-    <!-- Bootstrap JS-->
-    <script src="../js/bootstrap/bootstrap.bundle.js"></script>
-    <script src="../js/bootstrap/bootstrap.bundle.min.js"></script>
-    <script src="../js/bootstrap/bootstrap.js"></script>
-    <script src="../js/bootstrap/bootstrap.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="content/newUser.js"></script>
+    <script src="content/about.js"></script>
 
-    <!--CSS criado-->
-    <link rel="stylesheet" href="../css/files/map.css">
-    <link rel="stylesheet" href="../css/files/menu.css">
-    <link rel="stylesheet" href="../css/files/login.css">
-    <link rel="stylesheet" href="../css/files/index-logged.css">
+</head>
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="../css/bootstrap/bootstrap.css">
-    <link rel="stylesheet" href="../css/bootstrap/bootstrap.min.css">
-    <link rel="stylesheet" href="../css/bootstrap/bootstrap-grid.css">
-    <link rel="stylesheet" href="../css/bootstrap/bootstrap-grid.min.css">
-    <link rel="stylesheet" href="../css/bootstrap/bootstrap-reboot.css" >
-    <link rel="stylesheet" href="../css/bootstrap/bootstrap-reboot.min.css">
-    
-   <!-- Jquery Mask -->
-     <script src="../js/plugins/jquery.mask/jquery.mask.min.js"></script>
-     <script src="../js/plugins/jquery.mask/jquery.validate.min.js"></script> 
-     <script src="../js/plugins/jquery.mask/additional-methods.min.js"></script>
-     <script src="../js/plugins/jquery.mask/messages_pt_BR.js"></script> 
-
-
-    <title>WebGENTE</title>
-  </head>
-  <body>
-    <div id="menu">
-      <header>
-        <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <a class="navbar-brand" href="#"><img src="img/webgente-fundo-escuro-120x40.png" alt=""></a>
-            <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-              <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-            </ul>
-            <button type="button" class="btn btn-dark" onclick="logout()">Logout</button>
-          </div>
-        </nav>
-      </header>
-      <section>
-        <div class="row">
-          <div class="col-xl-1"></div>
-            <div class="card" style="width: 18rem;">
-              <img class="card-img-top" src="../img/usuarios.jpg" alt="Adicionar subcategoria">
-                <div class="card-body">
-                  <h5 class="card-title">Novos usuários</h5>
-                  <p class="card-text">Cadastro de novos usuários da prefeitura no sistema.</p>
-                  <a href="#" class="btn btn-primary" id="cadastro-usuarios" name="cadastro-usuarios" onclick="cadastroUsuarios()">Usuários</a>
-                </div>
+<body>
+    <div class="wrapper">
+        <!-- Sidebar  -->
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <h3>Cidade - UF</h3>
             </div>
-        <div class="col-xl-1"></div>
-      </section>
+
+            <ul class="list-unstyled components">
+                <p>Seja Bem-Vindo</p>
+                <li class="active">
+                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
+                    <ul class="collapse list-unstyled" id="homeSubmenu">
+                        <li>
+                            <a href="#">Home 1</a>
+                        </li>
+                        <li>
+                            <a href="#">Home 2</a>
+                        </li>
+                        <li>
+                            <a href="#">Home 3</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Usuários</a>
+                    <ul class="collapse list-unstyled" id="pageSubmenu">
+                        <li>
+                            <button type="button" class="btn btn-link" onclick="newUser()" style="color: white; margin-left: 15px;">Novo Usuário</button>
+                        </li>
+                        <li>
+                            <button type="button" class="btn btn-link" onclick="()" style="color: white; margin-left: 15px;">Ver Usuários</button>
+                        </li>
+                        <li>
+                            <button type="button" class="btn btn-link" onclick="()" style="color: white; margin-left: 15px;">Excluir Usuários</button>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <button type="button" class="btn btn-link" onclick="about()" style="color: white; font-size: 17px;">Sobre</button>
+                </li>
+                <li>
+                    <a href="#">Contato</a>
+                </li>
+            </ul>
+            <img src="../img/webgente-fundo-escuro-120x40.png" style="margin-top: 85%; margin-left: 22%;">
+        </nav>
+
+        <!-- Page Content  -->
+        <div id="content">
+
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
+
+                    <button type="button" id="sidebarCollapse" class="btn btn-dark">
+                        <i class="fas fa-align-left"></i>
+                        <span>Menu lateral</span>
+                    </button>
+                    <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="fas fa-align-justify"></i>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="nav navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <!--<a class="nav-link" href="#" onclick="logout()">Sair</a>-->
+                                <button type="button" class="btn btn-dark" onclick="logout()">Sair</button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <div id="conteudo-principal"></div>
+        </div>
     </div>
-  </body>
+
+    <!-- jQuery CDN - Slim version (=without AJAX) -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <!-- Popper.JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar').toggleClass('active');
+            });
+        });
+    </script>
+</body>
+
 </html>
