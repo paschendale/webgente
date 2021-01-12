@@ -39,7 +39,7 @@ function main(){
     /* Essa propriedade do objeto myMapa que se chama "scale" é um plugin que está definido dentro da classe "mapa" no arquivo js/class.js */
 
     myMapa.scale();
-
+  
     /* A variável criada abaixo (optionsControl) utiliza o plugin "collapse" que serve para mostrar e esconder conteúdo. Basicamente
     essa variável faz com que quando clicamos em um botão apareça uma informação contida nele e permite também o fechamento desse botão */
 
@@ -154,8 +154,8 @@ function main(){
     },'Minha localização').addTo(myMapa.getMapa());
 
 
-    // mde= source.getLayer(vetorMDE[0].layers);
-    /*  var coordenadas = L.easyButton({
+     mde= source.getLayer(vetorMDE[0].layers);
+      var coordenadas = L.easyButton({
         states: [{
                     stateName: 'coordenadas_disabled',
                     icon:      '<img src="img/coordenadas_active.png">',
@@ -179,5 +179,5 @@ function main(){
                     }
             }]
         }).addTo(myMapa.getMapa());
-    */
+    
 }

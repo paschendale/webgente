@@ -127,7 +127,9 @@ wms.Source = L.Layer.extend({
     },
 
     'addSubLayer': function(name) {
+        if(name!=mde._name){
         this._subLayers[name] = true;
+    }
         this.refreshOverlay();
     },
 
@@ -138,12 +140,9 @@ wms.Source = L.Layer.extend({
 
     'refreshOverlay': function() {
     	//sobreposição de atualização
-      //  this._subLayers= this._subLayers.replace(mde+",","");
      
-       
-        var subLayers = Object.keys(this._subLayers).join(",");
-        
-        
+     var subLayers = Object.keys(this._subLayers).join(",");
+     
         if (!this._map) {
             return;
         }
@@ -162,15 +161,22 @@ wms.Source = L.Layer.extend({
         // Identify map features in response to map clicks. To customize this
         // behavior, create a class extending wms.Source and override one or
         // more of the following hook functions.
-        if(info_gfi==true){
+        if(info_gfi==true || xyz==true){
         var layers = this.getIdentifyLayers();
         if (!layers.length) {
             return;
         }
+        if(xyz){
+         this.getFeatureInfo(
+            evt.containerPoint, evt.latlng, layers,
+            this.showFeatureCoordinates
+        );        
+        }else{
         this.getFeatureInfo(
             evt.containerPoint, evt.latlng, layers,
             this.showFeatureInfo
         );
+    }
     }
 
     },
@@ -189,28 +195,28 @@ wms.Source = L.Layer.extend({
             this.hideWaiting();
   			var text = this.parseFeatureInfo(result, url);
             callback.call(this, latlng, text);
-            
+                    
         }
     },
 
     'ajax': function(url, callback) {
         ajax.call(this, url, callback);
+
     },
 
     'getIdentifyLayers': function() {
         // Hook to determine which layers to identify
         if (this.options.identifyLayers)
             return this.options.identifyLayers;
-        return Object.keys(this._subLayers);
-      /*  var layer= new Array();
-       if(xyz==true){
-       layer[0]= 'bomdespacho:mde_bomdespacho' ;
-       layer=layer.concat(Object.keys(this._subLayers));
-            }else{
-       layer=Object.keys(this._subLayers);
-            }
+        var layer= new Array();
+        //habilita coordenadas
+       if(xyz){
+            layer[0]=mde._name;
+       }else{
+         layer=Object.keys(this._subLayers);
+       }
+        return layer;
 
-        return layer ;*/
      },
 
     'getFeatureInfoParams': function(point, layers) {
@@ -252,7 +258,24 @@ wms.Source = L.Layer.extend({
        
         return result;
     },
+    'showFeatureCoordinates': function(latlng, info){
+         // Ferramenta de coordenadas
+        if (!this._map) {
+            return;
+        }     
+        obj = JSON.parse(info);
+        //conversão das coordenadas para o sistema referenciado em startup.js  
+        var transf= proj4(epsgcode,[latlng['lng'],latlng['lat']]);             
+        obj.features[0].properties={
+         N:transf[1],
+         E:transf[0],
+         Z: obj.features[0].properties['GRAY_INDEX'],
+    };
+     var  div_content = '<div style="width:270px;"><p><a style="font-weight: bold; color: inherit;" >Coordenadas: '+epsgcode+'</a></p></div><div  class="panel> <div class="panel-body" style="height: 120px; overflow-y: auto; overflow-x: hidden;">'+properties2table(obj.features[0].properties)+'</div></div>';
+     this._map.openPopup(div_content, latlng);
 
+    }
+    ,
     'showFeatureInfo': function(latlng, info) {
         // Hook to handle displaying parsed AJAX response to the user
         if (!this._map) {
@@ -261,15 +284,6 @@ wms.Source = L.Layer.extend({
         obj = JSON.parse(info);
         //Identificar quais layer ativas 
         var layersMarked = this.getIdentifyLayers();
-        /*if(xyz==true){
-            obj.features[0].properties={
-                N:latlng['lng'],
-                E:latlng['lat'],
-                Z: obj.features[0].properties['GRAY_INDEX']
-            };
-              obj.features[0].id='Coordenadas';
-              obj.id='Valor';
-            }*/
         for(var num=0; num<obj.features.length;num++){
             for(var n=0; n<layersMarked.length;n++){
          obj.features[num].properties=restrictedAtributes(obj.features[num].properties,layersMarked[n]);  
@@ -281,7 +295,7 @@ wms.Source = L.Layer.extend({
             width: 300,
             maxHeight: 300
         }
-
+       
         if (typeof obj.features[0].properties.path_360 != 'undefined'){
 
             fullscreen = '<a href="'+sitebase+obj.features[0].properties.path_360+'" target="_blank">Abrir visualizador 360° em tela cheia</a>';
@@ -522,6 +536,7 @@ wms.Overlay = L.Layer.extend({
         var size = map.getSize();
         var wmsVersion = parseFloat(this.wmsParams.version);
         var crs = this.options.crs || map.options.crs;
+       
         var projectionKey = wmsVersion >= 1.3 ? 'crs' : 'srs';
         var nw = crs.project(bounds.getNorthWest());
         var se = crs.project(bounds.getSouthEast());

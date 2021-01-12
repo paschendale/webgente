@@ -40,7 +40,7 @@ function objects2div (objeto){
     i = 0;
 
     css = '<style>a {font-weight: bold; color: inherit;}</style>';
-
+    
     for (var property in objeto) {
     if (!objeto.hasOwnProperty(property)) continue;
 
@@ -48,7 +48,7 @@ function objects2div (objeto){
 
         title = (objeto[property].id).split('.');
 
-        id = objeto[property].properties.id;
+        id =  objeto[property].properties.id;
 
         div_content = '<div style="width:270px;"><p><a style="font-weight: bold; color: inherit;" data-toggle="collapse" href="#'+div_id+'">'+title[0]+': '+id+'</a></p></div><div id="'+div_id+'" class="panel-collapse collapse"><div class="panel-body" style="height: 120px; overflow-y: auto; overflow-x: hidden;">'+properties2table(objeto[property].properties)+'</div></div>'
 
@@ -84,7 +84,8 @@ function properties2table (objeto){
         
     };
 
-    css_table = '<style>table {width:250px;text-align:left;vertical-align:center;padding: 15px;border-bottom: 1px solid #ddd;font-family: Tahoma, Geneva, sans-serif;}td,th {border-bottom: 1px solid #ddd;padding: 2px;}tr:hover {background-color: #f5f5f5;}th {background-color: #f5f5f5;}</style>'
+    css_table =(xyz==true)? '<style>table {width:250px;text-align:left;vertical-align:center;padding: 15px;border-bottom: 1px solid #ddd;font-family: Tahoma, Geneva, sans-serif;}td,th {border-bottom: 1px solid #ddd;padding: 2px;}tr:hover {background-color: #f5f5f5;}th {background-color: #343a40; color: #f8f9fa;}</style>':
+    '<style>table {width:250px;text-align:left;vertical-align:center;padding: 15px;border-bottom: 1px solid #ddd;font-family: Tahoma, Geneva, sans-serif;}td,th {border-bottom: 1px solid #ddd;padding: 2px;}tr:hover {background-color: #f5f5f5;}th {background-color: #f5f5f5;}</style>';
 
     tb_final = '</table>';
 
@@ -104,6 +105,7 @@ function restrictedAtributes(objeto,nome){
         }
         
     }}
-    
+  
 return objeto;
 }
+
