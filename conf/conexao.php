@@ -12,6 +12,7 @@ class conexao{
 		$user = 'webgis_bd'; //usuário
 		$pass = '#.sxJZ]>8G'; //senha
 		$bd = 'webgente_bd'; //nome do banco
+
 		//=============================
 		//================================================================================
 		$this->conexao = mysqli_connect($host, $user, $pass, $bd) or die(mysqli_connect_error());

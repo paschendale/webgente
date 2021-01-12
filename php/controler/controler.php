@@ -42,6 +42,12 @@ class controler{
 		$usuario->setLogin($cpf, $senha);
 	}
 
+	function loginGmail(){
+		$email = $_POST['email'];
+		$usuario = new usuario();
+		$usuario->setLoginGmail($email);
+	}
+
 	function recuperarSenha(){
 		$email = $_POST['email'];
 		$senhaAntiga = $_POST['senha-antiga'];

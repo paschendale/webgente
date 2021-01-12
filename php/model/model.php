@@ -57,7 +57,7 @@ class usuario{
 		$con->fechando_conexao();
 
 		echo('<script>alert("Cadastro com sucesso.");</script>');
-		header('refresh: 0.001; ../register.php');
+		header('refresh: 0.001; ../admin.php');
  		exit;
 	}
 
@@ -97,6 +97,39 @@ class usuario{
  			echo('<script>alert("Usuario e/ou senha inválida. Tente novamente.");</script>');
  			header('refresh: 0.001; ../login.php');
  			exit;
+ 		}
+
+		$con->fechando_conexao();
+	}
+
+	function setLoginGmail($email){ 
+		$con = new conexao();
+		$con->abrindo_conexao();
+
+		$sql = "SELECT nome, tipo, senha, cpf FROM usuario WHERE email = '$email'";
+
+		$resposta = mysqli_query($con->getConexao(), $sql);
+ 		$resultado = mysqli_fetch_assoc($resposta);
+
+ 		if($resultado['tipo'] == 'prefeitura'){
+ 			//Cria uma sessão de usuário caso ela não exista ainda
+ 			session_start();
+ 			//Inicia o usuário no sistema
+ 			$_SESSION['email'] = $email;
+ 			$_SESSION['nome'] = $resultado['nome'];
+ 			$_SESSION['cpf'] = $resultado['cpf'];
+
+ 			echo "prefeitura";
+ 		}
+ 		else if($resultado['tipo'] == 'administrador'){
+ 			//Cria uma sessão de usuário caso ela não exista ainda
+ 			session_start();
+ 			//Inicia o usuário no sistema
+ 			$_SESSION['email'] = $email;
+ 			$_SESSION['nome'] = $resultado['nome'];
+ 			$_SESSION['cpf'] = $resultado['cpf'];
+
+ 			echo "administrador";
  		}
 
 		$con->fechando_conexao();

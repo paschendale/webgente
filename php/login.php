@@ -112,11 +112,62 @@
     <link rel="stylesheet" href="../css/bootstrap/bootstrap-reboot.min.css">
     
     <!-- Jquery Mask -->
-     <script src="../js/plugins/jquery.mask/jquery.mask.min.js"></script>
-     <script src="../js/plugins/jquery.mask/jquery.validate.min.js"></script> 
-     <script src="../js/plugins/jquery.mask/additional-methods.min.js"></script>
-     <script src="../js/plugins/jquery.mask/messages_pt_BR.js"></script> 
-     
+    <script src="../js/plugins/jquery.mask/jquery.mask.min.js"></script>
+    <script src="../js/plugins/jquery.mask/jquery.validate.min.js"></script> 
+    <script src="../js/plugins/jquery.mask/additional-methods.min.js"></script>
+    <script src="../js/plugins/jquery.mask/messages_pt_BR.js"></script> 
+    
+    <!--Login com Gmail-->
+    <!--Alterar o content abaixo conforme a credencial do Google Developer API-->
+    <meta name="google-signin-client_id" content='333295678672-v010o5iseq8kos37qh6ld8uua1bs3594.apps.googleusercontent.com'>
+
+    <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+    <script>
+		function onSuccess(googleUser) {
+			const profile = googleUser.getBasicProfile();
+
+			console.log('Logged in as: ' + profile.getName());
+		  	console.log('Name: ' + profile.getName());
+		  	console.log('Image URL: ' + profile.getImageUrl());
+		  	console.log('Email: ' + profile.getEmail()); 
+
+		  	$.ajax({
+			 	type: "POST",
+			  	url: 'redirect/redirect-login-gmail.php',
+			  	data: { email: profile.getEmail() },
+			  	success: function(data){
+			  		console.log(data);
+			  		if(data == 'prefeitura'){
+			  			console.log("Prefeitura");
+			  			window.location.href = "../index-logged.php";
+			  		}
+			  		else if(data == 'administrador'){
+			  			window.location.href = "admin.php";
+			  		}
+			  		else{
+			  			alert("Email e/ou senha inválido. Tente novamente");
+			  		}
+			  	},
+			  	error:function(){
+			  		console.log("ERROR");
+			  	}
+			});
+		}
+		function onFailure(error) {
+			console.log(error);
+		}
+		function renderButton() {
+			gapi.signin2.render('login-gmail', {
+				'scope': 'profile email',
+				'width': 240,
+				'height': 50,
+				'longtitle': true,
+				'theme': 'dark',
+				'onsuccess': onSuccess,
+				'onfailure': onFailure
+			});
+		}
+		</script>
 
 <body>
 
@@ -143,9 +194,9 @@
                     <br>
                     <center>or<center>
                     <br>
-                    <div class="col-md-12"> 
-                        <a class="btn btn-lg btn-google btn-block btn-outline" id="loginGoogle" href="#"><img src="https://img.icons8.com/color/16/000000/google-logo.png"> Login using Google</a>
-                    </div>
+
+                    <div id="login-gmail"></div>
+					 
                     <br>
                     <button type="button" class="btn btn-light btn-sm" data-toggle="modal" data-target="#exampleModalCenter">Esqueceu sua senha ?</button>
                     <button type="button" class="btn btn-light btn-sm" onclick="recuperarSenhaLogado()">Trocar senha</button>
