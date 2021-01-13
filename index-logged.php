@@ -28,6 +28,9 @@
     <link rel="stylesheet" href="css/plugins/groupedlayercontrol/leaflet.groupedlayercontrol.css">
     <script src="js/plugins/groupedlayercontrol/leaflet.groupedlayercontrol.js" type="text/javascript"></script>
 
+    <!-- Plugin de coordenadas: https://kartena.github.io/Proj4Leaflet/ -->
+    <script src="js/plugins/Proj4Leaflet/proj4.js" type="text/javascript"></script>  
+
     <!--Plugin de desenho de polígonos: https://github.com/Leaflet/Leaflet.draw/tree/leaflet-master-->
     <link rel="stylesheet" href="css/plugins/leaflet.draw.css">
     <script src="js/plugins/Leaflet.draw/Leaflet.draw.js"></script>
