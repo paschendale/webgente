@@ -333,7 +333,7 @@ class overlay{
 		this.grupo = grupo;
 		//inicializa os arrays alpha e numeric para serem concatenados no prop_querry
 		this.alpha =(alpha==undefined)?[]:alpha ;
-		this.numeric =(numeric==undefined)? []: numeric;
+		this.numeric =(numeric==undefined)?[]: numeric;
 		this.prop_query = this.alpha.concat(this.numeric);
 		this.prop_alternative = prop_alternative;
 		this.restricted = restricted; 

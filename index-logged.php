@@ -85,8 +85,9 @@
     <script src="js/search_functions.js"></script>
     <script src="js/call_functions.js"></script>
 
-    <!-- Carregando configurações de mapa para o usuário anonimo -->
+    <!-- Carregando configurações de mapa para o usuário logado -->
     <script src="conf/startup.js"></script>
+    <script src="conf/conexao_camadas.php"></script>
     <script src="conf/logged/base.js"></script>
     <script src="conf/logged/overlay-prefeitura.js"></script>  
 

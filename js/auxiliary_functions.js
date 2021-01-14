@@ -109,3 +109,65 @@ function restrictedAtributes(objeto,nome){
 return objeto;
 }
 
+/* Transforma campos selecionados na tabela de camadas em formatos adequados à classe overlay */
+function criaArray(objeto){
+    var vetor = [objeto] // Transforma o campo em um array
+    if (objeto[0]==undefined || objeto[0]==null || objeto[0]=="") {
+        vetor.length = 0 // Cria um array nulo caso não exista informações
+    } else if (objeto.split(',').length > 1){
+        vetor = objeto.split(',') // Cria um array com base nos valores separados por vírgula
+    }
+    return vetor
+}
+
+/* Cria um objeto com os parâmetros de uma camada overlay no modo restrito*/
+function criaParametroOverlay(objeto){
+    return new overlay(
+        objeto.nome,
+        objeto.layers,
+        objeto.grupo,
+        criaArray(objeto.alpha),
+        criaArray(objeto.numeric),
+        criaArray(objeto.prop_alternative),
+        criaArray(objeto.restricted),
+        objeto.maxZoom,
+        objeto.format,
+        objeto.transparent,
+        objeto.tiled
+        )
+}
+
+/* Cria um objeto com os parâmetros de uma camada overlay no modo irrestrito*/
+function criaParametroOverlayUnrestricted(objeto){
+    return new overlay(
+        objeto.nome,
+        objeto.layers,
+        objeto.grupo,
+        criaArray(objeto.alpha),
+        criaArray(objeto.numeric),
+        criaArray(objeto.prop_alternative),
+        [],
+        objeto.maxZoom,
+        objeto.format,
+        objeto.transparent,
+        objeto.tiled
+        )
+}
+
+/* Cria um vetor de camadas overlay no modo restrito */
+function criaVetorOverlay(objeto){
+    var vetor = [0];
+    for (var i = 0; i < objeto.length; i++) {
+        vetor[i] = criaParametroOverlay(objeto[i])
+    }
+    return vetor
+}
+
+/* Cria um vetor de camadas overlay no modo irrestrito */
+function criaVetorOverlayUnrestricted(objeto){
+    var vetor = [0];
+    for (var i = 0; i < objeto.length; i++) {
+        vetor[i] = criaParametroOverlayUnrestricted(objeto[i])
+    }
+    return vetor
+}

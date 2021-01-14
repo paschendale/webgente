@@ -28,7 +28,7 @@ var vetorBasemap = [
 
     parametros_cadastro = {
         nome: 'Base Cadastral',
-        host: 'http://localhost:8080/geoserver/ows?',
+        host: 'https://geoserver.genteufv.com.br/geoserver/ows?',
         padrao: true,
         maxZoom: 22,
         layers: 'bomdespacho:base_cadastral',
