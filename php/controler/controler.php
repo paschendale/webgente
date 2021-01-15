@@ -25,9 +25,12 @@ class controler{
 		}
 		else{
 			echo("<script>alert('CPF já cadastrado no sistema.');</script>");
-			header('refresh: 0.001; ../register.php');
+			header('refresh: 0.001; ../admin.php');
 			exit;
 		}
+
+		$usuario->constructor($nome, $cpf, $dataNascimento, $sexo, $faixaEtaria, $celular, $email, $senha, $tipo);
+		$usuario->setUsuario();
 	}
 
 	function login(){

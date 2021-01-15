@@ -28,11 +28,27 @@
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
 
-    <!--Javascript do menu principal superior-->
+    <!--Axios CDN-->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <!-- jQuery CDN --> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script> 
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
+
+    <!-- Jquery Mask -->     
+    <script src="../js/plugins/jquery.mask/jquery.mask.min.js"></script>
+    <script src="../js/plugins/jquery.mask/jquery.validate.min.js"></script> 
+    <script src="../js/plugins/jquery.mask/additional-methods.min.js"></script>
+    <script src="../js/plugins/jquery.mask/messages_pt_BR.js"></script> 
+
+     <!--Javascript do menu principal superior-->
     <script src="../js/call_functions.js"></script>
 
     <script src="content/newUser.js"></script>
     <script src="content/about.js"></script>
+    <script src="content/users.js"></script>
 
 </head>
 
@@ -47,16 +63,16 @@
             <ul class="list-unstyled components">
                 <p>Seja Bem-Vindo</p>
                 <li class="active">
-                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
+                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Camadas</a>
                     <ul class="collapse list-unstyled" id="homeSubmenu">
                         <li>
-                            <a href="#">Home 1</a>
+                            <a href="#">Nova camada</a>
                         </li>
                         <li>
-                            <a href="#">Home 2</a>
+                            <a href="#">Ver camadas cadastradas</a>
                         </li>
                         <li>
-                            <a href="#">Home 3</a>
+                            <a href="#">Excluir camadas</a>
                         </li>
                     </ul>
                 </li>
@@ -67,7 +83,7 @@
                             <button type="button" class="btn btn-link" onclick="newUser()" style="color: white; margin-left: 15px;">Novo Usuário</button>
                         </li>
                         <li>
-                            <button type="button" class="btn btn-link" onclick="()" style="color: white; margin-left: 15px;">Ver Usuários</button>
+                            <button type="button" class="btn btn-link" onclick="users()" style="color: white; margin-left: 15px;">Ver Usuários</button>
                         </li>
                         <li>
                             <button type="button" class="btn btn-link" onclick="()" style="color: white; margin-left: 15px;">Excluir Usuários</button>

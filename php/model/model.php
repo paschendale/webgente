@@ -1,7 +1,5 @@
 <?php
 
-include '../../conf/conexao.php';
-
 class usuario{
 	//private
 	private $nome;
@@ -32,12 +30,12 @@ class usuario{
 	//Get's
 
 	function verificaUsuario($cpf){
-		$con = new conexao();
-		$con->abrindo_conexao();
+		$conexao = new PDO('sqlite:../../conf/webgente_db.db') or die("Erro ao abrir a base");
 
 		$sql = "SELECT cpf FROM usuario WHERE cpf = '$cpf'";
-		$resposta = mysqli_query($con->getConexao(), $sql);
-		$resultado = mysqli_fetch_assoc($resposta);
+
+		$resposta = $conexao->query($sql);
+ 		$resultado = $resposta->fetch();
 
 		if($resultado['cpf'] == " " || $resultado['cpf'] == "" || $resultado == "NULL"){
 			return false;
@@ -48,13 +46,12 @@ class usuario{
 	}
 
 	function setUsuario(){
-		$con = new conexao();
-		$con->abrindo_conexao();
+		$conexao = new PDO('sqlite:../../conf/webgente_db.db') or die("Erro ao abrir a base");
 
-		$sql = "INSERT INTO usuario (nome, email, senha, faixaEtaria, tipo, dataNascimento, sexo, celular, cpf) VALUES ('$this->nome', '$this->email', '$this->senha', '$this->faixaEtaria', '$this->tipo', '$this->dataNascimento', '$this->sexo', '$this->celular', '$this->cpf')";
+		$sql = "INSERT INTO usuario (nome, cpf, dataNascimento, sexo, faixaEtaria, celular, email, senha, tipo) VALUES ('$this->nome', '$this->cpf', '$this->dataNascimento', '$this->sexo', '$this->faixaEtaria', '$this->celular', '$this->email', '$this->senha', '$this->tipo')";
 
-		$resposta = mysqli_query($con->getConexao(), $sql);
-		$con->fechando_conexao();
+		$conexao->exec($sql);
+		$conexao = null;
 
 		echo('<script>alert("Cadastro com sucesso.");</script>');
 		header('refresh: 0.001; ../admin.php');
@@ -62,13 +59,12 @@ class usuario{
 	}
 
 	function setLogin($cpf, $senha){ 
-		$con = new conexao();
-		$con->abrindo_conexao();
+		$conexao = new PDO('sqlite:../../conf/webgente_db.db') or die("Erro ao abrir a base");
 
 		$sql = "SELECT senha, nome, tipo FROM usuario WHERE cpf = '$cpf'";
 
-		$resposta = mysqli_query($con->getConexao(), $sql);
- 		$resultado = mysqli_fetch_assoc($resposta);
+ 		$resposta = $conexao->query($sql);
+ 		$resultado = $resposta->fetch();
 
  		if($resultado['senha'] == $senha && $resultado['tipo'] == 'prefeitura'){
  			//Cria uma sessão de usuário caso ela não exista ainda
@@ -80,11 +76,11 @@ class usuario{
  			header('refresh: 0.001; ../../index-logged.php');
  			exit;
  		}
- 		else if(($resultado['senha'] == 'admin' && $senha == 'admin') && $resultado['tipo'] == 'administrador'){
+ 		else if(($resultado['senha'] == 'admin' && $senha == 'admin') && $resultado['tipo'] == 'root'){
  			header('refresh: 0.001; ../../recoverPassword.html');
  			exit;
  		}
- 		else if($resultado['senha'] == $senha && $resultado['tipo'] == 'administrador'){
+ 		else if($resultado['senha'] == $senha && $resultado['tipo'] == 'root'){
  			//Cria uma sessão de usuário caso ela não exista ainda
  			session_start();
  			//Inicia o usuário no sistema
@@ -99,17 +95,16 @@ class usuario{
  			exit;
  		}
 
-		$con->fechando_conexao();
+		$conexao = null;
 	}
 
 	function setLoginGmail($email){ 
-		$con = new conexao();
-		$con->abrindo_conexao();
+		$conexao = new PDO('sqlite:../../conf/webgente_db.db') or die("Erro ao abrir a base");
 
 		$sql = "SELECT nome, tipo, senha, cpf FROM usuario WHERE email = '$email'";
 
-		$resposta = mysqli_query($con->getConexao(), $sql);
- 		$resultado = mysqli_fetch_assoc($resposta);
+		$resposta = $conexao->query($sql);
+ 		$resultado = $resposta->fetch();
 
  		if($resultado['tipo'] == 'prefeitura'){
  			//Cria uma sessão de usuário caso ela não exista ainda
@@ -132,16 +127,16 @@ class usuario{
  			echo "administrador";
  		}
 
-		$con->fechando_conexao();
+		$conexao = null;
 	}
 
 	function validaSenhaEmail($email, $senha){
-		$con = new conexao();
-		$con->abrindo_conexao();
+		$conexao = new PDO('sqlite:../../conf/webgente_db.db') or die("Erro ao abrir a base");
 
 		$sql = "SELECT nome FROM usuario WHERE email = '$email' AND senha = '$senha'";
-		$resposta = mysqli_query($con->getConexao(), $sql);
-		$resultado = mysqli_fetch_assoc($resposta);
+		
+		$resposta = $conexao->query($sql);
+ 		$resultado = $resposta->fetch();
 		
 		$con->fechando_conexao();
 
@@ -154,14 +149,15 @@ class usuario{
 	}
 
 	function novaSenha($email, $senha){
-		$con = new conexao();
-		$con->abrindo_conexao();
+		$conexao = new PDO('sqlite:../../conf/webgente_db.db') or die("Erro ao abrir a base");
 
 		$sql = "UPDATE usuario SET senha = '$senha' WHERE email = '$email'";
-		$resposta = mysqli_query($con->getConexao(), $sql);
+		
+		$conexao->query($sql);
 
-		$con->fechando_conexao();
+		$conexao = null;
 	}
+
 }
 
 ?>
