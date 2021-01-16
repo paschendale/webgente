@@ -49,7 +49,7 @@
     <script src="content/newUser.js"></script>
     <script src="content/about.js"></script>
     <script src="content/users.js"></script>
-
+    <script src="content/newLayer.js"></script>
 </head>
 
 <body>
@@ -66,13 +66,13 @@
                     <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Camadas</a>
                     <ul class="collapse list-unstyled" id="homeSubmenu">
                         <li>
-                            <a href="#">Nova camada</a>
+                            <button type="button" class="btn btn-link" onclick="newLayer()" style="color: white; margin-left: 15px;">Nova Camada</button>
                         </li>
                         <li>
-                            <a href="#">Ver camadas cadastradas</a>
+                            <button type="button" class="btn btn-link" onclick="()" style="color: white; margin-left: 15px;">Ativar/ Desativar Camadas</button>
                         </li>
                         <li>
-                            <a href="#">Excluir camadas</a>
+                            <button type="button" class="btn btn-link" onclick="()" style="color: white; margin-left: 15px;">Excluir Camadas</button>
                         </li>
                     </ul>
                 </li>
