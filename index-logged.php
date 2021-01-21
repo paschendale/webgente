@@ -13,26 +13,18 @@
     }     
   ?>
     
-    <!-- Required meta tags -->
+ <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
 
-    <link rel="icon" href="favicon.ico">
+    <link rel="icon" href="img/favicon.ico">
     <!--CSS do Leaflet-->
     <link rel="stylesheet" href="css/leaflet/leaflet.css">
 
     <!--Javascript do Leaflet-->
     <script src="js/leaflet/leaflet.js"></script>
 
-   <!--Plugin photosphereviewer: https://github.com/JeremyHeleine/WP-Photo-Sphere-->
-    <script src="js/plugins/photosphere/three.min.js"></script>
-    <script src="js/plugins/photosphere/photo-sphere-viewer.min.js"></script>
-
-    <!-- Plugin mini mapa: https://github.com/Norkart/Leaflet-MiniMap -->
-    <link rel="stylesheet" href="css/plugins/Control.MiniMap.css">
-    <script src="js/plugins/Control.MiniMap.min.js" type="text/javascript"></script>
-
-    <!-- Plugin para agurpar camadas: https://github.com/ismyrnow/leaflet-groupedlayercontrol  -->
+    <!-- Plugin para agrupar camadas: https://github.com/ismyrnow/leaflet-groupedlayercontrol  -->
     <link rel="stylesheet" href="css/plugins/groupedlayercontrol/leaflet.groupedlayercontrol.css">
     <script src="js/plugins/groupedlayercontrol/leaflet.groupedlayercontrol.js" type="text/javascript"></script>
 
@@ -70,38 +62,30 @@
 
     <!--GetFeatureInfo plugin-->
     <script src="js/plugins/GetFeatureInfo/leaflet.wms.js"></script>
-    <script src="js/files/functions.js"></script>
+    <script src="js/auxiliary_functions.js"></script>
     
     <!-- EasyButton -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.css">
     <script src="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.js"></script>
 
-    <!--Plugin: https://github.com/rowanwins/leaflet-easyPrint-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.js"></script> 
-
-    <!--Plugin externo para download png do mapa-->
+    <!--Plugin para exportar o mapa em tela: https://github.com/rowanwins/leaflet-easyPrint-->
     <script src="js/plugins/Leaflet-EasyPrint/dist/bundle.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.js"></script> 
 
     <!-- jQuery CDN --> 
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script> 
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
-     
-
+   
     <!--Javascript do mapa-->
-    <script src="js/files/main.js"></script>   
-    <script src="js/files/class.js"></script>
-    <script src="js/files/functions.js"></script>
-
-    <!--Javascript do menu principal superior-->
-    <script src="js/files/call_functions.js"></script>
-
-    <!--<script src="js/mapa/drag-and-drop.js"></script>-->
+    <script src="js/main.js"></script>   
+    <script src="js/class.js"></script>
+    <script src="js/search_functions.js"></script>
+    <script src="js/call_functions.js"></script>
 
     <!-- Carregando configurações de mapa para o usuário anonimo -->
     <script src="conf/startup.js"></script>
-    <script src="conf/anon/base.js"></script>
-    <script src="conf/anon/overlay.js"></script>  
+    <script src="conf/logged/base.js"></script>
+    <script src="conf/logged/overlay-prefeitura.js"></script>  
 
     <!-- Bootstrap JS-->
     <script src="js/bootstrap/bootstrap.bundle.js"></script>
@@ -110,7 +94,7 @@
     <script src="js/bootstrap/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-    <!--CSS criado-->
+    <!--CSS do WebGENTE-->
     <link rel="stylesheet" href="css/files/map.css">
     <link rel="stylesheet" href="css/files/menu.css">
     <link rel="stylesheet" href="css/files/login.css">
@@ -130,6 +114,30 @@
     <script src="js/plugins/jquery.mask/additional-methods.min.js"></script>
     <script src="js/plugins/jquery.mask/messages_pt_BR.js"></script> 
 
+    <!-- Funcoes de carregamento on-demand dos gifs de tutorial em Ajuda -->
+    <script>
+        function tutorial01(){
+            var tutorial = document.getElementById('tutorial01');
+            tutorial.innerHTML = '<img src="img/tut_camadas.gif" width="100%">';
+        }
+        function tutorial02(){
+            var tutorial = document.getElementById('tutorial02');
+            tutorial.innerHTML = '<img src="img/tut_zoom.gif" width="100%">';
+        }
+        function tutorial03(){
+            var tutorial = document.getElementById('tutorial03');
+            tutorial.innerHTML = '<img src="img/tut_atributos.gif" width="100%">';
+        }
+        function tutorial04(){
+            var tutorial = document.getElementById('tutorial04');
+            tutorial.innerHTML = '<img src="img/tut_360.gif" width="100%">';
+        }
+        function tutorial05(){
+            var tutorial = document.getElementById('tutorial05');
+            tutorial.innerHTML = '<img src="img/tut_pesquisa.gif" width="100%">';
+        }
+     </script>
+
     <title>WebGENTE</title>
   </head>
   <body onload="main()">
@@ -139,6 +147,8 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <a class="navbar-brand" href="#"><img src="img/webgente-fundo-escuro-120x40.png" alt=""></a>
+
+        <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#exampleModalLong">Ajuda</button>
           <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
          
@@ -152,9 +162,108 @@
   	</div>
   
     <!--Div onde o mapa será desenhado-->
-    <div id="barraPesquisas"></div>
     <div id="mapa">
-      <div id="consultaPesquisa"></div>
+
+
+    <!-- Div que aparece a barra de pesquisas sob demanda -->
+    <div id="barraPesquisas"></div>
+    <div id="barra-loading" style="position: relative; z-index: 1000; margin-left: 40%; margin-top: 20%;"></div>
+    <div id="consultaPesquisa"></div>
+
     </div>
   </body>
 </html>
+
+
+<!-- Modal de Ajuda -->
+<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Documentação de Ajuda do WebGENTE</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- Container de itens da help-->
+        <div class="container">
+          <div class="row align-items-center">
+            <a href="#tut-camadas" data-toggle="collapse" onclick="tutorial01()">+ Habilitando camadas</a>
+            <div class="col-xs-12">
+              <div id="tut-camadas" class="collapse">
+                <br>
+                <div id="tutorial01"></div>
+              </div>
+            </div>
+          </div>
+        </div> 
+        <hr></hr>
+        <!--Fim do container-->
+        <!-- Container de itens da help-->
+        <div class="container">
+          <div class="row align-items-center">
+            <br>
+            <a href="#tut-zoom" data-toggle="collapse" onclick="tutorial02()">+ Comandos de Zoom e movimento da tela</a>
+            <div class="col-xs-12">
+              <div id="tut-zoom" class="collapse">
+                <br>
+                <div id="tutorial02"></div>
+              </div>
+            </div>
+          </div>
+        </div> 
+        <hr></hr>
+        <!--Fim do container--> 
+        <!-- Container de itens da help-->
+        <div class="container">
+          <div class="row align-items-center">
+            <br>
+            <a href="#tut-atributos" data-toggle="collapse" onclick="tutorial03()">+ Visualizando os atributos das camadas</a>
+            <div class="col-xs-12">
+              <div id="tut-atributos" class="collapse">
+                <br>
+                <div id="tutorial03"></div>
+              </div>
+            </div>
+          </div>
+        </div> 
+        <hr></hr>
+        <!--Fim do container-->       
+        <!-- Container de itens da help-->
+        <div class="container">
+          <div class="row align-items-center">
+            <br>
+            <a href="#tut-360" data-toggle="collapse" onclick="tutorial04()">+ Visualizando as imagens 360°</a>
+            <div class="col-xs-12">
+              <div id="tut-360" class="collapse">
+                <br>
+                <div id="tutorial04"></div>
+              </div>
+            </div>
+          </div>
+        </div> 
+        <hr></hr>
+        <!--Fim do container-->
+        <!-- Container de itens da help-->
+        <div class="container">
+          <div class="row align-items-center">
+            <br>
+            <a href="#tut-pesquisa" data-toggle="collapse" onclick="tutorial05()">+ Pesquisando uma camada pelos atributos</a>
+            <div class="col-xs-12">
+              <div id="tut-pesquisa" class="collapse">
+                <br>
+                <div id="tutorial05"></div>
+              </div>
+            </div>
+          </div>
+        </div> 
+        <hr></hr>
+        <!--Fim do container-->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

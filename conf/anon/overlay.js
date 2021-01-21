@@ -39,13 +39,13 @@ var vetorOverlay =  [
 		)
 	,
 
-	parametros_geocodificacao_teste = new overlay(
+	parametros_geocodificacao = new overlay(
 		'Geocodificacao',
 		'bomdespacho:CAD_Geocodificacao',
 		'Cadastro Urbano',
+		['inscricao'],
 		[],
-		[],
-		[]
+		['Inscricao Cadastral']
 		)
 	,
 

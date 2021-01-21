@@ -1,5 +1,21 @@
+/* -------- Funções para os usuários pesquisarem, na "Barra de Pesquisa" da interface do WebGENTE, os atributos desejados das camadas 
+selecionadas -------- */
+
+
+
+/* Variáveis necessárias para a criação de funções pesquisáveis */ 
+var tabela= "";
+var layerF;
+var vetorLayer= new Array();
+var link="";
+var filtrado=new Array();
+var chaves= "";
+
+
 //Gera campos pesquisaveis de acordo com os atributos definidos no vetor prop_query
 //e envia  camada a ser exibida
+/* Essa função gera todos os campos pesquisáveis de acordo com os atributos que foram definidos anteriormente a aparecer quando o usuário
+clicar na barra de pesquisas. Depois de gerar esses campos, a camada a ser exibida e suas informações serão enviadas */
 function opcoes(){
 	var n = document.getElementById('barraPesquisa').value;
 	var opcao = document.getElementById("conteudo");
@@ -9,6 +25,7 @@ function opcoes(){
 		camposPesquisaveis+=` <input type="text" id="`+campos+`" name="`+ campos +`" placeholder="`+nome_alternativo+`">`
 	}
 
+    /* Estilo em HTML dos campos pesquisáveis que aparecerão na barra de pesquisas */
 	opcao.innerHTML = `
 		<style> 
 			input[type=text] {
@@ -29,46 +46,15 @@ function opcoes(){
 	    </form>`
 }
 
-var getJson = "";
 
-function gerarTXT(){
-    var textFile = null,
-    makeTextFile = function (text){
-        var data = new Blob([text], {type: 'text/plain'});
-      
-        if (textFile !== null) {
-            window.URL.revokeObjectURL(textFile);
-        }
-        textFile = window.URL.createObjectURL(data);
-        return textFile;
-    };
-
-    var create = document.getElementById('create');
-
-    create.addEventListener('click', function (){
-        var link = document.getElementById('downloadlink');
-      
-        link.href = makeTextFile(getJson);
-       link.style.display = 'block';
-    }, false);
-}
-
-
-
-
-
-var tabela= "";
-var layerF;
-var vetorLayer= new Array();
-var link="";
-var filtrado=new Array();
-var chaves= "";
-
+/* Função de fechar a tabela de pesquisa quando o usuário terminar de usá-la, ou seja, quando o usuário desabilitá-la. */
 function fecharTabela(){
     var tabelaExibicao = document.getElementById("conteudo");
     tabelaExibicao.innerHTML = "";
 }
 
+/* Função para exportar os resultados da pesquisa realizada pelo usuário em formatos shapefile, gml e scv. Os resultados são obtidos através 
+do GeoServer, logo torna-se necessário apresentar a overlayHost no final do código, caso contrário não será exportado nenhuma informação. */
 function link_shp (i, formato){
 //Exportar resultar em shp, gml e scv
 	chaves.unshift("geom");
@@ -85,7 +71,7 @@ function link_shp (i, formato){
     };
  
     var parameters = L.Util.extend(defaultParameters);
-   var URL = "https://geoserver.genteufv.com.br/geoserver/ows" + L.Util.getParamString(parameters);
+   var URL = overlayHost.substring(0,overlayHost.length-1)+ L.Util.getParamString(parameters);
  
    window.open(URL);
    chaves.splice(0,1);
@@ -93,12 +79,14 @@ function link_shp (i, formato){
     
     }
 
+/* Função para exibir as propriedades das camadas, ou seja, os atributos presentes nelas. Mas essa exibição restringe os atributos que 
+não podem ser visualizados pelo usuário anônimo, atributos esses que foram inseridos no arquivo conf > anon > overlay.. */
 function exibe_propriedades_tabela(i){
 	
     var response=tabela.features[i];
 	var consulta = document.getElementById("conteudo");
 
-	//variaveis que o tipo de usuário não pode ter acesso são excluídas com o método abaixo
+	//variaveis que o tipo de usuário não pode ter acesso são excluídas com o método abaixo:
 	
     var colunas="";
 	var linhas="";
@@ -116,6 +104,7 @@ function exibe_propriedades_tabela(i){
     	linhas+=`\n`;	
 	}	
 
+    /* Código HTML para o estilo para consulta de atributos que o usuário irá realizar */
     consulta.innerHTML = `
         <div id="img_fechar"><img src="img/left-arrow.png" alt="Voltar ao painel de pesquisas" onclick="opcoes(-1)"></div>
             <table id="tabela_propriedades">
@@ -133,6 +122,7 @@ function exibe_propriedades_tabela(i){
     `;  
 }
 
+
 function coordFail(coord){
 	//função recursiva que extrai uma matriz de coordenadas
 	if(coord.length>1 && coord[0].length>1 || coord.length>1 && coord[0].length==undefined ){
@@ -144,6 +134,8 @@ function coordFail(coord){
 	}
 }
 
+/* Função feita para pesquisar e selecionar uma via que o usuário deseja. É atribuído a ela um estilo de seleção no GeoServer para destacar
+sua seleção*/
 function buscaVia(posicao){
     //Usa a posição para retornar o objeto que vai ser filtrado e destacado
    
@@ -161,7 +153,8 @@ function buscaVia(posicao){
 	}
 	var selecao='';
 	
-	//De acordo com o tipo de geometria seleciona um estilo específico
+    //De acordo com o tipo de geometria seleciona um estilo específico que foi criado antes no GeoServer. Isso é feito para que a seleção seja 
+    //feita de maneira perceptível ao usuário.
 	switch(tabela.features[posicao].geometry['type']){
 		case 'Polygon':
 		case 'MultiPolygon':
@@ -180,7 +173,7 @@ function buscaVia(posicao){
 	}
 
 
-	
+	/* Aplica o estilo de seleção na camada e atributos pesquisáveis pelo usuário */
 	source = L.WMS.source(overlayHost, {
 		            opacity: 1,
 		            tiled: true,
@@ -200,6 +193,7 @@ function buscaVia(posicao){
 }
 
 
+/* Função receber a camada que o usuário deseja pesquisar e o que ele digitar no campo de pesquisar para retornar os possíveis resultados */
 function filtro ( objPesquisa){
 //Recebe a camada de pesquisa e concatena uma string com o conteúdo do cql_filter 
     var cql_filtro="";
@@ -244,9 +238,10 @@ function filtro ( objPesquisa){
 }
 
 
-
+/* Função que analisa/consulta a camada que vai ser filtrada na pesquisa. */
 function consultaFiltro (camadaFiltrada){
 
+    /* Estilo em HTML da pesquisa enquanto estiver carregando a camada escolhida pelo usuário */
     var loading = document.getElementById('barra-loading');
     loading.innerHTML = `<button class="btn btn-primary" type="button" disabled>
                           <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
@@ -288,10 +283,10 @@ function consultaFiltro (camadaFiltrada){
         //Cql filter adicionado também na requisição wfs
     };
 
-    
+    console.log();
 
     var parameters = L.Util.extend(defaultParameters);
-    var URL = "https://geoserver.genteufv.com.br/geoserver/ows" + L.Util.getParamString(parameters) ;
+   var URL = overlayHost.substring(0,overlayHost.length-1)+ L.Util.getParamString(parameters) ;
     var xhr = $.ajax({
         url: URL,
         dataType: 'jsonp', 
@@ -370,67 +365,3 @@ function apagaLayers(layer){
 
 }
 
-
-// getfeatureinfo
-
-function objects2div (objeto){
-
-    div_init = '<div';
-
-    div_final = '</div>';
-
-    div_data = '';
-
-    i = 0;
-
-    css = '<style>a {font-weight: bold; color: inherit;}</style>';
-
-    for (var property in objeto) {
-    if (!objeto.hasOwnProperty(property)) continue;
-
-        div_id = 'tabela'+i;
-
-        title = (objeto[property].id).split('.');
-
-        id = objeto[property].properties.id;
-
-        div_content = '<div style="width:270px;"><p><a style="font-weight: bold; color: inherit;" data-toggle="collapse" href="#'+div_id+'">'+title[0]+': '+id+'</a></p></div><div id="'+div_id+'" class="panel-collapse collapse"><div class="panel-body" style="height: 120px; overflow-y: auto; overflow-x: hidden;">'+properties2table(objeto[property].properties)+'</div></div>'
-
-        div_data = div_data + div_content + '<p></p>';
-
-        i++;
-
-    }
-
-    div_data = '<div>' + div_data + css + '</div>';
-
-    return div_data;
-
-};
-
-function properties2table (objeto){
-    tb_init = '<table><tr><th>Atributo</th><th>Valor</th></tr>';
-
-    tb_data_acum = '';
-
-    for (var property in objeto) {
-    if (!objeto.hasOwnProperty(property)) continue;
-
-    if (property == 'path_folder') {
-        tb_data = '<tr><td>Arquivos associados</td><td><a href="'+ objeto[property]+'" target="_blank"><img alt="Acessar o sistema Alfresco" src="img/folder.png"></a></td></tr>';
-    } else {
-        tb_data = '<tr><td>'+property+'</td><td>'+objeto[property]+'</td></tr>';
-    }
-
-    tb_data_acum = tb_data_acum+tb_data;     
-        
-    };
-
-    css_table = '<style>table {width:250px;text-align:left;vertical-align:center;padding: 15px;border-bottom: 1px solid #ddd;font-family: Tahoma, Geneva, sans-serif;}td,th {border-bottom: 1px solid #ddd;padding: 2px;}tr:hover {background-color: #f5f5f5;}th {background-color: #f5f5f5;}</style>'
-
-    tb_final = '</table>';
-
-    tb = css_table+tb_init+tb_data_acum+tb_final;
-
-    return tb;
-};
