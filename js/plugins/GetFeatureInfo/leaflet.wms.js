@@ -166,17 +166,12 @@ wms.Source = L.Layer.extend({
         if (!layers.length) {
             return;
         }
-        if(xyz){
-         this.getFeatureInfo(
-            evt.containerPoint, evt.latlng, layers,
-            this.showFeatureCoordinates
-        );        
-        }else{
+        
         this.getFeatureInfo(
             evt.containerPoint, evt.latlng, layers,
             this.showFeatureInfo
         );
-    }
+    
     }
 
     },
@@ -209,12 +204,13 @@ wms.Source = L.Layer.extend({
         if (this.options.identifyLayers)
             return this.options.identifyLayers;
         var layer= new Array();
-        //habilita coordenadas
-       if(xyz){
-            layer[0]=mde._name;
-       }else{
-         layer=Object.keys(this._subLayers);
-       }
+        //Verfica se o gfi está habilitado para as camadas 
+        if(info_gfi)
+        layer=Object.keys(this._subLayers);
+        //Verficação para a ferramenta de coordenadas
+        if(xyz)
+        layer.unshift(mde._name);
+
         return layer;
 
      },
@@ -257,23 +253,6 @@ wms.Source = L.Layer.extend({
         }
        
         return result;
-    },
-    'showFeatureCoordinates': function(latlng, info){
-         // Ferramenta de coordenadas
-        if (!this._map) {
-            return;
-        }     
-        obj = JSON.parse(info);
-        //conversão das coordenadas para o sistema referenciado em startup.js  
-        var transf= proj4(epsgcode,[latlng['lng'],latlng['lat']]);             
-        obj.features[0].properties={
-         N:transf[1],
-         E:transf[0],
-         Z: obj.features[0].properties['GRAY_INDEX'],
-    };
-     var  div_content = '<div style="width:270px;"><p><a style="font-weight: bold; color: inherit;" >Coordenadas: '+epsgcode+'</a></p></div><div  class="panel> <div class="panel-body" style="height: 120px; overflow-y: auto; overflow-x: hidden;">'+properties2table(obj.features[0].properties)+'</div></div>';
-     this._map.openPopup(div_content, latlng);
-
     }
     ,
     'showFeatureInfo': function(latlng, info) {
@@ -284,10 +263,17 @@ wms.Source = L.Layer.extend({
         obj = JSON.parse(info);
         //Identificar quais layer ativas 
         var layersMarked = this.getIdentifyLayers();
+
+
         for(var num=0; num<obj.features.length;num++){
             for(var n=0; n<layersMarked.length;n++){
          obj.features[num].properties=restrictedAtributes(obj.features[num].properties,layersMarked[n]);  
           }
+        }
+        if(xyz){
+            //Direciona os objetos de coordenadas para uma div separada
+            coordinates_list(obj.features[0],latlng);
+            obj.features.shift();
         }
 
 
@@ -295,7 +281,7 @@ wms.Source = L.Layer.extend({
             width: 300,
             maxHeight: 300
         }
-       
+       if(obj.features[0]!=undefined){
         if (typeof obj.features[0].properties.path_360 != 'undefined'){
 
             fullscreen = '<a href="'+sitebase+obj.features[0].properties.path_360+'" target="_blank">Abrir visualizador 360° em tela cheia</a>';
@@ -309,7 +295,8 @@ wms.Source = L.Layer.extend({
             this._map.openPopup(objects2div(obj.features), latlng, optionsPopup);
 
         }
-    },
+    }
+},
 
     'showWaiting': function() {
         // Hook to customize AJAX wait animation

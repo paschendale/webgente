@@ -84,13 +84,12 @@ function properties2table (objeto){
         
     };
 
-    css_table =(xyz==true)? '<style>table {width:250px;text-align:left;vertical-align:center;padding: 15px;border-bottom: 1px solid #ddd;font-family: Tahoma, Geneva, sans-serif;}td,th {border-bottom: 1px solid #ddd;padding: 2px;}tr:hover {background-color: #f5f5f5;}th {background-color: #343a40; color: #f8f9fa;}</style>':
-    '<style>table {width:250px;text-align:left;vertical-align:center;padding: 15px;border-bottom: 1px solid #ddd;font-family: Tahoma, Geneva, sans-serif;}td,th {border-bottom: 1px solid #ddd;padding: 2px;}tr:hover {background-color: #f5f5f5;}th {background-color: #f5f5f5;}</style>';
+    css_table ='<style>table {width:250px;text-align:left;vertical-align:center;padding: 15px;border-bottom: 1px solid #ddd;font-family: Tahoma, Geneva, sans-serif;}td,th {border-bottom: 1px solid #ddd;padding: 2px;}tr:hover {background-color: #f5f5f5;}th {background-color: #f5f5f5;}</style>';
 
     tb_final = '</table>';
 
     tb = css_table+tb_init+tb_data_acum+tb_final;
-
+    
     return tb;
 };
 
@@ -170,4 +169,90 @@ function criaVetorOverlayUnrestricted(objeto){
         vetor[i] = criaParametroOverlayUnrestricted(objeto[i])
     }
     return vetor
+}
+
+ function coordinates_list(obj,latlng){
+   var cont=document.getElementById('barraCoordenadas');
+   
+        //conversão das coordenadas para o sistema referenciado em startup.js
+        if(obj==undefined)
+          obj=new Object();
+
+        var transf= proj4(epsgcode,[latlng['lng'],latlng['lat']]);
+
+        obj.properties={
+         X:transf[0],
+         Y:transf[1],
+         Z: (obj.hasOwnProperty('properties'))?obj.properties['GRAY_INDEX']: 'N/A'
+    };
+     //Adiciona coordenadas um objeto tipo Map relacionado a uma chave
+     //A chave é o mesmo valor do div_id fo objeto no html   
+     coordinates_exp.set('coord'+(coordinates_exp.size+1),obj.properties);
+     if(coordinates_exp.size==1)
+     cont.innerHTML+= ` <div id="remove_coord">Exportar <img src="img/donwload.png" onclick="export_coordinates()";></div>`;  
+     
+     cont.innerHTML += ` <div id="coord`+(coordinates_exp.size)+`"><style> 
+     table {
+        height: 10%;
+        width: 15%;
+        text-align:center;
+        border: none;
+        margin: 3%;
+        padding: 5px 5px 5px 5px;
+    } 
+    tr,td{
+        border: none;
+
+    }
+    #coord`+(coordinates_exp.size)+` {
+        
+        width: 90%;
+        margin: 3%;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+       
+
+            }
+     </style>
+      <button type="button"  class="btn " style="font-size: 10px; position:absolute; left:0%; " onclick="remove_coordinates(`+(coordinates_exp.size)+`);">X</button>
+     <br>
+     <table>
+        
+        <tr><td>N:</td><td>`+obj.properties.Y+`</td></tr>
+        <tr><td>E:</td><td>`+obj.properties.X+`</td></tr>
+        <tr><td>Z:</td><td>`+obj.properties.Z+`</td></tr>
+    </table> 
+    </div>
+    `
+    
+    ;
+
+}
+
+function remove_coordinates(position){
+//remove a coordenada da tela e do vetor    
+var el = document.getElementById( 'coord'+position );
+el.parentNode.removeChild( el );
+el.innerHTML=``;
+coordinates_exp.delete('coord'+position);
+
+
+}
+
+function export_coordinates(){
+//concatena um string e gera um link csv
+var csv = "data:text/csv;charset=utf-8,";
+var cont= 1;
+csv+="Id;X;Y;Z\r\n"
+for (obj of coordinates_exp){
+csv += cont+";"+Object.values(obj[1]).join(";") + '\r\n';
+cont++;
+}
+var encodedUri = encodeURI(csv);
+var link = document.createElement("a");
+link.setAttribute("href", encodedUri);
+link.setAttribute("download", "coordenadas.csv");
+document.body.appendChild(link);
+link.click();
+
 }

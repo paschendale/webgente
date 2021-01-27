@@ -2,7 +2,6 @@
 selecionadas -------- */
 
 
-
 /* Variáveis necessárias para a criação de funções pesquisáveis */ 
 var tabela= "";
 var layerF;
@@ -79,73 +78,41 @@ function link_shp (i, formato){
     
     }
 
-/* Função para exibir as propriedades das camadas, ou seja, os atributos presentes nelas. Mas essa exibição restringe os atributos que 
-não podem ser visualizados pelo usuário anônimo, atributos esses que foram inseridos no arquivo conf > anon > overlay.. */
-function exibe_propriedades_tabela(i){
-	
-    var response=tabela.features[i];
-	var consulta = document.getElementById("conteudo");
-
-	//variaveis que o tipo de usuário não pode ter acesso são excluídas com o método abaixo:
-	
-    var colunas="";
-	var linhas="";
-    
-	for( campos of chaves ){
-        colunas+= `<th>`+campos+`</th>`;   
-        colunas+=`\n`;
-        if(campos == 'path_folder'){
-        	linhas+=`<td> <img src="img/folder.png" onClick="window.open('`+response.properties[campos]+`')"</td>`;
-        }else{
-
-        	linhas+=`<td>`+response.properties[campos]+`</td>`;	
-        }
-    	
-    	linhas+=`\n`;	
-	}	
-
-    /* Código HTML para o estilo para consulta de atributos que o usuário irá realizar */
-    consulta.innerHTML = `
-        <div id="img_fechar"><img src="img/left-arrow.png" alt="Voltar ao painel de pesquisas" onclick="opcoes(-1)"></div>
-            <table id="tabela_propriedades">
-                <tr>
-                    `+colunas+`
-                    
-                </tr>
-                <tr>
-                    `+linhas+`
-                   
-                </tr>
-            </table>
-        </div>
-            
-    `;  
-}
-
 
 function coordFail(coord){
 	//função recursiva que extrai uma matriz de coordenadas
-	if(coord.length>1 && coord[0].length>1 || coord.length>1 && coord[0].length==undefined ){
+
+	if(coord.length>=1 && coord[0].length==2 || coord.length==2 && coord[0].length==undefined ){
        
 		return coord;
 	}else{
-       
+      
 		return coordFail(coord[0]);
 	}
 }
 
 /* Função feita para pesquisar e selecionar uma via que o usuário deseja. É atribuído a ela um estilo de seleção no GeoServer para destacar
 sua seleção*/
-function buscaVia(posicao){
+function location_search (posicao){
     //Usa a posição para retornar o objeto que vai ser filtrado e destacado
-   
-	var coord=coordFail (tabela.features[posicao].geometry.coordinates);
-  
+   var coord= [];
+
+   if(posicao==-1){
+    for (var n=0; n<tabela.features.length;n++ ){
+     
+        coord= coord.concat(coordFail (tabela.features[n].geometry.coordinates));
+        }
+        
+     }else{
+    
+    coord=coordFail (tabela.features[posicao].geometry.coordinates);
+    }  
 
 	var lalo;
-	if(coord[0].length>1){ 
-	lalo= L.GeoJSON.coordsToLatLngs(coord);
-	myMapa.getMapa().fitBounds(lalo);
+   lalo=L.latLngBounds(coord);
+  if(coord[0].length>1){ 
+	    lalo= L.GeoJSON.coordsToLatLngs(coord);
+	    myMapa.getMapa().fitBounds(lalo);
 	}else{ 
         
 		lalo= L.GeoJSON.coordsToLatLng(coord);
@@ -155,7 +122,7 @@ function buscaVia(posicao){
 	
     //De acordo com o tipo de geometria seleciona um estilo específico que foi criado antes no GeoServer. Isso é feito para que a seleção seja 
     //feita de maneira perceptível ao usuário.
-	switch(tabela.features[posicao].geometry['type']){
+	switch(tabela.features[0].geometry['type']){
 		case 'Polygon':
 		case 'MultiPolygon':
 		selecao='poligono_selecao';
@@ -174,6 +141,8 @@ function buscaVia(posicao){
 
 
 	/* Aplica o estilo de seleção na camada e atributos pesquisáveis pelo usuário */
+    var filter= (posicao==-1)?filtrado[0]:filtrado[1];
+    console.log(filter);
 	source = L.WMS.source(overlayHost, {
 		            opacity: 1,
 		            tiled: true,
@@ -181,11 +150,13 @@ function buscaVia(posicao){
 		            "info_format": "application/json",
 		            transparent: true,
 		            format: 'image/png',
-		            cql_filter:filtrado[1],
+		            cql_filter:filter,
 		            styles: selecao
 		        });
 
-	
+	if(vetorLayer.length>1)
+        apagaLayers(vetorLayer[0]);
+    
 	vetorLayer.unshift(source.getLayer(layerF.layers));
      vetorLayer[0].addTo(myMapa.getMapa());
    
@@ -194,7 +165,7 @@ function buscaVia(posicao){
 
 
 /* Função receber a camada que o usuário deseja pesquisar e o que ele digitar no campo de pesquisar para retornar os possíveis resultados */
-function filtro ( objPesquisa){
+function concate_filter ( objPesquisa){
 //Recebe a camada de pesquisa e concatena uma string com o conteúdo do cql_filter 
     var cql_filtro="";
  
@@ -249,7 +220,7 @@ function consultaFiltro (camadaFiltrada){
                         </button>`;
 
 
- if(vetorLayer.length > 0){
+     if(vetorLayer.length > 0){
         controle = false;
         vetorLayer.forEach(apagaLayers);
     	vetorLayer=[];
@@ -268,7 +239,7 @@ function consultaFiltro (camadaFiltrada){
         layerF=camadaFiltrada;
         vetorLayer.unshift(source.getLayer(layerF.layers));
         vetorLayer[0].addTo(myMapa.getMapa());
-		filtro(null);    
+		concate_filter(null);    
      
     //Requisição WFS para buscar os dados a serem mostrados na tabela
     var defaultParameters = {
@@ -286,7 +257,7 @@ function consultaFiltro (camadaFiltrada){
     console.log();
 
     var parameters = L.Util.extend(defaultParameters);
-   var URL = overlayHost.substring(0,overlayHost.length-1)+ L.Util.getParamString(parameters) ;
+    var URL = overlayHost.substring(0,overlayHost.length-1)+ L.Util.getParamString(parameters) ;
     var xhr = $.ajax({
         url: URL,
         dataType: 'jsonp', 
@@ -311,6 +282,7 @@ function consultaFiltro (camadaFiltrada){
     				<button type="button" class="btn " onclick="link_shp(0,'shape-zip')" ><strong>SHP</strong></button>
     				<button type="button"  class="btn " onclick="link_shp(0, 'csv' ) "><strong>CSV</strong></button>
     				<button type="button"  class="btn " onclick="link_shp( 0,'GML3') "><strong>GML</strong></button>
+                    <button type="button"  class="btn " onclick="location_search(-1)"> <img src="img/lupa.png" > </button>
     				
     					<table id="tabela_pesquisa">
     						<tr>
@@ -335,8 +307,8 @@ function consultaFiltro (camadaFiltrada){
                         consulta_td  += linhas;
 
                         //Onclick chama duas funções
-                        consulta_td += '<td><img src="img/lupa.png" onclick="filtro('+i+');buscaVia('+i+'); exibe_propriedades_tabela('+i+')"></td>'; 
-                        consulta_td+= `<td> <img src="img/donwload.png" onclick="filtro(`+i+`);link_shp(`+1+`,'shape-zip')"></td> </tr>`;
+                        consulta_td += '<td><img src="img/lupa.png" onclick="concate_filter('+i+');location_search('+i+')"></td>'; 
+                        consulta_td+= `<td> <img src="img/donwload.png" onclick="concate_filter(`+i+`);link_shp(`+1+`,'shape-zip')"></td> </tr>`;
 
                     }
                     

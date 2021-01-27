@@ -9,7 +9,7 @@ var drawnItems;
 var drawControl; 
 var menu = " ";
 var mde= "";
-
+var coordinates_exp= new Map();
 //Função principal int main()
 
 /* A função main descrita abaixo exerce o papel de inicilizar toda a interface do WebGENTE, abrindo o mapa inicial com
@@ -166,6 +166,21 @@ function main(){
                  mde.addTo(myMapa.getMapa());  
                         coordenadas.state('coordenadas_enabled');
                         btn.state('coordenadas_enabled');  
+                        var cont=document.getElementById('barraCoordenadas');
+                        //Impede clicks na div de coordenadas
+                        var div = L.DomUtil.get('barraCoordenadas');
+                        L.DomEvent.disableClickPropagation(div);
+                        
+                        cont.innerHTML = `<div> 
+                        <style> 
+                        p{
+                             margin: 5px;
+                             color: #000;
+                        }
+                        </style>
+                            <p>Coordenadas</p>
+                            <p>`+ epsgcode+`  </p>
+                              </div> `; 
                           
                     }
                 }, {
@@ -175,7 +190,10 @@ function main(){
                     onClick: function(btn) {
                         coordenadas.state('coordenadas_disabled');
                         btn.state('coordenadas_disabled'); 
-                        xyz=false;   
+                        xyz=false;  
+                        var cont=document.getElementById('barraCoordenadas');
+                        cont.innerHTML = '';  
+                        coordinates_exp= new Map();
                     }
             }]
         }).addTo(myMapa.getMapa());

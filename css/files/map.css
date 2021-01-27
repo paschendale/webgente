@@ -179,4 +179,20 @@ th {background-color: #f5f5f5;}
 	}
 }
 
-
+#barraCoordenadas{
+	background-color: #FFFFFF;
+	opacity: 0.9; 
+	position: absolute; 
+	right: 1%; 
+	bottom:5%; 
+	width: 15%;
+	max-height: 80%;
+	min-width: 15%;
+	z-index: 1000;
+	border-radius: 10px;
+	font-family: Tahoma, Geneva, sans-serif;
+	text-align: center;
+	overflow-y:auto;
+	
+	
+}
