@@ -28,14 +28,9 @@
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
 
-    <!--Axios CDN-->
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-
     <!-- jQuery CDN --> 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script> 
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
 
     <!-- Jquery Mask -->     
     <script src="../js/plugins/jquery.mask/jquery.mask.min.js"></script>
@@ -49,7 +44,31 @@
     <script src="content/newUser.js"></script>
     <script src="content/about.js"></script>
     <script src="content/users.js"></script>
-    <script src="content/newLayer.js"></script>
+    <script src="content/layer.js"></script>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <script>
+    	var camadas = [];
+
+    	function verCamadas(){
+    		console.log(camadas);
+    	}
+
+    	function selecionarCamada(nome){
+    		//Adiciona a camada quando marca o check
+    		if(camadas.indexOf(nome) == -1){
+    			camadas.push(nome);
+    			//console.log(camadas);
+    		}
+    		//Remove a camada quando desmarca o check
+    		else if(camadas.indexOf(nome) > -1){
+    			camadas.splice(camadas.indexOf(nome), 1);
+    			//console.log(camadas);
+    		}
+    	}
+    </script>
+
 </head>
 
 <body>
@@ -63,18 +82,7 @@
             <ul class="list-unstyled components">
                 <p>Seja Bem-Vindo</p>
                 <li class="active">
-                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Camadas</a>
-                    <ul class="collapse list-unstyled" id="homeSubmenu">
-                        <li>
-                            <button type="button" class="btn btn-link" onclick="newLayer()" style="color: white; margin-left: 15px;">Nova Camada</button>
-                        </li>
-                        <li>
-                            <button type="button" class="btn btn-link" onclick="()" style="color: white; margin-left: 15px;">Ativar/ Desativar Camadas</button>
-                        </li>
-                        <li>
-                            <button type="button" class="btn btn-link" onclick="()" style="color: white; margin-left: 15px;">Excluir Camadas</button>
-                        </li>
-                    </ul>
+                    <button type="button" class="btn btn-link" onclick="layer()" style="color: white; font-size: 17px;">Camadas</button>
                 </li>
                 <li>
                     <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Usuários</a>

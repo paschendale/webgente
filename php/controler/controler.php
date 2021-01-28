@@ -84,6 +84,11 @@ class controler{
 		}
 
 	}
+
+	function layers(){
+		$layers = new layers();
+		$layers->getLayers();
+	}
 }
 
 ?>

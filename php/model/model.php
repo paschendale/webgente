@@ -160,4 +160,83 @@ class usuario{
 
 }
 
+class layers{
+	//private
+	private $nome;
+	private $layers;
+	private $grupo;
+	private $prop_query_alpha;
+	private $prop_query_numeric;
+	private $prop_alternative;
+	private $restricted;
+	private $maxZoom;
+	private $format;
+	private $transparent;
+	private $tiled;
+
+	//public
+	function constructo($nome, $layers, $grupo, $prop_query_alpha, $prop_query_numeric, $prop_alternative, $restricted, $maxZoom, $format, $transparent, $tiled){
+		$this->nome = $nome;
+		$this->layers = $layers;
+		$this->grupo = $grupo;
+		$this->prop_query_alpha = $prop_query_alpha;
+		$this->prop_query_numeric = $prop_query_numeric;
+		$this->prop_alternative = $prop_alternative;
+		$this->restricted = $restricted;
+		$this->maxZoom = $maxZoom;
+		$this->format = $format;
+		$this->transparent = $transparent;
+		$this->tiled = $tiled;
+	}
+
+	function getLayers(){
+		$conexao = new PDO('sqlite:../../conf/camadas.db') or die("Erro ao abrir a base");
+
+		$sql = "SELECT * FROM camadas";
+
+		$resposta = $conexao->query($sql);
+
+		echo '<table border = "1"><tr><td>Nome</td><td>Layers</td><td>Prop_query_alpha</td><td>Prop_query_numeric</td><td>Prop_alternative</td><td>Restricted</td><td>maxZoom</td><td>Format</td><td>Transparent</td><td>Tiled</td></tr/>';
+ 		
+ 		while($row = $resposta->fetch()){
+ 			echo "<tr>";
+ 			echo "<td>";
+ 				echo '<input type="checkbox" id='.$row["nome"].' name='.$row["nome"].' value='.$row["nome"].' onclick="selecionarCamada(this.value)">';
+ 			echo "</td>";
+ 			echo "<td>";
+ 				echo $row['nome']; 
+ 			echo "</td>";
+ 			echo "<td>";
+ 				echo $row['layers'];
+ 			echo "</td>";
+ 			echo "<td>";
+ 				echo $row['grupo'];
+ 			echo "</td>";
+ 			echo "<td>";
+ 				echo $row['prop_query_numeric'];
+ 			echo "</td>";
+ 			echo "<td>";
+ 				echo $row['prop_alternative'];
+ 			echo "</td>";
+ 			echo "<td>";
+ 				echo $row['restricted'];
+ 			echo "</td>";
+ 			echo "<td>";
+ 				echo $row['maxZoom'];
+ 			echo "</td>";
+ 			echo "<td>";
+ 				echo $row['format'];
+ 			echo "</td>";
+ 			echo "<td>";
+ 				echo $row['transparent'];
+ 			echo "</td>";
+ 			echo "<td>";
+ 				echo $row['tiled'];
+ 			echo "</td>";
+ 			echo "</tr>";
+ 		}
+ 		echo '</table>';
+	}
+}
+
 ?>
