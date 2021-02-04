@@ -181,51 +181,66 @@ function criaVetorOverlayUnrestricted(objeto){
         var transf= proj4(epsgcode,[latlng['lng'],latlng['lat']]);
 
         obj.properties={
-         X:transf[0],
-         Y:transf[1],
-         Z: (obj.hasOwnProperty('properties'))?obj.properties['GRAY_INDEX']: 'N/A'
-    };
+	        X:transf[0],
+	        Y:transf[1],
+	        Z: (obj.hasOwnProperty('properties'))?obj.properties['GRAY_INDEX']: 'N/A'
+    	};
      //Adiciona coordenadas um objeto tipo Map relacionado a uma chave
-     //A chave é o mesmo valor do div_id fo objeto no html   
-     coordinates_exp.set('coord'+(coordinates_exp.size+1),obj.properties);
-     if(coordinates_exp.size==1)
-     cont.innerHTML+= ` <div id="remove_coord">Exportar <img src="img/donwload.png" onclick="export_coordinates()";></div>`; 
-     cont.innerHTML += `
-     <div class="container">
-     <div class="row">
-     <div id="coord`+(coordinates_exp.size)+`">
-        <style> 
-         table {
-            height: 10%;
-            text-align:center;
-            border: none;
-            margin: 1%;
-            padding: 0px 0px 0px 0px;
-            width: auto;
-        }        
-        tr,td{
-            border: none;
-            margin-left: 0px;
-            padding: 2px 2px 2px 2px;
-            width: auto;
-        }
-        #coord`+(coordinates_exp.size)+` {
-            width: auto;
-            margin: 3%;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            padding: 2px 2px 2px 2px;
-        }
-     </style>
-        <button type="button"  class="btn " style="font-size: 10px; position:absolute; left:0%; " onclick="remove_coordinates(`+(coordinates_exp.size)+`);">X</button>
-        <br>
-        <table>
-            <tr><td>N:</td><td>`+obj.properties.Y+`</td></tr>
-            <tr><td>E:</td><td>`+obj.properties.X+`</td></tr>
-            <tr><td>Z:</td><td>`+obj.properties.Z+`</td></tr>
-        </table> 
-     </div></div></div>
-    `;
+     //A chave é o mesmo valor do div_id fo objeto no html  
+
+
+
+
+
+
+    var i = 0;
+    for(var [key, value] of coordinates_exp){
+     	if(value.X == obj.properties.X && value.Y == obj.properties.Y && value.Z == obj.properties.Z){
+     		i++;
+     	}
+    }
+    if(i == 0){
+    	coordinates_exp.set('coord'+(coordinates_exp.size+1),obj.properties);
+   
+	    if(coordinates_exp.size==1)
+	    cont.innerHTML+= ` <div id="remove_coord">Exportar <img src="img/donwload.png" onclick="export_coordinates()";></div>`; 
+	    cont.innerHTML += `
+		    <div class="container">
+		    <div class="row">
+		    <div id="coord`+(coordinates_exp.size)+`">
+		        <style> 
+		         table {
+		            height: 10%;
+		            text-align:center;
+		            border: none;
+		            margin: 1%;
+		            padding: 0px 0px 0px 0px;
+		            width: auto;
+		        }        
+		        tr,td{
+		            border: none;
+		            margin-left: 0px;
+		            padding: 2px 2px 2px 2px;
+		            width: auto;
+		        }
+		        #coord`+(coordinates_exp.size)+` {
+		            width: auto;
+		            margin: 3%;
+		            border: 1px solid #ddd;
+		            border-radius: 10px;
+		            padding: 2px 2px 2px 2px;
+		        }
+		    </style>
+		        <button type="button"  class="btn " style="font-size: 10px; position:absolute; left:0%; " onclick="remove_coordinates(`+(coordinates_exp.size)+`);">X</button>
+		        <br>
+		        <table>
+		            <tr><td>N:</td><td>`+obj.properties.Y+`</td></tr>
+		            <tr><td>E:</td><td>`+obj.properties.X+`</td></tr>
+		            <tr><td>Z:</td><td>`+obj.properties.Z+`</td></tr>
+		        </table> 
+		    </div></div></div>
+	    `;
+	}
 
 }
 
