@@ -1,32 +1,16 @@
 <?php
 
-class conexao{
-	//private
-	private $conexao;
+$db_camadas = new SQLite3('./webgente.db');
 
-	//public
-	public function abrindo_conexao(){
+$sql = "SELECT nome, layers, grupo, prop_query_alpha AS alpha, prop_query_numeric AS numeric, prop_alternative, restricted, maxZoom, format, transparent, tiled FROM camadas;";
 
-		 
-		//================================================================================
-		//Parâmetros de conexão com o banco MySQL secundário
-		$host = 'localhost'; //host de conexão
-		$user = 'webgente_user'; //usuário
-		$pass = '#.sxJZ]>8G'; //senha
-		$bd = 'webgente'; //nome do banco
+$camadas = $db_camadas->query($sql);
 
-		//=============================
-		//================================================================================
-		$this->conexao = mysqli_connect($host, $user, $pass, $bd) or die(mysqli_connect_error());
+while($row = $camadas->fetchArray(SQLITE3_ASSOC)){ 
 
-	}
-	public function getConexao(){
-		return $this->conexao;
-	}
-	public function fechando_conexao(){
-		mysqli_close($this->conexao);
-	}
+    $camadas_json[] = $row;
 };
 
+echo "var conexao_camadas =" . json_encode($camadas_json);
 ?>
 

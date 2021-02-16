@@ -30,7 +30,7 @@ class usuario{
 	//Get's
 
 	function verificaUsuario($cpf){
-		$conexao = new PDO('sqlite:../../conf/webgente_db.db') or die("Erro ao abrir a base");
+		$conexao = new PDO('sqlite:../../conf/webgente.db') or die("Erro ao abrir a base");
 
 		$sql = "SELECT cpf FROM usuario WHERE cpf = '$cpf'";
 
@@ -46,7 +46,7 @@ class usuario{
 	}
 
 	function setUsuario(){
-		$conexao = new PDO('sqlite:../../conf/webgente_db.db') or die("Erro ao abrir a base");
+		$conexao = new PDO('sqlite:../../conf/webgente.db') or die("Erro ao abrir a base");
 
 		$sql = "INSERT INTO usuario (nome, cpf, dataNascimento, sexo, faixaEtaria, celular, email, senha, tipo) VALUES ('$this->nome', '$this->cpf', '$this->dataNascimento', '$this->sexo', '$this->faixaEtaria', '$this->celular', '$this->email', '$this->senha', '$this->tipo')";
 
@@ -59,7 +59,7 @@ class usuario{
 	}
 
 	function setLogin($cpf, $senha){ 
-		$conexao = new PDO('sqlite:../../conf/webgente_db.db') or die("Erro ao abrir a base");
+		$conexao = new PDO('sqlite:../../conf/webgente.db') or die("Erro ao abrir a base");
 
 		$sql = "SELECT senha, nome, tipo FROM usuario WHERE cpf = '$cpf'";
 
@@ -99,7 +99,7 @@ class usuario{
 	}
 
 	function setLoginGmail($email){ 
-		$conexao = new PDO('sqlite:../../conf/webgente_db.db') or die("Erro ao abrir a base");
+		$conexao = new PDO('sqlite:../../conf/webgente.db') or die("Erro ao abrir a base");
 
 		$sql = "SELECT nome, tipo, senha, cpf FROM usuario WHERE email = '$email'";
 
@@ -131,7 +131,7 @@ class usuario{
 	}
 
 	function validaSenhaEmail($email, $senha){
-		$conexao = new PDO('sqlite:../../conf/webgente_db.db') or die("Erro ao abrir a base");
+		$conexao = new PDO('sqlite:../../conf/webgente.db') or die("Erro ao abrir a base");
 
 		$sql = "SELECT nome FROM usuario WHERE email = '$email' AND senha = '$senha'";
 		
@@ -149,7 +149,7 @@ class usuario{
 	}
 
 	function novaSenha($email, $senha){
-		$conexao = new PDO('sqlite:../../conf/webgente_db.db') or die("Erro ao abrir a base");
+		$conexao = new PDO('sqlite:../../conf/webgente.db') or die("Erro ao abrir a base");
 
 		$sql = "UPDATE usuario SET senha = '$senha' WHERE email = '$email'";
 		

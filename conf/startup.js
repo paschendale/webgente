@@ -1,12 +1,12 @@
 // Definindo latitude, longitude e zoom para a inicialização do mapa
 var init = {
-	latitude: -19.737342, 
-	longitude: -45.251930, 
-	zoomInicial: 18
+	latitude: -20.754649, 
+	longitude: -42.873321, 
+	zoomInicial: 20
 };
 
 // Definindo site base para processamento do 360°
-var sitebase = 'https://www.genteufv.com.br/psv/index.html?';
+var sitebase = 'http://localhost/webgente/psv/index.html?';
 
 //Definindo crs para a ferramenta de coordenadas
 var epsgcode="EPSG:31983";

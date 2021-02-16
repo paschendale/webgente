@@ -2,13 +2,10 @@ body{
 	padding: 0;
     margin: 0;
 }
-html,
-body,
-
-#mapa{
-    height: 97%;
-    z-index:-1;
+html, body, #mapa {
+    height: 100vh;
     position: relative;
+    z-index: -1;
 }
 
 /*Font geral da aplicação*/
@@ -76,7 +73,7 @@ body,
 #botao-ok{
 	background-color: #e6e6e6; /* Green */
 	border: solid lightgrey 0px;
-	border-radius: 10px
+	border-radius: 10px;
 	color: white;
 	padding: 3px 5px;
 	margin: 2px 2px 2px 2px;

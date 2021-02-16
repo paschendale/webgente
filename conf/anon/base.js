@@ -10,32 +10,16 @@ compatível com as especificações WMS, WCS e WFS */
 
 var vetorBasemap = [
     
-    //Parâmetro utilizado para carregar as informações da camada de Imageamento Aéreo e Orbital.
-
     parametros_imageamento = {
-        nome: 'Imageamento Aéreo e Orbital',
-        host: 'https://geoserver.genteufv.com.br/geoserver/ows?',
-        padrao: false,
-        maxZoom: 22,
-        layers: 'bomdespacho:ortofoto_base',
+        nome: 'Imageamento Aéreo',
+        host: 'http://localhost:8080/geoserver/ows?',
+        padrao: true,
+        maxZoom: 30,
+        layers: 'gianetti:ortofoto',
         format: 'image/png',
         transparent: false,
         tiled: true,
         attribution: 'Imageamento realizado por aerofotogrametria, executado pelo Grupo de Engenharia para Gestão Territorial - GENTE em 2020'
-    },
-
-    //Parâmetro para carregas as informações da camada de Base Cadastral
-
-    parametros_cadastro = {
-        nome: 'Base Cadastral',
-        host: 'https://geoserver.genteufv.com.br/geoserver/ows?',
-        padrao: true,
-        maxZoom: 22,
-        layers: 'bomdespacho:base_cadastral',
-        format: 'image/png',
-        transparent: false,
-        tiled: true,
-        attribution: 'Mapa Base do Cadastro Territorial elaborado pelo GENTE em 2020'
     }
 ];
 
