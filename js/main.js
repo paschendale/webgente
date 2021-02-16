@@ -48,6 +48,18 @@ function main(){
         groupsCollapsable: true,
         groupCheckboxes: true
     };
+
+    /* Adicionando Google Satelite e OpenStreetMaps */
+
+    var osm = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+    });
+
+    var google = L.tileLayer('http://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}',{
+        maxZoom: 20,
+        subdomains:['mt0','mt1','mt2','mt3']
+    });
+    
     
     /* O objeto "Lc" criado abaixo utiliza o pluguin "groupedLayers" que organiza a exibição das layers (camadas) na interface do
     WebGENTE. Observe que ele utiliza a variável "optionsControl" para tornar o botão de layers colapsável, assim como as caixas
@@ -69,6 +81,10 @@ function main(){
     }
 
     vetorBasemap.forEach(adicionaBasemap);
+
+    /* Adicionando Google e OSM no controle */
+    Lc.addBaseLayer(google, 'Google Satélite');
+    Lc.addBaseLayer(osm, 'OpenStreetMap');
 
     // Cria o source, inicializado pelo plugin Leaflet.wms para a adição das camadas overlay, 
     // o primeiro parametro é definido em conf/anon/overlay.js, especificando o host do GeoServer de onde serão puxadas as camadas
@@ -132,7 +148,6 @@ function main(){
         barraPesquisas();
     },'Habilitar ferramenta de pesquisa por atributo nas camadas').addTo(myMapa.getMapa());
     
-    // 
     L.DomEvent.disableScrollPropagation(L.DomUtil.get('consultaPesquisa'));
 
     //Variável global para controle da exibição ou não da barra de ferramentas conforme o clique do usuário;
