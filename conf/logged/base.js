@@ -1,4 +1,3 @@
-// Definindo camadas base
 var vetorBasemap = [
     
     parametros_imageamento = {
@@ -7,27 +6,26 @@ var vetorBasemap = [
         padrao: true,
         maxZoom: 30,
         layers: 'gianetti:ortofoto',
-        format: 'image/png',
+        format: 'image/jpeg',
         transparent: false,
         tiled: true,
-        attribution: 'Imageamento realizado por aerofotogrametria, executado pelo Grupo de Engenharia para Gestão Territorial - GENTE em 2020'
+        attribution: 'Imageamento realizado por aerofotogrametria pela UFV em 2017'
     }
 ];
 
+/* Variável criada para chamar as informações do Modelo Digital de Elevação no host */
 
 var vetorMDE = [
     parametros_mde = {
         nome: 'Modelo Digital de Elevação',
-        host: 'https://geoserver.genteufv.com.br/geoserver/ows?',
+        host: 'http://localhost:8080/geoserver/ows?',
         padrao: false,
-        maxZoom: 22,
-        layers: 'bomdespacho:mde_bomdespacho',
+        maxZoom: 30,
+        layers: 'gianetti:nasadem_vicosa',
         mde: true,
-        format: 'image/png',
+        format: 'image/jpeg',
         transparent: false,
         tiled: true,
-        attribution: 'Mapa Base do Cadastro Territorial elaborado pelo GENTE em 2020'
+        attribution: 'Modelo Digital de Elevação NASADEM'
     }
 ];
-
-    

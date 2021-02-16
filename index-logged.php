@@ -176,6 +176,18 @@
 
     </div>
   </body>
+  <script type="application/javascript">
+    var resizeMap = function () {
+        var map = document.getElementById('mapa');
+        var newHeight = document.documentElement.clientHeight -
+        document.getElementById('navbar').clientHeight;
+        map.style.height = newHeight + "px";
+        map.style.minHeight = newHeight + "px";
+    }
+    
+    $(document).ready(resizeMap);
+    window.onresize = resizeMap;
+    </script>
 </html>
 
 

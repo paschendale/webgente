@@ -136,7 +136,7 @@
   <body onload="main()">
 
   	<div id="menu">
-  		<nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
+  		<nav id="navbar" class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -166,6 +166,18 @@
     <div id="barraCoordenadas" ></div>
     </div>
   </body>
+  <script type="application/javascript">
+    var resizeMap = function () {
+        var map = document.getElementById('mapa');
+        var newHeight = document.documentElement.clientHeight -
+        document.getElementById('navbar').clientHeight;
+        map.style.height = newHeight + "px";
+        map.style.minHeight = newHeight + "px";
+    }
+    
+    $(document).ready(resizeMap);
+    window.onresize = resizeMap;
+    </script>
 </html>
 
 
