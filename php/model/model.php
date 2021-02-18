@@ -29,15 +29,15 @@ class usuario{
 
 	//Get's
 
-	function verificaUsuario($cpf){
+	function verificaUsuario($email){
 		$conexao = new PDO('sqlite:../../conf/webgente.db') or die("Erro ao abrir a base");
 
-		$sql = "SELECT cpf FROM usuario WHERE cpf = '$cpf'";
+		$sql = "SELECT email FROM usuario WHERE email = '$email'";
 
 		$resposta = $conexao->query($sql);
  		$resultado = $resposta->fetch();
 
-		if($resultado['cpf'] == " " || $resultado['cpf'] == "" || $resultado == "NULL"){
+		if($resultado['email'] == " " || $resultado['email'] == "" || $resultado == "NULL"){
 			return false;
 		}
 		else{
@@ -58,10 +58,10 @@ class usuario{
  		exit;
 	}
 
-	function setLogin($cpf, $senha){ 
+	function setLogin($email, $senha){ 
 		$conexao = new PDO('sqlite:../../conf/webgente.db') or die("Erro ao abrir a base");
 
-		$sql = "SELECT senha, nome, tipo FROM usuario WHERE cpf = '$cpf'";
+		$sql = "SELECT senha, nome, tipo FROM usuario WHERE email = '$email'";
 
  		$resposta = $conexao->query($sql);
  		$resultado = $resposta->fetch();
@@ -70,7 +70,7 @@ class usuario{
  			//Cria uma sessão de usuário caso ela não exista ainda
  			session_start();
  			//Inicia o usuário no sistema
- 			$_SESSION['cpf'] = $cpf;
+ 			$_SESSION['email'] = $email;
  			$_SESSION['nome'] = $resultado['nome'];
 
  			header('refresh: 0.001; ../../index-logged.php');
@@ -84,7 +84,7 @@ class usuario{
  			//Cria uma sessão de usuário caso ela não exista ainda
  			session_start();
  			//Inicia o usuário no sistema
- 			$_SESSION['cpf'] = $cpf;
+ 			$_SESSION['email'] = $email;
  			$_SESSION['nome'] = $resultado['nome'];
  			header('refresh: 0.001; ../admin.php');
  			exit;

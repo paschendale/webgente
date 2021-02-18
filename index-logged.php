@@ -6,7 +6,7 @@
     if(!isset($_SESSION)){
       session_start();
     }
-    if(!isset($_SESSION['nome']) || !isset($_SESSION['cpf'])){
+    if(!isset($_SESSION['nome']) || !isset($_SESSION['email'])){
       session_destroy();
       header('refresh: 0.001; index.html');
       exit;
@@ -157,7 +157,7 @@
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
          
           </ul>
-          <p id="bem-vindo">Prefeitura Municipal de Bom Despacho</p>
+          <p id="bem-vindo">Prefeitura Municipal</p>
           &nbsp
           <button class="btn btn-outline-primary my-2 my-sm-0" type="button" onclick="logoutPrefeitura()">Sair</button>
 

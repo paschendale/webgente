@@ -79,7 +79,6 @@
     <script src="../js/class.js"></script>
     <script src="../js/search_functions.js"></script>
     
-
     <!--<script src="js/mapa/drag-and-drop.js"></script>-->
 
     <!-- Camadas do mapa -->
@@ -110,12 +109,6 @@
     <link rel="stylesheet" href="../css/bootstrap/bootstrap-grid.min.css">
     <link rel="stylesheet" href="../css/bootstrap/bootstrap-reboot.css" >
     <link rel="stylesheet" href="../css/bootstrap/bootstrap-reboot.min.css">
-    
-    <!-- Jquery Mask -->
-    <script src="../js/plugins/jquery.mask/jquery.mask.min.js"></script>
-    <script src="../js/plugins/jquery.mask/jquery.validate.min.js"></script> 
-    <script src="../js/plugins/jquery.mask/additional-methods.min.js"></script>
-    <script src="../js/plugins/jquery.mask/messages_pt_BR.js"></script> 
     
     <!--Login com Gmail-->
     <!--Alterar o content abaixo conforme a credencial do Google Developer API-->
@@ -184,11 +177,11 @@
                 </div>
                 <div id="login" name="login" class="col-xl-4 col-sm-8">
                     <div class="form-group">
-                        <input type="text" class="form-control" id="usuario" name="usuario" aria-describedby="emailHelp" placeholder="CPF">
+                        <input type="email" class="form-control" id="usuario" name="usuario" placeholder="Email">
                     </div>
                     <div class="form-group">
                         <input type="password" class="form-control" id="senha" name="senha" placeholder="Senha">
-                        <small id="emailHelp" class="form-text text-muted">Mantenha em segurança sua senha</small>
+                        <small class="form-text text-muted">Mantenha em segurança sua senha</small>
                     </div>
                     <button type="submit" class="btn btn-secondary btn-lg btn-block" id="botao" name="botao">Enviar</button>
                     <br>
@@ -202,11 +195,11 @@
                     <button type="button" class="btn btn-light btn-sm" onclick="recuperarSenhaLogado()">Trocar senha</button>
 
                     <!-- Modal -->
-                      <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                      <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered" role="document">
                           <div class="modal-content">
                             <div class="modal-header">
-                              <h5 class="modal-title" id="exampleModalLongTitle">Esqueci minha senha ?</h5>
+                              <h5 class="modal-title">Esqueci minha senha ?</h5>
                               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                               </button>

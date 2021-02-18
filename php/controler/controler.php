@@ -17,14 +17,14 @@ class controler{
 		$usuario = new usuario();
 
 		//Retorna true se o usuário já esta cadastrado no banco e false caso não esteja
-		$valida = $usuario->verificaUsuario($cpf);
+		$valida = $usuario->verificaUsuario($email);
 
 		if($valida == false){	
 			$usuario->constructor($nome, $cpf, $dataNascimento, $sexo, $faixaEtaria, $celular, $email, $senha, $tipo);
 			$usuario->setUsuario();
 		}
 		else{
-			echo("<script>alert('CPF já cadastrado no sistema.');</script>");
+			echo("<script>alert('Email já cadastrado no sistema.');</script>");
 			header('refresh: 0.001; ../admin.php');
 			exit;
 		}
@@ -34,7 +34,7 @@ class controler{
 	}
 
 	function login(){
-		$cpf = $_POST['usuario'];
+		$email = $_POST['usuario'];
 		$senha = $_POST['senha'];	
 
 		if($senha != 'admin'){
@@ -42,7 +42,7 @@ class controler{
 		} 
 
 		$usuario = new usuario();
-		$usuario->setLogin($cpf, $senha);
+		$usuario->setLogin($email, $senha);
 	}
 
 	function loginGmail(){
